@@ -17,3 +17,32 @@
 /back/.fleet
 /back/.idea
 /back/.vscode
+
+# Logs
+/front/logs
+/front/*.log
+/front/npm-debug.log*
+/front/yarn-debug.log*
+/front/yarn-error.log*
+/front/pnpm-debug.log*
+/front/lerna-debug.log*
+
+/front/node_modules
+/front/.DS_Store
+/front/dist
+/front/dist-ssr
+/front/coverage
+/front/*.local
+
+/front//cypress/videos/
+/front//cypress/screenshots/
+
+# Editor directories and files
+/front/.vscode/*
+/front/!.vscode/extensions.json
+/front/.idea
+/front/*.suo
+/front/*.ntvs*
+/front/*.njsproj
+/front/*.sln
+/front/*.sw?
