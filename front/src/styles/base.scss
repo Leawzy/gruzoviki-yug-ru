@@ -8,7 +8,7 @@
   font-size: 16px;
   font-weight: 500;
   font-style: normal;
-  font-family: 'FuturaPT', sans-serif;
+  font-family: 'Montserrat', sans-serif;
   color: $baseTextColor;
   text-decoration: none;
   list-style: none;
@@ -17,6 +17,10 @@
 }
 
 body,html {
-  padding: 0;
   margin: 0;
+}
+
+.wrapper {
+  max-width: 1440px;
+  margin: 0 auto;
 }
