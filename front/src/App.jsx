@@ -1,10 +1,11 @@
+import BaseLayout from "./components/shared/baseLayout/index.jsx";
 
 function App() {
 
     return (
-        <>
-            <h1>41421</h1>
-        </>
+        <BaseLayout>
+            <h1>MainPage</h1>
+        </BaseLayout>
     )
 }
 
