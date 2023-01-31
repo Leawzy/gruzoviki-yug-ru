@@ -1,12 +1,12 @@
 import React from 'react';
-import HeaderLayout from "../header";
-import FooterLayout from "../footer";
+import HeaderLayout from "../HeaderLayout/index.jsx";
+import FooterLayout from "../../../core/Footer/index.jsx";
 
 function BaseLayout({children}) {
     return (
         <div>
             <HeaderLayout />
-            <div>
+            <div className={'wrapper'}>
                 {children}
             </div>
             <FooterLayout />
