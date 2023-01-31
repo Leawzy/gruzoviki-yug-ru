@@ -2,7 +2,7 @@
 
 .container {
   width: 100%;
-  max-width: 1660px;
+  max-width: 1440px;
   padding: 0 15px;
   margin: 0 auto;
 }
@@ -16,7 +16,7 @@
       transition: .6s ease;
 
       &:hover {
-        transform: rotate(360deg);
+        transform: translateY(-4px);
         filter: invert(28%) sepia(33%) saturate(5026%) hue-rotate(335deg) brightness(77%) contrast(104%);
       }
     }
@@ -139,6 +139,7 @@
   &__contact {
     display: flex;
     flex-direction: column;
+    padding: 0 10px;
   }
 
   &__contact-phone {
