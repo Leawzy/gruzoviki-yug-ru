@@ -1,5 +1,5 @@
 import React from 'react';
-import CardLayout from "../components/shared/layouts/MainLayout/index.jsx";
+import CardLayout from "../components/shared/layouts/MainPageLayout/index.jsx";
 
 function Home() {
     return (
