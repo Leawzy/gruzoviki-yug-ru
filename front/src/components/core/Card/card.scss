@@ -1,0 +1,126 @@
+@import "src/config";
+
+
+.short-catalog {
+  &__item {
+    padding: 27px 27px;
+  }
+
+  &__img-link {
+    display: flex;
+    position: relative;
+    height: 300px;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+  }
+
+  &__lt-info {
+    position: absolute;
+    left: 0;
+    top: 10px;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__new {
+    display: inline-block;
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 25px;
+    color: white;
+    background-color: #55BB9F;
+    border-radius: 5px;
+    padding: 3px 10px;
+    margin-bottom: 8px;
+  }
+
+  &__lb-info {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    z-index: 1;
+  }
+
+  &__discount {
+    display: inline-block;
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 25px;
+    color: white;
+    background-color: #FC443B;
+    border-radius: 5px;
+    padding: 3px 10px;
+    margin-bottom: 8px;
+  }
+
+  &__price {
+    display: flex;
+    align-items: center;
+  }
+
+  &__price-num {
+    font-weight: 600;
+    font-size: 22px;
+    line-height: 28px;
+    color: #404040;
+    padding-right: 20px;
+  }
+
+  &__price-s-num {
+    font-weight: 600;
+    font-size: 17px;
+    line-height: 28px;
+    color: $greyColor;
+    padding-right: 20px;
+    text-decoration: revert;
+  }
+
+  &__item-title {
+    font-size: 17px;
+    line-height: 22px;
+    padding-top: 5px;
+    padding-bottom: 10px;
+  }
+
+  &__item-link {
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+
+  &__add-cart {
+    margin-top: 20px;
+    display: inline-block;
+    background-color: #437FC8;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 28px;
+    color: white;
+    padding: 7px 30px;
+  }
+
+  &__add-ds-cart {
+    margin-top: 20px;
+    display: inline-block;
+    background-color: #999999;
+    border-radius: 5px;
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 28px;
+    color: white;
+    padding: 7px 30px;
+  }
+}
+
+.index {
+  &__catalog-img {
+    display: block;
+    width: 100%;
+    height: auto;
+    max-height: 300px;
+  }
+}
