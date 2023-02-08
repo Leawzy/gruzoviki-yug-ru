@@ -1,9 +1,18 @@
 import React from 'react';
 
-function bottomSideHeader() {
+function Footer() {
     return (
-        <div></div>
+        <footer className={footer}>
+            <div className={container}>
+                <a href="#" className={footer__logo-link}>
+                    <img src="" alt="Logo"/>
+                </a>
+                <ul className={footer__nav}>
+
+                </ul>
+            </div>
+        </footer>
     );
 }
 
-export default bottomSideHeader;
+export default Footer;

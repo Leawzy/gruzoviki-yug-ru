@@ -1,0 +1,81 @@
+.aboutsection {
+  &__page {
+    margin-top: 40px;
+  }
+
+  &__wrapper {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    @media screen and (max-width: 768px) {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+  }
+
+  &__img-block {
+    display: inline-block;
+  }
+
+  &__img-item {
+    @media screen and (max-width: 768px) {
+      width: 220px;
+      height: 224px;
+    }
+  }
+
+  &__content-block {
+    display: inline-block;
+    padding: 0 40px;
+    @media screen and (max-width: 768px) {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-content: center;
+      text-align: center;
+    }
+  }
+
+  &__content-text {
+    font-style: normal;
+    font-weight: 400;
+    font-size: 17px;
+    line-height: 28px;
+  }
+
+  &__btn {
+    display: inline-block;
+    position: relative;
+    border: none;
+    outline: none;
+    background: transparent;
+    font-weight: 500;
+    font-size: 17px;
+    line-height: 28px;
+    cursor: pointer;
+    &:hover {
+      text-decoration: underline;
+    }
+    &::after {
+      content: '';
+      width: 35px;
+      height: 22px;
+      position: absolute;
+      top: 4px;
+      left: 110px;
+      background-image: url('../../../assets/image/Arrow.svg');
+      background-repeat: no-repeat;
+      background-position: center center;
+    }
+    @media screen and (max-width: 768px){
+      &__btn {
+        &::after {
+          display: none;
+          position: center;
+        }
+      }
+    }
+  }
+}

@@ -1,12 +1,8 @@
 import React from 'react';
-import CardLayout from "../components/shared/layouts/MainPageLayout/index.jsx";
+import HomePage from "../components/features/home/index.jsx";
 
 function Home() {
-    return (
-        <>
-            <CardLayout />
-        </>
-    );
+    return <HomePage />
 }
 
 export default Home;

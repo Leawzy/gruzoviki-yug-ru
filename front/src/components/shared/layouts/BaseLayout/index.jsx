@@ -1,5 +1,5 @@
 import React from 'react';
-import HeaderLayout from "../HeaderLayout/index.jsx";
+import HeaderLayout from "./HeaderLayout/index.jsx";
 import FooterLayout from "../../../core/Footer/index.jsx";
 
 function BaseLayout({children}) {
@@ -9,7 +9,6 @@ function BaseLayout({children}) {
             <div className={'wrapper'}>
                 {children}
             </div>
-            <FooterLayout />
         </div>
     );
 }
