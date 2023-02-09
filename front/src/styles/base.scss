@@ -1,0 +1,34 @@
+@import "vars";
+
+*,
+::before,
+::after
+{
+  box-sizing: border-box;
+  font-size: 16px;
+  font-weight: 500;
+  font-style: normal;
+  font-family: 'Montserrat', sans-serif;
+  color: $baseTextColor;
+  text-decoration: none;
+  list-style: none;
+  outline: none;
+  transition: .4s ease;
+}
+
+body,html {
+  margin: 0;
+}
+
+.wrapper {
+  max-width: 1440px;
+  padding: 0 15px;
+  margin: 0 auto;
+}
+
+h1,h2,h3,h4,h5,h6 {
+  font-style: normal;
+  font-weight: 500;
+  font-size: 28px;
+  line-height: 62px;
+}
