@@ -6,6 +6,8 @@ import aboutIMG from "../../../assets/image/about/AboutIMG.svg";
 
 import './style.scss';
 
+import newsTest from '../../../assets/image/news/remgruzo-01.jpg'
+
 export default function HomePage() {
     return (
         <BaseLayout>
@@ -38,8 +40,50 @@ export default function HomePage() {
                 <div className="news__item-list">
                     <div className="news__item">
                         <a href="#" className='news__link'>
-                            <img src="" alt=""/>
-                            <span>Title</span>
+                            <img className="news__link-img" src={newsTest} alt="News"/>
+                            <div className="news__link-bg">
+                                <span className="news__title">Title</span>
+                            </div>
+                        </a>
+                    </div>
+                    <div className="news__item">
+                        <a href="#" className='news__link'>
+                            <img className="news__link-img" src={newsTest} alt="News"/>
+                            <div className="news__link-bg">
+                                <span className="news__title">Title</span>
+                            </div>
+                        </a>
+                    </div>
+                    <div className="news__item">
+                        <a href="#" className='news__link'>
+                            <img className="news__link-img" src={newsTest} alt="News"/>
+                            <div className="news__link-bg">
+                                <span className="news__title">Title</span>
+                            </div>
+                        </a>
+                    </div>
+                    <div className="news__item">
+                        <a href="#" className='news__link'>
+                            <img className="news__link-img" src={newsTest} alt="News"/>
+                            <div className="news__link-bg">
+                                <span className="news__title">Title</span>
+                            </div>
+                        </a>
+                    </div>
+                    <div className="news__item">
+                        <a href="#" className='news__link'>
+                            <img className="news__link-img" src={newsTest} alt="News"/>
+                            <div className="news__link-bg">
+                                <span className="news__title">Title</span>
+                            </div>
+                        </a>
+                    </div>
+                    <div className="news__item">
+                        <a href="#" className='news__link'>
+                            <img className="news__link-img" src={newsTest} alt="News"/>
+                            <div className="news__link-bg">
+                                <span className="news__title">Title</span>
+                            </div>
                         </a>
                     </div>
                 </div>
