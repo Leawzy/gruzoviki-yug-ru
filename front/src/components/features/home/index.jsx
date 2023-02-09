@@ -40,7 +40,7 @@ export default function HomePage() {
                 <div className="news__item-list">
                     <div className="news__item">
                         <a href="#" className='news__link'>
-                            <img className="news__link-img" src={newsTest} alt="News"/>
+                            <img className="news__link-img" src={newsTest} alt="News Pic"/>
                             <div className="news__link-bg">
                                 <span className="news__title">Title</span>
                             </div>
@@ -48,7 +48,7 @@ export default function HomePage() {
                     </div>
                     <div className="news__item">
                         <a href="#" className='news__link'>
-                            <img className="news__link-img" src={newsTest} alt="News"/>
+                            <img className="news__link-img" src={newsTest} alt="News Pic"/>
                             <div className="news__link-bg">
                                 <span className="news__title">Title</span>
                             </div>
@@ -56,7 +56,7 @@ export default function HomePage() {
                     </div>
                     <div className="news__item">
                         <a href="#" className='news__link'>
-                            <img className="news__link-img" src={newsTest} alt="News"/>
+                            <img className="news__link-img" src={newsTest} alt="News Pic"/>
                             <div className="news__link-bg">
                                 <span className="news__title">Title</span>
                             </div>
@@ -64,7 +64,7 @@ export default function HomePage() {
                     </div>
                     <div className="news__item">
                         <a href="#" className='news__link'>
-                            <img className="news__link-img" src={newsTest} alt="News"/>
+                            <img className="news__link-img" src={newsTest} alt="News Pic"/>
                             <div className="news__link-bg">
                                 <span className="news__title">Title</span>
                             </div>
@@ -72,7 +72,7 @@ export default function HomePage() {
                     </div>
                     <div className="news__item">
                         <a href="#" className='news__link'>
-                            <img className="news__link-img" src={newsTest} alt="News"/>
+                            <img className="news__link-img" src={newsTest} alt="News Pic"/>
                             <div className="news__link-bg">
                                 <span className="news__title">Title</span>
                             </div>
@@ -80,7 +80,7 @@ export default function HomePage() {
                     </div>
                     <div className="news__item">
                         <a href="#" className='news__link'>
-                            <img className="news__link-img" src={newsTest} alt="News"/>
+                            <img className="news__link-img" src={newsTest} alt="News Pic"/>
                             <div className="news__link-bg">
                                 <span className="news__title">Title</span>
                             </div>
