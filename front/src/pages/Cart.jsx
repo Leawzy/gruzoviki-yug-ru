@@ -1,9 +1,12 @@
 import React from 'react';
 
-function Register() {
+function Cart(props) {
+
+    console.log(props)
+
     return (
         <div></div>
     );
 }
 
-export default Register;
+export default Cart;
