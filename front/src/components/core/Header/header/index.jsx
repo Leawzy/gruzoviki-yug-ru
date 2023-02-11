@@ -34,7 +34,7 @@ function Header() {
                         <Link to={''} className="header__link-item">
                             <img className="header__link-item-icon" width={34} height={34} src={favorite} alt="favorite"/>
                         </Link>
-                        <Link to={''} className="header__link-item">
+                        <Link to={'/cart'} className="header__link-item">
                             <img className="header__link-item-icon" width={34} height={34} src={basket} alt="basket"/>
                         </Link>
                     </div>
