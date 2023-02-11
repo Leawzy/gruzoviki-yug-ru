@@ -55,9 +55,11 @@
     font-size: 17px;
     line-height: 28px;
     cursor: pointer;
+
     &:hover {
       text-decoration: underline;
     }
+
     &::after {
       content: '';
       width: 35px;
@@ -69,7 +71,8 @@
       background-repeat: no-repeat;
       background-position: center center;
     }
-    @media screen and (max-width: 768px){
+
+    @media screen and (max-width: 768px) {
       &__btn {
         &::after {
           display: none;
@@ -87,14 +90,43 @@
   &__item-list {
     display: grid;
     gap: 20px;
-    grid-template-columns: repeat(4,1fr);
+    grid-template-columns: repeat(4, 1fr);
     grid-template-areas:
     "A B C C"
-    "A D E F"
+    "A D E F";
+
+    @media screen and (max-width: 991px) {
+      grid-template-columns: repeat(3, 1fr);
+      grid-template-areas:
+      "A B C"
+      "A D E"
+      "F F F";
+    }
+
+    @media screen and (max-width: 768px) {
+      grid-template-columns: repeat(2, 1fr);
+      grid-template-areas:
+      "A B"
+      "A C"
+      "D D"
+      "E F";
+    }
+    @media screen and (max-width: 576px) {
+      grid-template-columns: repeat(1, 1fr);
+      grid-template-areas:
+      "A"
+      "A"
+      "B"
+      "C"
+      "D"
+      "E"
+      "F";
+    }
   }
 
   &__item:nth-child(1) {
     grid-area: A;
+
     .news__link-img {
       position: relative;
       height: 100%;
@@ -151,7 +183,7 @@
     width: 100%;
     height: 100%;
     z-index: 1;
-    background: linear-gradient(1.56deg, rgba(40,40,40, 0.78) 3.05%, rgba(30,30,30,0) 98.13%);
+    background: linear-gradient(1.56deg, rgba(40, 40, 40, 0.78) 3.05%, rgba(30, 30, 30, 0) 98.13%);
     display: flex;
     flex-direction: column;
     align-content: flex-end;
