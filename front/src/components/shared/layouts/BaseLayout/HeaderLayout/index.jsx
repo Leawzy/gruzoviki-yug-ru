@@ -1,5 +1,5 @@
 import React from 'react';
-import Header from "../../../../core/Header/header/index.jsx";
+import Header from "./Header/header/index.jsx";
 
 import './header.scss';
 

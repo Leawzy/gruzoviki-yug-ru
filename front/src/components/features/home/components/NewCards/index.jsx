@@ -1,21 +1,34 @@
-import React from 'react';
+import React, {useState} from 'react';
 import Card from './Card/index.jsx'
 import {useQuery} from "@tanstack/react-query";
 
 import './mainLayout.scss'
 import Skeleton from "./SkeletonCards/skeleton.jsx";
+import axios from "axios";
 
-export default function NewCard() {
+function NewCard() {
 
-    const { isLoading, error, data } = useQuery({
+    const [cart, setCart] = useState([])
+
+    const {isLoading, error, data} = useQuery({
         queryKey: ['PopularCards'],
         queryFn: () =>
-            fetch('http://localhost:7000/card').then(
+            fetch('http://localhost:7002/card').then(
                 (res) => res.json(),
             ),
     })
 
-    if (isLoading) return <Skeleton />
+    const addToCart = (data) => {
+        setCart([...cart, data])
+        console.log(cart)
+        try {
+            axios.post('http://localhost:7002/product', cart)
+        } catch (err) {
+            console.log(err)
+        }
+    }
+
+    if (isLoading) return <Skeleton/>
 
     if (error) return 'An error has occurred: ' + error.message
 
@@ -25,20 +38,22 @@ export default function NewCard() {
             <h3>Популярный товар</h3>
             <div className="short-catalog__wrapper">
                 {
-                    data.map((item, index) =>
+                    data.map(item =>
                         <Card
-                            key={index}
+                            key={item.id}
                             title={item.title}
                             sale={item.sale}
                             newItem={item.newItem}
                             price={item.price}
                             oldPrice={item.oldPrice}
                             discount={item.discount}
-                            onClickPlus={()=>console.log('Была нажата кнопка добавить')}
-                            onClickFav={()=>console.log('Была нажата кнопка добавить')}
+                            addToCart={addToCart}
+                            onClickFav={() => console.log('Была нажата кнопка добавить')}
                         />)
                 }
             </div>
         </div>
     );
 }
+
+export default NewCard
