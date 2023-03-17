@@ -8,7 +8,7 @@ import axios from "axios";
 
 function NewCard() {
 
-    const [cart, setCart] = useState([])
+    const [cartItems, setCartItems] = useState([]);
 
     const {isLoading, error, data} = useQuery({
         queryKey: ['PopularCards'],
@@ -17,15 +17,15 @@ function NewCard() {
                 (res) => res.json(),
             ),
     })
-
-    const addToCart = (data) => {
-        setCart([...cart, data])
-        console.log(cart)
-        try {
-            axios.post('http://localhost:7002/product', cart)
-        } catch (err) {
-            console.log(err)
-        }
+    const addToCart = (product) => {
+        console.log('Add', cartItems)
+        axios.post('', product)
+            .then(response => {
+                setCartItems(response.data);
+            })
+            .catch(error => {
+                console.log(error);
+            });
     }
 
     if (isLoading) return <Skeleton/>

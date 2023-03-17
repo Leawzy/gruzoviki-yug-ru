@@ -14,10 +14,6 @@ function Card(props) {
         setFav(!fav);
     }
 
-    const onClickPlus = () => {
-        props.addToCart(props)
-    }
-
 
     let classNameDependsOnDiscount = props.discount === false ? "hidden" : "";
     let classNameDependsOnOldPrice = props.oldPrice === false ? "hidden" : "";
@@ -49,7 +45,7 @@ function Card(props) {
                      src={fav ? `${heartFavActive}` : `${heartFavNeActive}`}
                      alt="Favorite button"/>
 
-                <button onClick={onClickPlus}>Добавить</button>
+                <button onClick={() => props.addToCart()}>Add to cart</button>
             </div>
         </div>
     );
