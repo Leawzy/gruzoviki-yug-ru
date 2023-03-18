@@ -116,4 +116,17 @@ class UserController extends Controller
             'email' => ['Данные введены не корренктно']
         ]);
     }
+
+    public function test()
+    {
+        $data = [
+            ['fio' => 'Недоступов Олег Юрьевич', 'post' => 'Студент', 'subject' => 'Фротн-енд разработчик',
+                'phone' => '8 800 555 35 35', 'email' => 'adminfront@universityn.com'],
+            ['fio' => 'Гаршин Илья Андреевич', 'post' => 'Студент', 'subject' => 'Бэк-енд разработчик',
+                'phone' => '8 800 555 35 35', 'email' => 'adminback@universityn.com'],
+        ];
+        return response()->json([
+            "data" => $data
+        ], 200);
+    }
 }
