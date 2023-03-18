@@ -1,0 +1,20 @@
+.profile__container {  display: grid;
+  grid-template-columns: 1.2fr 1.1fr 0.7fr;
+  grid-template-rows: 1.1fr 1fr 1fr;
+  gap: 50px 40px;
+  grid-auto-flow: row;
+  grid-template-areas:
+    "block-1 block-2 block-5"
+    "block-3 block-4 block-5"
+    ". . .";
+}
+
+.block-1 { grid-area: block-1; }
+
+.block-2 { grid-area: block-2; }
+
+.block-3 { grid-area: block-3; }
+
+.block-4 { grid-area: block-4; }
+
+.block-5 { grid-area: block-5; }

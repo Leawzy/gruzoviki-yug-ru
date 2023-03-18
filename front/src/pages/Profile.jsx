@@ -1,10 +1,12 @@
 import React from 'react';
 import axios from 'axios';
 import {useQuery} from "@tanstack/react-query";
+import BaseLayout from "../components/shared/layouts/BaseLayout/index.jsx";
+import ProfileLayout from "../components/shared/layouts/ProfileLayout/index.jsx";
 
 function Profile() {
 
-    const { isLoading, error, data } = useQuery({
+    const {isLoading, error, data} = useQuery({
         queryKey: ["repoData"],
         queryFn: () =>
             axios
@@ -21,15 +23,16 @@ function Profile() {
     }
 
     return (
-        <div>
-            <h1>Test Data:</h1>
-            <ul>
-                {data.map((item) => (
-                    <li key={item.id}>{item.fio}</li>
-                ))}
-            </ul>
-        </div>
-    );
+        <BaseLayout>
+            <h1>Мой профиль</h1>
+            <ProfileLayout
+                name={data[0].fio}
+                adress={data[0].subject}
+                email={data[0].email}
+                phone={data[0].phone}
+            />
+        </BaseLayout>
+);
 }
 
 export default Profile;
