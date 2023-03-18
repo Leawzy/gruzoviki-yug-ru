@@ -13,6 +13,8 @@ class ProductController extends Controller
 
         $data = Product::all();
 
-        return ProductResource::collection($data);
+        return response()->json([
+            "data" => ProductResource::collection($data),
+        ], 200);
     }
 }
