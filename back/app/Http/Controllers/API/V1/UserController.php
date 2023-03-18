@@ -120,9 +120,9 @@ class UserController extends Controller
     public function test()
     {
         $data = [
-            ['fio' => 'Недоступов Олег Юрьевич', 'post' => 'Студент', 'subject' => 'Фротн-енд разработчик',
+            ['id' => '0', 'fio' => 'Недоступов Олег Юрьевич', 'post' => 'Студент', 'subject' => 'Фротн-енд разработчик',
                 'phone' => '8 800 555 35 35', 'email' => 'adminfront@universityn.com'],
-            ['fio' => 'Гаршин Илья Андреевич', 'post' => 'Студент', 'subject' => 'Бэк-енд разработчик',
+            ['id' => '1', 'fio' => 'Гаршин Илья Андреевич', 'post' => 'Студент', 'subject' => 'Бэк-енд разработчик',
                 'phone' => '8 800 555 35 35', 'email' => 'adminback@universityn.com'],
         ];
         return response()->json([
