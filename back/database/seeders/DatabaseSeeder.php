@@ -3,6 +3,12 @@
 namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\Brand;
+use App\Models\Category;
+use App\Models\Product;
+use App\Models\Property;
+use App\Models\Property_oil;
+use App\Models\PropertyOil;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -14,6 +20,55 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
+        Brand::factory()->create([
+           'slug' => "test_brand",
+           'title' => "test_brand"
+        ]);
+
+        Property::factory()->create([
+           'name' => 'Масло'
+        ]);
+
+        Product::factory()
+            ->has(Category::factory(10))
+            ->create([
+                'brand_id' => Property::query()->inRandomOrder()->value('id'),
+                'property_id' => Property::query()->inRandomOrder()->value('id'),
+                'slug' => 'SINTEC PLATINUM 5W-40',
+                'title' => 'SINTEC PLATINUM 5W-40',
+                'short_desc' => 'Синтетическое 4 л',
+                'quantity' => '10',
+                'price' => '2019',
+                'art' => '1',
+            ])
+            ->create([
+                'brand_id' => Property::query()->inRandomOrder()->value('id'),
+                'property_id' => Property::query()->inRandomOrder()->value('id'),
+                'slug' => 'Liqui Moly Optimal 10W-40',
+                'title' => 'Liqui Moly Optimal 10W-40',
+                'short_desc' => 'Полусинтетическое 4 л',
+                'quantity' => '5',
+                'price' => '3889',
+                'art' => '2',
+            ]);
+
+        PropertyOil::factory()
+            ->create([
+                'property_id' => Property::query()->inRandomOrder()->value('id'),
+                'product_id' => Product::query()->inRandomOrder()->value('id'),
+                'description' => 'Производится из синтетических базовых масел и высокоэффективного многофункционального пакета присадок.',
+                'warranty' => '6 месяцев',
+                'country' => 'Россия',
+                'start_date' => '23 год'
+            ])
+            ->create([
+                'property_id' => Property::query()->inRandomOrder()->value('id'),
+                'product_id' => Product::query()->inRandomOrder()->value('id'),
+                'description' => 'Полусинтетическое моторное масло с адаптированным для российских условий пакетом присадок',
+                'warranty' => '6 месяцев',
+                'country' => 'Россия',
+                'start_date' => '22 год'
+            ]);
         // \App\Models\User::factory(10)->create();
 
         // \App\Models\User::factory()->create([

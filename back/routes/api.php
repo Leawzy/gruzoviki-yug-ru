@@ -20,4 +20,4 @@ use App\Http\Controllers\API\V1\ProductController;
 //    return $request->user();
 //});
 Route::get('/test', [UserController::class, 'test']);
-Route::get('/product_list', [ProductController::class, 'product_list']);
+Route::get('/product_list', [ProductController::class, 'showProducts']);
