@@ -13,8 +13,8 @@ function Header() {
             <div className='container'>
                 <div className="header__center-wrapper">
                     <div className='header__logo'>
-                        <a href="src/components/shared/layouts/BaseLayout/HeaderLayout/Header/header/index.jsx#" className='header__logo-img'>
-                        </a>
+                        <Link to={'/'} className='header__logo-img'>
+                        </Link>
                     </div>
                     <Navbar />
                     <div className="header__search">
