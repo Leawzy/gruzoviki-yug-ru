@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React from 'react';
 import Card from './Card/index.jsx'
 import {useQuery} from "@tanstack/react-query";
 
@@ -8,25 +8,17 @@ import axios from "axios";
 
 function NewCard() {
 
-    const [cartItems, setCartItems] = useState([]);
-
     const {isLoading, error, data} = useQuery({
-        queryKey: ['PopularCards'],
+        queryKey: ["HomeCard"],
         queryFn: () =>
-            fetch('http://localhost:7002/card').then(
-                (res) => res.json(),
-            ),
-    })
-    const addToCart = (product) => {
-        console.log('Add', cartItems)
-        axios.post('', product)
-            .then(response => {
-                setCartItems(response.data);
-            })
-            .catch(error => {
-                console.log(error);
-            });
-    }
+            axios
+                .get("http://5.167.50.180:8876/api/product_list")
+                .then((res) => res.data.data)
+                .catch(error => {
+                    console.log(error)
+                })
+    });
+
 
     if (isLoading) return <Skeleton/>
 
@@ -38,17 +30,16 @@ function NewCard() {
             <h3>Популярный товар</h3>
             <div className="short-catalog__wrapper">
                 {
-                    data.map(item =>
+                    data.map((item, index) =>
                         <Card
-                            key={item.id}
+                            item={item.data}
+                            key={index}
+                            id={item.id}
+                            quantity={item.quantity}
+                            brand={item.brand}
                             title={item.title}
                             sale={item.sale}
-                            newItem={item.newItem}
                             price={item.price}
-                            oldPrice={item.oldPrice}
-                            discount={item.discount}
-                            addToCart={addToCart}
-                            onClickFav={() => console.log('Была нажата кнопка добавить')}
                         />)
                 }
             </div>

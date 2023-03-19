@@ -1,53 +1,77 @@
 import React, {useState} from 'react';
-
 import pictureOfItem from '../../../../../../assets/image/tovar-1.svg'
-import heartFavNeActive from '../../../../../../assets/image/icons/heartFav-neact.svg'
-import heartFavActive from '../../../../../../assets/image/icons/heartFav-act.svg'
-
 import './card.scss'
+import axios from "axios";
+import {Link} from "react-router-dom";
 
 function Card(props) {
+    const [quantity, setQuantity] = useState(props.quantity);
+    const [isAddedToCart , setIsAddedToCart] = useState(false)
 
-    const [fav, setFav] = useState(false)
-
-    const onClickFav = () => {
-        setFav(!fav);
+    const addToCart = async () => {
+        try {
+            const res = await axios.post("", {
+                productID: props.id,
+                quantity: 1
+            })
+            console.log(res)
+            if(res.status === 200) {
+                setIsAddedToCart(true)
+                setQuantity(quantity - 1)
+            }
+        } catch (err) {
+            setIsAddedToCart(true)
+            setQuantity(quantity - 1)
+            console.log(err)
+        }
     }
 
-
-    let classNameDependsOnDiscount = props.discount === false ? "hidden" : "";
-    let classNameDependsOnOldPrice = props.oldPrice === false ? "hidden" : "";
-    let classNameDependsOnOldNewItem = props.newItem === false ? "hidden" : "";
+    const removeFromCart = async () => {
+        try {
+            const res = await axios.delete("/", {
+                productID: props.id,
+                productName: props.title
+            })
+            console.log(res)
+            setQuantity(props.quantity)
+            setIsAddedToCart(false)
+        } catch (err) {
+            // TODO: Удалить 42-43 строку
+            console.log(err)
+            setQuantity(props.quantity)
+            setIsAddedToCart(false)
+        }
+    }
 
     return (
-        <div className="short-catalog__item">
-            <a href="src/components/features/home/components/NewCards/Card/index.jsx"
-               className="short-catalog__img-link">
-                <div className={`short-catalog__lt-info`}>
-                    <span
-                        className={`short-catalog__new ${classNameDependsOnOldNewItem}`}>{props.newItem ? 'Новинка' : ''}</span>
-                </div>
-                <div className={`short-catalog__lb-info ${classNameDependsOnDiscount}`}>
-                    <span className={`short-catalog__discount`}>{`-${props.discount}%`}</span>
-                </div>
-                <img src={pictureOfItem} alt="Catalog Img" className="index__catalog-img"/>
-            </a>
-            <div className="short-catalog__price">
-                <p className="short-catalog__price-num">{`${props.price} ₽`}</p>
-                <s className={`short-catalog__price-s-num ${classNameDependsOnOldPrice}`}>{`${props.oldPrice} ₽`}</s>
-            </div>
-            <div className="short-catalog__item-title">
+        <Link to={`/products/${props.id}`}>
+            <div className="short-catalog__item" id={props.id}>
                 <a href="src/components/features/home/components/NewCards/Card/index.jsx"
-                   className="short-catalog__item-link">{props.title}</a>
+                   className="short-catalog__img-link">
+                    <div className={`short-catalog__lt-info`}>
+                    <span
+                        className={`short-catalog__new`}>{`Бренд: ${props.brand}`}</span>
+                    </div>
+                    <div className={`short-catalog__lb-info`}>
+                        <span className={`short-catalog__discount`}>{`Количество: ${quantity}`}</span>
+                    </div>
+                    <img src={pictureOfItem} alt="Catalog Img" className="index__catalog-img"/>
+                </a>
+                <div className="short-catalog__price">
+                    <p className="short-catalog__price-num">{`${props.price} ₽`}</p>
+                </div>
+                <div className="short-catalog__item-title">
+                    <a href="src/components/features/home/components/NewCards/Card/index.jsx"
+                       className="short-catalog__item-link">{props.title}</a>
+                    <p>{}</p>
+                </div>
+                <div>
+                    {quantity > 0 && !isAddedToCart && (<button onClick={addToCart}>Добавить в корзину</button>)}
+                    {quantity === 0 && <p>Товар закончился</p>}
+                    {isAddedToCart && <button onClick={removeFromCart}>Убрать с корзины</button>}
+                </div>
             </div>
-            <div>
-                <img width={42} height={42} onClick={onClickFav}
-                     src={fav ? `${heartFavActive}` : `${heartFavNeActive}`}
-                     alt="Favorite button"/>
-
-                <button onClick={() => props.addToCart()}>Add to cart</button>
-            </div>
-        </div>
+        </Link>
     );
 }
 
