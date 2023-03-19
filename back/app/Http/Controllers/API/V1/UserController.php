@@ -48,7 +48,6 @@ class UserController extends Controller
             "first_name" => ["required", "string"],
             "last_name" => ["required", "string"],
             "email" => ["required", "email", "string"],
-            "record_book" => ["required", "string"],
             "password" => ["required", "confirmed"],
         ]);
 
@@ -56,7 +55,6 @@ class UserController extends Controller
             "first_name" => $data["first_name"],
             "last_name" => $data["last_name"],
             "email" => $data["email"],
-            "record_book" => $data["record_book"],
             "password" => bcrypt($data["password"]),
         ]);
         $user->api_token = Str::random(80);
@@ -106,6 +104,9 @@ class UserController extends Controller
             "password" => ["required"]
         ]);
         $user = User::where(["email" => $request["email"]])->first();
+        $user->api_token = Str::random(80);
+        $user->save();
+        $user = User::where(["email" => $request["email"]])->first();
 
         if (Auth::attempt($request->only('email', 'password'))) {
             return response()->json([
@@ -115,6 +116,13 @@ class UserController extends Controller
         throw ValidationException::withMessages([
             'email' => ['Данные введены не корренктно']
         ]);
+    }
+    public function restore_password(Request $request){ // TODO: Узнать как обработать код с почты или Просто отправлять новый пароль на почту
+        $request->validate([
+            "email" => ["required", "string"]
+        ]);
+        $user = User::where(["email" => $request["email"]])->first();
+
     }
 
     public function test()
