@@ -5,6 +5,7 @@ namespace App\Http\Controllers\API\V1;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class ProfileController extends Controller
 {
@@ -32,17 +33,15 @@ class ProfileController extends Controller
         $token = $request->bearerToken();
 
         $user = User::where(["api_token" => $token])->first();
-
-        if ($user->password === $request['old_password']){
+        if (Hash::check($request['old_password'], $user->password)) {
             $user->password = bcrypt($request['new_password']);
             $user->save();
             return response()->json([
                 'Пароль успешно изменен'
             ]);
-        }
-        else {
+        } else {
             return response()->json([
-                'Неверный пароль'
+                'Старый пароль неверен'
             ]);
         }
     }
