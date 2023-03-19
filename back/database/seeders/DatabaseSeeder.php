@@ -29,11 +29,13 @@ class DatabaseSeeder extends Seeder
            'name' => 'Масло'
         ]);
 
+        Category::factory(2)->create();
+
         Product::factory()
-            ->has(Category::factory(10))
             ->create([
-                'brand_id' => Property::query()->inRandomOrder()->value('id'),
+                'brand_id' => Brand::query()->inRandomOrder()->value('id'),
                 'property_id' => Property::query()->inRandomOrder()->value('id'),
+                'category_id' => Category::query()->inRandomOrder()->value('id'),
                 'slug' => 'SINTEC PLATINUM 5W-40',
                 'title' => 'SINTEC PLATINUM 5W-40',
                 'short_desc' => 'Синтетическое 4 л',
@@ -42,8 +44,9 @@ class DatabaseSeeder extends Seeder
                 'art' => '1',
             ])
             ->create([
-                'brand_id' => Property::query()->inRandomOrder()->value('id'),
+                'brand_id' => Brand::query()->inRandomOrder()->value('id'),
                 'property_id' => Property::query()->inRandomOrder()->value('id'),
+                'category_id' => Category::query()->inRandomOrder()->value('id'),
                 'slug' => 'Liqui Moly Optimal 10W-40',
                 'title' => 'Liqui Moly Optimal 10W-40',
                 'short_desc' => 'Полусинтетическое 4 л',

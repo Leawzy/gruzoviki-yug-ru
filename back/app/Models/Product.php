@@ -21,7 +21,8 @@ class Product extends Model
         'price',
         'art',
         'brand_id',
-        'property_list_id'
+        'property_list_id',
+        'category_id',
     ];
 
     protected static function boot()
@@ -38,9 +39,9 @@ class Product extends Model
         return $this->belongsTo(Brand::class);
     }
 
-    public function categories(): BelongsToMany
+    public function category(): BelongsTo
     {
-        return $this->belongsToMany(Category::class);
+        return $this->belongsTo(Category::class);
     }
 
     public function oils(): HasMany

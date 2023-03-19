@@ -17,4 +17,10 @@ class ProductController extends Controller
             "data" => ProductResource::collection($data),
         ], 200);
     }
+
+    public function CardProduct($id){
+
+            $product = Product::where(["id" => $id])->first();
+            return new ProductResource($product);
+    }
 }
