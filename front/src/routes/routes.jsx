@@ -7,6 +7,7 @@ import Cart from "../pages/Cart.jsx";
 import Register from "../pages/Register.jsx";
 import Auth from "../pages/Auth.jsx";
 import Product from "../pages/Product.jsx";
+import Catalog from "../pages/Catalog.jsx";
 
 export const router = createBrowserRouter([
     {
@@ -37,6 +38,11 @@ export const router = createBrowserRouter([
     {
         path: "/register",
         element: <Register />,
+        errorElement: <ErrorPage />,
+    },
+    {
+        path: "/catalog",
+        element: <Catalog />,
         errorElement: <ErrorPage />,
     },
     {
