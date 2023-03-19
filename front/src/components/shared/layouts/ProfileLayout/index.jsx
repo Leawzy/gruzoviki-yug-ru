@@ -1,13 +1,18 @@
 import React, {useState} from 'react';
+import Cookies from 'js-cookie';
+import axios from "axios";
+import {useNavigate} from "react-router-dom";
 
 import './profile.scss'
-import axios from "axios";
+
 import ProfileForm from "../../../core/ProfileForm/ProfileForm.jsx";
 
-function ProfileLayout({name, address, email, phone}) {
 
-    const [oldPassword, setOldPassword] = useState('')
-    const [newPassword, setNewPassword] = useState('')
+function ProfileLayout({name, address, email, phone, lastname}) {
+
+    const navigate = useNavigate();
+    const [old_password, setOldPassword] = useState('')
+    const [new_password, setNewPassword] = useState('')
     const [confirmPassword, setConfirmPassword] = useState('')
 
     const changeHandler = (e) => {
@@ -30,44 +35,54 @@ function ProfileLayout({name, address, email, phone}) {
     const submitHandler = async (e) => {
         e.preventDefault()
 
-        if (newPassword !== confirmPassword) {
+        if (new_password !== confirmPassword) {
             alert('Вы не смогли потвердить новый пароль. Проверьте их схожесть')
             return;
         }
-
-        const response = await axios.put('api', {
-            oldPassword,
-            newPassword
-        });
-
+        try {
+            const response = await axios.post('http://5.167.50.180:8876/api/change_password', {
+                old_password,
+                new_password,
+            }, {
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${Cookies.get('api_token')}`,
+                }
+            });
+            Cookies.remove("api_token")
+            navigate('/');
+            console.log(response)
+        } catch (e) {
+            console.log(e)
+        }
     }
 
     return (
         <div className="profile__container">
             <div className="profile__block block-1">
                 <p className="profile__title">ФИО</p>
-                <p className="profile__data">{name}</p>
+                <p className="profile__data">{`${name} ${lastname}`}</p>
                 <button>Редактировать</button>
             </div>
             <div className="profile__block block-2">
                 <p className="profile__title">Адрес</p>
-                <p className="profile__data">{address}</p>
+                <p className="profile__data">{!address ? 'Поле не заполнено': `${address}`}</p>
                 <button>Редактировать</button>
             </div>
             <div className="profile__block block-3">
                 <p className="profile__title">Email</p>
-                <p className="profile__data">{email}</p>
+                <p className="profile__data">{!email ? 'Поле не заполнено': `${email}`}</p>
                 <button>Редактировать</button>
             </div>
             <div className="profile__block block-4">
                 <p className="profile__title">Телефон</p>
-                <p className="profile__data">{phone}</p>
+                <p className="profile__data">{!phone ? 'Поле не заполнено': `${phone}`}</p>
                 <button>Редактировать</button>
             </div>
             <div className="block-5 profile__block">
                 <ProfileForm
-                    oldPassword={oldPassword}
-                    newPassword={newPassword}
+                    oldPassword={old_password}
+                    newPassword={new_password}
                     confirmPassword={confirmPassword}
                     changeHandler={changeHandler}
                     submitHandler={submitHandler}
