@@ -6,6 +6,7 @@ import PageNotFound from "../pages/404.jsx";
 import Cart from "../pages/Cart.jsx";
 import Register from "../pages/Register.jsx";
 import Auth from "../pages/Auth.jsx";
+import Product from "../pages/Product.jsx";
 
 export const router = createBrowserRouter([
     {
@@ -16,6 +17,11 @@ export const router = createBrowserRouter([
     {
         path: "/profile",
         element: <Profile />,
+        errorElement: <ErrorPage />,
+    },
+    {
+        path: "/products/:id",
+        element: <Product />,
         errorElement: <ErrorPage />,
     },
     {
