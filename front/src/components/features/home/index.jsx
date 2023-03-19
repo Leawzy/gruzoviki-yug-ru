@@ -11,23 +11,24 @@ import newsTest from '../../../assets/image/news/remgruzo-01.jpg'
 export default function HomePage() {
     return (
         <BaseLayout>
-            <Slider />
-            <NewCard />
+            <Slider/>
+            <NewCard/>
             <section className='aboutsection__page'>
                 <div className='aboutsection__wrapper'>
                     <div className='aboutsection__img-block'>
-                        <img src={aboutIMG} alt="aboutIMG" className='aboutsection__img-item' height={426} width={551}/>
+                        <img src={aboutIMG} alt="aboutIMG" className='aboutsection__img-item' height={466} width={551}/>
                     </div>
                     <div className='aboutsection__content-block'>
                         <h1> О комапнии</h1>
-                        <p className='aboutsection__content-text'>На протяжении 6 лет компания «Автомастер» занимается поставками автозапчастей ГАЗ, УАЗ, ПАЗ, ВАЗ, Камаз.
-                            Мы специализируемся на продвижение своего бренда ТМ PRAVT – сертифицированная торговая марка российской компании.
-                            Наша география расширяется по всей России и ближнему зарубежью, мы стали узнаваемые.
+                        <p className='aboutsection__content-text'>Наша компания специализируется на ремонте грузовиков
+                            европейского и американского типа в городе Ростове-на-Дону. Мы имеем многолетний опыт работы
+                            с различными марками грузовиков, включая Volvo, MAN, Scania, Freightliner, Mack и другие.
                         </p>
-                        <p className='aboutsection__content-text'>На сегодняшний день ассортимент нашей продукции более 600 позиций.
-                            С каждым годом прогресс увеличения ассортимента
-                            составляет не менее чем на 35%.
-                            Производственные мощности, партнеры компании расположены на территории КНР.
+                        <p className='aboutsection__content-text'>
+                            Наша команда высококвалифицированных механиков и техников имеет широкий спектр знаний и
+                            навыков, необходимых для проведения любых ремонтных работ на грузовиках. Мы используем
+                            только качественные запчасти и оборудование, чтобы гарантировать, что ваш грузовик будет
+                            отремонтирован в соответствии с высокими стандартами качества.
                         </p>
                         <a href={'#'} className='aboutsection__btn'>Подробнее</a>
                     </div>
