@@ -8,17 +8,19 @@ import axios from "axios";
 
 function NewCard() {
 
-    const {isLoading, error, data} = useQuery({
-        queryKey: ["HomeCard"],
-        queryFn: () =>
-            axios
-                .get("http://5.167.50.180:8876/api/product_list")
-                .then((res) => res.data.data)
-                .catch(error => {
-                    console.log(error)
-                })
-    });
+    async function fetchRepoData() {
+        try {
+            const res = await axios.get("http://5.167.50.180:8876/api/product_list");
+            return res.data.data;
+        } catch (error) {
+            throw new Error(error);
+        }
+    }
 
+    const { isLoading, error, data } = useQuery({
+        queryKey: ["repoData"],
+        queryFn: fetchRepoData,
+    });
 
     if (isLoading) return <Skeleton/>
 
@@ -35,6 +37,7 @@ function NewCard() {
                             item={item.data}
                             key={index}
                             id={item.id}
+                            short_desc={item.short_desc}
                             quantity={item.quantity}
                             brand={item.brand}
                             title={item.title}

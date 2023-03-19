@@ -5,7 +5,6 @@ import BaseLayout from "../components/shared/layouts/BaseLayout/index.jsx";
 import ProfileLayout from "../components/shared/layouts/ProfileLayout/index.jsx";
 
 function Profile() {
-    const locale = 'ru'
     const [time, setTime] = useState(new Date())
 
     useEffect(() => {
@@ -17,17 +16,21 @@ function Profile() {
         }
     }, []);
 
-    const day = time.toLocaleDateString(locale, { weekday: 'long' });
-    const date = `${day}, ${time.getDate()} ${time.toLocaleDateString(locale, { month: 'long' })}\n\n`;
     const hour = time.getHours();
 
     const currectTime = `${(hour < 12 && 'Доброе утро') || (hour < 17 && 'Добрый день') || 'Добрый вечер'}, `;
-    const {isLoading, error, data} = useQuery({
+    async function fetchRepoData() {
+        try {
+            const res = await axios.get("http://5.167.50.180:8876/api/test");
+            return res.data.data;
+        } catch (error) {
+            throw new Error(error);
+        }
+    }
+
+    const { isLoading, error, data } = useQuery({
         queryKey: ["repoData"],
-        queryFn: () =>
-            axios
-                .get("http://5.167.50.180:8876/api/test")
-                .then((res) => res.data.data),
+        queryFn: fetchRepoData,
     });
 
     if(isLoading) {
