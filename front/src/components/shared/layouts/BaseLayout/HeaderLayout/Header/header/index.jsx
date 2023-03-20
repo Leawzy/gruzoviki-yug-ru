@@ -42,7 +42,7 @@ function Header() {
                     </div>
                     <div className="header__contact">
                         <div className="header__contact-phone">
-                            <a href="src/components/shared/layouts/BaseLayout/HeaderLayout/Header/header/index.jsx#">+8 989 777 42 45</a>
+                            <a href="tel:89897774245">+8 989 777 42 45</a>
                             <a className="header__contact-timetable">8:00 до 19:00 СБ и ВСК выходной</a>
                         </div>
                     </div>

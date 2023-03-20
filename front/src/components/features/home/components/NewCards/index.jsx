@@ -1,31 +1,22 @@
 import React from 'react';
-import Card from './Card/index.jsx'
-import {useQuery} from "@tanstack/react-query";
-
 import './mainLayout.scss'
+
+import Card from './Card/index.jsx'
 import Skeleton from "./SkeletonCards/skeleton.jsx";
-import axios from "axios";
+import useProductList from "../../../../../hooks/useFetchHook.js";
+
 
 function NewCard() {
 
-    async function fetchRepoData() {
-        try {
-            const res = await axios.get("http://5.167.50.180:8876/api/product_list");
-            return res.data.data;
-        } catch (error) {
-            throw new Error(error);
-        }
+    const { isLoading, error, data } = useProductList();
+
+    if (isLoading) {
+        return <Skeleton />;
     }
 
-    const { isLoading, error, data } = useQuery({
-        queryKey: ["repoData"],
-        queryFn: fetchRepoData,
-    });
-
-    if (isLoading) return <Skeleton/>
-
-    if (error) return 'An error has occurred: ' + error.message
-
+    if (error) {
+        return <div>An error has occurred: {error.message}</div>;
+    }
 
     return (
         <div className="index-catalog">

@@ -1,69 +1,76 @@
 import React, {useState} from 'react';
 import axios from "axios";
-import RegisterForm from "../components/core/RegisterForm/RegisterForm.jsx";
+import {useNavigate} from "react-router-dom";
+import Cookies from 'js-cookie';
 
 function Register() {
-    const [email, SetEmail] = useState('')
-    const [password, SetPassword] = useState('')
-    const [fullname, SetFullname] = useState('')
-    const [repassword, SetRePassword] = useState('')
+    const [email, setEmail] = useState("");
+    const [first_name, setFirstName] = useState("");
+    const [last_name, setLastName] = useState("");
+    const [password, setPassword] = useState("");
+    const [password_confirmation, Setpassword_confirmation] = useState("");
 
-    const emailHandlerManager = (e) => {
-        SetEmail(e.target.value)
-        console.log(email)
-    }
-
-    const fullNameHandlerManager = (e) => {
-        SetFullname(e.target.value)
-        console.log(fullname)
-    }
-
-    const passwordHandlerManager = (e) => {
-        SetPassword(e.target.value)
-        console.log(password)
-    }
-
-    const rePasswordHandlerManager = (e) => {
-        SetRePassword(e.target.value)
-        console.log(repassword)
-    }
+    const navigate = useNavigate();
 
     const handlerSubmit = (e) => {
-        e.preventDefault()
-    }
-
-    const sendRegisterAPI = () => {
-        if (email === '' && email.length < 0 && fullname === '' && fullname.length < 0 && password === '' && password.length < 0 && repassword === '') {
-            alert('Заполните все поля!')
-        } else if (password !== repassword) {
-            alert('Пароли должны совпадать!')
-        } else {
-            console.log(password, email)
-            axios.post('', {
-                fullname: fullname,
-                email: email,
-                password: password,
-                repassword: repassword
-            }).then(result => {
-                console.log(result)
-            }).catch(err => {
-                console.log(err)
+        if (password === password_confirmation) {
+            e.preventDefault();
+            axios.post("http://5.167.50.180:8876/api/register", {
+                email,
+                password,
+                first_name,
+                last_name,
+                password_confirmation
+            }).then(res => {
+                const token = res.data.token;
+                Cookies.set('token', token, {expires: 7});
+                navigate('/profile');
+            }).catch(error => {
+                console.log(error);
             })
         }
-    }
+    };
 
-    return <RegisterForm
-        sendRegisterAPI={sendRegisterAPI}
-        email={email}
-        password={password}
-        fullname={fullname}
-        repassword={repassword}
-        handlerSubmit={handlerSubmit}
-        passwordHandlerManager={passwordHandlerManager}
-        fullNameHandlerManager={fullNameHandlerManager}
-        emailHandlerManager={emailHandlerManager}
-        rePasswordHandlerManager={rePasswordHandlerManager}
-    />
+    return (
+        <form onSubmit={handlerSubmit}>
+            <input
+                type="name"
+                value={first_name}
+                onChange={(e) => setFirstName(e.target.value)}
+                placeholder="Ваше имя"
+                required
+            />
+            <input
+                type="name"
+                value={last_name}
+                onChange={(e) => setLastName(e.target.value)}
+                placeholder="Ваша Фамилия"
+                required
+            />
+            <input
+                type="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                placeholder="Email"
+                required
+            />
+            <input
+                type="password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                placeholder="Пароль"
+                required
+            />
+            <input
+                type="password"
+                value={password_confirmation}
+                onChange={(e) => Setpassword_confirmation(e.target.value)}
+                placeholder="Повторить пароль"
+                required
+            />
+            <button type="submit">Зарегистрироваться</button>
+        </form>
+    )
 }
 
 export default Register;
