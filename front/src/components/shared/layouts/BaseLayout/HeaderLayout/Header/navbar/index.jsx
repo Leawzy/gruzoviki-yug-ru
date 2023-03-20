@@ -6,13 +6,13 @@ function NavBar() {
         <div className='header__centerNav'>
             <ul className='header__centerNav-menu'>
                 <li className='header__centerNav-item'>
-                    <NavLink to={'/'} className='header__centerNav-link'>Детали</NavLink>
+                    <NavLink to={'/catalog'} className='header__centerNav-link'>Детали</NavLink>
                 </li>
                 <li className='header__centerNav-item'>
-                    <NavLink to={'/'} className='header__centerNav-link'>Акссесуары</NavLink>
+                    <NavLink to={'/catalog'} className='header__centerNav-link'>Акссесуары</NavLink>
                 </li>
                 <li className='header__centerNav-item'>
-                    <NavLink to={'/'} className='header__centerNav-link'>Инстурменты</NavLink>
+                    <NavLink to={'/catalog'} className='header__centerNav-link'>Инстурменты</NavLink>
                 </li>
             </ul>
         </div>
