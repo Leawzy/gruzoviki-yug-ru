@@ -11,16 +11,11 @@ class ProductController extends Controller
 {
     public function showProducts(){
 
-        $data = Product::all();
-
-        return response()->json([
-            "data" => ProductResource::collection($data),
-        ], 200);
+        return ProductResource::collection(Product::all());
     }
 
     public function CardProduct($id){
 
-            $product = Product::where(["id" => $id])->first();
-            return new ProductResource($product);
+            return new ProductResource(Product::findOrFail($id));
     }
 }
