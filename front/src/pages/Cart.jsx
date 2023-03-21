@@ -1,31 +1,32 @@
-import React from 'react';
-import {useQuery} from "@tanstack/react-query";
-import Card from "../components/features/home/components/NewCards/Card/index.jsx";
+import React, {useEffect, useState} from 'react';
 
 function Cart() {
-    const {error, data} = useQuery({
-        queryKey: ['CartItems'],
-        queryFn: () =>
-            fetch('http://localhost:7002/product').then(
-                (res) => res.json(),
-            ),
-    })
+    const [cartItems, setCartItems] = useState([]);
 
-    if (error) return 'An error has occurred: ' + error.message
-
-    console.log(data)
+    useEffect(() => {
+        const items = localStorage.getItem('cart');
+        if (items) {
+            setCartItems(JSON.parse(items));
+        }
+    }, []);
 
     return (
-        <>
-            {data && data.map(item =>
-                <Card
-                    key={item.id}
-                    title={item.title}
-                />
+        <div>
+            {cartItems.length === 0 ? (
+                <p>Your cart is empty</p>
+            ) : (
+                <ul>
+                    {cartItems.map((item) => (
+                        <div key={item.id}>
+                            <h1>{item.title}</h1>
+                            <p>{item.price}</p>
+                            <p>{item.quantity}</p>
+                        </div>
+                    ))}
+                </ul>
             )}
-        </>
+        </div>
     );
-
 }
 
 export default Cart;
