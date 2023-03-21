@@ -48,4 +48,9 @@ class Product extends Model
     {
         return $this->hasMany(PropertyOil::class);
     }
+
+    public function bearing(): HasMany
+    {
+        return $this->hasMany(PropertyBearing::class);
+    }
 }
