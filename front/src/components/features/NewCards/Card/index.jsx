@@ -1,5 +1,5 @@
 import React from 'react';
-import pictureOfItem from '../../../../../../assets/image/tovar-1.svg'
+import pictureOfItem from '../../../../assets/image/tovar-1.svg'
 import './card.scss'
 import {Link} from "react-router-dom";
 

@@ -2,11 +2,11 @@ import React, { useEffect, useState } from 'react';
 import './mainLayout.scss';
 import Card from './Card/index.jsx';
 import Skeleton from './SkeletonCards/skeleton.jsx';
-import useProductList from '../../../../../hooks/useFetchHook.js';
+import useProductList from '../../../hooks/useFetchHook.js';
 
 function NewCard() {
     const { isLoading, error, data } = useProductList();
-    const [cart, setCart] = useState(JSON.parse(localStorage.getItem('cart') || []));
+    const [cart, setCart] = useState(JSON.parse(localStorage.getItem('cart') || localStorage.setItem('cart', JSON.stringify(cart))));
 
     useEffect(() => {
         const data = localStorage.getItem('cart');
@@ -28,7 +28,8 @@ function NewCard() {
             newCart.push({ ...item, quantity: 1 });
         }
         setCart(newCart);
-        item.clicked = true; // Mark the item as clicked
+        item.clicked = true;
+        localStorage.setItem('cart', JSON.stringify(newCart));
     };
 
     const removeFromCart = (item) => {
@@ -41,7 +42,8 @@ function NewCard() {
                 newCart.splice(index, 1);
             }
             setCart(newCart);
-            item.clicked = false; // Mark the item as not clicked
+            item.clicked = false;
+            localStorage.setItem('cart', JSON.stringify(newCart));
         }
     };
 
@@ -58,7 +60,7 @@ function NewCard() {
             <h3>Популярный товар</h3>
             <div className="short-catalog__wrapper">
                 {data.map((item, index) => {
-                    const isClicked = item.clicked || false; // Check if the item has been clicked
+                    const isClicked = item.clicked || false;
                     return (
                         <Card
                             key={index}
@@ -71,7 +73,7 @@ function NewCard() {
                             price={item.price}
                             addToCart={() => addToCart(item)}
                             removeFromCart={() => removeFromCart(item)}
-                            isClicked={isClicked} // Pass the isClicked property to the Card component
+                            isClicked={isClicked}
                         />
                     );
                 })}
