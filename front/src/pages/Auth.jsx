@@ -1,7 +1,9 @@
 import React, {useState} from 'react';
 import axios from "axios";
 import Cookies from "js-cookie";
-import {useNavigate} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
+
+import '../config.scss'
 
 function Auth() {
     const [email, setEmail] = useState("");
@@ -23,7 +25,8 @@ function Auth() {
     };
 
     return (
-        <form onSubmit={handleLogin}>
+        <form onSubmit={handleLogin} className={'Form'} >
+            <h1>Авторизация</h1>
             <input
                 type="email"
                 value={email}
@@ -38,7 +41,8 @@ function Auth() {
                 placeholder="Password"
                 required
             />
-            <button type="submit">Login</button>
+            <button type="submit">Авторизоваться</button>
+            <p className={'UnderText'}>Нет аккаунта? - <Link to={'/register'} className={'LinkToRegister'}>Зарегистрируйся!</Link></p>
         </form>
     );
 }

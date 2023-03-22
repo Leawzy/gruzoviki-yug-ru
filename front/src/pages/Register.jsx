@@ -1,7 +1,9 @@
 import React, {useState} from 'react';
 import axios from "axios";
-import {useNavigate} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 import Cookies from 'js-cookie';
+
+import '../config.scss'
 
 function Register() {
     const [email, setEmail] = useState("");
@@ -32,7 +34,8 @@ function Register() {
     };
 
     return (
-        <form onSubmit={handlerSubmit}>
+        <form onSubmit={handlerSubmit} className={'FormRegister'}>
+            <h1>Регистарция</h1>
             <input
                 type="name"
                 value={first_name}
@@ -69,6 +72,7 @@ function Register() {
                 required
             />
             <button type="submit">Зарегистрироваться</button>
+            <p className={'UnderText'}>Есть аккаунт? - <Link to={'/login'} className={'LinkToRegister'}>Авторизируйся!</Link></p>
         </form>
     )
 }
