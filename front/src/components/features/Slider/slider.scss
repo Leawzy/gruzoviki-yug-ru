@@ -1,0 +1,44 @@
+.image-slider {
+  margin-top: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+
+  .prev-button,
+  .next-button {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: transparent;
+    border: none;
+    color: #d93737;
+    font-size: 2rem;
+    cursor: pointer;
+    transition: opacity 0.2s ease-in-out;
+
+    &:hover {
+      opacity: 0.8;
+    }
+  }
+
+  .prev-button {
+    left: 22px;
+  }
+
+  .next-button {
+    right: 22px;
+  }
+
+  .slider-image {
+    width: 1500px;
+    height: 511px;
+  }
+  @media screen and (max-width: 768px){
+    display: none;
+  }
+  @media screen and (max-width: 1200px){
+    display: none;
+  }
+}
+
