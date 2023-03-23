@@ -7,8 +7,24 @@
   margin: 0 auto;
 }
 
+.LogOut {
+  border: none;
+  outline: none;
+  background: transparent;
+  margin: 0;
+  padding-top: 5px;
+  padding-left: 0;
+  color: black;
+  cursor: pointer;
+  &:hover{
+    color: red;
+    text-decoration: underline;
+  }
+}
+
 .header {
   margin-top: 40px;
+
   &__link-item {
     padding: 0 10px;
     cursor: pointer;
@@ -34,7 +50,7 @@
     justify-content: space-between;
     flex-wrap: wrap;
 
-    @media screen and (max-width: 768px){
+    @media screen and (max-width: 768px) {
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -49,7 +65,7 @@
     background-image: url('../../../../../assets/image/point.svg');
     @include imageSettingsHeader;
     cursor: pointer;
-    @media screen and (max-width: 768px){
+    @media screen and (max-width: 768px) {
       display: none;
     }
   }
@@ -57,7 +73,7 @@
   &__centerNav-menu {
     display: flex;
     flex-wrap: wrap;
-    @media screen and (max-width: 768px){
+    @media screen and (max-width: 768px) {
       display: flex;
       flex-direction: column;
       padding: 0;
@@ -66,7 +82,7 @@
   }
 
   &__centerNav {
-    @media screen and (max-width: 768px){
+    @media screen and (max-width: 768px) {
       display: flex;
       flex-direction: column;
       text-align: center;
@@ -77,7 +93,7 @@
   &__centerNav-item {
     display: block;
     padding: 0 10px;
-    @media screen and (max-width: 768px){
+    @media screen and (max-width: 768px) {
       margin-bottom: 11px;
     }
   }
@@ -157,13 +173,15 @@
     display: flex;
     flex-direction: column;
     color: $baseTextColor;
+
     a:first-child {
       &:hover {
         text-decoration: underline;
         color: $redColor;
       }
     }
-    @media screen and (max-width: 768px){
+
+    @media screen and (max-width: 768px) {
       margin-top: 20px;
       margin-bottom: 20px;
       display: flex;

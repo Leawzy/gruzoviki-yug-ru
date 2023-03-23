@@ -9,6 +9,26 @@
   display: none !important;
 }
 
+.Button-Cart {
+  .AddToCart {
+    padding: 12px 22px;
+    background: cornflowerblue;
+    color: white;
+    border-radius: 10px;
+    cursor: pointer;
+    outline: none;
+    border: none;
+  }
+  .RemoveFromCart {
+    padding: 12px 22px;
+    background:  #10c44c;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+  }
+}
+
 .short-catalog {
   &__item {
     padding: 15px 55px;
