@@ -27,7 +27,7 @@ class DatabaseSeeder extends Seeder
 
         Property::factory()
             ->create([
-           'name' => 'Масло'
+                'name' => 'Масло'
             ])
             ->create([
                 'name' => 'Подшипник'
@@ -49,7 +49,7 @@ class DatabaseSeeder extends Seeder
             ])
             ->create([
                 'brand_id' => Brand::query()->inRandomOrder()->value('id'),
-                'property_id' => Property::query()->inRandomOrder()->value('id'),
+                'property_id' => Property::query()->where('id', 1)->value('id'),
                 'category_id' => Category::query()->inRandomOrder()->value('id'),
                 'slug' => 'Liqui Moly Optimal 10W-40',
                 'title' => 'Liqui Moly Optimal 10W-40',
@@ -60,7 +60,7 @@ class DatabaseSeeder extends Seeder
             ])
             ->create([
                 'brand_id' => Brand::query()->inRandomOrder()->value('id'),
-                'property_id' => Property::query()->inRandomOrder()->value('id'),
+                'property_id' => Property::query()->where('id', 1)->value('id'),
                 'category_id' => Category::query()->inRandomOrder()->value('id'),
                 'slug' => 'Подшипник 1',
                 'title' => 'Подшипник 1',
@@ -71,7 +71,51 @@ class DatabaseSeeder extends Seeder
             ])
             ->create([
                 'brand_id' => Brand::query()->inRandomOrder()->value('id'),
+                'property_id' => Property::query()->where('id', 2)->value('id'),
+                'category_id' => Category::query()->inRandomOrder()->value('id'),
+                'slug' => 'Подшипник 1',
+                'title' => 'Подшипник 1',
+                'short_desc' => 'Подшипник 3см',
+                'quantity' => '1',
+                'price' => '2000',
+                'art' => '4',
+            ])
+            ->create([
+                'brand_id' => Brand::query()->inRandomOrder()->value('id'),
                 'property_id' => Property::query()->inRandomOrder()->value('id'),
+                'category_id' => Category::query()->inRandomOrder()->value('id'),
+                'slug' => 'SINTEC PLATINUM 5W-40',
+                'title' => 'SINTEC PLATINUM 5W-40',
+                'short_desc' => 'Синтетическое 4 л',
+                'quantity' => '10',
+                'price' => '2019',
+                'art' => '1',
+            ])
+            ->create([
+                'brand_id' => Brand::query()->inRandomOrder()->value('id'),
+                'property_id' => Property::query()->where('id', 1)->value('id'),
+                'category_id' => Category::query()->inRandomOrder()->value('id'),
+                'slug' => 'Liqui Moly Optimal 10W-40',
+                'title' => 'Liqui Moly Optimal 10W-40',
+                'short_desc' => 'Полусинтетическое 4 л',
+                'quantity' => '5',
+                'price' => '3889',
+                'art' => '2',
+            ])
+            ->create([
+                'brand_id' => Brand::query()->inRandomOrder()->value('id'),
+                'property_id' => Property::query()->where('id', 1)->value('id'),
+                'category_id' => Category::query()->inRandomOrder()->value('id'),
+                'slug' => 'Подшипник 1',
+                'title' => 'Подшипник 1',
+                'short_desc' => 'Подшипник 3см',
+                'quantity' => '3',
+                'price' => '2500',
+                'art' => '3',
+            ])
+            ->create([
+                'brand_id' => Brand::query()->inRandomOrder()->value('id'),
+                'property_id' => Property::query()->where('id', 2)->value('id'),
                 'category_id' => Category::query()->inRandomOrder()->value('id'),
                 'slug' => 'Подшипник 1',
                 'title' => 'Подшипник 1',
@@ -85,7 +129,7 @@ class DatabaseSeeder extends Seeder
         PropertyOil::factory()
             ->create([
                 'property_id' => Property::query()->inRandomOrder()->value('id'),
-                'product_id' => Product::query()->inRandomOrder()->value('id'),
+                'product_id' => Product::query()->where('id', 1)->value('id'),
                 'description' => 'Производится из синтетических базовых масел и высокоэффективного многофункционального пакета присадок.',
                 'warranty' => '6 месяцев',
                 'country' => 'Россия',
@@ -93,7 +137,7 @@ class DatabaseSeeder extends Seeder
             ])
             ->create([
                 'property_id' => Property::query()->inRandomOrder()->value('id'),
-                'product_id' => Product::query()->inRandomOrder()->value('id'),
+                'product_id' => Product::query()->where('id', 2)->value('id'),
                 'description' => 'Полусинтетическое моторное масло с адаптированным для российских условий пакетом присадок',
                 'warranty' => '6 месяцев',
                 'country' => 'Россия',
@@ -103,7 +147,7 @@ class DatabaseSeeder extends Seeder
         PropertyBearing::factory()
             ->create([
                 'property_id' => Property::query()->inRandomOrder()->value('id'),
-                'product_id' => Product::query()->inRandomOrder()->value('id'),
+                'product_id' => Product::query()->where('id', 3)->value('id'),
                 'description' => 'Подшипник',
                 'warranty' => '1 год',
                 'country' => 'Германия',
