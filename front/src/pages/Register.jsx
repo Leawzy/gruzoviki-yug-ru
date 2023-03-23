@@ -14,22 +14,22 @@ function Register() {
 
     const navigate = useNavigate();
 
-    const handlerSubmit = (e) => {
+    const handlerSubmit = async (e) => {
         if (password === password_confirmation) {
             e.preventDefault();
-            axios.post("http://5.167.50.180:8876/api/register", {
-                email,
-                password,
-                first_name,
-                last_name,
-                password_confirmation
-            }).then(res => {
-                const token = res.data.token;
-                Cookies.set('token', token, {expires: 7});
-                navigate('/profile');
-            }).catch(error => {
+            try {
+               const res = await axios.post("http://5.167.50.180:8876/api/register", {
+                    email,
+                    password,
+                    first_name,
+                    last_name,
+                    password_confirmation
+                })
+                Cookies.set('api_token', res.data.token, {expires: 7});
+                navigate('/');
+            } catch(error) {
                 console.log(error);
-            })
+            }
         }
     };
 

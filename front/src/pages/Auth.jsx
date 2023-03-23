@@ -8,6 +8,7 @@ import '../config.scss'
 function Auth() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    const [error, setError] = useState(null)
 
     const navigate = useNavigate();
     const handleLogin = async (e) => {
@@ -19,15 +20,20 @@ function Auth() {
             });
             Cookies.set("api_token", response.data.token);
             navigate('/profile');
-        } catch (error) {
-            console.error(error);
+            setError(null)
+        } catch (err) {
+            setError(err.response.data.message)
         }
     };
 
+
+    
     return (
-        <form onSubmit={handleLogin} className={'Form'} >
+        <form onSubmit={handleLogin} className={'Form'}>
             <h1>Авторизация</h1>
+            <p style={{color: 'red'}}>{error}</p>
             <input
+                className={ error === null ? '' : 'error'}
                 type="email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
@@ -35,6 +41,7 @@ function Auth() {
                 required
             />
             <input
+                className={ error === null ? '' : 'error'}
                 type="password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
