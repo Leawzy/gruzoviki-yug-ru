@@ -5,8 +5,10 @@ import Skeleton from './SkeletonCards/skeleton.jsx';
 import useProductList from '../../../hooks/useFetchHook.js';
 
 function NewCard() {
+
     const { isLoading, error, data } = useProductList();
-    const [cart, setCart] = useState(JSON.parse(localStorage.getItem('cart') || localStorage.setItem('cart', JSON.stringify(cart))));
+    const [cart, setCart] = useState(JSON.parse(localStorage.getItem('cart') || localStorage.setItem('cart', JSON.stringify([]))));
+    const [isAddedToCart, setIsAddedToCart] = useState(false);
 
     useEffect(() => {
         const data = localStorage.getItem('cart');
@@ -28,7 +30,8 @@ function NewCard() {
             newCart.push({ ...item, quantity: 1 });
         }
         setCart(newCart);
-        item.clicked = true;
+        setIsAddedToCart(true);
+        localStorage.setItem(`cart-${item.id}`, JSON.stringify(true));
         localStorage.setItem('cart', JSON.stringify(newCart));
     };
 
@@ -42,7 +45,8 @@ function NewCard() {
                 newCart.splice(index, 1);
             }
             setCart(newCart);
-            item.clicked = false;
+            setIsAddedToCart(false);
+            localStorage.removeItem(`cart-${item.id}`);
             localStorage.setItem('cart', JSON.stringify(newCart));
         }
     };
@@ -60,7 +64,7 @@ function NewCard() {
             <h3>Популярный товар</h3>
             <div className="short-catalog__wrapper">
                 {data.map((item, index) => {
-                    const isClicked = item.clicked || false;
+                    const addedToCart = localStorage.getItem(`cart-${item.id}`) === 'true';
                     return (
                         <Card
                             key={index}
@@ -73,7 +77,7 @@ function NewCard() {
                             price={item.price}
                             addToCart={() => addToCart(item)}
                             removeFromCart={() => removeFromCart(item)}
-                            isClicked={isClicked}
+                            isAddedToCart={addedToCart}
                         />
                     );
                 })}

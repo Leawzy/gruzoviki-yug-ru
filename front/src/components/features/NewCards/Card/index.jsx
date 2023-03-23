@@ -4,7 +4,7 @@ import './card.scss'
 import {Link} from "react-router-dom";
 
 function Card(props) {
-    const {title, short_desc, id, price, quantity, brand, isClicked, addToCart, removeFromCart} = props;
+    const {title, short_desc, id, price, quantity, brand, isAddedToCart , addToCart, removeFromCart} = props;
 
     return (
         <div className="short-catalog__item" id={id}>
@@ -27,11 +27,11 @@ function Card(props) {
                       className="short-catalog__item-link">{title}</Link>
                 <p>{short_desc}</p>
             </div>
-            <div>
-                {isClicked ? (
-                    <button onClick={removeFromCart}>Убрать из корзины</button>
+            <div className={'Button-Cart'}>
+                {isAddedToCart  ? (
+                    <button className={'RemoveFromCart'} onClick={removeFromCart}>Убрать из корзины</button>
                 ) : (
-                    <button onClick={addToCart}>Добавить в корзину</button>
+                    <button className={'AddToCart'} onClick={addToCart}>Добавить в корзину</button>
                 )}
             </div>
         </div>

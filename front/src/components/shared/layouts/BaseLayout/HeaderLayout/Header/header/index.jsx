@@ -16,8 +16,9 @@ function Header() {
     const [isLoggedIn, setIsLoggedIn] = useState(false);
     const [count, setCount] = useState(0);
 
+
     useEffect(() => {
-        const cartItems = JSON.parse(localStorage.getItem("cart")) || [];
+        const cartItems = JSON.parse(localStorage.getItem("cart"));
         setCount(cartItems.length);
     }, []);
 
@@ -37,6 +38,12 @@ function Header() {
     if (redirectToCatalog) {
         return navigate(`/catalog?search=${searchQuery}`)
     }
+    const logoutHandler = () => {
+        Cookies.remove("api_token")
+        navigate('/');
+        setIsLoggedIn(false);
+    }
+
 
     return (
         <div className='header__center'>
@@ -63,11 +70,14 @@ function Header() {
                             <img className="header__link-item-icon" width={34} height={34} src={account} alt="account"/>
                             <div className="dropmenu-content">
                                 {isLoggedIn ? (
-                                    <Link to={'/profile'}>Профиль</Link>
+                                    <>
+                                        <Link to={'/profile'}>Профиль</Link>
+                                        <button className={'LogOut'} onClick={logoutHandler}>Выход</button>
+                                    </>
                                 ) : (
                                     <>
-                                        <Link to={"/register"}>Регистрация</Link>
                                         <Link to={"/login"}>Авторизация</Link>
+                                        <Link to={"/register"}>Регистрация</Link>
                                     </>
                                 )}
                             </div>
