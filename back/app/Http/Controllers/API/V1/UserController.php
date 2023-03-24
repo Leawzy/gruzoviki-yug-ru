@@ -104,9 +104,10 @@ class UserController extends Controller
             "password" => ["required"]
         ]);
         $user = User::where(["email" => $request["email"]])->first();
-        $user->api_token = Str::random(80);
-        $user->save();
-        $user = User::where(["email" => $request["email"]])->first();
+        // TODO: сделать реворк данной функции
+//        $user->api_token = Str::random(80);
+//        $user->save();
+//        $user = User::where(["email" => $request["email"]])->first();
 
         if (Auth::attempt($request->only('email', 'password'))) {
             return response()->json([
@@ -125,6 +126,7 @@ class UserController extends Controller
 
     }
 
+    // TODO: Удалить две функции перед продакшеном и проверить РОУТЫ
     public function test()
     {
         $data = [
@@ -136,5 +138,13 @@ class UserController extends Controller
         return response()->json([
             "data" => $data
         ], 200);
+    }
+
+    public function test_user_list()
+    {
+        $data = User::all();
+        return [
+            $data
+        ];
     }
 }
