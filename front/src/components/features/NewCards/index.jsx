@@ -1,13 +1,22 @@
-import React, { useEffect, useState } from 'react';
+import React, {useEffect, useState} from 'react';
 import './mainLayout.scss';
 import Card from './Card/index.jsx';
 import Skeleton from './SkeletonCards/skeleton.jsx';
 import useProductList from '../../../hooks/useFetchHook.js';
 import Header from "../../shared/layouts/BaseLayout/HeaderLayout/Header/header/index.jsx";
 
-function NewCard() {
+let result = 0;
+function Count(count) {
+    let data = count;
+    result = data;
+}
 
-    const { isLoading, error, data } = useProductList();
+console.log(result);
+
+export const CountContext = React.createContext(8);
+
+function NewCard() {
+    const {isLoading, error, data} = useProductList();
     const [cart, setCart] = useState(JSON.parse(localStorage.getItem('cart') || localStorage.setItem('cart', JSON.stringify([]))));
     const [isAddedToCart, setIsAddedToCart] = useState(false);
     const [count, setCount] = useState(0);
@@ -29,7 +38,7 @@ function NewCard() {
         if (existingItem) {
             existingItem.quantity += 1;
         } else {
-            newCart.push({ ...item, quantity: 1 });
+            newCart.push({...item, quantity: 1});
         }
         setCart(newCart);
         setIsAddedToCart(true);
@@ -59,13 +68,13 @@ function NewCard() {
         }
     };
     if (isLoading) {
-        return <Skeleton />;
+        return <Skeleton/>;
     }
 
     if (error) {
         return <div>An error has occurred: {error.message}</div>;
     }
-
+    Count(5)
     return (
         <div className="index-catalog">
             <h3>Популярный товар</h3>
@@ -89,9 +98,6 @@ function NewCard() {
                     );
                 })}
             </div>
-            <Header
-                countp={count}
-            />
         </div>
     );
 }

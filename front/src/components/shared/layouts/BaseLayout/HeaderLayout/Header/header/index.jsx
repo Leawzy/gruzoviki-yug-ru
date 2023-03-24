@@ -1,7 +1,8 @@
-import React, {useEffect, useState} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import {Link} from "react-router-dom";
-import { useNavigate } from "react-router-dom";
+import {useNavigate} from "react-router-dom";
 import Cookies from "js-cookie";
+import {CountContext} from '../../../../../../features/NewCards/index.jsx'
 
 import account from '../../../../../../../assets/image/icons/account.svg'
 import basket from '../../../../../../../assets/image/icons/basket.svg'
@@ -9,26 +10,13 @@ import favorite from '../../../../../../../assets/image/icons/favorite.svg'
 
 import Navbar from "../navbar/index.jsx";
 
-function Header(props) {
-    const { countp } = props
+function Header() {
+    const count = useContext(CountContext);
+    console.log(count);
     const navigate = useNavigate();
     const [searchQuery, setSearchQuery] = useState('');
     const [redirectToCatalog, setRedirectToCatalog] = useState(false);
     const [isLoggedIn, setIsLoggedIn] = useState(false);
-    const [count, setCount] = useState(0)
-
-    useEffect(() => {
-        const cartItems = JSON.parse(localStorage.getItem("cart"));
-        let data = cartItems.length
-        if (countp >= 1) {
-            setCount(countp)
-        } else setCount(data)
-    });
-    console.log(count);
-    useEffect(() => {
-        const token = Cookies.get('api_token');
-        setIsLoggedIn(!!token);
-    }, []);
 
     const handleInputChange = (event) => {
         setSearchQuery(event.target.value);
@@ -47,7 +35,6 @@ function Header(props) {
         setIsLoggedIn(false);
     }
 
-
     return (
         <div className='header__center'>
             <div className='container'>
@@ -56,9 +43,10 @@ function Header(props) {
                         <Link to={'/'} className='header__logo-img'>
                         </Link>
                     </div>
-                    <Navbar />
+                    <Navbar/>
                     <form className="header__search">
-                        <input className='header__search-input' type="text" placeholder={'Что будем искать?'} value={searchQuery}
+                        <input className='header__search-input' type="text" placeholder={'Что будем искать?'}
+                               value={searchQuery}
                                onChange={handleInputChange}/>
                         <button type={'submit'} onSubmit={handleFormSubmit} className='header__search-submit'></button>
                     </form>
@@ -86,7 +74,8 @@ function Header(props) {
                             </div>
                         </div>
                         <Link to={''} className="header__link-item">
-                            <img className="header__link-item-icon" width={34} height={34} src={favorite} alt="favorite"/>
+                            <img className="header__link-item-icon" width={34} height={34} src={favorite}
+                                 alt="favorite"/>
                         </Link>
                         <Link to={'/cart'} className="header__link-item">
                             <img className="header__link-item-icon" width={34} height={34} src={basket} alt="basket"/>
