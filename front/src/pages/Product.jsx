@@ -5,7 +5,7 @@ import axios from 'axios';
 
 function useFetchRepoData(id) {
     return useQuery({
-        queryKey: ['repoData', id],
+        queryKey: ['ProductCard', id],
         queryFn: async () => {
             try {
                 const res = await axios.get(`http://5.167.50.180:8876/api/card/${id}`);
@@ -38,6 +38,19 @@ function Product() {
             <h1>{data.title}</h1>
             <p>ID: {id}</p>
             <p>{data.short_desc}</p>
+            {
+                data.property.map((e, index) =>
+                    <ul key={index}>
+                        <li>
+                            <p>{e?.description}</p>
+                            <p>{e?.size}</p>
+                            <p>{e?.warranty}</p>
+                            <p>{e?.country}</p>
+                            <p>{e?.start_date}</p>
+                        </li>
+                    </ul>
+                )
+            }
         </div>
     );
 }
