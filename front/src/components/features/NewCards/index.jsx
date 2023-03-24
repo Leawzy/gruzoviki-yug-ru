@@ -3,24 +3,13 @@ import './mainLayout.scss';
 import Card from './Card/index.jsx';
 import Skeleton from './SkeletonCards/skeleton.jsx';
 import useProductList from '../../../hooks/useFetchHook.js';
-import Header from "../../shared/layouts/BaseLayout/HeaderLayout/Header/header/index.jsx";
-
-let result = 0;
-function Count(count) {
-    let data = count;
-    result = data;
-}
-
-console.log(result);
-
-export const CountContext = React.createContext(8);
-
+import { useDispatch } from 'react-redux';
 function NewCard() {
     const {isLoading, error, data} = useProductList();
     const [cart, setCart] = useState(JSON.parse(localStorage.getItem('cart') || localStorage.setItem('cart', JSON.stringify([]))));
     const [isAddedToCart, setIsAddedToCart] = useState(false);
     const [count, setCount] = useState(0);
-
+    const dispatch = useDispatch();
     useEffect(() => {
         const data = localStorage.getItem('cart');
         if (data) {
@@ -46,7 +35,7 @@ function NewCard() {
         localStorage.setItem('cart', JSON.stringify(newCart));
         const cartItems = JSON.parse(localStorage.getItem("cart"));
         let data = cartItems.length
-        setCount(data)
+        dispatch({ type: 'UPDATE_NUMBER', payload: data });
     };
 
     const removeFromCart = (item) => {
@@ -64,7 +53,7 @@ function NewCard() {
             localStorage.setItem('cart', JSON.stringify(newCart));
             const cartItems = JSON.parse(localStorage.getItem("cart"));
             let data = cartItems.length
-            setCount(data)
+            dispatch({ type: 'UPDATE_NUMBER', payload: data });
         }
     };
     if (isLoading) {
@@ -74,7 +63,6 @@ function NewCard() {
     if (error) {
         return <div>An error has occurred: {error.message}</div>;
     }
-    Count(5)
     return (
         <div className="index-catalog">
             <h3>Популярный товар</h3>

@@ -2,7 +2,6 @@ import React, {useContext, useEffect, useState} from 'react';
 import {Link} from "react-router-dom";
 import {useNavigate} from "react-router-dom";
 import Cookies from "js-cookie";
-import {CountContext} from '../../../../../../features/NewCards/index.jsx'
 
 import account from '../../../../../../../assets/image/icons/account.svg'
 import basket from '../../../../../../../assets/image/icons/basket.svg'
@@ -10,17 +9,28 @@ import favorite from '../../../../../../../assets/image/icons/favorite.svg'
 
 import Navbar from "../navbar/index.jsx";
 
+import { useSelector } from 'react-redux';
+
 function Header() {
-    const count = useContext(CountContext);
-    console.log(count);
     const navigate = useNavigate();
     const [searchQuery, setSearchQuery] = useState('');
     const [redirectToCatalog, setRedirectToCatalog] = useState(false);
     const [isLoggedIn, setIsLoggedIn] = useState(false);
-
+    const [count, setCount] = useState(0)
+    const myNumber = useSelector(state => state.myNumber);
     const handleInputChange = (event) => {
         setSearchQuery(event.target.value);
     };
+
+    const cartItems = JSON.parse(localStorage.getItem("cart"));
+
+    useEffect(() => {
+        const cartItems = JSON.parse(localStorage.getItem("cart"));
+        let data = cartItems.length
+        if (myNumber >= 1) {
+            setCount(myNumber)
+        } else setCount(data)
+    });
 
     const handleFormSubmit = () => {
         setRedirectToCatalog(true);

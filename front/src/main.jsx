@@ -13,31 +13,33 @@ import Register from "./pages/Register.jsx";
 import Product from "./pages/Product.jsx";
 import Cart from "./pages/Cart.jsx";
 import Catalog from "./pages/Catalog.jsx";
-
+import { Provider } from 'react-redux';
+import {store} from "./redux/store.js";
 import {PrivateAuthRoute, PrivateNoNAuthRoute} from "./routes/privateRoute.jsx";
-
 const queryClient = new QueryClient();
 
 
 ReactDOM.createRoot(document.getElementById('root')).render(
     <React.StrictMode>
-        <QueryClientProvider client={queryClient}>
-            <BrowserRouter>
-                <Routes>
-                    <Route element={<PrivateAuthRoute/>}>
-                        <Route path={'/profile'} element={<Profile/>} />
-                        <Route path={'/cart'} element={<Cart />} />
-                    </Route>
-                    <Route element={<PrivateNoNAuthRoute/>}>
-                        <Route path={'/login'} element={<Auth />} />
-                        <Route path={'/register'} element={<Register />} />
-                    </Route>
-                    <Route path={'/'} element={<Home />} />
-                    <Route path={'/products/:id'} element={<Product />} />
-                    <Route path={'/catalog'} element={<Catalog />} />
-                </Routes>
-            </BrowserRouter>
-            <ReactQueryDevtools initialIsOpen={false}/>
-        </QueryClientProvider>
+        <Provider store={store}>
+            <QueryClientProvider client={queryClient}>
+                <BrowserRouter>
+                    <Routes>
+                        <Route element={<PrivateAuthRoute/>}>
+                            <Route path={'/profile'} element={<Profile/>} />
+                            <Route path={'/cart'} element={<Cart />} />
+                        </Route>
+                        <Route element={<PrivateNoNAuthRoute/>}>
+                            <Route path={'/login'} element={<Auth />} />
+                            <Route path={'/register'} element={<Register />} />
+                        </Route>
+                        <Route path={'/'} element={<Home />} />
+                        <Route path={'/products/:id'} element={<Product />} />
+                        <Route path={'/catalog'} element={<Catalog />} />
+                    </Routes>
+                </BrowserRouter>
+                <ReactQueryDevtools initialIsOpen={false}/>
+            </QueryClientProvider>
+        </Provider>
     </React.StrictMode>
 );
