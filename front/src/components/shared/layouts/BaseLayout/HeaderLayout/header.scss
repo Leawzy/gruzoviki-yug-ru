@@ -60,9 +60,13 @@
 
   &__logo-img {
     display: block;
-    width: 187px;
-    height: 64px;
-    background-image: url('../../../../../assets/image/point.svg');
+    width: 128px;
+    height: 116px;
+    background-image: url('../../../../../assets/image/logo.svg');
+    background-size: 120px !important;
+    &:hover {
+      background-size: 125px !important;
+    }
     @include imageSettingsHeader;
     cursor: pointer;
     @media screen and (max-width: 768px) {

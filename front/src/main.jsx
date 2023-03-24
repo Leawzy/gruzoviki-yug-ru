@@ -27,13 +27,13 @@ ReactDOM.createRoot(document.getElementById('root')).render(
                     <Routes>
                         <Route element={<PrivateAuthRoute/>}>
                             <Route path={'/profile'} element={<Profile/>} />
-                            <Route path={'/cart'} element={<Cart />} />
                         </Route>
                         <Route element={<PrivateNoNAuthRoute/>}>
                             <Route path={'/login'} element={<Auth />} />
                             <Route path={'/register'} element={<Register />} />
                         </Route>
                         <Route path={'/'} element={<Home />} />
+                        <Route path={'/cart'} element={<Cart />} />
                         <Route path={'/products/:id'} element={<Product />} />
                         <Route path={'/catalog'} element={<Catalog />} />
                     </Routes>

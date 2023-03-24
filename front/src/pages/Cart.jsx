@@ -1,4 +1,7 @@
 import React, {useEffect, useState} from 'react';
+import BaseLayout from "../components/shared/layouts/BaseLayout/index.jsx";
+
+import '../styles/base.scss'
 
 function Cart() {
     const [cartItems, setCartItems] = useState([]);
@@ -10,22 +13,37 @@ function Cart() {
         }
     }, []);
 
+    function getTotalPrice (){
+        let totalPrice = 0;
+        cartItems.forEach(item => {
+            totalPrice += item.price;
+        });
+        return totalPrice.toFixed();
+    }
+
     return (
-        <div>
-            {cartItems.length === 0 ? (
-                <p>Your cart is empty</p>
-            ) : (
-                <ul>
-                    {cartItems.map((item) => (
-                        <div key={item.id}>
-                            <h1>{item.title}</h1>
-                            <p>{item.price}</p>
-                            <p>{item.quantity}</p>
+        <BaseLayout>
+            <>
+                {cartItems.length === 0 ? (
+                    <p>Корзина пустая</p>
+                ) : (
+                    <div className={'cart'}>
+                        <h1>Ваши Заказы</h1>
+                        {cartItems.map((item) => (
+                            <div key={item.id} className={'cart__wrapper'}>
+                                <p className={'cart__title'}>{item.title}</p>
+                                <p className={'cart__price'}>Цены: {item.price}</p>
+                                <p className={'cart__quantity'}>Количество: {item.quantity}</p>
+                            </div>
+                        ))}
+                        <div>
+                            <p>Общая сумма: {getTotalPrice()}</p>
+                            <button>Оплатить</button>
                         </div>
-                    ))}
-                </ul>
-            )}
-        </div>
+                    </div>
+                )}
+            </>
+        </BaseLayout>
     );
 }
 
