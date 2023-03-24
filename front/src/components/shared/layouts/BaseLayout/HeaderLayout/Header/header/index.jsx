@@ -9,19 +9,22 @@ import favorite from '../../../../../../../assets/image/icons/favorite.svg'
 
 import Navbar from "../navbar/index.jsx";
 
-function Header() {
+function Header(props) {
+    const { countp } = props
     const navigate = useNavigate();
     const [searchQuery, setSearchQuery] = useState('');
     const [redirectToCatalog, setRedirectToCatalog] = useState(false);
     const [isLoggedIn, setIsLoggedIn] = useState(false);
-    const [count, setCount] = useState(0);
-
+    const [count, setCount] = useState(0)
 
     useEffect(() => {
         const cartItems = JSON.parse(localStorage.getItem("cart"));
-        setCount(cartItems.length);
-    }, []);
-
+        let data = cartItems.length
+        if (countp >= 1) {
+            setCount(countp)
+        } else setCount(data)
+    });
+    console.log(count);
     useEffect(() => {
         const token = Cookies.get('api_token');
         setIsLoggedIn(!!token);

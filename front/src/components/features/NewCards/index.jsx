@@ -3,12 +3,14 @@ import './mainLayout.scss';
 import Card from './Card/index.jsx';
 import Skeleton from './SkeletonCards/skeleton.jsx';
 import useProductList from '../../../hooks/useFetchHook.js';
+import Header from "../../shared/layouts/BaseLayout/HeaderLayout/Header/header/index.jsx";
 
 function NewCard() {
 
     const { isLoading, error, data } = useProductList();
     const [cart, setCart] = useState(JSON.parse(localStorage.getItem('cart') || localStorage.setItem('cart', JSON.stringify([]))));
     const [isAddedToCart, setIsAddedToCart] = useState(false);
+    const [count, setCount] = useState(0);
 
     useEffect(() => {
         const data = localStorage.getItem('cart');
@@ -33,6 +35,9 @@ function NewCard() {
         setIsAddedToCart(true);
         localStorage.setItem(`cart-${item.id}`, JSON.stringify(true));
         localStorage.setItem('cart', JSON.stringify(newCart));
+        const cartItems = JSON.parse(localStorage.getItem("cart"));
+        let data = cartItems.length
+        setCount(data)
     };
 
     const removeFromCart = (item) => {
@@ -48,9 +53,11 @@ function NewCard() {
             setIsAddedToCart(false);
             localStorage.removeItem(`cart-${item.id}`);
             localStorage.setItem('cart', JSON.stringify(newCart));
+            const cartItems = JSON.parse(localStorage.getItem("cart"));
+            let data = cartItems.length
+            setCount(data)
         }
     };
-
     if (isLoading) {
         return <Skeleton />;
     }
@@ -82,6 +89,9 @@ function NewCard() {
                     );
                 })}
             </div>
+            <Header
+                countp={count}
+            />
         </div>
     );
 }
