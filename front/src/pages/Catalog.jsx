@@ -1,6 +1,6 @@
 import React from 'react';
 
-function Catalog(props) {
+function Catalog() {
     return (
         <div></div>
     );
