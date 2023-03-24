@@ -1,4 +1,4 @@
-import React, {useContext, useEffect, useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {Link} from "react-router-dom";
 import {useNavigate} from "react-router-dom";
 import Cookies from "js-cookie";
@@ -21,8 +21,6 @@ function Header() {
     const handleInputChange = (event) => {
         setSearchQuery(event.target.value);
     };
-
-    const cartItems = JSON.parse(localStorage.getItem("cart"));
 
     useEffect(() => {
         const cartItems = JSON.parse(localStorage.getItem("cart"));
