@@ -13,12 +13,17 @@ function Cart() {
         }
     }, []);
 
-    function getTotalPrice (){
+    function getTotalPrice() {
         let totalPrice = 0;
         cartItems.forEach(item => {
             totalPrice += item.price;
         });
         return totalPrice.toFixed();
+    }
+
+    function getTotalItems() {
+        let total = cartItems.length
+        return total
     }
 
     return (
@@ -37,7 +42,7 @@ function Cart() {
                             </div>
                         ))}
                         <div>
-                            <p>Общая сумма: {getTotalPrice()}</p>
+                            <p>Общая сумма: {getTotalPrice()} | Общее количество позиций: {getTotalItems()}</p>
                             <button>Оплатить</button>
                         </div>
                     </div>
