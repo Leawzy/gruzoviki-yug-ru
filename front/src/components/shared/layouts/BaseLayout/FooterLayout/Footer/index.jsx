@@ -8,7 +8,7 @@ function Footer() {
             <div className="footer__addr">
                 <h1 className="footer__logo">Грузовики-Юг</h1>
                 <address>
-                    <a className={'map__address'} href={'https://yandex.ru/maps/?ll=39.855348%2C47.123700&mode=routes&rtext=~47.123747%2C39.855329&rtt=auto&ruri=~ymapsbm1%3A%2F%2Forg%3Foid%3D180686594518&z=17.1'}>5534 Somewhere In. The World 22193-10212 </a>
+                    <a className={'map__address'} href={'https://yandex.ru/maps/?ll=39.855348%2C47.123700&mode=routes&rtext=~47.123747%2C39.855329&rtt=auto&ruri=~ymapsbm1%3A%2F%2Forg%3Foid%3D180686594518&z=17.1'}>Промышленная ул., 16, хутор Маяковского</a>
                 </address>
                 <div className={'footer__phones'}>
                     <a href="">7 989 633 84 44</a>
@@ -34,9 +34,9 @@ function Footer() {
                         </li>
                     </ul>
                 </li>
-                <li className="nav__item nav__item--extra">
+                <li className="nav__item">
                     <h2 className="nav__title">Навигация</h2>
-                    <ul className="nav__ul nav__ul--extra">
+                    <ul className="nav__ul">
                         <li>
                             <a href="#">Доставка</a>
                         </li>
