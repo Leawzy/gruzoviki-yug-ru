@@ -1,6 +1,7 @@
 import React from 'react';
 
 import './footer.scss'
+import {Link} from "react-router-dom";
 
 function Footer() {
     return (
@@ -56,7 +57,7 @@ function Footer() {
 
                     <ul className="nav__ul">
                         <li>
-                            <a href="#">Политика кондифициальности</a>
+                            <Link to={'/privacy'}>Политика кондифициальности</Link>
                         </li>
                         <li>
                             <a href="#">Пользовательское соглашение</a>
