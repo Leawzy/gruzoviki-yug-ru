@@ -5,6 +5,7 @@ namespace Database\Seeders;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use App\Models\Brand;
 use App\Models\Category;
+use App\Models\Post;
 use App\Models\Product;
 use App\Models\Property;
 use App\Models\PropertyBearing;
@@ -153,6 +154,32 @@ class DatabaseSeeder extends Seeder
                 'country' => 'Германия',
                 'size' => '3см',
                 'start_date' => '22 год'
+            ]);
+
+        Post::factory()
+            ->create([
+                'slug' => 'Post 1',
+                'title' => 'Post 1',
+                'short_desc' => 'Я пост 1',
+                'description' => 'Я пост 1 привет мой дорой друг сегодня мы поговорим как ты меня видишь',
+            ])
+            ->create([
+                'slug' => 'Post 2',
+                'title' => 'Post 2',
+                'short_desc' => 'Я пост 2',
+                'description' => 'Я пост 2 привет мой дорой друг сегодня мы поговорим как ты меня видишь',
+            ])
+            ->create([
+                'slug' => 'Post 3',
+                'title' => 'Post 3',
+                'short_desc' => 'Я пост 3',
+                'description' => 'Я пост 3 привет мой дорой друг сегодня мы поговорим как ты меня видишь',
+            ])
+            ->create([
+                'slug' => 'Post 4',
+                'title' => 'Post 4',
+                'short_desc' => 'Я пост 4',
+                'description' => 'Я пост 4 привет мой дорой друг сегодня мы поговорим как ты меня видишь',
             ]);
         // \App\Models\User::factory(10)->create();
 
