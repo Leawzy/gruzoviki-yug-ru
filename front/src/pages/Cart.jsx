@@ -1,10 +1,13 @@
 import React, {useEffect, useState} from 'react';
 import BaseLayout from "../components/shared/layouts/BaseLayout/index.jsx";
+import {useDispatch} from "react-redux";
 
 import '../styles/base.scss'
 
 function Cart() {
     const [cartItems, setCartItems] = useState([]);
+    const dispatch = useDispatch();
+
 
     useEffect(() => {
         const items = localStorage.getItem('cart');
@@ -22,8 +25,7 @@ function Cart() {
     }
 
     function getTotalItems() {
-        let total = cartItems.length
-        return total
+        return cartItems.length
     }
 
     return (
@@ -39,6 +41,21 @@ function Cart() {
                                 <p className={'cart__title'}>{item.title}</p>
                                 <p className={'cart__price'}>Цены: {item.price}</p>
                                 <p className={'cart__quantity'}>Количество: {item.quantity}</p>
+                                <button onClick={() => {
+                                    const updatedCart = cartItems.filter((items) => items.id !== item.id);
+                                    setCartItems(updatedCart);
+                                    if(updatedCart) {
+                                        updatedCart.quantity -= 1;
+                                        if (updatedCart.quantity === 0) {
+                                            const index = cartItems.indexOf(updatedCart);
+                                            cartItems.splice(index, 1);
+                                        }
+                                        localStorage.removeItem(`cart-${item.id}`);
+                                        localStorage.setItem('cart', JSON.stringify(updatedCart));
+                                    }
+                                    let data = (cartItems.length - 1)
+                                    dispatch({ type: 'UPDATE_NUMBER', payload: data });
+                                    }}>Удалить</button>
                             </div>
                         ))}
                         <div>
