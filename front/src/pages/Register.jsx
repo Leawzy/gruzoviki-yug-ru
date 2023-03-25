@@ -18,7 +18,7 @@ function Register() {
         if (password === password_confirmation) {
             e.preventDefault();
             try {
-               const res = await axios.post("http://5.167.50.180:8876/api/register", {
+                const res = await axios.post("http://5.167.50.180:8876/api/register", {
                     email,
                     password,
                     first_name,
@@ -27,7 +27,7 @@ function Register() {
                 })
                 Cookies.set('api_token', res.data.token, {expires: 7});
                 navigate('/');
-            } catch(error) {
+            } catch (error) {
                 console.log(error);
             }
         }
@@ -71,8 +71,16 @@ function Register() {
                 placeholder="Повторить пароль"
                 required
             />
+            <div className={'accept__privacy'}>
+                <p>
+                    Регистрируясь, вы соглашаетесь с <Link to={'/tos'}>Условиями предоставления услуг</Link> и <Link
+                    to={'/privacy'}>Политикой конфиденциальности</Link>, а также с <Link to={'/tos'}>Политикой использования файлов
+                    cookie.</Link>
+                </p>
+            </div>
             <button type="submit">Зарегистрироваться</button>
-            <p className={'UnderText'}>Есть аккаунт? - <Link to={'/login'} className={'LinkToRegister'}>Авторизируйся!</Link></p>
+            <p className={'UnderText'}>Есть аккаунт? - <Link to={'/login'}
+                                                             className={'LinkToRegister'}>Авторизируйся!</Link></p>
         </form>
     )
 }
