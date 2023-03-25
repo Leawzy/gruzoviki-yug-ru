@@ -202,6 +202,31 @@ h1, h2, h3, h4, h5, h6 {
     padding: 15px;
   }
 
+  &__time {
+    display: block;
+    width: 100%;
+    color: #ccc5c5;
+    font-size: 15px;
+    font-weight: 500;
+    padding: 15px;
+  }
+
+  .news__card {
+    &:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 5px 54px 0 rgba(0, 0, 0, 0.28);
+      background: linear-gradient(1.56deg, rgba(40, 40, 40, 0.78) 100%);
+    }
+  }
+
+  &__desc {
+    display: block;
+    width: 100%;
+    color: #ffffff;
+    font-weight: 600;
+    padding: 15px;
+  }
+
   .news__link-img {
     display: block;
     width: 100%;
@@ -231,6 +256,20 @@ h1, h2, h3, h4, h5, h6 {
   justify-content: center;
   text-align: center;
   margin-top: 11%;
+
+  .accept__privacy {
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 580px;
+
+    a {
+      color: #437FC8;
+      text-decoration: underline;
+      &:hover {
+        color: #6e6e6e;
+      }
+    }
+  }
 
   input {
     width: 500px;
