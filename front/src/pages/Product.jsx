@@ -7,6 +7,7 @@ import pictureOfItem from '../assets/image/tovar-1.svg'
 import '../config.scss';
 import ZoomImage from "../components/core/ZoomImage/ZoomImage.jsx";
 import BaseLayout from "../components/shared/layouts/BaseLayout/index.jsx";
+import Tabs from "../components/shared/Tabs/index.jsx";
 
 function useFetchRepoData(id) {
     return useQuery({
@@ -40,30 +41,37 @@ function Product() {
 
     return (
         <BaseLayout>
-            <div className="product__wrapper">
-                <div className={'product__card'}>
-                    <div className={'product__card-img'}>
+            <div className={'card__wrapper'}>
+                <div className={'card__top'}>
+                    <div>
                         <ZoomImage src={pictureOfItem}/>
                     </div>
-                    <div className={'product__card-info'}>
-                        <h1 className={'product__card-info-title'}>{data.title}</h1>
+                    <div>
+                        <h1>{data.title}</h1>
                         <div className={'border'}></div>
-                        <p className={'product__card-info-sd'}>{data.short_desc}</p>
-                        {
-                            data.property.map((e, index) =>
-                                <div key={index}>
-                                    <>
-                                        <h2>FAFA</h2>
-                                        <p>{e?.description}</p>
-                                        <p>{e?.size}</p>
-                                        <p>{e?.warranty}</p>
-                                        <p>{e?.country}</p>
-                                        <p>{e?.start_date}</p>
-                                    </>
-                                </div>
-                            )
-                        }
+                        <p>{data.short_desc}</p>
                     </div>
+                </div>
+                <div className={'card__bottom'}>
+                    {
+                        data.property.map((e, index) =>
+                            <div key={index}>
+                                <Tabs>
+                                    <div label="Описание">
+                                        <p>{e?.description}</p>
+                                    </div>
+                                    <div label="Характеристики">
+                                       {
+                                            e === true ?  <p>`Объем / Размер: ${e?.size}`</p> : ''
+                                        }
+                                        <p>Гарантия: {e?.warranty}</p>
+                                        <p>Страна производитель: {e?.country}</p>
+                                        <p>Товар поступил: {e?.start_date}</p>
+                                    </div>
+                                </Tabs>
+                            </div>
+                        )
+                    }
                 </div>
             </div>
         </BaseLayout>
