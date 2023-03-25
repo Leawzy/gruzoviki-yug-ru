@@ -2,7 +2,7 @@ import React from 'react';
 import './mainLayout.scss';
 import Card from './Card/index.jsx';
 import Skeleton from './SkeletonCards/skeleton.jsx';
-import useProductList from '../../../hooks/useFetchHook.js';
+import {useProductList} from '../../../hooks/useFetchHook.js';
 import CartHook from "../../../hooks/CartHook.js";
 
 function PopularCard() {
