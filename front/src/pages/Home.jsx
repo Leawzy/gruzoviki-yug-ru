@@ -21,7 +21,7 @@ function Home() {
             <section className='aboutsection__page'>
                 <div className='aboutsection__wrapper'>
                     <div className='aboutsection__img-block'>
-                        <img src={aboutIMG} alt="aboutIMG" className='aboutsection__img-item' height={466} width={551}/>
+                        <img src={aboutIMG} alt="aboutIMG" className='aboutsection__img-item' height={468} width={551}/>
                     </div>
                     <div className='aboutsection__content-block'>
                         <h1> О комапнии</h1>
