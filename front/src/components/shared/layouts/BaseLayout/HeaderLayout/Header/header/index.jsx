@@ -30,6 +30,15 @@ function Header() {
         } else setCount(data)
     });
 
+    useEffect(() => {
+        function checkIsAuth() {
+            if(Cookies.get('api_token')) {
+                setIsLoggedIn(true)
+            }
+        }
+        checkIsAuth()
+    })
+
     const handleFormSubmit = () => {
         setRedirectToCatalog(true);
     };
