@@ -16,6 +16,9 @@ import Catalog from "./pages/Catalog.jsx";
 import { Provider } from 'react-redux';
 import {store} from "./redux/store.js";
 import {PrivateAuthRoute, PrivateNoNAuthRoute} from "./routes/privateRoute.jsx";
+import NewsPost from "./pages/NewsPost.jsx";
+import Privacy from "./pages/Privacy.jsx";
+import Tos from "./pages/Tos.jsx";
 const queryClient = new QueryClient();
 
 
@@ -35,7 +38,10 @@ ReactDOM.createRoot(document.getElementById('root')).render(
                         <Route path={'/'} element={<Home />} />
                         <Route path={'/cart'} element={<Cart />} />
                         <Route path={'/products/:id'} element={<Product />} />
+                        <Route path={'/news/:id'} element={<NewsPost />} />
                         <Route path={'/catalog'} element={<Catalog />} />
+                        <Route path={'/privacy'} element={<Privacy />} />
+                        <Route path={'/tos'} element={<Tos />} />
                     </Routes>
                 </BrowserRouter>
                 <ReactQueryDevtools initialIsOpen={false}/>
