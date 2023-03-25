@@ -9,8 +9,9 @@ function Auth() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [error, setError] = useState(null)
-
+    const [agreement, setAgreement] = useState(false);
     const navigate = useNavigate();
+
     const handleLogin = async (e) => {
         e.preventDefault();
         try {
@@ -18,7 +19,11 @@ function Auth() {
                 email,
                 password,
             });
-            Cookies.set("api_token", response.data.token);
+            if(!agreement) {
+                Cookies.set("api_token", response.data.token, { expires: 1 });
+            } else {
+                Cookies.set("api_token", response.data.token, { expires: 7 });
+            }
             navigate('/profile');
             setError(null)
         } catch (err) {
@@ -26,7 +31,10 @@ function Auth() {
         }
     };
 
-
+    function saveMe(e) {
+        setAgreement(e.target.checked);
+    }
+    
     
     return (
         <form onSubmit={handleLogin} className={'Form'}>
@@ -49,6 +57,7 @@ function Auth() {
                 required
             />
             <button type="submit">Авторизоваться</button>
+            <input type="checkbox" onChange={saveMe} />Запомнить меня
             <p className={'UnderText'}>Нет аккаунта? - <Link to={'/register'} className={'LinkToRegister'}>Зарегистрируйся!</Link></p>
         </form>
     );
