@@ -180,7 +180,26 @@ class DatabaseSeeder extends Seeder
                 'title' => 'Post 4',
                 'short_desc' => 'Я пост 4',
                 'description' => 'Я пост 4 привет мой дорой друг сегодня мы поговорим как ты меня видишь',
+            ])
+            ->create([
+                'slug' => 'Post 5',
+                'title' => 'Post 5',
+                'short_desc' => 'Я пост 5',
+                'description' => 'Я пост 5 привет мой дорой друг сегодня мы поговорим как ты меня видишь',
+            ])
+            ->create([
+                'slug' => 'Post 6',
+                'title' => 'Post 6',
+                'short_desc' => 'Я пост 6',
+                'description' => 'Я пост 6 привет мой дорой друг сегодня мы поговорим как ты меня видишь',
+            ])
+            ->create([
+                'slug' => 'Post 7',
+                'title' => 'Post 7',
+                'short_desc' => 'Я пост 7',
+                'description' => 'Я пост 7 привет мой дорой друг сегодня мы поговорим как ты меня видишь',
             ]);
+
         // \App\Models\User::factory(10)->create();
 
         // \App\Models\User::factory()->create([
