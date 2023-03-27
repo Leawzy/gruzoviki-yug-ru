@@ -47,6 +47,7 @@ class DatabaseSeeder extends Seeder
                 'quantity' => '10',
                 'price' => '2019',
                 'art' => '1',
+                'img' => 'productimg/tovar-1.svg'
             ])
             ->create([
                 'brand_id' => Brand::query()->inRandomOrder()->value('id'),
@@ -58,6 +59,7 @@ class DatabaseSeeder extends Seeder
                 'quantity' => '5',
                 'price' => '3889',
                 'art' => '2',
+                'img' => 'productimg/tovar-1.svg'
             ])
             ->create([
                 'brand_id' => Brand::query()->inRandomOrder()->value('id'),
@@ -69,6 +71,7 @@ class DatabaseSeeder extends Seeder
                 'quantity' => '3',
                 'price' => '2500',
                 'art' => '3',
+                'img' => 'productimg/tovar-1.svg'
             ])
             ->create([
                 'brand_id' => Brand::query()->inRandomOrder()->value('id'),
@@ -80,6 +83,7 @@ class DatabaseSeeder extends Seeder
                 'quantity' => '1',
                 'price' => '2000',
                 'art' => '4',
+                'img' => 'productimg/tovar-1.svg'
             ])
             ->create([
                 'brand_id' => Brand::query()->inRandomOrder()->value('id'),
@@ -91,6 +95,7 @@ class DatabaseSeeder extends Seeder
                 'quantity' => '10',
                 'price' => '2019',
                 'art' => '1',
+                'img' => 'productimg/tovar-1.svg'
             ])
             ->create([
                 'brand_id' => Brand::query()->inRandomOrder()->value('id'),
@@ -102,6 +107,7 @@ class DatabaseSeeder extends Seeder
                 'quantity' => '5',
                 'price' => '3889',
                 'art' => '2',
+                'img' => 'productimg/tovar-1.svg'
             ])
             ->create([
                 'brand_id' => Brand::query()->inRandomOrder()->value('id'),
@@ -113,6 +119,7 @@ class DatabaseSeeder extends Seeder
                 'quantity' => '3',
                 'price' => '2500',
                 'art' => '3',
+                'img' => 'productimg/tovar-1.svg'
             ])
             ->create([
                 'brand_id' => Brand::query()->inRandomOrder()->value('id'),
@@ -124,6 +131,7 @@ class DatabaseSeeder extends Seeder
                 'quantity' => '1',
                 'price' => '2000',
                 'art' => '4',
+                'img' => 'productimg/tovar-1.svg'
             ]);
 
 
