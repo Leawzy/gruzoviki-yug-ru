@@ -16,6 +16,7 @@ function Header() {
     const [searchQuery, setSearchQuery] = useState('');
     const [redirectToCatalog, setRedirectToCatalog] = useState(false);
     const [isLoggedIn, setIsLoggedIn] = useState(false);
+    const [isLoggedAdmin, setIsLoggedAdmin] = useState(false);
     const [count, setCount] = useState(0)
     const myNumber = useSelector(state => state.myNumber);
     const handleInputChange = (event) => {
@@ -39,6 +40,15 @@ function Header() {
         checkIsAuth()
     })
 
+    useEffect(() => {
+        function checkIsAuthAdmin() {
+            if(Cookies.get('admin_token')) {
+                setIsLoggedAdmin(true)
+            }
+        }
+        checkIsAuthAdmin()
+    })
+
     const handleFormSubmit = () => {
         setRedirectToCatalog(true);
     };
@@ -48,60 +58,101 @@ function Header() {
     }
     const logoutHandler = () => {
         Cookies.remove("api_token")
+        Cookies.remove("admin_token")
         navigate('/');
         setIsLoggedIn(false);
+        setIsLoggedAdmin(false)
     }
 
     return (
-        <div className='header__center'>
-            <div className='container'>
-                <div className="header__center-wrapper">
-                    <div className='header__logo'>
-                        <Link to={'/'} className='header__logo-img'>
-                        </Link>
-                    </div>
-                    <Navbar/>
-                    <form className="header__search">
-                        <input className='header__search-input' type="text" placeholder={'Что будем искать?'}
-                               value={searchQuery}
-                               onChange={handleInputChange}/>
-                        <button type={'submit'} onSubmit={handleFormSubmit} className='header__search-submit'></button>
-                    </form>
-                    <div className="header__contact">
-                        <div className="header__contact-phone">
-                            <a href="tel:89897774245">+8 989 777 42 45</a>
-                            <a className="header__contact-timetable">8:00 до 19:00 СБ и ВСК выходной</a>
-                        </div>
-                    </div>
-                    <div>
-                        <div style={{display: 'inline-block'}} className="header__link-item dropmenu">
-                            <img className="header__link-item-icon" width={34} height={34} src={account} alt="account"/>
-                            <div className="dropmenu-content">
-                                {isLoggedIn ? (
-                                    <>
-                                        <Link to={'/profile'}>Профиль</Link>
-                                        <button className={'LogOut'} onClick={logoutHandler}>Выход</button>
-                                    </>
-                                ) : (
-                                    <>
-                                        <Link to={"/login"}>Авторизация</Link>
-                                        <Link to={"/register"}>Регистрация</Link>
-                                    </>
-                                )}
+            isLoggedAdmin ? (
+                <>
+                    <div className='header__center'>
+                        <div className='container'>
+                            <div className="header__center-wrapper">
+                                <div className='header__logo'>
+                                    <Link to={'/'} className='header__logo-img'>
+                                    </Link>
+                                </div>
+                                <Navbar/>
+                                <form className="header__search">
+                                    <input className='header__search-input' type="text" placeholder={'Что будем искать?'}
+                                           value={searchQuery}
+                                           onChange={handleInputChange}/>
+                                    <button type={'submit'} onSubmit={handleFormSubmit} className='header__search-submit'></button>
+                                </form>
+                                <div className="header__contact">
+                                    <div className="header__contact-phone">
+                                        <a href="tel:89897774245">+8 989 777 42 45</a>
+                                        <a className="header__contact-timetable">8:00 до 19:00 СБ и ВСК выходной</a>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div style={{display: 'inline-block'}} className="header__link-item dropmenu">
+                                        <img className="header__link-item-icon" width={34} height={34} src={account} alt="account"/>
+                                        <div className="dropmenu-content">
+                                            <Link to={'/adminpanel'}>Панель Управления</Link>
+                                            <button className={'LogOut'} onClick={logoutHandler}>Выход</button>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                        <Link to={''} className="header__link-item">
-                            <img className="header__link-item-icon" width={34} height={34} src={favorite}
-                                 alt="favorite"/>
-                        </Link>
-                        <Link to={'/cart'} className="header__link-item">
-                            <img className="header__link-item-icon" width={34} height={34} src={basket} alt="basket"/>
-                            <span>{count}</span>
-                        </Link>
                     </div>
-                </div>
-            </div>
-        </div>
+                </>
+            ) : (
+                <>
+                    <div className='header__center'>
+                        <div className='container'>
+                            <div className="header__center-wrapper">
+                                <div className='header__logo'>
+                                    <Link to={'/'} className='header__logo-img'>
+                                    </Link>
+                                </div>
+                                <Navbar/>
+                                <form className="header__search">
+                                    <input className='header__search-input' type="text" placeholder={'Что будем искать?'}
+                                           value={searchQuery}
+                                           onChange={handleInputChange}/>
+                                    <button type={'submit'} onSubmit={handleFormSubmit} className='header__search-submit'></button>
+                                </form>
+                                <div className="header__contact">
+                                    <div className="header__contact-phone">
+                                        <a href="tel:89897774245">+8 989 777 42 45</a>
+                                        <a className="header__contact-timetable">8:00 до 19:00 СБ и ВСК выходной</a>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div style={{display: 'inline-block'}} className="header__link-item dropmenu">
+                                        <img className="header__link-item-icon" width={34} height={34} src={account} alt="account"/>
+                                        <div className="dropmenu-content">
+                                            {isLoggedIn ? (
+                                                <>
+                                                    <Link to={'/profile'}>Профиль</Link>
+                                                    <button className={'LogOut'} onClick={logoutHandler}>Выход</button>
+                                                </>
+                                            ) : (
+                                                <>
+                                                    <Link to={"/login"}>Авторизация</Link>
+                                                    <Link to={"/register"}>Регистрация</Link>
+                                                </>
+                                            )}
+                                        </div>
+                                    </div>
+                                    <Link to={''} className="header__link-item">
+                                        <img className="header__link-item-icon" width={34} height={34} src={favorite}
+                                             alt="favorite"/>
+                                    </Link>
+                                    <Link to={'/cart'} className="header__link-item">
+                                        <img className="header__link-item-icon" width={34} height={34} src={basket} alt="basket"/>
+                                        <span>{count}</span>
+                                    </Link>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </>
+            )
     );
 }
 
