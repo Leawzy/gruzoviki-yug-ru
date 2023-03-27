@@ -103,19 +103,19 @@ class UserController extends Controller
             "email" => ["required", "string"],
             "password" => ["required"]
         ]);
-        $user = User::where(["email" => $request["email"]])->first();
         // TODO: сделать реворк данной функции
 //        $user->api_token = Str::random(80);
 //        $user->save();
 //        $user = User::where(["email" => $request["email"]])->first();
 
         if (Auth::attempt($request->only('email', 'password'))) {
+            $user = User::where(["email" => $request["email"]])->first();
             return response()->json([
                 'token' => $user->api_token
             ], 200);
         }
         throw ValidationException::withMessages([
-            'email' => ['Данные введены не корренктно']
+            'message' => ['Данные введены не корренктно']
         ]);
     }
     public function restore_password(Request $request){ // TODO: Узнать как обработать код с почты или Просто отправлять новый пароль на почту

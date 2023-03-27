@@ -21,19 +21,19 @@ class AdminController extends Controller
             "login" => ["required", "string"],
             "password" => ["required"]
         ]);
-        $admin_user = AdminUser::where(["login" => $request["login"]])->first();
 
         if (Auth::guard('admin')->attempt($request->only('login', 'password'))) {
             // TODO: сделать реворк данной функции
-            $admin_user->api_token = Str::random(80);
-            $admin_user->save();
-            $admin_user = AdminUser::where(["login" => $request["login"]])->first();
+              $admin_user = AdminUser::where(["login" => $request["login"]])->first();
+//            $admin_user->api_token = Str::random(80);
+//            $admin_user->save();
+//            $admin_user = AdminUser::where(["login" => $request["login"]])->first();
             return response()->json([
                 'token' => $admin_user->api_token
             ], 200);
         }
         throw ValidationException::withMessages([
-            'login' => ['Данные введены не корренктно']
+            'message' => ['Данные введены не корренктно']
         ]);
     }
 }
