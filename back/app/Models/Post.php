@@ -25,4 +25,9 @@ class Post extends Model
             $post->slug = $post->slug ?? str($post->title)->slug();
         });
     }
+
+    public function getImageUrlAttribute()
+    {
+       return url('storage/' . $this->img);
+    }
 }

@@ -53,4 +53,9 @@ class Product extends Model
     {
         return $this->hasMany(PropertyBearing::class);
     }
+
+    public function getImageUrlAttribute()
+    {
+        return url('storage/' . $this->img);
+    }
 }
