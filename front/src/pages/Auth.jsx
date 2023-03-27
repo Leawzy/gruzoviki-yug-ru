@@ -12,10 +12,12 @@ function Auth() {
     const [agreement, setAgreement] = useState(false);
     const navigate = useNavigate();
 
+    const LOGIN_API_URL = 'http://5.167.50.180:8876/api/login';
+
     const handleLogin = async (e) => {
         e.preventDefault();
         try {
-            const response = await axios.post("http://5.167.50.180:8876/api/login", {
+            const response = await axios.post(LOGIN_API_URL, {
                 email,
                 password,
             });
@@ -34,7 +36,7 @@ function Auth() {
     function saveMe(e) {
         setAgreement(e.target.checked);
     }
-    
+
     
     return (
         <form onSubmit={handleLogin} className={'Form'}>
@@ -57,7 +59,12 @@ function Auth() {
                 required
             />
             <button type="submit">Авторизоваться</button>
-            <input type="checkbox" onChange={saveMe} />Запомнить меня
+            <div>
+                <p className={'check__auth'}>
+                    <input type="checkbox" onChange={saveMe} />Запомнить меня
+                </p>
+
+            </div>
             <p className={'UnderText'}>Нет аккаунта? - <Link to={'/register'} className={'LinkToRegister'}>Зарегистрируйся!</Link></p>
         </form>
     );
