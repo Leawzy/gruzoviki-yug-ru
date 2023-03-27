@@ -1,10 +1,9 @@
 import React from 'react';
-import pictureOfItem from '../../../../assets/image/tovar-1.svg'
 import './card.scss'
 import {Link} from "react-router-dom";
 
 function Card(props) {
-    const {title, short_desc, id, price, quantity, brand, isAddedToCart , addToCart, removeFromCart} = props;
+    const {title, short_desc, id, price, quantity, brand, isAddedToCart , addToCart, removeFromCart, img} = props;
 
     return (
         <div className="short-catalog__item" id={id}>
@@ -17,7 +16,7 @@ function Card(props) {
                 <div className={`short-catalog__lb-info`}>
                     <span className={`short-catalog__discount`}>{`Количество: ${quantity} шт.`}</span>
                 </div>
-                <img src={pictureOfItem} alt="Catalog Img" className="index__catalog-img"/>
+                <img src={img} alt="Catalog Img" className="index__catalog-img"/>
             </Link>
             <div className="short-catalog__price">
                 <p className="short-catalog__price-num">{`${price} ₽`}</p>

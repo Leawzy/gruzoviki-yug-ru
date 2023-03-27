@@ -3,8 +3,8 @@ import {useParams} from 'react-router-dom';
 import {useQuery} from '@tanstack/react-query';
 import axios from 'axios';
 
-import pictureOfItem from '../assets/image/tovar-1.svg'
 import '../config.scss';
+
 import ZoomImage from "../components/core/ZoomImage/ZoomImage.jsx";
 import BaseLayout from "../components/shared/layouts/BaseLayout/index.jsx";
 import Tabs from "../components/shared/Tabs/index.jsx";
@@ -44,7 +44,7 @@ function Product() {
             <div className={'card__wrapper'}>
                 <div className={'card__top'}>
                     <div>
-                        <ZoomImage src={pictureOfItem}/>
+                        <ZoomImage src={data.img}/>
                     </div>
                     <div>
                         <h1>{data.title}</h1>

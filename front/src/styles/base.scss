@@ -1,4 +1,15 @@
 @import "vars";
+@import "mixins";
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type=number] {
+  -moz-appearance:textfield;
+}
 
 *,
 ::before,
@@ -215,7 +226,7 @@ h1, h2, h3, h4, h5, h6 {
     &:hover {
       transform: translateY(-10px);
       box-shadow: 0 5px 54px 0 rgba(0, 0, 0, 0.28);
-      background: linear-gradient(1.56deg, rgba(40, 40, 40, 0.78) 100%);
+      background: linear-gradient(90deg, rgba(37,37,37,1) 0%, rgba(64,64,65,1) 35%);
     }
   }
 
@@ -255,7 +266,7 @@ h1, h2, h3, h4, h5, h6 {
   align-content: center;
   justify-content: center;
   text-align: center;
-  margin-top: 11%;
+  margin-top: 8%;
 
   .accept__privacy {
     margin-left: auto;
@@ -272,38 +283,10 @@ h1, h2, h3, h4, h5, h6 {
   }
 
   input {
-    width: 500px;
-    height: 42px;
-    padding-left: 12px;
-    margin-left: auto;
-    margin-right: auto;
-    margin-top: 20px;
-    border: 1px solid black;
-    border-radius: 6px;
-    outline: none;
-    transition: .4s ease;
-
-    &:focus {
-      border: 1px solid #437FC8;
-      outline: #437FC8;
-    }
+    @include inputForm;
   }
 
-  button {
-    margin-top: 28px;
-    width: 350px;
-    height: 34px;
-    border-radius: 5px;
-    background: transparent;
-    border: 1px solid black;
-    cursor: pointer;
-    margin-left: auto;
-    margin-right: auto;
-
-    &:hover {
-      border: 1px solid seagreen;
-    }
-  }
+  @include buttonForm;
 
   .UnderText {
     margin-top: 50px;
@@ -327,38 +310,11 @@ h1, h2, h3, h4, h5, h6 {
   margin-top: 15%;
 
   input {
-    width: 500px;
-    height: 42px;
-    padding-left: 12px;
-    margin-left: auto;
-    margin-right: auto;
-    margin-top: 20px;
-    border: 1px solid black;
-    border-radius: 6px;
-    outline: none;
-    transition: .4s ease;
-
-    &:focus {
-      border: 1px solid #437FC8;
-      outline: #437FC8;
-    }
+    @include inputForm;
   }
 
-  button {
-    margin-top: 28px;
-    width: 350px;
-    height: 34px;
-    border-radius: 5px;
-    background: transparent;
-    border: 1px solid black;
-    cursor: pointer;
-    margin-left: auto;
-    margin-right: auto;
 
-    &:hover {
-      border: 1px solid seagreen;
-    }
-  }
+  @include buttonForm;
 
   .UnderText {
     margin-top: 50px;
@@ -370,6 +326,18 @@ h1, h2, h3, h4, h5, h6 {
         color: #3758CB;
       }
     }
+  }
+}
+
+.check__auth {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  input {
+    width: 20px;
+    height: 20px;
+    padding: 0;
+    margin: 0 10px;
   }
 }
 

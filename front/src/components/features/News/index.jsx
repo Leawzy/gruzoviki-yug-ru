@@ -1,5 +1,4 @@
 import React from 'react';
-import newsTest from "../../../assets/image/news/remgruzo-01.jpg";
 import {Link} from "react-router-dom";
 import {useNewsList} from "../../../hooks/useFetchHook.js";
 import Skeleton from "../NewCards/SkeletonCards/skeleton.jsx";
@@ -31,7 +30,7 @@ function News() {
                         return (
                             <div className="news__item news__card" key={index}>
                                 <Link to={`/news/${item.id}`} className='news__link'>
-                                    <img className="news__link-img" src={newsTest} alt="News Pic"/>
+                                    <img className="news__link-img" src={item.img} alt="News Pic"/>
                                     <div className="news__link-bg">
                                         <span className="news__title">{item.title}</span>
                                         <span className="news__desc">{item.short_desc}</span>
