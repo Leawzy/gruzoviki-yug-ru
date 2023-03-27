@@ -15,10 +15,12 @@ import Cart from "./pages/Cart.jsx";
 import Catalog from "./pages/Catalog.jsx";
 import { Provider } from 'react-redux';
 import {store} from "./redux/store.js";
-import {PrivateAuthRoute, PrivateNoNAuthRoute} from "./routes/privateRoute.jsx";
+import {AdminRoute, PrivateAuthRoute, PrivateNoNAuthRoute} from "./routes/privateRoute.jsx";
 import NewsPost from "./pages/NewsPost.jsx";
 import Privacy from "./pages/Privacy.jsx";
 import Tos from "./pages/Tos.jsx";
+import AdminAuth from "./pages/AdminAuth.jsx";
+import Adminpanel from "./pages/Adminpanel.jsx";
 const queryClient = new QueryClient();
 
 
@@ -34,6 +36,10 @@ ReactDOM.createRoot(document.getElementById('root')).render(
                         <Route element={<PrivateNoNAuthRoute/>}>
                             <Route path={'/login'} element={<Auth />} />
                             <Route path={'/register'} element={<Register />} />
+                            <Route path={'/adminLogin'} element={<AdminAuth />} />
+                        </Route>
+                        <Route element={<AdminRoute />}>
+                            <Route path={'/adminpanel'} element={<Adminpanel />} />
                         </Route>
                         <Route path={'/'} element={<Home />} />
                         <Route path={'/cart'} element={<Cart />} />
