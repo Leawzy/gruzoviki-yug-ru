@@ -10,7 +10,7 @@ function useFetchRepoData(id) {
         queryFn: async () => {
             try {
                 const res = await axios.get(`http://5.167.50.180:8876/api/post/${id}`);
-                return res.data;
+                return res.data.data;
             } catch (error) {
                 throw new Error(error);
             }
