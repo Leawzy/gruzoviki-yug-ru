@@ -28,6 +28,7 @@ function PopularCard() {
                             key={index}
                             id={item.id}
                             short_desc={item.short_desc}
+                            img={item.img}
                             quantity={item.quantity}
                             brand={item.brand}
                             title={item.title}
