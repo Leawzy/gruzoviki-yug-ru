@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\AdminUser;
 use App\Models\Brand;
 use App\Models\Category;
 use App\Models\Post;
@@ -221,6 +222,18 @@ class DatabaseSeeder extends Seeder
             'description' => 'Я пост 8 привет мой дорой друг сегодня мы поговорим как ты меня видишь',
             'img' => 'postimg/ddb73ff7e277a6cc1fbede190d79648d.png'
         ]);
+
+        AdminUser::factory()
+            ->create([
+               'login' => 'Leawzy',
+               'email' => 'facyoucraft@gmail.com',
+               'password' => bcrypt(12345)
+            ])
+            ->create([
+                'login' => 'Renthop',
+                'email' => 'onedostupov@gmail.com',
+                'password' => bcrypt(12345)
+            ]);
 
         // \App\Models\User::factory(10)->create();
 
