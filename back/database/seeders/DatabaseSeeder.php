@@ -12,6 +12,7 @@ use App\Models\Property;
 use App\Models\PropertyBearing;
 use App\Models\PropertyOil;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Str;
 
 class DatabaseSeeder extends Seeder
 {
@@ -227,12 +228,14 @@ class DatabaseSeeder extends Seeder
             ->create([
                'login' => 'Leawzy',
                'email' => 'facyoucraft@gmail.com',
-               'password' => bcrypt(12345)
+               'password' => bcrypt(12345),
+               'api_token' =>  Str::random(80)
             ])
             ->create([
                 'login' => 'Renthop',
                 'email' => 'onedostupov@gmail.com',
-                'password' => bcrypt(12345)
+                'password' => bcrypt(12345),
+                'api_token' => Str::random(80)
             ]);
 
         // \App\Models\User::factory(10)->create();
