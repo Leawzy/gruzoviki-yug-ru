@@ -1,0 +1,7 @@
+{
+    "root": true,
+    "extends": ["webpractik", "next", "next/core-web-vitals"],
+    "rules": {
+        "lodash/import-scope": "off"
+    }
+}
