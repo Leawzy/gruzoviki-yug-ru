@@ -1,0 +1,75 @@
+@import "../../../../../styles/mixin";
+
+.shortCatalogItem {
+  padding: 15px 55px;
+  .shortCatalogItemLink {
+    display: flex;
+    position: relative;
+    height: 300px;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    .shortCatalogItemLeftInfo {
+      position: absolute;
+      left: 0;
+      top: 10px;
+      z-index: 1;
+      display: flex;
+      flex-direction: column;
+      .shortCatalogBrand {
+        display: inline-block;
+        font-weight: 600;
+        font-size: 14px;
+        line-height: 25px;
+        color: white;
+        background-color: #55BB9F;
+        border-radius: 5px;
+        padding: 3px 10px;
+        margin-bottom: 8px;
+      }
+    }
+    .shortCatalogItemRightInfo {
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      z-index: 1;
+      .shortCatalogAmount {
+        display: inline-block;
+        font-weight: 600;
+        font-size: 14px;
+        line-height: 25px;
+        color: white;
+        background-color: #FC443B;
+        border-radius: 5px;
+        padding: 3px 10px;
+        margin-bottom: 8px;
+      }
+    }
+  }
+  .shortCatalogPrice {
+    padding: 20px 0;
+    display: flex;
+    align-items: center;
+    .shortCatalogPriceNum {
+      font-weight: 600;
+      font-size: 22px;
+      line-height: 28px;
+      color: #404040;
+      padding-right: 20px;
+    }
+  }
+  .shortCatalogTitle {
+    margin-bottom: 30px;
+    .shortCatalogTitleText {
+      font-size: 17px;
+      line-height: 22px;
+      padding-top: 5px;
+      padding-bottom: 10px;
+      min-height: 80px;
+    }
+  }
+  .shortButtons {
+    .removeFromCart{@include removeFromCartButton}
+    .AddToCart{@include addToCartButton}
+  }
+}
