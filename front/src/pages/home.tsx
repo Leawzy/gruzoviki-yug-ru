@@ -1,10 +1,13 @@
 import React from 'react';
 
+import Home from '../components/features/home';
+import BaseLayout from '../components/shared/layouts/BaseLayout';
+
 function HomePage() {
     return (
-        <div>
-            <h1>header</h1>
-        </div>
+        <BaseLayout>
+            <Home />
+        </BaseLayout>
     );
 }
 
