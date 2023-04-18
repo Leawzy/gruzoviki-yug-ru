@@ -1,0 +1,110 @@
+.footer {
+  max-width: 1440px;
+  display: flex;
+  flex-flow: row wrap;
+  margin: 55px auto;
+  padding: 10px 10px 20px 20px;
+  color: #2f2f2f;
+  background-color: #fff;
+  border-top: 1px solid #e5e5e5;
+}
+
+.mapAddress {
+  &:hover {
+    color: #437FC8;
+    text-decoration: underline;
+  }
+}
+
+.footer > * {
+  flex:  1 100%;
+}
+
+.footerAddr {
+  margin-right: 1.25em;
+  margin-bottom: 2em;
+}
+
+.footerLogo {
+  font-weight: 800;
+  text-transform: uppercase;
+  font-size: 1.5rem;
+}
+
+.footerAddr h2 {
+  margin-top: 1.3em;
+  font-size: 15px;
+  font-weight: 400;
+}
+
+.navTitle {
+  font-weight: 800;
+  font-size: 15px;
+  margin-bottom: 8px;
+}
+
+.footer ul {
+  list-style: none;
+  padding-left: 0;
+}
+
+.footer li {
+  line-height: 2em;
+}
+
+.footer a {
+  text-decoration: none;
+}
+
+.footerNav {
+  display: flex;
+  flex-flow: row wrap;
+}
+
+.footerNav > * {
+  flex: 1 50%;
+  margin-right: 1.25em;
+}
+
+.footerPhones {
+  margin-top: 33px;
+  display: flex;
+  flex-direction: column;
+}
+
+.navUl a {
+  color: #999;
+  &:hover {
+    color: #437FC8;
+    text-decoration: underline;
+  }
+}
+
+.legal {
+  display: flex;
+  flex-wrap: wrap;
+  color: #999;
+}
+
+@media screen and (min-width: 200px) and (max-width: 500px){
+  .footer {
+    .navTitle {
+      margin-top: 10px;
+      margin-bottom: 8px;
+    }
+  }
+}
+
+@media screen and (min-width: 40.375em) {
+  .footerNav > * {
+    flex: 1;
+  }
+
+  .footerAddr {
+    flex: 1 0;
+  }
+
+  .footerNav {
+    flex: 2 0;
+  }
+}
