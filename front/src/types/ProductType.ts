@@ -1,4 +1,6 @@
-interface Product {
+export interface Product {
+    product?: string[];
+    products?: string[];
     id: string;
     shortDesc: string;
     img: string;
@@ -7,7 +9,4 @@ interface Product {
     title: string;
     sale: boolean;
     price: number;
-    products: string;
 }
-
-export type { Product };
