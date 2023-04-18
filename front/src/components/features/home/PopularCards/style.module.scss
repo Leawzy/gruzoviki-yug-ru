@@ -1,0 +1,24 @@
+.mainSection {
+  margin-top: 70px;
+  .mainSectionTitle {
+    font-size: 24px;
+    font-weight: 600;
+  }
+  .mainPopularCardsCatalog {
+    display: grid;
+    row-gap: 25px;
+    grid-template-columns: repeat(4,1fr);
+    @media screen and (max-width: 991px){
+      grid-template-columns: repeat(3,1fr);
+      row-gap: 0;
+    }
+    @media screen and (max-width: 768px){
+      grid-template-columns: repeat(2,1fr);
+      row-gap: 0;
+    }
+    @media screen and (max-width: 576px){
+      grid-template-columns: repeat(1,1fr);
+      row-gap: 0;
+    }
+  }
+}
