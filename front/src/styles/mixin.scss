@@ -1,0 +1,24 @@
+@mixin imageSettingsHeader {
+  background-position: left top;
+  background-size: 100%;
+  background-repeat: no-repeat;
+}
+
+@mixin addToCartButton {
+  padding: 12px 22px;
+  background: cornflowerblue;
+  color: white;
+  border-radius: 10px;
+  cursor: pointer;
+  outline: none;
+  border: none;
+}
+
+@mixin removeFromCartButton {
+  padding: 12px 22px;
+  background:  #10c44c;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+}
