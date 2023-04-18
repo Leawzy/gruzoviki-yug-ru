@@ -123,3 +123,8 @@ module.exports = {
         ];
     },
 };
+module.exports = {
+    images: {
+        domains: ['api.ch32081.tw1.ru', '5.167.50.180'],
+    },
+};
