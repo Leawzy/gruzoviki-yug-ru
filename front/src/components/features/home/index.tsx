@@ -1,5 +1,6 @@
 import React from 'react';
 
+import News from './News';
 import PopularCards from './PopularCards';
 import Slider from './Slider';
 
@@ -13,6 +14,7 @@ function Home() {
         <>
             <Slider images={images} />
             <PopularCards />
+            <News />
         </>
     );
 }

@@ -2,10 +2,16 @@ import React from 'react';
 
 import { useProductList } from '../../../../hooks/usePopularCardHook';
 import PopularCard from './PopularCard';
+import SkeletonCard from './SkeletonCard';
 import cn from './style.module.scss';
 
 export default function PopularCards() {
-    const { productList } = useProductList();
+    const { productList, loading } = useProductList();
+
+    if (!loading) {
+        return <SkeletonCard />;
+    }
+
     return (
         <main className={cn.mainSection}>
             <h1 className={cn.mainSectionTitle}>Популярные товары</h1>

@@ -1,0 +1,79 @@
+.productPage {
+  .productPageTop {
+    display: flex;
+    justify-content: space-between;
+    align-content: center;
+    align-items: center;
+    padding: 12px 12px;
+    border-bottom: 1px solid #d92020;
+
+    h1 {
+      font-size: 28px;
+      font-weight: bold;
+    }
+
+    .productPageTopAction {
+      display: flex;
+
+      .productPageTopActionLink {
+        padding: 0 8px;
+
+        &:hover {
+          cursor: pointer;
+          color: #C82132;
+        }
+      }
+
+      .productPageTopArt {
+        margin-left: 30px;
+        p {
+          font-size: 14px;
+          font-weight: 400;
+          color: #6e6e6e;
+        }
+      }
+    }
+  }
+
+  .productPageWrapper {
+    display: flex;
+
+    .productPageButtons {
+      .productPageBuyButtons {
+        display: flex;
+      }
+    }
+
+    .productPageInfo {
+      padding: 30px 80px;
+
+      .productPagePrice {
+        margin-top: 43px;
+        margin-bottom: 33px;
+        padding: 20px 90px;
+        border-radius: 9px;
+        box-shadow: 0 20px 12px -16px rgba(0,30,85,.04), 0 8px 24px 18px rgba(0,30,85,.05);
+        p {
+          font-size: 22px;
+          font-weight: 700;
+        }
+      }
+
+      .productPageInfoText {
+        display: flex;
+        align-items: center;
+        align-content: center;
+        color: #6e6e6e;
+        font-weight: 600;
+        font-size: 14px;
+
+        .productPageInfoSubject {
+          color: #1e1e1e;
+          font-size: 18px;
+          font-weight: 700;
+          padding-left: 4px;
+        }
+      }
+    }
+  }
+}

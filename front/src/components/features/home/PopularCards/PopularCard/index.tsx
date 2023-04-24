@@ -2,6 +2,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import React from 'react';
 
+import { useCartStore } from '../../../../../mobx/CartStore/CartStoreContext';
 import { Product } from '../../../../../types/ProductType';
 import cn from './style.module.scss';
 
@@ -14,6 +15,19 @@ export default function PopularCard({
     title,
     shortDesc,
 }: Product) {
+    const [addedToCart, setAddedToCart] = React.useState(false);
+    const store = useCartStore();
+
+    const handleAddToCart = () => {
+        store.addItem({ id, title, price, quantity: 1 });
+        setAddedToCart(true);
+    };
+
+    const handleRemoveFromCart = () => {
+        store.removeItem(id);
+        setAddedToCart(false);
+    };
+
     return (
         <div className={cn.shortCatalogItem} id={id}>
             <Link href={`/products/${id}`} className={cn.shortCatalogItemLink}>
@@ -39,8 +53,15 @@ export default function PopularCard({
                 <p>{shortDesc}</p>
             </div>
             <div className={cn.shortButtons}>
-                <button className={cn.removeFromCart}>Убрать из корзины</button>
-                <button className={cn.AddToCart}>Добавить в корзину</button>
+                {addedToCart ? (
+                    <button className={cn.removeFromCart} onClick={handleRemoveFromCart}>
+                        Убрать из корзины
+                    </button>
+                ) : (
+                    <button className={cn.AddToCart} onClick={handleAddToCart}>
+                        Добавить в корзину
+                    </button>
+                )}
             </div>
         </div>
     );
