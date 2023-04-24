@@ -35,6 +35,10 @@
         "unused-imports"
     ],
     "rules": {
+        "@typescript-eslint/ban-ts-ignore": "off",
+        "jsx-a11y/control-has-associated-label": "off",
+        "@typescript-eslint/ban-ts-comment": "off",
+        "no-plusplus": "off",
         "no-duplicate-imports": "error",
         "no-unused-vars": "off",
         "no-empty-pattern": "error",
