@@ -1,17 +1,20 @@
 import Image from 'next/image';
+import Link from 'next/link';
 import React, { useState } from 'react';
 
+import account from '../../../../../../public/images/icons/account.svg';
+import basket from '../../../../../../public/images/icons/basket.svg';
+import favorite from '../../../../../../public/images/icons/favorite.svg';
 import cn from './style.module.scss';
 
 export default function Header() {
-    const [isLoggedIn, setIsLoggedIn] = useState(false);
+    const [login, setIsLogged] = useState(false);
     return (
         <div className={cn.headerCenter}>
             <div className={cn.container}>
                 <div className={cn.headerCenterWrapper}>
                     <div className={cn.headerLogo}>
-                        {/* eslint-disable-next-line jsx-a11y/anchor-has-content */}
-                        <a className={cn.headerLogoImg} />
+                        <Link href="/" className={cn.headerLogoImg} />
                     </div>
                     <div className={cn.header__centerNav}>
                         <ul className={cn.headerCenterNavMenu}>
@@ -45,7 +48,7 @@ export default function Header() {
                     <div className={cn.headerLinks}>
                         <div className={`${cn.headerLinkItem} ${cn.dropmenu}`}>
                             <Image
-                                src="images/icons/account.svg"
+                                src={account as string}
                                 className={cn.headerLinkItemIcon}
                                 width={34}
                                 loading="lazy"
@@ -53,7 +56,7 @@ export default function Header() {
                                 alt="account"
                             />
                             <div className={cn.dropmenuContent}>
-                                {isLoggedIn ? (
+                                {login ? (
                                     <div className={cn.dropmenuContentText}>
                                         <a>Профиль</a>
                                         <button type="submit" className={cn.LogOut}>
@@ -70,7 +73,7 @@ export default function Header() {
                         </div>
                         <a className={cn.headerLinkItem}>
                             <Image
-                                src="images/icons/favorite.svg"
+                                src={favorite as string}
                                 className={cn.headerLinkItemIcon}
                                 loading="lazy"
                                 width={34}
@@ -78,16 +81,16 @@ export default function Header() {
                                 alt="favorite"
                             />
                         </a>
-                        <a className={cn.headerLinkItem}>
+                        <Link href="/cart" className={cn.headerLinkItem}>
                             <Image
-                                src="images/icons/basket.svg"
+                                src={basket as string}
                                 className={cn.headerLinkItemIcon}
                                 loading="lazy"
                                 width={34}
                                 height={34}
                                 alt="basket"
                             />
-                        </a>
+                        </Link>
                     </div>
                 </div>
             </div>
