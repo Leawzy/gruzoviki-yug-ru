@@ -3,7 +3,7 @@ export interface Product {
     description?: string;
     product?: string[];
     products?: string[];
-    id: string;
+    id: string | number;
     shortDesc: string;
     img: string;
     quantity: number;
@@ -14,6 +14,7 @@ export interface Product {
 }
 
 interface DataIF {
+    id: string | number;
     property: PropertyIF;
     price: string | number;
     art: number | string;
