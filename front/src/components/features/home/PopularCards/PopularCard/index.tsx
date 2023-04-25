@@ -29,7 +29,7 @@ export default function PopularCard({
     };
 
     return (
-        <div className={cn.shortCatalogItem} id={id}>
+        <article className={cn.shortCatalogItem} id={String(id)}>
             <Link href={`/products/${id}`} className={cn.shortCatalogItemLink}>
                 <div className={cn.shortCatalogItemLeftInfo}>
                     <span className={cn.shortCatalogBrand}>{`Бренд: ${brand}`}</span>
@@ -63,6 +63,6 @@ export default function PopularCard({
                     </button>
                 )}
             </div>
-        </div>
+        </article>
     );
 }

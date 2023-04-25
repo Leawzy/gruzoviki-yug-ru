@@ -1,30 +1,42 @@
 import Link from 'next/link';
-import React from 'react';
+import React, { useEffect } from 'react';
 
 import { useNewsList } from '../../../../hooks/useNewsHook';
-import SkeletonCard from '../PopularCards/SkeletonCard';
+import SkeletonCard from '../PopularCards/SkeletonContainer';
 import cn from './style.module.scss';
 
 export default function News() {
-    const { newsList, loading } = useNewsList();
+    const { newsList, loading, fetchNewsList } = useNewsList();
     const maxItems = 6;
 
+    useEffect(() => {
+        fetchNewsList().catch(e => console.error(e));
+    }, []);
+
     if (!loading) {
-        return <SkeletonCard />;
+        newsList.map(item => (
+            <div key={item.id}>
+                <SkeletonCard />
+            </div>
+        ));
     }
 
     return (
-        <section className={cn.news}>
+        <section key="news-section" className={cn.news}>
             <div className={cn.newsWrapper}>
                 <h3>Новости</h3>
             </div>
-            <div className={cn.newsItemList}>
-                {newsList.slice(0, maxItems).map((item, index) => {
+            <div key="news-item" className={cn.newsItemList}>
+                {newsList.slice(0, maxItems).map(item => {
                     const formattedDate = new Date(item.created_at).toLocaleString('ru-RU', {
                         dateStyle: 'full',
                     });
                     return (
-                        <div className={`${cn.newsItem} ${cn.newsCard}`} key={index}>
+                        <div
+                            className={`${cn.newsItem} ${cn.newsCard}`}
+                            key={item.id}
+                            id={String(item.id)}
+                        >
                             <Link href={`/news/${item.id}`} className={cn.newsLink}>
                                 <img className={cn.newsLinkImg} src={item.img} alt="News Pic" />
                                 <div className={cn.newsLinkBg}>

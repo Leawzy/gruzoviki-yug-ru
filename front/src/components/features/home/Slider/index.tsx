@@ -19,7 +19,7 @@ export default function Slider({ images }: SliderIF) {
     };
 
     return (
-        <div className={cn.imageSlider}>
+        <div className={cn.imageSlider} key={index + 1} id={String(index + 1)}>
             <button className={cn.prevButton} onClick={() => handleClick('prev')}>
                 &lt;
             </button>
@@ -28,6 +28,7 @@ export default function Slider({ images }: SliderIF) {
                 width={1200}
                 height={200}
                 src={images[index]}
+                priority
                 alt={`Image ${index + 1}`}
             />
             <button className={cn.nextButton} onClick={() => handleClick('next')}>

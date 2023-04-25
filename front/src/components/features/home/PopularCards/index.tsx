@@ -2,14 +2,18 @@ import React from 'react';
 
 import { useProductList } from '../../../../hooks/usePopularCardHook';
 import PopularCard from './PopularCard';
-import SkeletonCard from './SkeletonCard';
+import SkeletonCard from './SkeletonContainer';
 import cn from './style.module.scss';
 
 export default function PopularCards() {
     const { productList, loading } = useProductList();
 
     if (!loading) {
-        return <SkeletonCard />;
+        productList.map(item => (
+            <div key={item.id}>
+                <SkeletonCard />
+            </div>
+        ));
     }
 
     return (
