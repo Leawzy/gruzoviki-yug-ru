@@ -1,4 +1,5 @@
 import '../styles/index.scss';
+import 'react-toastify/dist/ReactToastify.css';
 
 import { DehydratedState, Hydrate, QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
