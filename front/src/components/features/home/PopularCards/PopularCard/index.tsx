@@ -4,6 +4,8 @@ import React from 'react';
 
 import { useCartStore } from '../../../../../mobx/CartStore/CartStoreContext';
 import { Product } from '../../../../../types/ProductType';
+import ButtonAdd from '../../../../core/buttons/ButtonAdd';
+import ButtonRemove from '../../../../core/buttons/ButtonRemove';
 import cn from './style.module.scss';
 
 export default function PopularCard({
@@ -54,13 +56,9 @@ export default function PopularCard({
             </div>
             <div className={cn.shortButtons}>
                 {addedToCart ? (
-                    <button className={cn.removeFromCart} onClick={handleRemoveFromCart}>
-                        Убрать из корзины
-                    </button>
+                    <ButtonRemove onClick={handleRemoveFromCart}>Убрать из корзины</ButtonRemove>
                 ) : (
-                    <button className={cn.AddToCart} onClick={handleAddToCart}>
-                        Добавить в корзину
-                    </button>
+                    <ButtonAdd onClick={handleAddToCart}>Добавить в корзину</ButtonAdd>
                 )}
             </div>
         </article>
