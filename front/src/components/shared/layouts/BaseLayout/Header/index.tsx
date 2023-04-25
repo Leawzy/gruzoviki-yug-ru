@@ -65,8 +65,8 @@ export default function Header() {
                                     </div>
                                 ) : (
                                     <div className={cn.dropmenuContentText}>
-                                        <a>Авторизация</a>
-                                        <a>Регистрация</a>
+                                        <Link href="/authorization">Авторизация</Link>
+                                        <Link href="/registration">Регистрация</Link>
                                     </div>
                                 )}
                             </div>
