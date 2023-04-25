@@ -2,8 +2,11 @@ import { GetServerSideProps } from 'next';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
 import React, { useState } from 'react';
+import { toast, ToastContainer } from 'react-toastify';
 
 import { apiFetch } from '../../axios/global';
+import ButtonAdd from '../../components/core/buttons/ButtonAdd';
+import ButtonRemove from '../../components/core/buttons/ButtonRemove';
 import BaseLayout from '../../components/shared/layouts/BaseLayout';
 import { useCartStore } from '../../mobx/CartStore/CartStoreContext';
 import { Product, PropertyIF } from '../../types/ProductType';
@@ -57,18 +60,46 @@ export default function ProductPage({ product }: Props) {
         }
     }
 
+    const getActiveLink = async () => {
+        const link = window.location.href;
+        await navigator.clipboard.writeText(link);
+        toast('🔗 Ссылка успешна скопирована!', {
+            position: 'bottom-right',
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: 'light',
+        });
+    };
+
     if (router.isFallback) {
         return <div>Загрузка...</div>;
     }
 
     return (
         <BaseLayout>
+            <ToastContainer
+                position="bottom-right"
+                autoClose={2000}
+                hideProgressBar={false}
+                newestOnTop={false}
+                closeOnClick
+                rtl={false}
+                draggable
+                pauseOnHover
+                theme="light"
+            />
             <div className={cn.productPage}>
                 <div className={cn.productPageTop}>
                     <h1>{product.data?.title}</h1>
                     <div className={cn.productPageTopAction}>
                         <p className={cn.productPageTopActionLink}>В избранное</p>
-                        <p className={cn.productPageTopActionLink}>Поделиться</p>
+                        <button onClick={getActiveLink} className={cn.productPageTopActionLink}>
+                            Поделиться
+                        </button>
                         <div className={cn.productPageTopArt}>
                             <p>Артикул: {product.data?.art}</p>
                         </div>
@@ -104,16 +135,11 @@ export default function ProductPage({ product }: Props) {
                         </div>
                         <div className={cn.productPageButtons}>
                             {addedToCart ? (
-                                <button
-                                    className={cn.removeFromCart}
-                                    onClick={handleRemoveFromCart}
-                                >
-                                    Убрать из корзины
-                                </button>
+                                <ButtonRemove onClick={handleRemoveFromCart}>
+                                    Удалить с корзины
+                                </ButtonRemove>
                             ) : (
-                                <button className={cn.AddToCart} onClick={handleAddToCart}>
-                                    Добавить в корзину
-                                </button>
+                                <ButtonAdd onClick={handleAddToCart}> Добавить в корзину</ButtonAdd>
                             )}
                             <div className={cn.productPageBuyButtons}>
                                 <button onClick={setMinusHandler}>-</button>
