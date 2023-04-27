@@ -14,7 +14,7 @@ class ProductController extends Controller
         return ProductResource::collection(Product::all());
     }
 
-    public function showCardProduct($id){
+    public function getCardProduct($id){
 
         return new ProductResource(Product::findOrFail($id));
     }
