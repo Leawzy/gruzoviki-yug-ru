@@ -244,6 +244,7 @@ class DatabaseSeeder extends Seeder
                 'role' => 'admin',
             ]);
 
+
 //         User::factory(100)->create();
 
         // \App\Models\User::factory()->create([

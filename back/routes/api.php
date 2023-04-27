@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Api\v1\OtherController;
 use App\Http\Controllers\Api\v1\ProductController;
+use App\Http\Controllers\Api\v1\ProfileController;
 use App\Http\Controllers\Api\v1\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -21,8 +22,8 @@ Route::get('/product_list', [ProductController::class, 'showProducts']);
 Route::get('/card/{id}', [ProductController::class, 'getCardProduct']);
 
 //User function
-Route::post('/register', [UserController::class, 'register']);
-Route::post('/login', [UserController::class, 'login']);
+Route::post('/register', [UserController::class, 'createUser']);
+Route::post('/login', [UserController::class, 'authUser']);
 
 // Other Function
 Route::get('/slider', [OtherController::class, 'showSlider']);
@@ -31,7 +32,7 @@ Route::get('/post/{id}', [OtherController::class, 'getPostById']);
 
 //Auth User function
 Route::middleware(['auth:api'])->group(function () {
-
+    Route::get('/profile', [ProfileController::class, 'getUserProfile']);
 });
 
 //Admin function

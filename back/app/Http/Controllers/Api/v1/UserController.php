@@ -10,7 +10,7 @@ use Tymon\JWTAuth\Facades\JWTAuth;
 
 class UserController extends Controller
 {
-    public function register(Request $request): \Illuminate\Http\JsonResponse
+    public function createUser(Request $request): \Illuminate\Http\JsonResponse
     {
 
         $data = $request->validate([
@@ -33,7 +33,7 @@ class UserController extends Controller
         return response()->json(compact('token'));
     }
 
-    public function login(Request $request)
+    public function authUser(Request $request)
     {
         // Получаем email и пароль из запроса
         $credentials = $request->only('email', 'password');
