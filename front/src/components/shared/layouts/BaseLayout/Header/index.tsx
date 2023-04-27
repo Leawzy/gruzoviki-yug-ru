@@ -1,6 +1,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
-import React, { useState } from 'react';
+import { destroyCookie, parseCookies } from 'nookies';
+import React, { useEffect, useState } from 'react';
 
 import account from '../../../../../../public/images/icons/account.svg';
 import basket from '../../../../../../public/images/icons/basket.svg';
@@ -9,6 +10,20 @@ import cn from './style.module.scss';
 
 export default function Header() {
     const [login, setIsLogged] = useState(false);
+    const cookies = parseCookies();
+    const { token } = cookies;
+
+    useEffect(() => {
+        if (token) {
+            setIsLogged(true);
+        }
+    }, []);
+
+    const logOut = () => {
+        destroyCookie(null, 'token');
+        location.reload();
+    };
+
     return (
         <div className={cn.headerCenter}>
             <div className={cn.container}>
@@ -58,8 +73,12 @@ export default function Header() {
                             <div className={cn.dropmenuContent}>
                                 {login ? (
                                     <div className={cn.dropmenuContentText}>
-                                        <a>Профиль</a>
-                                        <button type="submit" className={cn.LogOut}>
+                                        <Link href="/profile">Профиль</Link>
+                                        <button
+                                            onClick={logOut}
+                                            type="submit"
+                                            className={cn.LogOut}
+                                        >
                                             Выход
                                         </button>
                                     </div>
