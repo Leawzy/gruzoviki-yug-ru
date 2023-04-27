@@ -1,17 +1,13 @@
 import Link from 'next/link';
-import React, { useEffect } from 'react';
+import React from 'react';
 
 import { useNewsList } from '../../../../hooks/useNewsHook';
 import SkeletonCard from '../PopularCards/SkeletonContainer';
 import cn from './style.module.scss';
 
 export default function News() {
-    const { newsList, loading, fetchNewsList } = useNewsList();
+    const { newsList, loading } = useNewsList();
     const maxItems = 6;
-
-    useEffect(() => {
-        fetchNewsList().catch(e => console.error(e));
-    }, []);
 
     if (!loading) {
         newsList.map(item => (
@@ -28,7 +24,7 @@ export default function News() {
             </div>
             <div key="news-item" className={cn.newsItemList}>
                 {newsList.slice(0, maxItems).map(item => {
-                    const formattedDate = new Date(item.created_at).toLocaleString('ru-RU', {
+                    const formattedDate = new Date(item.createdAt).toLocaleString('ru-RU', {
                         dateStyle: 'full',
                     });
                     return (
