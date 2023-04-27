@@ -1,34 +1,15 @@
 export interface Product {
-    data?: DataIF;
-    description?: string;
-    product?: string[];
-    products?: string[];
     id: string | number;
+    title: string;
     shortDesc: string;
     img: string;
     quantity: number;
     brand: string;
-    title: string;
     sale: boolean;
     price: number;
-}
-
-interface DataIF {
-    id: string | number;
-    property: PropertyIF;
-    price: string | number;
-    art: number | string;
-    title: string;
-    brand: string;
-    quantity: string;
-    category: CategoryIf;
-    img: string | undefined;
-    short_desc: string;
-}
-
-interface CategoryIf {
-    id: number | string;
-    title: string;
+    art?: string;
+    description?: string;
+    category?: CategoryProduct;
 }
 
 export interface PropertyIF {
@@ -37,4 +18,8 @@ export interface PropertyIF {
     description: string;
     warranty: string;
     start_date: string;
+}
+
+interface CategoryProduct {
+    title: string;
 }
