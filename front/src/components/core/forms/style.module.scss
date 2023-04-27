@@ -1,0 +1,40 @@
+@import "../../../styles/mixin";
+
+.BackgroundForms {
+  padding-top: 90px;
+
+  .Form {
+    @include AuthenticationForm(580px, 400px);
+
+    .FormLabel {
+      display: flex;
+      flex-direction: column;
+      padding: 0 88px;
+
+      input {
+        width: 400px;
+        height: 32px;
+        border: 1px solid #6e6e6e;
+        border-radius: 4px;
+        outline: none;
+
+        &:active {
+          border: 1px solid #3758CB;
+        }
+
+        &:focus {
+          border: 1px solid #3758CB;
+        }
+      }
+    }
+  }
+}
+
+.FormLabelError {
+  color: #bf1650;
+}
+
+.FormLabelError::before {
+  display: inline;
+  content: "⚠ ";
+}
