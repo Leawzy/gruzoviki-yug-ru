@@ -5,6 +5,7 @@ type CartItem = {
     price: number;
     title: string;
     quantity: number;
+    addedToCart?: boolean;
 };
 
 type CartStore = {
@@ -14,6 +15,7 @@ type CartStore = {
         price: number | string;
         id: string | number;
         title: string;
+        addedToCart?: boolean;
     }) => void;
     removeItem: (id: number | string) => void;
     getItemStore: () => CartItem[];
