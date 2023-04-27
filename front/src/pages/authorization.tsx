@@ -1,7 +1,9 @@
 import React from 'react';
 
+import AuthorizationForm from '../components/core/forms/AuthForm';
+
 function AuthorizationPage() {
-    return <div />;
+    return <AuthorizationForm />;
 }
 
 export default AuthorizationPage;
