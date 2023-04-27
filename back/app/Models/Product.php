@@ -13,16 +13,20 @@ class Product extends Model
     use HasFactory;
 
     protected $fillable = [
-      'slug',
-      'title',
-      'img',
-      'shortDesc',
-      'quantity',
-      'price',
-      'art',
-      'brand_id',
-      'categoryId',
-      'characteristic_id'
+        'slug',
+        'title',
+        'img',
+        'shortDesc',
+        'quantity',
+        'price',
+        'art',
+        'brand_id',
+        'categoryId',
+        'properties'
+    ];
+
+    protected $casts = [
+        'properties' => 'array',
     ];
 
     protected static function boot(): void
@@ -42,16 +46,6 @@ class Product extends Model
     public function brand(): BelongsTo
     {
         return $this->belongsTo(Brand::class);
-    }
-
-    public function oils(): HasMany
-    {
-        return $this->hasMany(Oil::class);
-    }
-
-    public function bearing(): HasMany
-    {
-        return $this->hasMany(Bearing::class);
     }
 
     public function getImageUrlAttribute()

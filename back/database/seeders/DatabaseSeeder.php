@@ -3,11 +3,8 @@
 namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
-use App\Models\Bearing;
 use App\Models\Brand;
 use App\Models\Category;
-use App\Models\Characteristic;
-use App\Models\Oil;
 use App\Models\Post;
 use App\Models\Product;
 use App\Models\Slider;
@@ -29,20 +26,25 @@ class DatabaseSeeder extends Seeder
             'title' => "test_brand"
         ]);
 
-        Characteristic::factory()
-            ->create([
-                'name' => 'Масло'
-            ])
-            ->create([
-                'name' => 'Подшипник'
-            ]);
-
         Category::factory(2)->create();
+
+        $propertyOil = [
+            'description' => 'Производится из синтетических базовых масел и высокоэффективного многофункционального пакета присадок.',
+            'warranty' => '6 месяцев',
+            'country' => 'Россия',
+            'startDate' => '23 год'
+        ];
+        $propertyBearing = [
+            'description' => 'Подшипник',
+            'warranty' => '1 год',
+            'country' => 'Германия',
+            'size' => '3см',
+            'start_date' => '22 год'
+        ];
 
         Product::factory()
             ->create([
                 'brand_id' => Brand::query()->inRandomOrder()->value('id'),
-                'characteristic_id' => Characteristic::query()->inRandomOrder()->value('id'),
                 'category_id' => Category::query()->inRandomOrder()->value('id'),
                 'slug' => 'SINTEC PLATINUM 5W-40',
                 'title' => 'SINTEC PLATINUM 5W-40',
@@ -50,11 +52,11 @@ class DatabaseSeeder extends Seeder
                 'quantity' => '10',
                 'price' => '2019',
                 'art' => '1',
-                'img' => 'productImg/tovar-1.svg'
+                'img' => 'productImg/tovar-1.svg',
+                'properties' => $propertyOil
             ])
             ->create([
                 'brand_id' => Brand::query()->inRandomOrder()->value('id'),
-                'characteristic_id' => Characteristic::query()->where('id', 1)->value('id'),
                 'category_id' => Category::query()->inRandomOrder()->value('id'),
                 'slug' => 'Liqui Moly Optimal 10W-40',
                 'title' => 'Liqui Moly Optimal 10W-40',
@@ -62,11 +64,12 @@ class DatabaseSeeder extends Seeder
                 'quantity' => '5',
                 'price' => '3889',
                 'art' => '2',
-                'img' => 'productImg/tovar-1.svg'
+                'img' => 'productImg/tovar-1.svg',
+                'properties' => $propertyOil,
+
             ])
             ->create([
                 'brand_id' => Brand::query()->inRandomOrder()->value('id'),
-                'characteristic_id' => Characteristic::query()->where('id', 1)->value('id'),
                 'category_id' => Category::query()->inRandomOrder()->value('id'),
                 'slug' => 'Подшипник 1',
                 'title' => 'Подшипник 1',
@@ -74,11 +77,11 @@ class DatabaseSeeder extends Seeder
                 'quantity' => '3',
                 'price' => '2500',
                 'art' => '3',
-                'img' => 'productImg/tovar-1.svg'
+                'img' => 'productImg/tovar-1.svg',
+                'properties' => $propertyBearing
             ])
             ->create([
                 'brand_id' => Brand::query()->inRandomOrder()->value('id'),
-                'characteristic_id' => Characteristic::query()->where('id', 2)->value('id'),
                 'category_id' => Category::query()->inRandomOrder()->value('id'),
                 'slug' => 'Подшипник 1',
                 'title' => 'Подшипник 1',
@@ -86,11 +89,11 @@ class DatabaseSeeder extends Seeder
                 'quantity' => '1',
                 'price' => '2000',
                 'art' => '4',
-                'img' => 'productImg/tovar-1.svg'
+                'img' => 'productImg/tovar-1.svg',
+                'properties' => $propertyBearing
             ])
             ->create([
                 'brand_id' => Brand::query()->inRandomOrder()->value('id'),
-                'characteristic_id' => Characteristic::query()->inRandomOrder()->value('id'),
                 'category_id' => Category::query()->inRandomOrder()->value('id'),
                 'slug' => 'SINTEC PLATINUM 5W-40',
                 'title' => 'SINTEC PLATINUM 5W-40',
@@ -98,11 +101,11 @@ class DatabaseSeeder extends Seeder
                 'quantity' => '10',
                 'price' => '2019',
                 'art' => '1',
-                'img' => 'productImg/tovar-1.svg'
+                'img' => 'productImg/tovar-1.svg',
+                'properties' => $propertyOil
             ])
             ->create([
                 'brand_id' => Brand::query()->inRandomOrder()->value('id'),
-                'characteristic_id' => Characteristic::query()->where('id', 1)->value('id'),
                 'category_id' => Category::query()->inRandomOrder()->value('id'),
                 'slug' => 'Liqui Moly Optimal 10W-40',
                 'title' => 'Liqui Moly Optimal 10W-40',
@@ -110,11 +113,11 @@ class DatabaseSeeder extends Seeder
                 'quantity' => '5',
                 'price' => '3889',
                 'art' => '2',
-                'img' => 'productImg/tovar-1.svg'
+                'img' => 'productImg/tovar-1.svg',
+                'properties' => $propertyOil
             ])
             ->create([
                 'brand_id' => Brand::query()->inRandomOrder()->value('id'),
-                'characteristic_id' => Characteristic::query()->where('id', 1)->value('id'),
                 'category_id' => Category::query()->inRandomOrder()->value('id'),
                 'slug' => 'Подшипник 1',
                 'title' => 'Подшипник 1',
@@ -122,11 +125,11 @@ class DatabaseSeeder extends Seeder
                 'quantity' => '3',
                 'price' => '2500',
                 'art' => '3',
-                'img' => 'productImg/tovar-1.svg'
+                'img' => 'productImg/tovar-1.svg',
+                'properties' => $propertyBearing
             ])
             ->create([
                 'brand_id' => Brand::query()->inRandomOrder()->value('id'),
-                'characteristic_id' => Characteristic::query()->where('id', 2)->value('id'),
                 'category_id' => Category::query()->inRandomOrder()->value('id'),
                 'slug' => 'Подшипник 1',
                 'title' => 'Подшипник 1',
@@ -134,38 +137,11 @@ class DatabaseSeeder extends Seeder
                 'quantity' => '1',
                 'price' => '2000',
                 'art' => '4',
-                'img' => 'productImg/tovar-1.svg'
+                'img' => 'productImg/tovar-1.svg',
+                'properties' => $propertyBearing
             ]);
 
 
-        Oil::factory()
-            ->create([
-                'characteristic_id' => Characteristic::query()->inRandomOrder()->value('id'),
-                'product_id' => Product::query()->where('id', 1)->value('id'),
-                'description' => 'Производится из синтетических базовых масел и высокоэффективного многофункционального пакета присадок.',
-                'warranty' => '6 месяцев',
-                'country' => 'Россия',
-                'startDate' => '23 год'
-            ])
-            ->create([
-                'characteristic_id' => Characteristic::query()->inRandomOrder()->value('id'),
-                'product_id' => Product::query()->where('id', 2)->value('id'),
-                'description' => 'Полусинтетическое моторное масло с адаптированным для российских условий пакетом присадок',
-                'warranty' => '6 месяцев',
-                'country' => 'Россия',
-                'startDate' => '22 год'
-            ]);
-
-        Bearing::factory()
-            ->create([
-                'characteristic_id' => Characteristic::query()->inRandomOrder()->value('id'),
-                'product_id' => Product::query()->where('id', 3)->value('id'),
-                'description' => 'Подшипник',
-                'warranty' => '1 год',
-                'country' => 'Германия',
-                'size' => '3см',
-                'startDate' => '22 год'
-            ]);
 
         Post::factory()
             ->create([

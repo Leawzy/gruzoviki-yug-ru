@@ -27,12 +27,9 @@ return new class extends Migration
             $table->unsignedInteger('price')
                 ->default(0);
             $table->string('art');
+            $table->json('properties')->nullable();
 
             $table->foreignIdFor(Brand::class)
-                ->constrained()
-                ->cascadeOnUpdate()
-                ->cascadeOnDelete();
-            $table->foreignIdFor(Characteristic::class)
                 ->constrained()
                 ->cascadeOnUpdate()
                 ->cascadeOnDelete();

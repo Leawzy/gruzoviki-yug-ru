@@ -13,25 +13,9 @@ class ProductResource extends JsonResource
      *
      * @return array<string, mixed>
      */
-    protected $related = [
-        'oils' => OilResource::class,
-        'bearing' => BearingResource::class,
-        // Add more related models and their resource classes here
-    ];
 
     public function toArray($request)
     {
-        $properties = [];
-
-        foreach ($this->related as $relationName => $resourceClass) {
-            $relatedModels = $this->{$relationName};
-
-            foreach ($relatedModels as $relatedModel) {
-                $resource = new $resourceClass($relatedModel);
-                $properties[] = $resource->toArray($request);
-            }
-        }
-
         return [
             'id' => $this->id,
             'title' => $this->title,
@@ -41,7 +25,7 @@ class ProductResource extends JsonResource
             'img' => $this->imageUrl,
             'brand' => $this->brand->title,
             'art' => $this->art,
-            'property' => $properties,
+            'property' => $this->properties,
             'category' => new CategoryResource($this->category),
         ];
     }
