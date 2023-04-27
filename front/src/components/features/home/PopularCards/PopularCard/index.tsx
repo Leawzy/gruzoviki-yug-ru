@@ -1,6 +1,6 @@
 import Image from 'next/image';
 import Link from 'next/link';
-import React from 'react';
+import React, { useEffect } from 'react';
 
 import { useCartStore } from '../../../../../mobx/CartStore/CartStoreContext';
 import { Product } from '../../../../../types/ProductType';
@@ -20,8 +20,18 @@ export default function PopularCard({
     const [addedToCart, setAddedToCart] = React.useState(false);
     const store = useCartStore();
 
+    useEffect(() => {
+        const cartItems = JSON.parse(localStorage.getItem('cartItems') || '[]');
+        const item = cartItems.find((item: any) => item.id === id);
+        console.log(item);
+        if (item) {
+            console.log(1);
+            setAddedToCart(true);
+        }
+    }, [id]);
+
     const handleAddToCart = () => {
-        store.addItem({ id, title, price, quantity: 1 });
+        store.addItem({ id, title, price, quantity: 1, addedToCart: true });
         setAddedToCart(true);
     };
 
