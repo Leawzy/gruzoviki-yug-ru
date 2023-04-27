@@ -33,7 +33,7 @@ export const getServerSideProps: GetServerSideProps<Props> = async ({ params }) 
     }
 
     const response = await apiFetch(`/api/post/${String(newsId)}`);
-    const product: Product = response.data as Product;
+    const product: Product = response.data.data as Product;
 
     return {
         props: {
