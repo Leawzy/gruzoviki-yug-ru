@@ -24,7 +24,7 @@ function useNewsList() {
         fetchNewsList().catch(e => console.error(e));
     }, []);
 
-    return { newsList, loading, fetchNewsList };
+    return { newsList, loading };
 }
 
 export { useNewsList };
