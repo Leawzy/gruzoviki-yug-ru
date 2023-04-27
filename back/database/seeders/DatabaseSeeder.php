@@ -10,6 +10,8 @@ use App\Models\Characteristic;
 use App\Models\Oil;
 use App\Models\Post;
 use App\Models\Product;
+use App\Models\Slider;
+use App\Models\User;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Str;
 
@@ -48,7 +50,7 @@ class DatabaseSeeder extends Seeder
                 'quantity' => '10',
                 'price' => '2019',
                 'art' => '1',
-                'img' => 'productimg/tovar-1.svg'
+                'img' => 'productImg/tovar-1.svg'
             ])
             ->create([
                 'brand_id' => Brand::query()->inRandomOrder()->value('id'),
@@ -60,7 +62,7 @@ class DatabaseSeeder extends Seeder
                 'quantity' => '5',
                 'price' => '3889',
                 'art' => '2',
-                'img' => 'productimg/tovar-1.svg'
+                'img' => 'productImg/tovar-1.svg'
             ])
             ->create([
                 'brand_id' => Brand::query()->inRandomOrder()->value('id'),
@@ -72,7 +74,7 @@ class DatabaseSeeder extends Seeder
                 'quantity' => '3',
                 'price' => '2500',
                 'art' => '3',
-                'img' => 'productimg/tovar-1.svg'
+                'img' => 'productImg/tovar-1.svg'
             ])
             ->create([
                 'brand_id' => Brand::query()->inRandomOrder()->value('id'),
@@ -84,7 +86,7 @@ class DatabaseSeeder extends Seeder
                 'quantity' => '1',
                 'price' => '2000',
                 'art' => '4',
-                'img' => 'productimg/tovar-1.svg'
+                'img' => 'productImg/tovar-1.svg'
             ])
             ->create([
                 'brand_id' => Brand::query()->inRandomOrder()->value('id'),
@@ -96,7 +98,7 @@ class DatabaseSeeder extends Seeder
                 'quantity' => '10',
                 'price' => '2019',
                 'art' => '1',
-                'img' => 'productimg/tovar-1.svg'
+                'img' => 'productImg/tovar-1.svg'
             ])
             ->create([
                 'brand_id' => Brand::query()->inRandomOrder()->value('id'),
@@ -108,7 +110,7 @@ class DatabaseSeeder extends Seeder
                 'quantity' => '5',
                 'price' => '3889',
                 'art' => '2',
-                'img' => 'productimg/tovar-1.svg'
+                'img' => 'productImg/tovar-1.svg'
             ])
             ->create([
                 'brand_id' => Brand::query()->inRandomOrder()->value('id'),
@@ -120,7 +122,7 @@ class DatabaseSeeder extends Seeder
                 'quantity' => '3',
                 'price' => '2500',
                 'art' => '3',
-                'img' => 'productimg/tovar-1.svg'
+                'img' => 'productImg/tovar-1.svg'
             ])
             ->create([
                 'brand_id' => Brand::query()->inRandomOrder()->value('id'),
@@ -132,7 +134,7 @@ class DatabaseSeeder extends Seeder
                 'quantity' => '1',
                 'price' => '2000',
                 'art' => '4',
-                'img' => 'productimg/tovar-1.svg'
+                'img' => 'productImg/tovar-1.svg'
             ]);
 
 
@@ -171,56 +173,75 @@ class DatabaseSeeder extends Seeder
                 'title' => 'Post 1',
                 'shortDesc' => 'Я пост 1',
                 'description' => 'Я пост 1 привет мой дорой друг сегодня мы поговорим как ты меня видишь',
-                'img' => 'postimg/remgruzo-01.png'
+                'img' => 'postImg/remgruzo-01.png'
             ])
             ->create([
                 'slug' => 'Post 2',
                 'title' => 'Post 2',
                 'shortDesc' => 'Я пост 2',
                 'description' => 'Я пост 2 привет мой дорой друг сегодня мы поговорим как ты меня видишь',
-                'img' => 'postimg/97b3d592deb17167ac8560466a1b7dd6.png'
+                'img' => 'postImg/97b3d592deb17167ac8560466a1b7dd6.png'
             ])
             ->create([
                 'slug' => 'Post 3',
                 'title' => 'Post 3',
                 'shortDesc' => 'Я пост 3',
                 'description' => 'Я пост 3 привет мой дорой друг сегодня мы поговорим как ты меня видишь',
-                'img' => 'postimg/56403082e3eb70182b6d30d2d5ab8536.png'
+                'img' => 'postImg/56403082e3eb70182b6d30d2d5ab8536.png'
             ])
             ->create([
                 'slug' => 'Post 4',
                 'title' => 'Post 4',
                 'shortDesc' => 'Я пост 4',
                 'description' => 'Я пост 4 привет мой дорой друг сегодня мы поговорим как ты меня видишь',
-                'img' => 'postimg/161e43dd7d19b8a88b80e035aa9b47c9.png'
+                'img' => 'postImg/161e43dd7d19b8a88b80e035aa9b47c9.png'
             ])
             ->create([
                 'slug' => 'Post 5',
                 'title' => 'Post 5',
                 'shortDesc' => 'Я пост 5',
                 'description' => 'Я пост 5 привет мой дорой друг сегодня мы поговорим как ты меня видишь',
-                'img' => 'postimg/075280feb9162bfd2dbc21424641488a.png'
+                'img' => 'postImg/075280feb9162bfd2dbc21424641488a.png'
             ])
             ->create([
                 'slug' => 'Post 6',
                 'title' => 'Post 6',
                 'shortDesc' => 'Я пост 6',
                 'description' => 'Я пост 6 привет мой дорой друг сегодня мы поговорим как ты меня видишь',
-                'img' => 'postimg/6cdbbda2cfdfaa669eda140f23092b11.png'
+                'img' => 'postImg/6cdbbda2cfdfaa669eda140f23092b11.png'
             ])
             ->create([
                 'slug' => 'Post 7',
                 'title' => 'Post 7',
                 'shortDesc' => 'Я пост 7',
                 'description' => 'Я пост 7 привет мой дорой друг сегодня мы поговорим как ты меня видишь',
-                'img' => 'postimg/ef898b90570442e1466a107d8d5cc3ce.png'
+                'img' => 'postImg/ef898b90570442e1466a107d8d5cc3ce.png'
             ])
             ->create([
                 'slug' => 'Post 8',
                 'title' => 'Post 8',
                 'shortDesc' => 'Я пост 8',
                 'description' => 'Я пост 8 привет мой дорой друг сегодня мы поговорим как ты меня видишь',
-                'img' => 'postimg/ddb73ff7e277a6cc1fbede190d79648d.png'
+                'img' => 'postImg/ddb73ff7e277a6cc1fbede190d79648d.png'
+            ]);
+
+        Slider::factory()
+            ->create([
+                'name' => 'slider1',
+                'img' => 'sliderImg/slide1.png'
+            ])
+            ->create([
+                'name' => 'slider2',
+                'img' => 'sliderImg/slide2.png'
+            ]);
+
+        User::factory()
+            ->create([
+                'firstName' => 'Admin',
+                'lastName' => 'Adminov',
+                'email' => 'admin@admin.ru',
+                'password' => bcrypt(12345),
+                'role' => 'admin',
             ]);
 
 //         User::factory(100)->create();
