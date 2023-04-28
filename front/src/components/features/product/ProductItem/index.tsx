@@ -105,7 +105,7 @@ export default function ProductItem({ product }: ProductItemIF) {
                         </span>
                         <span className={cn.productPageInfoText}>
                             Бренд:
-                            <p className={cn.productPageInfoSubject}>{product.brand}</p>
+                            <p className={cn.productPageInfoSubject}>{product.brand.title}</p>
                         </span>
                         <span className={cn.productPageInfoText}>
                             Количество:
