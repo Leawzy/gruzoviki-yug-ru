@@ -26,7 +26,7 @@ export const getServerSideProps: GetServerSideProps<Props> = async ({ params }) 
         return { notFound: true };
     }
 
-    const response = await apiFetch(`/api/card/${String(productId)}`);
+    const response = await apiFetch(`/api/product/card/${String(productId)}`);
     const product: Product = response.data.data as Product;
 
     return {
