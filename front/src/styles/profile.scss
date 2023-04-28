@@ -1,0 +1,41 @@
+.profileTitle {
+  font-size: 33px;
+  margin-bottom: 30px;
+}
+
+.profileHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30px;
+
+  .profileHeaderWelcome {
+    font-size: 19px;
+    font-weight: 700;
+  }
+
+  .profileButton {
+    background: transparent;
+    padding: 0 20px;
+    margin-left: 20px;
+    border: none;
+
+    &:first-child {
+      color: #3758CB;
+      cursor: pointer;
+
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+
+    &:last-child {
+      color: #C82132;
+      cursor: pointer;
+
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+}
