@@ -1,11 +1,11 @@
 <?php
 
+use App\Models\User;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration
-{
+return new class extends Migration {
     /**
      * Run the migrations.
      */
@@ -13,6 +13,20 @@ return new class extends Migration
     {
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('userId')
+                ->nullable();
+            $table->foreign('userId')
+                ->references('id')
+                ->on('users');
+
+            $table->dateTime('data')
+                ->nullable();
+            $table->string('total');
+            $table->string('delivery');
+            $table->string('paymentMethod');
+            $table->string('status')
+                ->default('В обработке');
+
             $table->timestamps();
         });
     }

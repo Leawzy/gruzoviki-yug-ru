@@ -3,11 +3,14 @@
 namespace App\Http\Controllers\Api\v1;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\Orders\OrderResource;
 use App\Http\Resources\Other\PostResource;
 use App\Http\Resources\Other\SliderResource;
+use App\Models\Order;
 use App\Models\Post;
 use App\Models\Slider;
 use Illuminate\Http\Request;
+use Tymon\JWTAuth\Facades\JWTAuth;
 
 class OtherController extends Controller
 {
@@ -24,5 +27,18 @@ class OtherController extends Controller
     public function showSlider()
     {
         return SliderResource::collection(Slider::all());
+    }
+
+    public function getOrders(Request $request)
+    {
+        $token = JWTAuth::parseToken();
+        $user = $token->authenticate();
+        $order = Order::where(["userId" => $user->id])->get();
+
+        if ($order) {
+            return OrderResource::collection($order);
+        }
+
+        return 'null';
     }
 }
