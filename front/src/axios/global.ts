@@ -19,4 +19,8 @@ const setAuthToken = () => {
     }
 };
 
-export { apiFetch, setAuthToken };
+function dayOfLiveToken() {
+    return 3 * 24 * 60 * 60;
+}
+
+export { apiFetch, dayOfLiveToken, setAuthToken };
