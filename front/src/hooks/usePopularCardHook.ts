@@ -3,13 +3,13 @@ import { useEffect, useState } from 'react';
 import { apiFetch } from '../axios/global';
 import { Product } from '../types/ProductType';
 
-function useProductList() {
+function usePopularList() {
     const [productList, setProductList] = useState<Product[]>([]);
     const [loading, setLoading] = useState(false);
     useEffect(() => {
-        async function fetchProductList() {
+        async function fetchPopularProductList() {
             try {
-                const res: { data: { data: Product[] } } = await apiFetch('/api/product_list', {
+                const res: { data: { data: Product[] } } = await apiFetch('api/product/popular', {
                     method: 'get',
                 });
                 setProductList(res.data.data);
@@ -19,10 +19,11 @@ function useProductList() {
                 setLoading(false);
             }
         }
-        fetchProductList().catch(e => console.error(e));
+
+        fetchPopularProductList().catch(e => console.error(e));
     }, []);
 
     return { productList, loading };
 }
 
-export { useProductList };
+export { usePopularList };
