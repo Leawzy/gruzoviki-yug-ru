@@ -9,13 +9,18 @@ use Illuminate\Http\Request;
 
 class ProductController extends Controller
 {
-    public function showProducts(){
-
+    public function showProducts()
+    {
         return ProductResource::collection(Product::all());
     }
 
-    public function getCardProduct($id){
+    public function getPopularProduct()
+    {
+        return ProductResource::collection(Product::where('isPopular', true)->get());
+    }
 
+    public function getCardProduct($id)
+    {
         return new ProductResource(Product::findOrFail($id));
     }
 }
