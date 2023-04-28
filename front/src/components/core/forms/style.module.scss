@@ -1,37 +1,47 @@
 @import "../../../styles/mixin";
 
-.BackgroundForms {
-  padding-top: 90px;
+
+.RegisterForm {
+  @include FormTop(50px);
 
   .Form {
-    @include AuthenticationForm(580px, 400px);
+    @include AuthenticationForm(580px, 820px);
+  }
+}
 
-    .FormLabel {
-      display: flex;
-      flex-direction: column;
-      padding: 0 88px;
+.AuthForm {
+  @include FormTop(90px);
 
-      input {
-        width: 400px;
-        height: 32px;
-        border: 1px solid #6e6e6e;
-        border-radius: 4px;
-        outline: none;
+  .Form {
+    @include AuthenticationForm(580px, 560px);
+  }
+}
 
-        &:active {
-          border: 1px solid #3758CB;
-        }
+.acceptPrivacy {
+  padding-top: 50px;
+  text-align: center;
 
-        &:focus {
-          border: 1px solid #3758CB;
-        }
-      }
+  a {
+    color: #437FC8;
+    text-decoration: underline;
+
+    &:hover {
+      color: #6e6e6e;
     }
   }
 }
 
 .FormLabelError {
   color: #bf1650;
+}
+
+.errorInput {
+  border: 2px solid #e80c0c !important;
+  background: rgba(229, 38, 38, 0.55);
+
+  &::placeholder {
+    color: #000000;
+  }
 }
 
 .FormLabelError::before {
