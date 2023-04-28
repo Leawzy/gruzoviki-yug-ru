@@ -36,6 +36,7 @@ Route::middleware(['auth:api'])->group(function () {
     Route::get('/profile', [ProfileController::class, 'getUserProfile']);
     Route::patch('/profile/change/password', [ProfileController::class, 'changeUserPassword']);
     Route::patch('/profile/change/info', [ProfileController::class, 'updateUserData']);
+    Route::get('/orders', [OtherController::class, 'getOrders']);
 });
 
 //Admin function

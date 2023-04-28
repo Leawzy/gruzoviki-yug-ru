@@ -11,7 +11,7 @@ class ProductController extends Controller
 {
     public function showProducts()
     {
-        return ProductResource::collection(Product::all());
+        return ProductResource::collection(Product::paginate(9));
     }
 
     public function getPopularProduct()

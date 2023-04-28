@@ -1,0 +1,33 @@
+<?php
+
+namespace App\Http\Resources\Orders;
+
+use Illuminate\Http\Request;
+use Illuminate\Http\Resources\Json\JsonResource;
+
+class OrderResource extends JsonResource
+{
+    /**
+     * Transform the resource into an array.
+     *
+     * @return array<string, mixed>
+     */
+    public function toArray(Request $request): array
+    {
+        $products = [];
+
+        foreach ($this->orderProduct as $orderProductResource)
+        {
+            $products[] = new OrderProductResource($orderProductResource);
+        }
+
+        return [
+            'data' => $this->data,
+            'total' => $this->total,
+            'delivery' => $this->delivery,
+            'paymentMethod' => $this->paymentMethod,
+            'status' => $this->status,
+            'products' => $products,
+        ];
+    }
+}
