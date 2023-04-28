@@ -5,6 +5,8 @@ namespace Database\Seeders;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use App\Models\Brand;
 use App\Models\Category;
+use App\Models\Order;
+use App\Models\OrderProduct;
 use App\Models\Post;
 use App\Models\Product;
 use App\Models\Slider;
@@ -222,7 +224,38 @@ class DatabaseSeeder extends Seeder
                 'role' => 'admin',
             ]);
 
+        Order::factory()
+            ->create([
+                'userId' => User::query()->where('id', 1)->value('id'),
+                'total' => 2019,
+                'delivery' => 'Самовывоз',
+                'paymentMethod' => "Безналичный",
+                'status' => "В обработке",
+            ]);
 
+        OrderProduct::factory()
+            ->create([
+                'orderId' => Order::query()->where('id', 1)->value('id'),
+                'product_id' => Product::query()->where('id', 1)->value('id'),
+            ]);
+
+//        $numberOfProduct = 200;
+//        for ($i = 0; $i < $numberOfProduct; $i++) {
+//            Product::factory()
+//                ->create([
+//                    'brand_id' => Brand::query()->inRandomOrder()->value('id'),
+//                    'category_id' => Category::query()->inRandomOrder()->value('id'),
+//                    'slug' => 'Liqui Moly Optimal 10W-40',
+//                    'title' => 'Liqui Moly Optimal 10W-40',
+//                    'shortDesc' => 'Полусинтетическое 4 л',
+//                    'quantity' => '5',
+//                    'price' => '3889',
+//                    'art' => '2',
+//                    'img' => 'productImg/tovar-1.svg',
+//                    'properties' => $propertyOil,
+//                ]);
+//        }
+        Product::factory(200)->create();
 //         User::factory(100)->create();
 
         // \App\Models\User::factory()->create([
