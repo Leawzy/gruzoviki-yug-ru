@@ -10,7 +10,6 @@ import { withAuth } from '../utils/withAuth';
 function ProfilePage() {
     const { profile } = useProfileData();
     const router = useRouter();
-
     const [time, setTime] = useState(new Date());
 
     useEffect(() => {
@@ -34,11 +33,19 @@ function ProfilePage() {
 
     return (
         <BaseLayout>
-            <h1>Мой профиль</h1>
-            <button>Редактирование</button>
-            <button onClick={logoutHandler}>Выход</button>
-            <p>{`${String(currectTime)}${profile.firstName}`}</p>
-            <ProfileLayout profile={profile} />
+            <h1 className="profileTitle">Мой профиль</h1>
+            <div className="profileHeader">
+                <p className="profileHeaderWelcome">
+                    👋 {`${String(currectTime)}${String(profile.firstName)}`}
+                </p>
+                <div>
+                    <button className="profileButton">Редактирование</button>
+                    <button className="profileButton" onClick={logoutHandler}>
+                        Выход
+                    </button>
+                </div>
+            </div>
+            <ProfileLayout profileData={profile} />
             <h2 style={{ borderTop: '1px solid grey' }}>Заказы</h2>
         </BaseLayout>
     );
