@@ -34,13 +34,19 @@ export default function Header() {
                     <div className={cn.header__centerNav}>
                         <ul className={cn.headerCenterNavMenu}>
                             <li className={cn.headerCenterNavMenuItem}>
-                                <a className={cn.headerCenterNavLink}>Детали</a>
+                                <Link href="/catalog" className={cn.headerCenterNavLink}>
+                                    Детали
+                                </Link>
                             </li>
                             <li className={cn.headerCenterNavMenuItem}>
-                                <a className={cn.headerCenterNavLink}>Акссесуары</a>
+                                <Link href="/catalog" className={cn.headerCenterNavLink}>
+                                    Акссесуары
+                                </Link>
                             </li>
                             <li className={cn.headerCenterNavMenuItem}>
-                                <a className={cn.headerCenterNavLink}>Инстурменты</a>
+                                <Link href="/catalog" className={cn.headerCenterNavLink}>
+                                    Инстурменты
+                                </Link>
                             </li>
                         </ul>
                     </div>
