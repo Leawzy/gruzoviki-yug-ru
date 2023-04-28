@@ -53,6 +53,7 @@ class DatabaseSeeder extends Seeder
                 'price' => '2019',
                 'art' => '1',
                 'img' => 'productImg/tovar-1.svg',
+                'isPopular' => true,
                 'properties' => $propertyOil
             ])
             ->create([
@@ -78,6 +79,7 @@ class DatabaseSeeder extends Seeder
                 'price' => '2500',
                 'art' => '3',
                 'img' => 'productImg/tovar-1.svg',
+                'isPopular' => true,
                 'properties' => $propertyBearing
             ])
             ->create([

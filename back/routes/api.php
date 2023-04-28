@@ -18,8 +18,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 //Product function
-Route::get('/product_list', [ProductController::class, 'showProducts']);
-Route::get('/card/{id}', [ProductController::class, 'getCardProduct']);
+Route::get('/product/list', [ProductController::class, 'showProducts']);
+Route::get('/product/card/{id}', [ProductController::class, 'getCardProduct']);
+Route::get('/product/popular', [ProductController::class, 'getPopularProduct']);
 
 //User function
 Route::post('/register', [UserController::class, 'createUser']);
@@ -33,6 +34,8 @@ Route::get('/post/{id}', [OtherController::class, 'getPostById']);
 //Auth User function
 Route::middleware(['auth:api'])->group(function () {
     Route::get('/profile', [ProfileController::class, 'getUserProfile']);
+    Route::patch('/profile/change/password', [ProfileController::class, 'changeUserPassword']);
+    Route::patch('/profile/change/info', [ProfileController::class, 'updateUserData']);
 });
 
 //Admin function
