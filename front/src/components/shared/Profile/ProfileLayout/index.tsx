@@ -8,10 +8,10 @@ import ProfileForm from '../../../core/forms/ProfileForm';
 import cn from './style.module.scss';
 
 interface ProfileLayoutProps {
-    profile: ProfileType;
+    profileData: ProfileType;
 }
 
-export default function ProfileLayout({ profile }: ProfileLayoutProps) {
+export default function ProfileLayout({ profileData }: ProfileLayoutProps) {
     const [oldPassword, setOldPassword] = useState('');
     const [newPassword, setNewPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
@@ -79,9 +79,9 @@ export default function ProfileLayout({ profile }: ProfileLayoutProps) {
             <div className={`${cn.profileBlock} ${cn.blockFirst}`}>
                 <p className={cn.profileTitle}>ФИО</p>
                 <p className={cn.profileData}>
-                    {!profile.firstName
+                    {!profileData.firstName
                         ? 'Поле не заполнено'
-                        : `${profile.firstName} ${profile.lastName}`}
+                        : `${profileData.firstName} ${profileData.lastName}`}
                 </p>
             </div>
             <div className={`${cn.profileBlock} ${cn.blockSecond}`}>
@@ -91,13 +91,13 @@ export default function ProfileLayout({ profile }: ProfileLayoutProps) {
             <div className={`${cn.profileBlock} ${cn.blockThird}`}>
                 <p className={cn.profileTitle}>Email</p>
                 <p className={cn.profileData}>
-                    {!profile.email ? 'Поле не заполнено' : `${profile.email}`}
+                    {!profileData.email ? 'Поле не заполнено' : `${profileData.email}`}
                 </p>
             </div>
             <div className={`${cn.profileBlock} ${cn.blockFourth}`}>
                 <p className={cn.profileTitle}>Телефон</p>
                 <p className={cn.profileData}>
-                    {!profile.phone ? 'Поле не заполнено' : `${profile.phone}`}
+                    {!profileData.phone ? 'Поле не заполнено' : `${profileData.phone}`}
                 </p>
             </div>
             <div className={` ${cn.profileBlock} ${cn.blockFiftieth}`}>
