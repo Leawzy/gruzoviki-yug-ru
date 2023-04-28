@@ -1,12 +1,12 @@
 import React from 'react';
 
-import { useProductList } from '../../../../hooks/usePopularCardHook';
-import PopularCard from './PopularCard';
+import { usePopularList } from '../../../../hooks/usePopularCardHook';
+import ProductCard from '../../../core/card/ProductCard';
 import SkeletonCard from './SkeletonContainer';
 import cn from './style.module.scss';
 
 export default function PopularCards() {
-    const { productList, loading } = useProductList();
+    const { productList, loading } = usePopularList();
 
     if (!loading) {
         productList.map(item => (
@@ -21,7 +21,7 @@ export default function PopularCards() {
             <h1 className={cn.mainSectionTitle}>Популярные товары</h1>
             <div className={cn.mainPopularCardsCatalog}>
                 {productList.map(product => (
-                    <PopularCard
+                    <ProductCard
                         key={product.id}
                         img={product.img}
                         id={product.id}
