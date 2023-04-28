@@ -15,6 +15,10 @@ type Inputs = {
     passwordConfirmation: string;
 };
 
+interface LoginResponseData {
+    token: string;
+}
+
 export default function RegistrationForm() {
     const router = useRouter();
     const {
@@ -35,8 +39,8 @@ export default function RegistrationForm() {
                 },
             });
             if (res.status === 200) {
-                const { token } = res.data;
-                setCookie(null, 'token', token as string, {
+                const { token } = res.data as LoginResponseData;
+                setCookie(null, 'token', token, {
                     maxAge: dayOfLiveToken(),
                 });
                 await router.push('/');
