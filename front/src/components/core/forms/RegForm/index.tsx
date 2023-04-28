@@ -36,7 +36,7 @@ export default function RegistrationForm() {
             });
             if (res.status === 200) {
                 const { token } = res.data;
-                setCookie(null, 'token', token, {
+                setCookie(null, 'token', token as string, {
                     maxAge: dayOfLiveToken(),
                 });
                 await router.push('/');
