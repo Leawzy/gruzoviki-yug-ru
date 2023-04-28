@@ -27,7 +27,10 @@ return new class extends Migration
             $table->unsignedInteger('price')
                 ->default(0);
             $table->string('art');
-            $table->json('properties')->nullable();
+            $table->json('properties')
+                ->nullable();
+            $table->boolean('isPopular')
+                ->default(false);
 
             $table->foreignIdFor(Brand::class)
                 ->constrained()

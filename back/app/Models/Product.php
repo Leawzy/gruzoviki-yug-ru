@@ -22,7 +22,8 @@ class Product extends Model
         'art',
         'brand_id',
         'categoryId',
-        'properties'
+        'properties',
+        'isPopular',
     ];
 
     protected $casts = [
