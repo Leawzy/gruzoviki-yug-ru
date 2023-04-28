@@ -39,10 +39,10 @@ export default function ProductCard({
     };
 
     return (
-        <article className={cn.shortCatalogItem} id={String(id)}>
+        <article className={cn.shortCatalogItem}>
             <Link href={`/products/${id}`} className={cn.shortCatalogItemLink}>
                 <div className={cn.shortCatalogItemLeftInfo}>
-                    <span className={cn.shortCatalogBrand}>{`Бренд: ${brand}`}</span>
+                    <span className={cn.shortCatalogBrand}>{`Бренд: ${brand.title}`}</span>
                 </div>
                 <div className={cn.shortCatalogItemRightInfo}>
                     <span className={cn.shortCatalogAmount}>{`Количество: ${quantity} шт.`}</span>
