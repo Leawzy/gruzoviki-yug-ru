@@ -1,7 +1,8 @@
-@import "../../../../../styles/mixin";
+@import "../../../../styles/mixin";
 
 .shortCatalogItem {
   padding: 15px 55px;
+
   .shortCatalogItemLink {
     display: flex;
     position: relative;
@@ -9,6 +10,7 @@
     align-items: center;
     justify-content: center;
     flex-direction: column;
+
     .shortCatalogItemLeftInfo {
       position: absolute;
       left: 0;
@@ -16,6 +18,7 @@
       z-index: 1;
       display: flex;
       flex-direction: column;
+
       .shortCatalogBrand {
         display: inline-block;
         font-weight: 600;
@@ -28,11 +31,13 @@
         margin-bottom: 8px;
       }
     }
+
     .shortCatalogItemRightInfo {
       position: absolute;
       left: 0;
       bottom: 0;
       z-index: 1;
+
       .shortCatalogAmount {
         display: inline-block;
         font-weight: 600;
@@ -46,10 +51,12 @@
       }
     }
   }
+
   .shortCatalogPrice {
     padding: 20px 0;
     display: flex;
     align-items: center;
+
     .shortCatalogPriceNum {
       font-weight: 600;
       font-size: 22px;
@@ -58,8 +65,10 @@
       padding-right: 20px;
     }
   }
+
   .shortCatalogTitle {
     margin-bottom: 30px;
+
     .shortCatalogTitleText {
       font-size: 17px;
       line-height: 22px;
@@ -68,8 +77,14 @@
       min-height: 80px;
     }
   }
+
   .shortButtons {
-    .removeFromCart{@include removeFromCartButton}
-    .AddToCart{@include addToCartButton}
+    .removeFromCart {
+      @include removeFromCartButton
+    }
+
+    .AddToCart {
+      @include addToCartButton
+    }
   }
 }

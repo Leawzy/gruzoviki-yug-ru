@@ -1,0 +1,34 @@
+.categoryPage {
+  .categoryContainer {
+    .categoryPageTitle {
+      font-weight: 600;
+      font-size: 30px;
+      line-height: 35px;
+    }
+
+    .categoryPageWrapper {
+      display: flex;
+
+      .categoryPageFilter {
+        flex: 0 0 auto;
+        width: 338px;
+        min-width: 338px;
+      }
+
+      .categoryPageContent {
+        flex: 1 1 auto;
+
+        .categoryPageContentWrapper {
+          display: grid;
+          grid-template-columns: repeat(3, 1fr);
+          @media screen and (max-width: 991px) {
+            grid-template-columns: repeat(2, 1fr);
+          }
+          @media screen and (max-width: 576px) {
+            grid-template-columns: repeat(1, 1fr);
+          }
+        }
+      }
+    }
+  }
+}
