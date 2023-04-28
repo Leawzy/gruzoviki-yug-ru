@@ -4,7 +4,7 @@ export interface Product {
     shortDesc: string;
     img: string;
     quantity: number;
-    brand: string;
+    brand: BrandProduct;
     sale: boolean;
     price: number;
     art?: string;
@@ -12,14 +12,18 @@ export interface Product {
     category?: CategoryProduct;
 }
 
-export interface PropertyIF {
-    id: string | number;
-    country: string;
-    description: string;
-    warranty: string;
-    start_date: string;
+export interface MetaIF {
+    from: number;
+    last_page: number;
+    per_page: number;
+    to: number;
+    total: number;
 }
 
 interface CategoryProduct {
+    title: string;
+}
+
+interface BrandProduct {
     title: string;
 }
