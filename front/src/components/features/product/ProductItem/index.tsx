@@ -19,8 +19,8 @@ export default function ProductItem({ product }: ProductItemIF) {
     const [addedToCart, setAddedToCart] = React.useState(false);
 
     useEffect(() => {
-        const cartItems = JSON.parse(localStorage.getItem('cartItems') || '[]');
-        const item = cartItems.find((item: string) => item.id === product.id);
+        const cartItems = JSON.parse(localStorage.getItem('cartItems') || '[]') as Product[];
+        const item = cartItems.find((item: Product) => item.id === product.id);
         if (item) {
             setAddedToCart(true);
         }
@@ -57,9 +57,9 @@ export default function ProductItem({ product }: ProductItemIF) {
         }
     }
 
-    function copyLinkOfProduct() {
+    async function copyLinkOfProduct() {
         const cpLink = window.location.href;
-        navigator.clipboard.writeText(cpLink);
+        await navigator.clipboard.writeText(cpLink);
         toast.success('🔗 Ссылка успешна скопирована!', {
             position: 'bottom-right',
             autoClose: 3400,
