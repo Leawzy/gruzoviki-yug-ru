@@ -1,4 +1,12 @@
 .news {
+  .newsWrapper {
+    h3 {
+      font-size: 24px;
+      font-weight: 600;
+      padding-bottom: 38px;
+    }
+  }
+
   .newsItemList {
     display: grid;
     gap: 20px;

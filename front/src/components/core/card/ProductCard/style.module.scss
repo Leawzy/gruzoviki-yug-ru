@@ -20,15 +20,7 @@
       flex-direction: column;
 
       .shortCatalogBrand {
-        display: inline-block;
-        font-weight: 600;
-        font-size: 14px;
-        line-height: 25px;
-        color: white;
-        background-color: #55BB9F;
-        border-radius: 5px;
-        padding: 3px 10px;
-        margin-bottom: 8px;
+        @include buttonInfoOfProduct(#55BB9F);
       }
     }
 
@@ -39,15 +31,7 @@
       z-index: 1;
 
       .shortCatalogAmount {
-        display: inline-block;
-        font-weight: 600;
-        font-size: 14px;
-        line-height: 25px;
-        color: white;
-        background-color: #FC443B;
-        border-radius: 5px;
-        padding: 3px 10px;
-        margin-bottom: 8px;
+        @include buttonInfoOfProduct(#e04d4d);
       }
     }
   }

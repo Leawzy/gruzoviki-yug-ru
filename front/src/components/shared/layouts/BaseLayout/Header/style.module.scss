@@ -1,6 +1,49 @@
 @import "../../../../../styles/mixin";
 @import "../../../../../styles/base";
 
+
+.headerCenterAdmin {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding-top: 10px;
+  padding-bottom: 12px;
+
+  .headerCenterAdminContent {
+    display: flex;
+    align-content: center;
+    align-items: center;
+
+
+    p {
+      font-size: 14px;
+      font-weight: 700;
+    }
+
+    button {
+      background: transparent;
+      align-items: center;
+      border: none;
+      margin-left: 40px;
+      cursor: pointer;
+
+      &:hover {
+        color: #C82132;
+        text-decoration: underline;
+      }
+    }
+  }
+
+  .headerCenterAdminLink {
+    font-size: 15px;
+    font-weight: 800;
+
+    &:hover {
+      color: #3758CB;
+    }
+  }
+}
+
 .headerCenter {
   padding-top: 16px;
   padding-bottom: 16px;
@@ -32,11 +75,13 @@
     flex-direction: column;
     align-content: center;
     text-align: center;
+
     a {
       color: black;
       padding: 10px 0;
       text-decoration: none;
       display: block;
+
       &:hover {
         color: #437FC8;
         text-decoration: underline;
@@ -53,7 +98,8 @@
     padding-left: 0;
     color: black;
     cursor: pointer;
-    &:hover{
+
+    &:hover {
       color: red;
       text-decoration: underline;
     }

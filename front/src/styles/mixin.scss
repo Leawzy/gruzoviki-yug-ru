@@ -89,3 +89,15 @@
 @mixin FormTop($pTop) {
   padding-top: $pTop;
 }
+
+@mixin buttonInfoOfProduct($colorOfBG) {
+  display: inline-block;
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 25px;
+  color: white;
+  background-color: $colorOfBG;
+  border-radius: 5px;
+  padding: 3px 10px;
+  margin-bottom: 8px;
+}
