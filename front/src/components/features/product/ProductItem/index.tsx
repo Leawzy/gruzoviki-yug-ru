@@ -81,13 +81,30 @@ export default function ProductItem({ product }: ProductItemIF) {
                 <div className={cn.productPageTop}>
                     <h1>{product.title}</h1>
                     <div className={cn.productPageTopAction}>
+                        <div className={cn.productPageTopArt}>
+                            <p>Артикул: {product.art}</p>
+                        </div>
+                    </div>
+                </div>
+                <div className={cn.productPageBottom}>
+                    <div className={cn.productPageBottomInfo}>
+                        <p className={cn.productPageBottomBrand}>{product.brand.title}</p>
+                        {product.popular === 1 ? (
+                            <p className={cn.productPageBottomPopular}>Популярный товар</p>
+                        ) : (
+                            ''
+                        )}
+                        {product.quantity >= 1 ? (
+                            <p className={cn.productPageBottomCheckIs}>В наличие</p>
+                        ) : (
+                            <p className={cn.productPageBottomNoCheckIs}>Нет в наличие</p>
+                        )}
+                    </div>
+                    <div className={cn.productPageBottomLinks}>
                         <p className={cn.productPageTopActionLink}>В избранное</p>
                         <button onClick={copyLinkOfProduct} className={cn.productPageTopActionLink}>
                             Поделиться
                         </button>
-                        <div className={cn.productPageTopArt}>
-                            <p>Артикул: {product.art}</p>
-                        </div>
                     </div>
                 </div>
                 <div className={cn.productPageWrapper}>
@@ -113,6 +130,8 @@ export default function ProductItem({ product }: ProductItemIF) {
                             Количество:
                             <p className={cn.productPageInfoSubject}>{product.quantity}</p>
                         </span>
+                    </div>
+                    <div>
                         <div className={cn.productPagePrice}>
                             <p>{product.price} ₽</p>
                         </div>
