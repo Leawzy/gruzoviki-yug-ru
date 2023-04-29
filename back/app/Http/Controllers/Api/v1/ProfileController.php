@@ -58,7 +58,7 @@ class ProfileController extends Controller
             'lastName' => $user->lastName,
             'email' => $user->email,
             'phoneNumber' => $user->phoneNumber,
-            'role' => $this->role
+            'role' => $user->role
         ];
     }
 

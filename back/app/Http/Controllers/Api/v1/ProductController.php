@@ -9,10 +9,11 @@ use Illuminate\Http\Request;
 
 class ProductController extends Controller
 {
-    public function showProducts()
+    public function showProducts($page = 1)
     {
-        return ProductResource::collection(Product::paginate(9));
+        return ProductResource::collection(Product::paginate(9, ['*'], 'page', $page));
     }
+
 
     public function getPopularProduct()
     {
