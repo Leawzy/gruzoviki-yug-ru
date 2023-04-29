@@ -40,6 +40,8 @@ export default function ProductItem({ product }: ProductItemIF) {
                 title: product.title,
                 price: product.price,
                 quantity: itemCount,
+                maxQuantity: product.quantity,
+                img: product.img,
             });
             setAddedToCart(true);
         }
