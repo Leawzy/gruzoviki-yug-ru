@@ -24,15 +24,15 @@ class AdminController extends Controller
     public function createUser(Request $request): \Illuminate\Http\JsonResponse
     {
         $data = $request->validate([
-            'first_name' => ["required", "string"],
-            'last_name' => ["required", "string"],
+            'firstName' => ["required", "string"],
+            'lastName' => ["required", "string"],
             'email' => ["required", "string"],
             'password' => ["required", "string"]
         ]);
 
         $user = User::create([
-            "first_name" => $data["first_name"],
-            "last_name" => $data["last_name"],
+            "firstName" => $data["firstName"],
+            "lastName" => $data["lastName"],
             "email" => $data["email"],
             "password" => bcrypt($data["password"]),
             $request['phoneNumber'] === null ?  : "phoneNumber" => $request['phoneNumber'],
@@ -55,6 +55,7 @@ class AdminController extends Controller
             $request['email'] === null ?  : $user->email = $request['email'];
             $request['phoneNumber'] === null ?  : $user->phoneNumber = $request['phoneNumber'];
             $request['password'] === null ?  : $user->password = bcrypt($request['password']);
+            $request['role'] === null ?  : $user->role =  $request['role'];
             $user->save();
             return response()->json([
                 'message' => 'Данные успешно обновлены',
