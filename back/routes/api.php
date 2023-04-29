@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\v1\AdminController;
 use App\Http\Controllers\Api\v1\OtherController;
 use App\Http\Controllers\Api\v1\ProductController;
 use App\Http\Controllers\Api\v1\ProfileController;
@@ -18,7 +19,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 //Product function
-Route::get('/product/list', [ProductController::class, 'showProducts']);
+Route::get('/product/list/{page?}', [ProductController::class, 'showProducts']);
 Route::get('/product/card/{id}', [ProductController::class, 'getCardProduct']);
 Route::get('/product/popular', [ProductController::class, 'getPopularProduct']);
 
@@ -41,5 +42,10 @@ Route::middleware(['auth:api'])->group(function () {
 
 //Admin function
 Route::middleware(['auth:api', 'admin'])->group(function () {
+    Route::get('/admin/user/get/{page?}', [AdminController::class, 'getAllUser']);
+    Route::post('/admin/user/create', [AdminController::class, 'createUser']);
+    Route::patch('/admin/user/change', [AdminController::class, 'changeUser']);
 
+    Route::get('/admin/brand/get/{page?}', [AdminController::class, 'getAllBrand']);
+    Route::post('/admin/brand/create', [AdminController::class, 'createBrand']);
 });
