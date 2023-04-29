@@ -1,55 +1,53 @@
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 import React from 'react';
 
+import { AdminTypeBrand, AdminTypeUser } from '../../../../../types/AdminType';
 import cn from './style.module.scss';
 
 interface WidgetProps {
     type: string;
-    users: {
-        total: number;
-    };
-    brand: {
-        total: number;
-    };
+    users: AdminTypeUser[];
+    brand: AdminTypeBrand[];
 }
 
 interface WidgetData {
     title: string;
-    amount: number;
+    amount: string;
     link: string;
 }
 
 export default function Widget({ type, users, brand }: WidgetProps) {
     let data: WidgetData;
-
+    const totalUser = users.length;
+    const totalBrands = brand.length;
     const diff = 20;
 
     switch (type) {
         case 'user':
             data = {
                 title: 'Пользователи',
-                amount: users.total,
+                amount: totalUser.toString(),
                 link: 'See all users',
             };
             break;
         case 'order':
             data = {
                 title: 'Заказы',
-                amount: 0,
+                amount: '0',
                 link: 'View all orders',
             };
             break;
         case 'brands':
             data = {
                 title: 'Бренды',
-                amount: brand.total,
+                amount: totalBrands.toString(),
                 link: 'View net earnings',
             };
             break;
         default:
             data = {
                 title: '',
-                amount: 1,
+                amount: '1',
                 link: '',
             };
             break;
