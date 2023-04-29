@@ -2,6 +2,7 @@ export interface Product {
     id: string | number;
     title: string;
     shortDesc: string;
+    popular?: number;
     img: string;
     quantity: number;
     brand: BrandProduct;
