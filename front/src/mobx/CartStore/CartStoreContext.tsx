@@ -5,6 +5,8 @@ type CartItem = {
     price: number;
     title: string;
     quantity: number;
+    maxQuantity: number | string;
+    img: string;
     addedToCart?: boolean;
 };
 
@@ -13,6 +15,8 @@ type CartStore = {
     addItem: (item: {
         quantity: number | string;
         price: number | string;
+        maxQuantity: number | string;
+        img: string;
         id: string | number;
         title: string;
         addedToCart?: boolean;

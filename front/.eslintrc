@@ -36,6 +36,7 @@
   ],
   "rules": {
     "@typescript-eslint/ban-ts-ignore": "off",
+    "no-restricted-globals": "off",
     "jsx-a11y/control-has-associated-label": "off",
     "@typescript-eslint/ban-ts-comment": "off",
     "no-plusplus": "off",

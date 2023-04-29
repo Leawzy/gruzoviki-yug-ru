@@ -1,3 +1,4 @@
+import { useRouter } from 'next/router';
 import { destroyCookie } from 'nookies';
 import React, { useState } from 'react';
 import { toast, ToastContainer } from 'react-toastify';
@@ -12,6 +13,7 @@ interface ProfileLayoutProps {
 }
 
 export default function ProfileLayout({ profileData }: ProfileLayoutProps) {
+    const router = useRouter();
     const [oldPassword, setOldPassword] = useState('');
     const [newPassword, setNewPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
@@ -34,7 +36,6 @@ export default function ProfileLayout({ profileData }: ProfileLayoutProps) {
     };
 
     const submitHandler = async (e: React.FormEvent<HTMLFormElement>) => {
-        setAuthToken();
         e.preventDefault();
 
         if (newPassword !== confirmPassword) {
@@ -50,12 +51,17 @@ export default function ProfileLayout({ profileData }: ProfileLayoutProps) {
             });
         }
         try {
-            const res = await apiFetch('/change', {
-                method: 'post',
-                headers: {},
+            setAuthToken();
+            const res = await apiFetch('api/profile/change/password', {
+                method: 'patch',
+                data: {
+                    oldPassword,
+                    newPassword,
+                },
             });
             if (res.status === 200) {
                 destroyCookie(null, 'token');
+                await router.push('/authorization');
             } else {
                 toast.error('Ошибка при смене пароля', {
                     position: 'bottom-right',

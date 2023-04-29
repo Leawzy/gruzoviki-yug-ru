@@ -14,3 +14,39 @@ $cardMargin: 16px;
   margin: 0 auto;
 }
 
+.pagination {
+  display: flex;
+  justify-content: center;
+  margin-top: 30px;
+  list-style: none;
+  font-size: 16px;
+
+  li {
+    cursor: pointer;
+    margin: 0 10px;
+
+    &:first-child,
+    &:last-child {
+      margin: 0 5px;
+    }
+
+    &.active {
+      font-weight: 600;
+      border-bottom: 2px solid #000;
+    }
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+
+  a {
+    color: #000;
+    text-decoration: none;
+  }
+
+  .disabled {
+    opacity: 0.3;
+    pointer-events: none;
+  }
+}

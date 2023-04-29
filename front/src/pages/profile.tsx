@@ -4,7 +4,7 @@ import React, { useEffect, useState } from 'react';
 
 import BaseLayout from '../components/shared/layouts/BaseLayout';
 import ProfileLayout from '../components/shared/Profile/ProfileLayout';
-import { useProfileData } from '../hooks/useGetProfile';
+import { useProfileData } from '../hooks/useGetProfileHook';
 import { withAuth } from '../utils/withAuth';
 
 function ProfilePage() {

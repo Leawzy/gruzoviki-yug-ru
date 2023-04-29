@@ -40,6 +40,8 @@ export default function ProductItem({ product }: ProductItemIF) {
                 title: product.title,
                 price: product.price,
                 quantity: itemCount,
+                maxQuantity: product.quantity,
+                img: product.img,
             });
             setAddedToCart(true);
         }
@@ -105,7 +107,7 @@ export default function ProductItem({ product }: ProductItemIF) {
                         </span>
                         <span className={cn.productPageInfoText}>
                             Бренд:
-                            <p className={cn.productPageInfoSubject}>{product.brand}</p>
+                            <p className={cn.productPageInfoSubject}>{product.brand.title}</p>
                         </span>
                         <span className={cn.productPageInfoText}>
                             Количество:

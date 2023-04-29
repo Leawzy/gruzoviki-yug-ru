@@ -1,0 +1,196 @@
+.cartPageItem {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  border-bottom: 1px solid #e5e5e5;
+  padding: 25px 0 32px 0;
+  @media screen and (max-width: 480px) {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .cartPageItemLeft {
+    display: flex;
+    @media screen and (max-width: 480px) {
+      align-items: center;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .cartPageItemImage {
+      display: block;
+      width: auto;
+      height: auto;
+      margin: 0 auto;
+      max-width: 121px;
+      max-height: 121px;
+
+      .cartPageItemImg {
+        width: 140px;
+      }
+    }
+
+    .cartPageItemContent {
+      margin-left: 43px;
+      display: flex;
+      flex-direction: column;
+      @media screen and (max-width: 480px) {
+        margin-top: 22px;
+        margin-left: 0;
+      }
+
+      .cartPageItemTitle {
+        font-weight: 600;
+        font-size: 18px;
+        line-height: 28px;
+        padding-bottom: 10px;
+
+        &:hover {
+          text-decoration: underline;
+          cursor: pointer;
+          color: #3758CB;
+        }
+      }
+
+      .cartPageItemCode {
+        font-size: 14px;
+        font-weight: 600;
+        color: #6e6e6e;
+      }
+    }
+  }
+
+  .cartPageItemRight {
+    flex: 0 1 auto;
+    display: flex;
+    padding-left: 20px;
+    align-items: flex-start;
+    min-width: 320px;
+    justify-content: space-between;
+    @media screen and (max-width: 480px) {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      align-content: center;
+    }
+
+    .cartPageItemRightNum {
+      padding: 20px 0;
+      display: flex;
+      align-items: center;
+      align-content: center;
+      width: 100%;
+      @media screen and (max-width: 1200px) {
+        margin-bottom: 20px;
+      }
+      @media screen and (max-width: 480px) {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        text-align: center;
+      }
+
+      .cartPageItemRightMinus {
+        flex: 0 0 auto;
+        width: 35px;
+        height: 35px;
+        border: 1px solid #6e6e6e;
+        border-radius: 50%;
+        text-align: center;
+        font-weight: 800;
+        background: transparent;
+        cursor: pointer;
+        font-size: 18px;
+        line-height: 25px;
+        color: #6e6e6e;
+      }
+
+      .cartPageItemRightInput {
+        input {
+          width: 45px;
+          border: none;
+          outline: none;
+          text-align: center;
+        }
+      }
+
+      .cartPageItemRightPlus {
+        flex: 0 0 auto;
+        width: 35px;
+        height: 35px;
+        border: 1px solid #6e6e6e;
+        border-radius: 50%;
+        text-align: center;
+        font-weight: 800;
+        background: transparent;
+        cursor: pointer;
+        font-size: 18px;
+        line-height: 25px;
+        color: #6e6e6e;
+      }
+    }
+
+    .cartPageItemRightPrice {
+      display: flex;
+      text-align: center;
+      flex-direction: column;
+      align-items: center;
+      flex: 0 0 auto;
+      padding-left: 20px;
+      @media screen and (max-width: 1200px) {
+        padding-left: 0;
+      }
+      @media screen and (max-width: 480px) {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        text-align: center;
+      }
+
+
+      p:first-child {
+        font-style: normal;
+        font-weight: 600;
+        font-size: 20px;
+        line-height: 25px;
+        color: #404040;
+      }
+
+      s {
+        font-style: normal;
+        font-weight: 600;
+        font-size: 14px;
+        line-height: 25px;
+        color: #6E6E6E;
+      }
+
+      button {
+        margin-top: 14px;
+        font-size: 14px;
+        line-height: 25px;
+        color: #3758CB;
+        background: transparent;
+        align-items: center;
+        align-content: center;
+        border: none;
+        display: inline-block;
+        padding-left: 19px;
+        position: relative;
+        cursor: pointer;
+
+        &::before {
+          content: '';
+          width: 11px;
+          height: 11px;
+          position: absolute;
+          left: 0;
+          top: 7px;
+          z-index: 1;
+          background-image: url("../../../../../public/images/icons/delete.svg");
+          background-position: left top;
+          background-repeat: no-repeat;
+        }
+      }
+    }
+  }
+}
