@@ -34,7 +34,7 @@ class ProductFactory extends Factory
             'price' => '2019',
             'art' => '1',
             'img' => 'productImg/tovar-1.svg',
-            'isPopular' => true,
+            'isPopular' => false,
             'properties' => $propertyOil
         ];
     }
