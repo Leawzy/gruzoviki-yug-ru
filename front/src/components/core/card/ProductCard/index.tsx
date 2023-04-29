@@ -29,7 +29,15 @@ export default function ProductCard({
     }, [id]);
 
     const handleAddToCart = () => {
-        store.addItem({ id, title, price, quantity: 1, addedToCart: true });
+        store.addItem({
+            id,
+            img,
+            title,
+            price,
+            maxQuantity: quantity,
+            quantity: 1,
+            addedToCart: true,
+        });
         setAddedToCart(true);
     };
 
