@@ -12,7 +12,12 @@ class Category extends Model
 
     protected $fillable = [
         "slug",
-        "title"
+        "title",
+        "properties"
+    ];
+
+    protected $casts = [
+        'properties' => 'array',
     ];
 
     protected static function boot(): void

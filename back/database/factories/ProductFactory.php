@@ -26,7 +26,7 @@ class ProductFactory extends Factory
         ];
         return [
             'brand_id' => Brand::query()->inRandomOrder()->value('id'),
-            'category_id' => Category::query()->inRandomOrder()->value('id'),
+            'category_id' => Category::query()->where('id', 1)->value('id'),
             'slug' => 'SINTEC PLATINUM 5W-40',
             'title' => 'SINTEC PLATINUM 5W-40',
             'shortDesc' => 'Синтетическое 4 л',
