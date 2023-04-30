@@ -1,8 +1,9 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import React, { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
 
-import { useCartStore } from '../../../../mobx/CartStore/CartStoreContext';
+import { addToCart, removeFromCart } from '../../../../redux/actions';
 import { Product } from '../../../../types/ProductType';
 import ButtonAdd from '../../buttons/ButtonAdd';
 import ButtonRemove from '../../buttons/ButtonRemove';
@@ -18,7 +19,8 @@ export default function ProductCard({
     shortDesc,
 }: Product) {
     const [addedToCart, setAddedToCart] = React.useState(false);
-    const store = useCartStore();
+
+    const dispatch = useDispatch();
 
     useEffect(() => {
         const cartItems = JSON.parse(localStorage.getItem('cartItems') || '[]') as Product[];
@@ -29,20 +31,12 @@ export default function ProductCard({
     }, [id]);
 
     const handleAddToCart = () => {
-        store.addItem({
-            id,
-            img,
-            title,
-            price,
-            maxQuantity: quantity,
-            quantity: 1,
-            addedToCart: true,
-        });
         setAddedToCart(true);
+        dispatch(addToCart(id, title, price, img, Boolean(true), 1));
     };
 
-    const handleRemoveFromCart = () => {
-        store.removeItem(id);
+    const handleRemoveToCart = () => {
+        dispatch(removeFromCart(id));
         setAddedToCart(false);
     };
 
@@ -72,7 +66,7 @@ export default function ProductCard({
             </div>
             <div className={cn.shortButtons}>
                 {addedToCart ? (
-                    <ButtonRemove onClick={handleRemoveFromCart}>Убрать из корзины</ButtonRemove>
+                    <ButtonRemove onClick={handleRemoveToCart}>Убрать из корзины</ButtonRemove>
                 ) : (
                     <ButtonAdd onClick={handleAddToCart}>Добавить в корзину</ButtonAdd>
                 )}
