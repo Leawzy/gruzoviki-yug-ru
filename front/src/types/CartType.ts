@@ -1,8 +1,15 @@
 export interface CartItem {
     id: number;
     title: string;
-    price: number;
-    quantity: number;
     img: string;
-    maxQuantity: string | number;
+    price: number;
+    maxQuantity?: number;
+    quantity: number;
+    addedToCart: boolean;
+}
+
+export interface RootState {
+    cart: {
+        items: CartItem[];
+    };
 }

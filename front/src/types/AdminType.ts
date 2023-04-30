@@ -1,4 +1,5 @@
 export interface AdminTypeUser {
+    total: number;
     users: users;
 }
 
@@ -7,9 +8,9 @@ export interface AdminTypeBrand {
 }
 
 export interface users {
-    total: string;
+    total: number;
 }
 
 export interface brandType {
-    total: string;
+    total: number;
 }
