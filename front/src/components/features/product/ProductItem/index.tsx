@@ -1,8 +1,9 @@
 import Image from 'next/image';
 import React, { useEffect, useState } from 'react';
+import { useDispatch } from 'react-redux';
 import { toast, ToastContainer } from 'react-toastify';
 
-import { useCartStore } from '../../../../mobx/CartStore/CartStoreContext';
+import { addToCart, removeFromCart } from '../../../../redux/actions';
 import { Product } from '../../../../types/ProductType';
 import ButtonAdd from '../../../core/buttons/ButtonAdd';
 import ButtonRemove from '../../../core/buttons/ButtonRemove';
@@ -14,9 +15,10 @@ interface ProductItemIF {
 }
 
 export default function ProductItem({ product }: ProductItemIF) {
-    const store = useCartStore();
     const [itemCount, setItemCount] = useState(1);
     const [addedToCart, setAddedToCart] = React.useState(false);
+
+    const dispatch = useDispatch();
 
     useEffect(() => {
         const cartItems = JSON.parse(localStorage.getItem('cartItems') || '[]') as Product[];
@@ -26,31 +28,33 @@ export default function ProductItem({ product }: ProductItemIF) {
         }
     }, [product.id]);
 
+    console.log(product);
+
+    const handleAddToCart = () => {
+        setAddedToCart(true);
+        dispatch(
+            addToCart(
+                product.id,
+                product.title,
+                product.price,
+                product.img,
+                Boolean(true),
+                itemCount
+            )
+        );
+    };
+
+    const handleRemoveToCart = () => {
+        dispatch(removeFromCart(product.id));
+        setAddedToCart(false);
+    };
+
     function setPlusHandler() {
         setItemCount(itemCount + 1);
         if (itemCount >= Number(product.quantity)) {
             setItemCount(Number(product.quantity));
         }
     }
-
-    const handleAddToCart = () => {
-        if (product) {
-            store.addItem({
-                id: product.id,
-                title: product.title,
-                price: product.price,
-                quantity: itemCount,
-                maxQuantity: product.quantity,
-                img: product.img,
-            });
-            setAddedToCart(true);
-        }
-    };
-
-    const handleRemoveFromCart = () => {
-        store.removeItem(product.id);
-        setAddedToCart(false);
-    };
 
     function setMinusHandler() {
         setItemCount(itemCount - 1);
@@ -137,7 +141,7 @@ export default function ProductItem({ product }: ProductItemIF) {
                         </div>
                         <div className={cn.productPageButtons}>
                             {addedToCart ? (
-                                <ButtonRemove onClick={handleRemoveFromCart}>
+                                <ButtonRemove onClick={handleRemoveToCart}>
                                     Удалить с корзины
                                 </ButtonRemove>
                             ) : (

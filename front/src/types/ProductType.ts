@@ -1,5 +1,5 @@
 export interface Product {
-    id: string | number;
+    id: number;
     title: string;
     shortDesc: string;
     popular?: number;

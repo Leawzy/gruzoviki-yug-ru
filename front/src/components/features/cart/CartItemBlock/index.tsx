@@ -1,8 +1,9 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
 
-import { useCartStore } from '../../../../mobx/CartStore/CartStoreContext';
+import { removeFromCart } from '../../../../redux/actions';
 import cn from './style.module.scss';
 
 interface CartItemBlock {
@@ -11,35 +12,22 @@ interface CartItemBlock {
     price: number;
     quantity: number;
     img?: string;
-    maxQuantity: string | number;
 }
 
-export default function CartItemBlock({
-    title,
-    img,
-    price,
-    quantity,
-    id,
-    maxQuantity,
-}: CartItemBlock) {
-    const store = useCartStore();
+export default function CartItemBlock({ title, img, price, quantity, id }: CartItemBlock) {
     const [itemAmount, setItemAmount] = useState(quantity);
-    const handleRemoveFromCart = () => {
-        store.removeItem(id);
+    const dispatch = useDispatch();
+
+    const handleRemoveToCart = () => {
+        dispatch(removeFromCart(id));
     };
 
     const plusQuantity = () => {
         setItemAmount(itemAmount + 1);
-        if (itemAmount >= Number(maxQuantity)) {
-            setItemAmount(Number(maxQuantity));
-        }
     };
 
     const minusQuantity = () => {
         setItemAmount(itemAmount - 1);
-        if (itemAmount <= 1) {
-            setItemAmount(1);
-        }
     };
 
     return (
@@ -77,7 +65,7 @@ export default function CartItemBlock({
                 </div>
                 <div className={cn.cartPageItemRightPrice}>
                     <p>{price} ₽</p>
-                    <button onClick={handleRemoveFromCart}>Удалить</button>
+                    <button onClick={handleRemoveToCart}>Удалить</button>
                 </div>
             </div>
         </div>

@@ -2,3 +2,5 @@ node_modules
 next.config.js
 lint-staged.config.js
 next-seo.config.ts
+src/page/_app.tsx
+src/redux/

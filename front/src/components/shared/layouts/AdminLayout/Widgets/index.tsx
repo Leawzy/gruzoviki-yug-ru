@@ -1,4 +1,5 @@
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
+import Link from 'next/link';
 import React from 'react';
 
 import { AdminTypeBrand, AdminTypeUser } from '../../../../../types/AdminType';
@@ -13,42 +14,49 @@ interface WidgetProps {
 interface WidgetData {
     title: string;
     amount: string;
+    textLink: string;
     link: string;
 }
 
 export default function Widget({ type, users, brand }: WidgetProps) {
     let data: WidgetData;
-    const totalUser = users.length;
-    const totalBrands = brand.length;
+    // @ts-ignore
+    const totalUser = String(users.total);
+    // @ts-ignore
+    const totalBrands = String(brand.total);
     const diff = 20;
 
     switch (type) {
         case 'user':
             data = {
                 title: 'Пользователи',
-                amount: totalUser.toString(),
-                link: 'See all users',
+                amount: String(totalUser),
+                textLink: 'Просмотреть всех пользователей',
+                link: '/admin/users',
             };
             break;
         case 'order':
             data = {
                 title: 'Заказы',
-                amount: '0',
-                link: 'View all orders',
+                amount: String(0),
+                textLink: 'Просмотреть все заказы',
+                link: '/admin/orders',
             };
             break;
         case 'brands':
             data = {
                 title: 'Бренды',
-                amount: totalBrands.toString(),
-                link: 'View net earnings',
+                amount: String(totalBrands),
+                textLink: 'Просмотреть все бренды',
+                link: '/admin/brands',
             };
             break;
         default:
             data = {
                 title: '',
-                amount: '1',
-                link: '',
+                amount: String(1),
+                textLink: '',
+                link: '/controlpanel',
             };
             break;
     }
@@ -58,7 +66,9 @@ export default function Widget({ type, users, brand }: WidgetProps) {
             <div className={cn.left}>
                 <span className={cn.title}>{data.title}</span>
                 <span className={cn.counter}>{data.amount}</span>
-                <span className={cn.link}>{data.link}</span>
+                <Link href={data.link}>
+                    <span className={cn.link}>{data.textLink}</span>
+                </Link>
             </div>
             <div className={cn.right}>
                 <div className={`${cn.percentage} ${cn.positive}`}>
