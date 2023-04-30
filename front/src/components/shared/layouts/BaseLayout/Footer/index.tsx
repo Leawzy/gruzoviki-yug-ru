@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import React from 'react';
 
 import cn from './style.module.scss';
@@ -48,10 +49,10 @@ export default function Footer() {
                             <a href="#">Блог</a>
                         </li>
                         <li>
-                            <a href="#">Контакты</a>
+                            <Link href="/contact">Контакты</Link>
                         </li>
                         <li>
-                            <a href="#">Обратная связь</a>
+                            <Link href="/contact">Обратная связь</Link>
                         </li>
                     </ul>
                 </li>
