@@ -1,0 +1,152 @@
+@import "../../../styles/mixin";
+
+.contactPage {
+  .contactPageLists {
+    margin-bottom: 44px;
+    @media screen and (max-width: 440px) {
+      margin-left: 42px;
+    }
+
+    h1 {
+      font-size: 28px;
+      font-weight: 700;
+      line-height: 44px;
+      margin-bottom: 53px;
+      @media screen and (max-width: 440px) {
+        text-align: center;
+      }
+    }
+
+    .contactPageList {
+      padding: 8px 0;
+
+      .contactPageListTop {
+        display: flex;
+
+        p {
+          margin-left: 12px;
+        }
+      }
+
+      .contactPageListContent {
+        padding: 10px 40px;
+
+        li {
+          font-style: normal;
+          font-weight: 400;
+          font-size: 15px;
+          line-height: 35px;
+          color: #1E1E1E;
+        }
+      }
+    }
+  }
+
+  .contactPageCallBack {
+    margin-top: 22px;
+
+    h2 {
+      font-size: 28px;
+      font-weight: 700;
+      line-height: 44px;
+      margin-bottom: 23px;
+      @media screen and (max-width: 440px) {
+        margin-left: 64px;
+        text-align: center;
+      }
+    }
+
+    .contactPageForm {
+
+      .contactPageFormTop {
+        display: flex;
+        @media screen and (max-width: 440px) {
+          display: flex;
+          flex-direction: column;
+          margin-left: 20px;
+        }
+
+        label {
+          display: flex;
+          flex-direction: column;
+          margin-left: 20px;
+          @media screen and (max-width: 440px) {
+            margin-left: 0;
+          }
+
+          &:first-child {
+            margin-left: 0;
+          }
+
+          input, select {
+            width: 290px;
+            padding-left: 9px;
+            height: 40px;
+            border: 1px solid #C4C4C4;
+            border-radius: 5px;
+            @media screen and (max-width: 440px) {
+              margin-left: 0;
+            }
+          }
+
+          select {
+            width: 290px;
+            padding-left: 9px;
+            height: 40px;
+          }
+        }
+      }
+
+      .contactPageFormBottom {
+        margin-top: 33px;
+        margin-bottom: 33px;
+        display: flex;
+        align-items: center;
+        align-content: center;
+        @media screen and (max-width: 440px) {
+          display: flex;
+          flex-direction: column;
+          margin-left: 40px;
+          text-align: center;
+        }
+
+        textarea {
+          width: 916px;
+          height: 140px;
+          border: 1px solid #C4C4C4;
+          border-radius: 5px;
+          resize: none;
+          @media screen and (max-width: 440px) {
+            width: 316px;
+            height: 140px;
+          }
+        }
+
+        button {
+          padding: 22px 98px;
+          background: cornflowerblue;
+          color: white;
+          margin-left: 22px;
+          border-radius: 10px;
+          cursor: pointer;
+          outline: none;
+          border: none;
+          @media only screen and (max-width: 700px) and (min-width: 300px) {
+            margin-top: 10px;
+            padding: 12px 18px;
+            font-size: 14px;
+          }
+        }
+      }
+    }
+  }
+
+  .contactPageMap {
+    @media screen and (max-width: 440px) {
+      iframe {
+        width: 340px;
+        height: 300px;
+      }
+    }
+  }
+}

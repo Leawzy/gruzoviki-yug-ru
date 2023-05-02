@@ -36,7 +36,7 @@ export default function SideBar() {
                             <span>Отредактровать пользователя</span>
                         </li>
                     </Link>
-                    <Link href="/">
+                    <Link href="/admin/brand/brandAdd">
                         <li>
                             <StoreIcon className={cn.icon} />
                             <span>Добавить бренд</span>

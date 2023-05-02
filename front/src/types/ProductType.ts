@@ -1,4 +1,5 @@
 export interface Product {
+    property: PropertyProduct;
     id: number;
     title: string;
     shortDesc: string;
@@ -21,8 +22,17 @@ export interface MetaIF {
     total: number;
 }
 
+interface PropertyProduct {
+    property: {
+        [key: string]: string;
+    };
+}
+
 interface CategoryProduct {
     title: string;
+    property: {
+        [key: string]: string;
+    };
 }
 
 interface BrandProduct {
