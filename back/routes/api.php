@@ -31,7 +31,7 @@ Route::post('/login', [UserController::class, 'authUser']);
 // Other Function
 Route::get('/slider', [OtherController::class, 'showSlider']);
 Route::get('/posts', [OtherController::class, 'showPost']);
-Route::get('/post/{id}', [OtherController::class, 'getPostById']);
+Route::get('/post/card/{id}', [OtherController::class, 'getPostById']);
 
 //Auth User function
 Route::middleware(['auth:api'])->group(function () {
