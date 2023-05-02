@@ -9,6 +9,10 @@ use Illuminate\Http\Request;
 
 class ProductController extends Controller
 {
+    public function getAllProducts()
+    {
+        return ProductResource::collection(Product::all());
+    }
     public function showProducts($page = 1)
     {
         return ProductResource::collection(Product::paginate(9, ['*'], 'page', $page));
