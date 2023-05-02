@@ -194,12 +194,13 @@ class AdminController extends Controller
     public function createCategory(Request $request)
     {
         $data = $request->validate([
-            'title' => $request['title']
+            'title' => $request['title'],
+            'property' => $request['property']
         ]);
 
         $category = Category::create([
             'title' => $data['title'],
-            'property' => [
+            'properties' => [
                 $data['property']
             ]
         ]);
@@ -216,6 +217,7 @@ class AdminController extends Controller
         $category = Category::findOrFail($request['id']);
 
         $request['title'] === null ? : $category->title = $request['title'];
+        $request['property'] === null ? : $category->properties = $request['property'];
 
         return response()->json([
             'message' => 'Категория успешно обновлена',
