@@ -1,5 +1,5 @@
 import React from 'react';
 
-export default function Favorite() {
+export default function CategoryChange() {
     return <div />;
 }

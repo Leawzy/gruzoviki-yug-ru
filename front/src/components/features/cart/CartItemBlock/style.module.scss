@@ -180,13 +180,13 @@
 
         &::before {
           content: '';
-          width: 11px;
-          height: 11px;
+          width: 37px;
+          height: 37px;
           position: absolute;
           left: 0;
           top: 7px;
           z-index: 1;
-          background-image: url("../../../../../public/images/icons/delete.svg");
+          background-image: url("../../../../../public/images/icons/delete.webp");
           background-position: left top;
           background-repeat: no-repeat;
         }

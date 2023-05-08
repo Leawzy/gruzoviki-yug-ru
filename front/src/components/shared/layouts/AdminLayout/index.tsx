@@ -5,7 +5,11 @@ import SideBar from './SideBar';
 import cn from './style.module.scss';
 import Widget from './Widgets';
 
-export default function AdminLayout() {
+interface AdminLayoutIF {
+    children: React.ReactNode;
+}
+
+export default function AdminLayout({ children }: AdminLayoutIF) {
     const { users } = useAdminUserData();
     const { brand } = useAdminBrandData();
 
@@ -18,6 +22,7 @@ export default function AdminLayout() {
                     <Widget type="order" users={users} brand={brand} />
                     <Widget type="brands" users={users} brand={brand} />
                 </div>
+                <div className={cn.children}>{children}</div>
             </div>
         </div>
     );

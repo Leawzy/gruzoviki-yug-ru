@@ -1,43 +1,31 @@
-import { GetServerSideProps } from 'next';
 import { useRouter } from 'next/router';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 
 import { apiFetch } from '../../axios/global';
-import BaseLayout from '../../components/shared/layouts/BaseLayout';
-import { Product } from '../../types/ProductType';
+import { News } from '../../types/NewsType';
 
-interface Props {
-    product: Product;
-}
-
-export default function ProductPage({ product }: Props) {
+function ProductPage() {
     const router = useRouter();
+    // @ts-ignore
+    const [news, setNews] = useState<News>({});
+    const { newsId } = router.query;
 
-    if (router.isFallback) {
-        return <div>Loading...</div>;
-    }
+    useEffect(() => {
+        async function getProductIdItem() {
+            try {
+                const res: { data: { data: News } } = await apiFetch(
+                    `/api/post/card/${Number(newsId)}`
+                );
+                setNews(res.data.data);
+            } catch (e) {
+                console.error(e);
+            }
+        }
 
-    return (
-        <BaseLayout>
-            <h1>{product.title}</h1>
-            <p>ID: {product.id}</p>
-            <p>Description: {product.description}</p>
-        </BaseLayout>
-    );
+        getProductIdItem().catch(error => console.error(error));
+    }, []);
+
+    return <div>{news.title}</div>;
 }
 
-export const getServerSideProps: GetServerSideProps<Props> = async ({ params }) => {
-    const newsId = params?.newsId;
-    if (!newsId) {
-        return { notFound: true };
-    }
-
-    const response = await apiFetch(`/api/post/${String(newsId)}`);
-    const product: Product = response.data.data as Product;
-
-    return {
-        props: {
-            product,
-        },
-    };
-};
+export default ProductPage;

@@ -73,7 +73,8 @@ export default function UserAdd() {
                 <input
                     onChange={e => setPhoneNumber(e.target.value)}
                     type="text"
-                    placeholder="Введите телефон"
+                    maxLength={11}
+                    placeholder="71234567890"
                 />
                 <select onChange={e => setRole(e.target.value)}>
                     <option>Выберете роль</option>

@@ -32,7 +32,7 @@ export default function ProductCard({
 
     const handleAddToCart = () => {
         setAddedToCart(true);
-        dispatch(addToCart(id, title, price, img, Boolean(true), 1));
+        dispatch(addToCart(id, title, price, img, Boolean(true), quantity, 1));
     };
 
     const handleRemoveToCart = () => {

@@ -6,10 +6,11 @@ export const addToCart = (
     price: number,
     img: string,
     addedToCart: boolean,
+    maxQuantity: number,
     quantity: number
 ) => ({
     type: ADD_TO_CART,
-    payload: { id, title, price, img, addedToCart, quantity },
+    payload: { id, title, price, img, addedToCart, quantity, maxQuantity },
 });
 
 export const removeFromCart = (id: number) => ({

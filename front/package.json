@@ -3,11 +3,10 @@
   "version": "1.2.0",
   "private": true,
   "scripts": {
-    "build": "next build",
     "dev": "kill-port 3000 && cross-env NODE_OPTIONS='--inspect' next dev -p 3000",
-    "check-ts": "npm run type-check",
-    "check-all": "npm run check-all",
-    "prod": "next start"
+    "build": "next build",
+    "prod": "next start",
+    "build-out": "next export"
   },
   "dependencies": {
     "@emotion/react": "11.10.8",
@@ -20,6 +19,7 @@
     "clsx": "^1.2.1",
     "dompurify": "3.0.1",
     "form-data": "4.0.0",
+    "i": "0.3.7",
     "jwt-decode": "3.1.2",
     "lodash": "4.17.21",
     "modern-normalize": "1.1.0",
@@ -27,6 +27,7 @@
     "next": "13.3.1",
     "next-seo": "6.0.0",
     "nookies": "2.5.2",
+    "npm": "9.6.5",
     "react": "18.2.0",
     "react-content-loader": "6.2.1",
     "react-dom": "18.2.0",
@@ -35,8 +36,7 @@
     "react-redux": "8.0.5",
     "react-toastify": "9.1.2",
     "react-use": "17.4.0",
-    "redux": "4.2.1",
-    "sharp": "0.32.0"
+    "redux": "4.2.1"
   },
   "devDependencies": {
     "@next/bundle-analyzer": "13.3.0",

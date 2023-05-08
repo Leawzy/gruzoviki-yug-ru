@@ -1,10 +1,7 @@
 import Image from 'next/image';
 import React from 'react';
 
-import calendar from '../../../../public/images/icons/contact/calendar.svg';
-import call from '../../../../public/images/icons/contact/call.svg';
-import invoices from '../../../../public/images/icons/contact/invoices.svg';
-import mail from '../../../../public/images/icons/contact/mail.svg';
+import { calendar, call, invoices, mail } from '../../../utils/images';
 import cn from './style.module.scss';
 
 export default function Contact() {
@@ -14,12 +11,7 @@ export default function Contact() {
                 <h1>Контакты</h1>
                 <ul className={cn.contactPageList}>
                     <div className={cn.contactPageListTop}>
-                        <Image
-                            width={25}
-                            height={25}
-                            src={calendar as string}
-                            alt="Icon in Contact"
-                        />
+                        <Image width={25} height={25} src={calendar} alt="Icon in Contact" />
                         <p>График работы отдела продаж</p>
                     </div>
                     <div className={cn.contactPageListContent}>
@@ -30,7 +22,7 @@ export default function Contact() {
                 </ul>
                 <ul className={cn.contactPageList}>
                     <div className={cn.contactPageListTop}>
-                        <Image width={25} height={25} src={call as string} alt="Icon in Contact" />
+                        <Image width={25} height={25} src={call} alt="Icon in Contact" />
                         <p>График работы отдела продаж</p>
                     </div>
                     <div className={cn.contactPageListContent}>
@@ -41,7 +33,7 @@ export default function Contact() {
                 </ul>
                 <ul className={cn.contactPageList}>
                     <div className={cn.contactPageListTop}>
-                        <Image width={25} height={25} src={mail as string} alt="Icon in Contact" />
+                        <Image width={25} height={25} src={mail} alt="Icon in Contact" />
                         <p>График работы отдела продаж</p>
                     </div>
                     <div className={cn.contactPageListContent}>
@@ -50,12 +42,7 @@ export default function Contact() {
                 </ul>
                 <ul className={cn.contactPageList}>
                     <div className={cn.contactPageListTop}>
-                        <Image
-                            width={25}
-                            height={25}
-                            src={invoices as string}
-                            alt="Icon in Contact"
-                        />
+                        <Image width={25} height={25} src={invoices} alt="Icon in Contact" />
                         <p>График работы отдела продаж</p>
                     </div>
                     <div className={cn.contactPageListContent}>
@@ -99,10 +86,10 @@ export default function Contact() {
             </div>
             <div className={cn.contactPageMap}>
                 <iframe
+                    title="myFrame"
                     src="https://yandex.ru/map-widget/v1/?um=constructor%3Aadf503c8d493db84b041a6d7eb227197f147588a3976d525bfd0865b492dab34&amp;source=constructor"
                     width="1280"
                     height="556"
-                    frameBorder="0"
                 />
             </div>
         </section>

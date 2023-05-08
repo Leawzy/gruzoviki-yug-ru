@@ -35,6 +35,7 @@
     "unused-imports"
   ],
   "rules": {
+    "react/no-array-index-key": "off",
     "@typescript-eslint/ban-ts-ignore": "off",
     "no-restricted-globals": "off",
     "jsx-a11y/control-has-associated-label": "off",
@@ -61,7 +62,7 @@
     "max-len": [
       2,
       {
-        "code": 120,
+        "code": 250,
         "ignoreUrls": true
       }
     ],
@@ -81,7 +82,6 @@
     ],
     "class-methods-use-this": "warn",
     "react/display-name": "off",
-    "react/no-array-index-key": "warn",
     "react/jsx-filename-extension": [
       1,
       {

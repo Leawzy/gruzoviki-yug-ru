@@ -4,31 +4,34 @@ import { useDispatch } from 'react-redux';
 import { toast, ToastContainer } from 'react-toastify';
 
 import { addToCart, removeFromCart } from '../../../../redux/actions';
-import { Product } from '../../../../types/ProductType';
+import { ProductPage } from '../../../../types/ProductType';
 import ButtonAdd from '../../../core/buttons/ButtonAdd';
 import ButtonRemove from '../../../core/buttons/ButtonRemove';
 import BaseLayout from '../../../shared/layouts/BaseLayout';
 import cn from './style.module.scss';
 
 interface ProductItemIF {
-    product: Product;
+    product: ProductPage;
 }
 
 export default function ProductItem({ product }: ProductItemIF) {
+    const dispatch = useDispatch();
     const [itemCount, setItemCount] = useState(1);
     const [addedToCart, setAddedToCart] = React.useState(false);
+    const { property, category } = product;
+    const categoryProperties = category.property;
 
-    const dispatch = useDispatch();
+    const propertyStrings = Object.keys(categoryProperties)
+        .filter(key => key in property)
+        .map(key => `${categoryProperties[key]} ${property[key]}`);
 
     useEffect(() => {
-        const cartItems = JSON.parse(localStorage.getItem('cartItems') || '[]') as Product[];
-        const item = cartItems.find((item: Product) => item.id === product.id);
+        const cartItems = JSON.parse(localStorage.getItem('cartItems') || '[]') as ProductPage[];
+        const item = cartItems.find((item: ProductPage) => item.id === product.id);
         if (item) {
             setAddedToCart(true);
         }
     }, [product.id]);
-
-    console.log(product);
 
     const handleAddToCart = () => {
         setAddedToCart(true);
@@ -81,7 +84,7 @@ export default function ProductItem({ product }: ProductItemIF) {
     return (
         <BaseLayout>
             <ToastContainer />
-            <div className={cn.productPage}>
+            <div className={cn.productPage} key={product.id}>
                 <div className={cn.productPageTop}>
                     <h1>{product.title}</h1>
                     <div className={cn.productPageTopAction}>
@@ -124,7 +127,7 @@ export default function ProductItem({ product }: ProductItemIF) {
                     <div className={cn.productPageInfo}>
                         <span className={cn.productPageInfoText}>
                             Тип:
-                            <p className={cn.productPageInfoSubject}>{product.category?.title}</p>
+                            <p className={cn.productPageInfoSubject}>{product.category.title}</p>
                         </span>
                         <span className={cn.productPageInfoText}>
                             Бренд:
@@ -155,14 +158,11 @@ export default function ProductItem({ product }: ProductItemIF) {
                         </div>
                     </div>
                 </div>
-                {/* {productData?.property.map((p: PropertyIF) => ( */}
-                {/*     <div key={p.id}> */}
-                {/*         <p>Страна производитель: {p.country}</p> */}
-                {/*         <p>Описание: {p.description}</p> */}
-                {/*         <p>{p.warranty}</p> */}
-                {/*         <p>{p.start_date}</p> */}
-                {/*     </div> */}
-                {/* ))} */}
+                <div>
+                    {propertyStrings.map((propString, index) => (
+                        <div key={index}>{propString}</div>
+                    ))}
+                </div>
             </div>
         </BaseLayout>
     );

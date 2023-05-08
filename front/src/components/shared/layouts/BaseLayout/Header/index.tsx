@@ -3,10 +3,8 @@ import Link from 'next/link';
 import { destroyCookie, parseCookies } from 'nookies';
 import React, { useEffect, useState } from 'react';
 
-import account from '../../../../../../public/images/icons/account.svg';
-import basket from '../../../../../../public/images/icons/basket.svg';
-import favorite from '../../../../../../public/images/icons/favorite.svg';
 import { useProfileData } from '../../../../../hooks/useGetProfileHook';
+import { account, basket, favorite } from '../../../../../utils/images';
 import cn from './style.module.scss';
 
 export default function Header() {
@@ -87,7 +85,7 @@ export default function Header() {
                         <div className={cn.headerLinks}>
                             <div className={`${cn.headerLinkItem} ${cn.dropmenu}`}>
                                 <Image
-                                    src={account as string}
+                                    src={account}
                                     className={cn.headerLinkItemIcon}
                                     width={34}
                                     loading="lazy"
@@ -117,7 +115,7 @@ export default function Header() {
                             </div>
                             <a className={cn.headerLinkItem}>
                                 <Image
-                                    src={favorite as string}
+                                    src={favorite}
                                     className={cn.headerLinkItemIcon}
                                     loading="lazy"
                                     width={34}
@@ -127,7 +125,7 @@ export default function Header() {
                             </a>
                             <Link href="/cart" className={cn.headerLinkItem}>
                                 <Image
-                                    src={basket as string}
+                                    src={basket}
                                     className={cn.headerLinkItemIcon}
                                     loading="lazy"
                                     width={34}
