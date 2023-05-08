@@ -23,4 +23,9 @@ class Brand extends Model
             $brand->slug = $brand->slug ?? Str::slug($brand->title);
         });
     }
+
+    public function getImageUrlAttribute()
+    {
+        return url('storage/' . $this->img);
+    }
 }
