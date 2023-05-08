@@ -170,7 +170,7 @@ class ProfileController extends Controller
      *                     example="johndoe@example.com"
      *                 ),
      *                 @OA\Property(
-     *                     property="phone_number",
+     *                     property="phoneNumber",
      *                     description="User's phone number",
      *                     type="string",
      *                     example="+1 (555) 123-4567"
