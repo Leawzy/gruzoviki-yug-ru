@@ -3,6 +3,9 @@
 namespace App\Http\Controllers\Api\v1;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\Brand\BrandResource;
+use App\Http\Resources\Category\CategoryResource;
+use App\Http\Resources\Other\SliderResource;
 use App\Models\Brand;
 use App\Models\Category;
 use App\Models\Slider;
@@ -13,11 +16,9 @@ use Illuminate\Support\Facades\Storage;
 class AdminController extends Controller
 {
     //User section
-    public function getAllUser($page = 1): \Illuminate\Http\JsonResponse
+    public function getAllUser(): \Illuminate\Database\Eloquent\Collection
     {
-        return response()->json([
-            'data' => User::paginate(15, ['*'], 'page', $page)
-        ], 200);
+        return User::all();
     }
 
     public function getUser($id)
@@ -72,11 +73,9 @@ class AdminController extends Controller
     }
 
     //Slider Section
-    public function getAllSlider($page = 1)
+    public function getAllSlider()
     {
-        return response()->json([
-            'data' => Slider::paginate(15, ['*'], 'page', $page)
-        ], 200);
+        return SliderResource::collection(Slider::all());
     }
 
     public function createSlider(Request $request)
@@ -129,11 +128,9 @@ class AdminController extends Controller
     }
 
     //Brand Section
-    public function getAllBrand($page = 1)
+    public function getAllBrand()
     {
-        return response()->json([
-            'data' => Brand::paginate(15, ['*'], 'page', $page)
-        ], 200);
+        return BrandResource::collection(Brand::all());
     }
 
     public function createBrand(Request $request)
@@ -184,25 +181,21 @@ class AdminController extends Controller
     }
 
     //Category Section
-    public function getAllCategory($page = 1)
+    public function getAllCategory()
     {
-        return response()->json([
-            'data' => Category::paginate(15, ['*'], 'page', $page)
-        ], 200);
+        return CategoryResource::collection(Category::all());
     }
 
     public function createCategory(Request $request)
     {
         $data = $request->validate([
-            'title' => $request['title'],
-            'property' => $request['property']
+            'title' => ["required", "string"],
+            'property' => ["required"],
         ]);
 
         $category = Category::create([
             'title' => $data['title'],
-            'properties' => [
-                $data['property']
-            ]
+            'properties' => $data['property'],
         ]);
 
         $category->save();
