@@ -1,21 +1,19 @@
 import Image from 'next/image';
 import React from 'react';
 
+import { useGetSliderHook } from '../../../hooks/useGetSliderHook';
 import { masterCard, storage, visa } from '../../../utils/images';
 import News from './News';
 import PopularCards from './PopularCards';
 import Slider from './Slider';
 import cn from './style.module.scss';
 
-const images = [
-    'http://api.ch32081.tw1.ru/storage/app/public/slider/slide1.png',
-    'http://api.ch32081.tw1.ru/storage/app/public/slider/slide2.png',
-];
-
 function Home() {
+    const { slider } = useGetSliderHook();
+
     return (
         <>
-            <Slider images={images} />
+            <Slider images={slider} />
             <PopularCards />
             <section className={cn.aboutBlock}>
                 <div className={cn.aboutBlockWrapper}>
