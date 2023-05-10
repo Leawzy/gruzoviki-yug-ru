@@ -1,5 +1,10 @@
 import React from 'react';
 
-export default function Products() {
+import { withAuth } from '../../utils/withAuth';
+import { withAuthAdmin } from '../../utils/withAuthAdmin';
+
+function Products() {
     return <div />;
 }
+
+export default withAuth(withAuthAdmin(Products));
