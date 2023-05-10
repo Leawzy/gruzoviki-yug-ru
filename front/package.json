@@ -24,7 +24,7 @@
     "lodash": "4.17.21",
     "modern-normalize": "1.1.0",
     "nanoid": "^4.0.2",
-    "next": "13.3.1",
+    "next": "13.4.1",
     "next-seo": "6.0.0",
     "nookies": "2.5.2",
     "npm": "9.6.5",
@@ -34,9 +34,11 @@
     "react-hook-form": "7.43.9",
     "react-paginate": "8.2.0",
     "react-redux": "8.0.5",
+    "react-spinners": "0.13.8",
     "react-toastify": "9.1.2",
     "react-use": "17.4.0",
-    "redux": "4.2.1"
+    "redux": "4.2.1",
+    "sharp": "0.32.1"
   },
   "devDependencies": {
     "@next/bundle-analyzer": "13.3.0",
