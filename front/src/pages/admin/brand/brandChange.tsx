@@ -11,8 +11,10 @@ import React, { useEffect, useState } from 'react';
 
 import AdminLayout from '../../../components/shared/layouts/AdminLayout';
 import { useAdminBrandData } from '../../../hooks/useAdminHook';
+import { withAuth } from '../../../utils/withAuth';
+import { withAuthAdmin } from '../../../utils/withAuthAdmin';
 
-export default function BrandChange() {
+function BrandChange() {
     const { brand } = useAdminBrandData();
     const [rows, setRows] = useState<GridRowsProp>([]);
     const [selectedRow, setSelectedRow] = useState<GridValidRowModel | undefined>([]);
@@ -86,3 +88,5 @@ export default function BrandChange() {
         </AdminLayout>
     );
 }
+
+export default withAuth(withAuthAdmin(BrandChange));
