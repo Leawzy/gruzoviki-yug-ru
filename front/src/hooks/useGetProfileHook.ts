@@ -10,8 +10,7 @@ function useProfileData() {
         const getProfile = async () => {
             setAuthToken();
             try {
-                const res: { data: ProfileType[] } = await apiFetch.get('api/profile');
-                // @ts-ignore
+                const res: { data: ProfileType } = await apiFetch.get('api/profile');
                 setProfile(res.data);
             } catch {
                 /* empty */
