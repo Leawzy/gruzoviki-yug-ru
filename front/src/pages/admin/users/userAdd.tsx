@@ -1,15 +1,24 @@
+import { useRouter } from 'next/router';
 import React, { useState } from 'react';
 import { toast, ToastContainer } from 'react-toastify';
 
 import { adminFetch, setAuthToken } from '../../../axios/global';
+import { withAuth } from '../../../utils/withAuth';
+import { withAuthAdmin } from '../../../utils/withAuthAdmin';
+import cn from '../style.module.scss';
 
-export default function UserAdd() {
+function UserAdd() {
     const [firstName, setFirstName] = useState('');
     const [lastName, setLastName] = useState('');
     const [password, setPassword] = useState('');
     const [email, setEmail] = useState('');
     const [phoneNumber, setPhoneNumber] = useState('');
     const [role, setRole] = useState('user');
+    const route = useRouter();
+
+    const cancelCreate = async () => {
+        await route.replace('/controlpanel');
+    };
 
     async function createUserHandler() {
         setAuthToken();
@@ -36,6 +45,7 @@ export default function UserAdd() {
                     progress: undefined,
                     theme: 'light',
                 });
+                await route.replace('/controlpanel');
             }
         } catch (e) {
             console.error(e);
@@ -43,9 +53,10 @@ export default function UserAdd() {
     }
 
     return (
-        <div>
+        <div className={cn.userAddBlock}>
+            <h1>Добавить пользователя</h1>
             <ToastContainer />
-            <form onSubmit={e => e.preventDefault()}>
+            <form className={cn.userAddForm} onSubmit={e => e.preventDefault()}>
                 <input
                     onChange={e => setFirstName(e.target.value)}
                     type="text"
@@ -81,8 +92,13 @@ export default function UserAdd() {
                     <option value="user">User</option>
                     <option value="admin">Admin</option>
                 </select>
-                <button onClick={createUserHandler}>Создать пользователя</button>
+                <div className={cn.userAddButtons}>
+                    <button onClick={cancelCreate}>Отмена</button>
+                    <button onClick={createUserHandler}>Создать пользователя</button>
+                </div>
             </form>
         </div>
     );
 }
+
+export default withAuth(withAuthAdmin(UserAdd));

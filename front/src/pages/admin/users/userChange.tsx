@@ -12,6 +12,8 @@ import React, { useEffect, useState } from 'react';
 import { adminFetch, setAuthToken } from '../../../axios/global';
 import AdminLayout from '../../../components/shared/layouts/AdminLayout';
 import { useAdminUserData } from '../../../hooks/useAdminHook';
+import { withAuth } from '../../../utils/withAuth';
+import { withAuthAdmin } from '../../../utils/withAuthAdmin';
 
 interface UserDataIF {
     id: number;
@@ -22,7 +24,7 @@ interface UserDataIF {
     role: string;
 }
 
-export default function UserChange() {
+function UserChange() {
     const { users } = useAdminUserData();
     const [rows, setRows] = useState<GridRowsProp>([]);
     const [selectedRow, setSelectedRow] = useState<GridValidRowModel | undefined>([]);
@@ -41,8 +43,10 @@ export default function UserChange() {
     const handleSaveChanges = async () => {
         setAuthToken();
         try {
-            const { id, firstName, lastName, email, phoneNumber, role } = selectedRow || {};
-            const data: UserDataIF = {
+            // @ts-ignore
+            const { id, firstName, lastName, email, phoneNumber, role }: UserDataIF =
+                selectedRow || {};
+            const data = {
                 id,
                 firstName,
                 lastName,
@@ -158,3 +162,5 @@ export default function UserChange() {
         </AdminLayout>
     );
 }
+
+export default withAuth(withAuthAdmin(UserChange));
