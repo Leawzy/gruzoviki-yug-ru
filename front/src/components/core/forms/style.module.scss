@@ -10,10 +10,10 @@
 }
 
 .AuthForm {
-  @include FormTop(90px);
+  @include FormTop(120px);
 
   .Form {
-    @include AuthenticationForm(580px, 560px);
+    @include AuthenticationForm(580px, 460px);
   }
 }
 
