@@ -62,4 +62,14 @@ Route::middleware(['auth:api', 'admin'])->group(function () {
     Route::get('/admin/category/get', [AdminController::class, 'getAllCategory']);
     Route::post('/admin/category/create', [AdminController::class, 'createCategory']);
     Route::post('/admin/category/change', [AdminController::class, 'changeCategory']);
+
+    //Post section
+    Route::get('/admin/post/get', [AdminController::class, 'getAllPost']);
+    Route::post('/admin/post/create', [AdminController::class, 'createPost']);
+    Route::post('/admin/post/change', [AdminController::class, 'changePost']);
+
+    //Product section
+    Route::get('/admin/product/get', [AdminController::class, 'getAllProduct']);
+    Route::post('/admin/product/create', [AdminController::class, 'createProduct']);
+    Route::post('/admin/product/change', [AdminController::class, 'changeProduct']);
 });

@@ -5,9 +5,13 @@ namespace App\Http\Controllers\Api\v1;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\Brand\BrandResource;
 use App\Http\Resources\Category\CategoryResource;
+use App\Http\Resources\Other\PostResource;
 use App\Http\Resources\Other\SliderResource;
+use App\Http\Resources\Product\ProductResource;
 use App\Models\Brand;
 use App\Models\Category;
+use App\Models\Post;
+use App\Models\Product;
 use App\Models\Slider;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -16,14 +20,11 @@ use Illuminate\Support\Facades\Storage;
 class AdminController extends Controller
 {
     //User section
-    public function getAllUser(): \Illuminate\Database\Eloquent\Collection
+    public function getAllUser(): \Illuminate\Http\JsonResponse
     {
-        return User::all();
-    }
-
-    public function getUser($id)
-    {
-        return User::findOrFail($id);
+        return response()->json([
+            'data' => User::all()
+        ], 200);
     }
 
     public function createUser(Request $request): \Illuminate\Http\JsonResponse
@@ -40,8 +41,8 @@ class AdminController extends Controller
             "lastName" => $data["lastName"],
             "email" => $data["email"],
             "password" => bcrypt($data["password"]),
-            $request['phoneNumber'] === null ? : "phoneNumber" => $request['phoneNumber'],
-            $request['role'] === null ? : "role" => $request['role'],
+            $request['phoneNumber'] === null ?: "phoneNumber" => $request['phoneNumber'],
+            $request['role'] === null ?: "role" => $request['role'],
         ]);
         $user->save();
 
@@ -55,12 +56,12 @@ class AdminController extends Controller
         $user = User::findOrFail($request['id']);
 
         if ($user) {
-            $request['firstName'] === null ? : $user->firstName = $request['firstName'];
-            $request['lastName'] === null ? : $user->lastName = $request['lastName'];
-            $request['email'] === null ? : $user->email = $request['email'];
-            $request['phoneNumber'] === null ? : $user->phoneNumber = $request['phoneNumber'];
-            $request['password'] === null ? : $user->password = bcrypt($request['password']);
-            $request['role'] === null ? : $user->role = $request['role'];
+            $request['firstName'] === null ?: $user->firstName = $request['firstName'];
+            $request['lastName'] === null ?: $user->lastName = $request['lastName'];
+            $request['email'] === null ?: $user->email = $request['email'];
+            $request['phoneNumber'] === null ?: $user->phoneNumber = $request['phoneNumber'];
+            $request['password'] === null ?: $user->password = bcrypt($request['password']);
+            $request['role'] === null ?: $user->role = $request['role'];
             $user->save();
             return response()->json([
                 'message' => 'Данные успешно обновлены',
@@ -107,23 +108,25 @@ class AdminController extends Controller
     {
         $slider = Slider::findOrFail($request['id']);
 
-        $request['title'] === null ?: $slider->title = $request['title'];
-
-        if ($request->hasFile('file')) {
-            $file = $request->file('file');
-            $filename = time() . '.' . $file->getClientOriginalExtension();
-            $file->storeAs('sliderImg/id/' . $slider->id, $filename, 'public');
-            if ($slider->img) {
-                Storage::disk('public')->delete($slider->img);
-            }
-            $slider->img = 'sliderImg/id/' . $slider->id . '/' . $filename;
+        if($slider)
+        {
+            $request['title'] === null ?: $slider->title = $request['title'];
             $slider->save();
+
+            if ($request->hasFile('file')) {
+                $file = $request->file('file');
+                $filename = time() . '.' . $file->getClientOriginalExtension();
+                $file->storeAs('sliderImg/id/' . $slider->id, $filename, 'public');
+                if ($slider->img) {
+                    Storage::disk('public')->delete($slider->img);
+                }
+                $slider->img = 'sliderImg/id/' . $slider->id . '/' . $filename;
+                $slider->save();
+            }
         }
 
         return response()->json([
             'message' => 'Слайдер успешно обновлен',
-            $slider->img,
-            $slider->title
         ]);
     }
 
@@ -163,16 +166,20 @@ class AdminController extends Controller
     {
         $brand = Brand::findOrFail($request['id']);
 
-        $request['title'] === null ? : $brand->title = $request['title'];
-        if ($request->hasFile('file')) {
-            $file = $request->file('file');
-            $filename = time() . '.' . $file->getClientOriginalExtension();
-            $file->storeAs('brandImg/id/' . $brand->id, $filename, 'public');
-            if ($brand->img) {
-                Storage::disk('public')->delete($brand->img);
-            }
-            $brand->img = 'brandImg/id/' . $brand->id . '/' . $filename;
+        if($brand)
+        {
+            $request['title'] === null ?: $brand->title = $request['title'];
             $brand->save();
+            if ($request->hasFile('file')) {
+                $file = $request->file('file');
+                $filename = time() . '.' . $file->getClientOriginalExtension();
+                $file->storeAs('brandImg/id/' . $brand->id, $filename, 'public');
+                if ($brand->img) {
+                    Storage::disk('public')->delete($brand->img);
+                }
+                $brand->img = 'brandImg/id/' . $brand->id . '/' . $filename;
+                $brand->save();
+            }
         }
 
         return response()->json([
@@ -208,15 +215,161 @@ class AdminController extends Controller
     public function changeCategory(Request $request)
     {
         $category = Category::findOrFail($request['id']);
+        if($category)
+        {
+            $request['title'] === null ?: $category->title = $request['title'];
+            $request['property'] === null ?: $category->properties = $request['property'];
 
-        $request['title'] === null ? : $category->title = $request['title'];
-        $request['property'] === null ? : $category->properties = $request['property'];
+            $category->save();
+        }
 
         return response()->json([
             'message' => 'Категория успешно обновлена',
         ]);
     }
 
-    //Product Section
+    //Post Section
+    public function getAllPost()
+    {
+        return PostResource::collection(Post::all());
+    }
 
+    public function createPost(Request $request)
+    {
+        $data = $request->validate([
+            'title' => ["required", "string"],
+            'file' => ['required', 'image', 'max:2048'],
+            'shortDesc' => ["required", "string"],
+            'description' => ["required", "string"],
+        ]);
+
+        $post = Post::create([
+            'title' => $data['title'],
+            'shortDesc' => $data['shortDesc'],
+            'description' => $data['description']
+        ]);
+
+        $post->save();
+
+        if ($request->hasFile('file')) {
+            $file = $request->file('file');
+            $filename = time() . '.' . $file->getClientOriginalExtension();
+            $file->storeAs('postImg/id/' . $post->id, $filename, 'public');
+            $post->img = 'postImg/id/' . $post->id . '/' . $filename;
+            $post->save();
+        }
+
+        return response()->json([
+            'message' => 'Пост успешно добавлен'
+        ], 200);
+    }
+
+    public function changePost(Request $request)
+    {
+        $post = Post::findOrFail($request['id']);
+
+        if ($post){
+            $request['title'] === null ?: $post->title = $request['title'];
+            $post->save();
+            if ($request->hasFile('file')) {
+                $file = $request->file('file');
+                $filename = time() . '.' . $file->getClientOriginalExtension();
+                $file->storeAs('postImg/id/' . $post->id, $filename, 'public');
+                if ($post->img) {
+                    Storage::disk('public')->delete($post->img);
+                }
+                $post->img = 'postImg/id/' . $post->id . '/' . $filename;
+                $post->save();
+            }
+        }
+
+        return response()->json([
+            'message' => 'Пости успешно обновлен',
+        ], 200);
+    }
+
+    //Product Section
+    public function getAllProduct()
+    {
+        return ProductResource::collection(Product::all());
+    }
+
+    public function createProduct(Request $request)
+    {
+        $data = $request->validate([
+            'title' => ["required", "string"],
+            'shortDesc' => ["required", "string"],
+            'price' => ["required", "string"],
+            'quantity' => ["required", "string"],
+            'art' => ["required", "string"],
+            'property' => ["required"],
+            'isPopular' => ["required", "string"],
+            'file' => ['required', 'image', 'max:2048'],
+            'brandId' => ["required", "string"],
+            'categoryId' => ["required", "string"],
+        ]);
+
+        $product = Product::create([
+            'title' => $data['title'],
+            'shortDesc' => $data['shortDesc'],
+            'price' => $data['price'],
+            'quantity' => $data['quantity'],
+            'art' => $data['art'],
+            'property' => $data['property'],
+            'isPopular' => $data['isPopular'],
+            'brand_id' => Brand::query()->where('id', $data['brandId'])->value('id'),
+            'category_id' => Category::query()->where('id', $data['categoryId'])->value('id'),
+        ]);
+
+        $product->save();
+
+        if ($request->hasFile('file')) {
+            $file = $request->file('file');
+            $filename = time() . '.' . $file->getClientOriginalExtension();
+            $file->storeAs('productImg/id/' . $product->id, $filename, 'public');
+            $product->img = 'productImg/id/' . $product->id . '/' . $filename;
+            $product->save();
+        }
+
+        return response()->json([
+            'message' => 'Продукт успешно создан',
+        ], 200);
+    }
+
+    public function changeProduct(Request $request)
+    {
+        $product = Product::findOrFail($request['id']);
+
+        if($product)
+        {
+            $request['title'] === null ?: $product->title = $request['title'];
+            $request['shortDesc'] === null ?: $product->shortDesc = $request['shortDesc'];
+            $request['price'] === null ?: $product->price = $request['price'];
+            $request['quantity'] === null ?: $product->quantity = $request['quantity'];
+            $request['art'] === null ?: $product->art = $request['art'];
+            $request['property'] === null ?: $product->property = $request['property'];
+            $request['isPopular'] === null ?: $product->isPopular = $request['isPopular'];
+            $request['brandId'] === null ?: $product->brand_id = Brand::query()->where('id',
+                $request['brandId'])->value('id');
+            $request['categoryId'] === null ?: $product->category_id = Category::query()->where('id',
+                $request['categoryId'])->value('id');
+            $product->save();
+
+
+            if ($request->hasFile('file')) {
+                $file = $request->file('file');
+                $filename = time() . '.' . $file->getClientOriginalExtension();
+                $file->storeAs('productImg/id/' . $product->id, $filename, 'public');
+                if ($product->img) {
+                    Storage::disk('public')->delete($product->img);
+                }
+                $product->img = 'productImg/id/' . $product->id . '/' . $filename;
+                $product->save();
+            }
+        }
+
+        return response()->json([
+            'message' => 'Продукт успешно обновлен',
+        ]);
+    }
 }
