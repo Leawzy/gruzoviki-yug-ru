@@ -1,7 +1,11 @@
-import React, { useState } from 'react';
+import { useRouter } from 'next/router';
+import React, { ChangeEvent, useCallback, useState } from 'react';
 import { toast, ToastContainer } from 'react-toastify';
 
 import { adminFetch, setAuthToken } from '../../../axios/global';
+import { withAuth } from '../../../utils/withAuth';
+import { withAuthAdmin } from '../../../utils/withAuthAdmin';
+import cn from '../style.module.scss';
 
 interface propertyObjectIF {
     [key: string]: string;
@@ -14,11 +18,16 @@ interface itemIF {
 
 type ArrayType = itemIF[];
 
-export default function CategoryAdd() {
+function CategoryAdd() {
     const [array, setArray] = useState([{ key: '', value: '' }]);
     const [titleCategory, setTitleCategory] = useState('');
+    const route = useRouter();
 
-    async function createCategory() {
+    const cancelCreate = async () => {
+        await route.replace('/controlpanel');
+    };
+
+    const createCategory = useCallback(async () => {
         setAuthToken();
         try {
             const propertyObj: propertyObjectIF = {};
@@ -43,8 +52,9 @@ export default function CategoryAdd() {
                     progress: undefined,
                     theme: 'light',
                 });
+                await route.replace('/controlpanel');
             } else {
-                toast.success('Ошибка в создании категории', {
+                toast.error('Ошибка в создании категории', {
                     position: 'bottom-right',
                     autoClose: 3400,
                     hideProgressBar: false,
@@ -58,27 +68,37 @@ export default function CategoryAdd() {
         } catch (e) {
             console.error(e);
         }
-    }
+    }, [array, titleCategory]);
 
-    function handleChange(i: number, event: { target: { name: string; value: string } }): void {
-        const { name, value } = event.target;
-        const newArray: ArrayType = [...array];
-        newArray[i] = { ...newArray[i], [name]: value };
-        setArray(newArray);
-    }
+    const handleTitleChange = useCallback((e: ChangeEvent<HTMLInputElement>) => {
+        setTitleCategory(e.target.value);
+    }, []);
+
+    const handleChange = useCallback(
+        (i: number, event: { target: { name: string; value: string } }) => {
+            const { name, value } = event.target;
+            const newArray: ArrayType = [...array];
+            newArray[i] = { ...newArray[i], [name]: value };
+            setArray(newArray);
+        },
+        [array]
+    );
 
     function handleAdd() {
         setArray([...array, { key: '', value: '' }]);
     }
+
     return (
-        <div>
+        <div className={cn.categoryAddBlock}>
+            <h1>Создание Категории</h1>
             <ToastContainer />
             <input
-                onChange={e => setTitleCategory(e.target.value)}
+                className={cn.inputNameCategory}
+                onChange={handleTitleChange}
                 placeholder="Название категории"
             />
             {array.map((item, i) => (
-                <div key={i}>
+                <div key={i} className={cn.categoryAddInputs}>
                     <input
                         name="key"
                         value={item.key}
@@ -93,10 +113,17 @@ export default function CategoryAdd() {
                     />
                 </div>
             ))}
-            <button type="button" onClick={() => handleAdd()}>
-                Добавить элемент
-            </button>
-            <button onClick={createCategory}>Создать категорию</button>
+            <div>
+                <button className={cn.addNewBlock} type="button" onClick={() => handleAdd()}>
+                    Добавить элемент
+                </button>
+            </div>
+            <div className={cn.categoryAddButtons}>
+                <button onClick={createCategory}>Создать категорию</button>
+                <button onClick={cancelCreate}>Отмена</button>
+            </div>
         </div>
     );
 }
+
+export default withAuth(withAuthAdmin(CategoryAdd));

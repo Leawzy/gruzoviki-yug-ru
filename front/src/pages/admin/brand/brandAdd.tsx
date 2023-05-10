@@ -1,13 +1,22 @@
-import React, { ChangeEvent, useState } from 'react';
+import { useRouter } from 'next/router';
+import React, { ChangeEvent, useCallback, useState } from 'react';
 import { toast, ToastContainer } from 'react-toastify';
 
 import { adminFetch, setAuthToken } from '../../../axios/global';
+import { withAuth } from '../../../utils/withAuth';
+import { withAuthAdmin } from '../../../utils/withAuthAdmin';
+import cn from '../style.module.scss';
 
-export default function BrandAdd() {
+function BrandAdd() {
     const [title, setTitle] = useState('');
     const [selectedFile, setSelectedFile] = useState<File | null>(null);
+    const route = useRouter();
 
-    const handleFileChange = (event: ChangeEvent<HTMLInputElement>) => {
+    const cancelCreate = async () => {
+        await route.replace('/controlpanel');
+    };
+
+    const handleFileChange = useCallback((event: ChangeEvent<HTMLInputElement>) => {
         const file = event.target.files?.[0];
         if (file) {
             if (file.type === 'image/webp') {
@@ -16,9 +25,9 @@ export default function BrandAdd() {
                 setSelectedFile(null);
             }
         }
-    };
+    }, []);
 
-    async function createBrand() {
+    const createBrand = useCallback(async () => {
         setAuthToken();
         if (selectedFile) {
             try {
@@ -43,6 +52,7 @@ export default function BrandAdd() {
                         progress: undefined,
                         theme: 'light',
                     });
+                    await route.replace('/controlpanel');
                 }
             } catch (e) {
                 console.error(e);
@@ -59,12 +69,13 @@ export default function BrandAdd() {
                 theme: 'light',
             });
         }
-    }
+    }, [selectedFile, title]);
 
     return (
-        <div>
+        <div className={cn.brandAddBlock}>
+            <h1>Создать Бренд</h1>
             <ToastContainer />
-            <form onSubmit={e => e.preventDefault()}>
+            <form className={cn.brandAddForm} onSubmit={e => e.preventDefault()}>
                 <input
                     onChange={e => setTitle(e.target.value)}
                     type="text"
@@ -72,8 +83,13 @@ export default function BrandAdd() {
                     required
                 />
                 <input type="file" accept="image/webp" onChange={handleFileChange} />
-                <button onClick={createBrand}>Создать бренда</button>
+                <div className={cn.brandAddButtons}>
+                    <button onClick={cancelCreate}>Отмена</button>
+                    <button onClick={createBrand}>Создать бренда</button>
+                </div>
             </form>
         </div>
     );
 }
+
+export default withAuth(withAuthAdmin(BrandAdd));

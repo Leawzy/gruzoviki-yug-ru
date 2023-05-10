@@ -1,7 +1,11 @@
 import React from 'react';
 
 import ImageConverter from '../../utils/ converterFiles';
+import { withAuth } from '../../utils/withAuth';
+import { withAuthAdmin } from '../../utils/withAuthAdmin';
 
-export default function Convertor() {
+function Convertor() {
     return <ImageConverter />;
 }
+
+export default withAuth(withAuthAdmin(Convertor));
