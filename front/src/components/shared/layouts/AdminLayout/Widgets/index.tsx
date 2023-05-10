@@ -32,7 +32,7 @@ export default function Widget({ type, users, brand }: WidgetProps) {
                 title: 'Пользователи',
                 amount: String(totalUser),
                 textLink: 'Просмотреть всех пользователей',
-                link: '/admin/users',
+                link: '/admin/users/userChange',
             };
             break;
         case 'order':
