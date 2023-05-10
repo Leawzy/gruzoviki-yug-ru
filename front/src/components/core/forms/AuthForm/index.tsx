@@ -1,6 +1,6 @@
 import { useRouter } from 'next/router';
 import { setCookie } from 'nookies';
-import React, { useState } from 'react';
+import React from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 
 import { apiFetch, dayOfLiveToken } from '../../../../axios/global';
@@ -16,7 +16,6 @@ interface ResponseData {
 }
 
 export default function AuthorizationForm() {
-    const [agreement, setAgreement] = useState(false);
     const router = useRouter();
     const {
         register,
@@ -33,22 +32,12 @@ export default function AuthorizationForm() {
         });
         if (res.status === 200) {
             const { token } = res.data;
-            if (!agreement) {
-                setCookie(null, 'token', token, {
-                    maxAge: dayOfLiveToken(),
-                });
-            } else {
-                setCookie(null, 'token', token, {
-                    maxAge: 7 * 24 * 60 * 60,
-                });
-            }
+            setCookie(null, 'token', token, {
+                maxAge: dayOfLiveToken(),
+            });
             await router.push('/');
         }
     };
-
-    function saveMe(e: React.ChangeEvent<HTMLInputElement>) {
-        setAgreement(e.target.checked);
-    }
 
     return (
         <div className={cn.AuthForm}>
@@ -63,7 +52,7 @@ export default function AuthorizationForm() {
                         {...register('email', { required: true })}
                     />
                     {errors.email && (
-                        <span className={cn.FormLabelError}>Это поле должно быть заполненым</span>
+                        <span className={cn.FormLabelError}>Это поле должно быть заполненным</span>
                     )}
                 </label>
                 <label className={cn.FormLabel}>
@@ -75,7 +64,7 @@ export default function AuthorizationForm() {
                         {...register('password', { required: true })}
                     />
                     {errors.password && (
-                        <span className={cn.FormLabelError}>Это поле должно быть заполненым</span>
+                        <span className={cn.FormLabelError}>Это поле должно быть заполненным</span>
                     )}
                 </label>
                 {errors.email || errors.password ? (
@@ -87,12 +76,6 @@ export default function AuthorizationForm() {
                         <input type="submit" value="Авторизироваться" />
                     </div>
                 )}
-                <div>
-                    <p className="check__auth">
-                        <input type="checkbox" onChange={saveMe} />
-                        Запомнить меня
-                    </p>
-                </div>
             </form>
         </div>
     );
