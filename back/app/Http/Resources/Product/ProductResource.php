@@ -23,7 +23,7 @@ class ProductResource extends JsonResource
             'shortDesc' => $this->shortDesc,
             'price' => $this->price,
             'quantity' => $this->quantity,
-            'img' => $this->imageUrl,
+            'img' => $this->img === null ?: $this->imageUrl,
             'brand' => new BrandResource($this->brand),
             'art' => $this->art,
             'property' => $this->properties,
