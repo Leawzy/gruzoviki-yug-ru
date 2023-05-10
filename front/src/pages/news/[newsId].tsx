@@ -1,8 +1,13 @@
 import { useRouter } from 'next/router';
-import React, { useEffect, useState } from 'react';
+import React, { CSSProperties, useEffect, useState } from 'react';
+import { RotateLoader } from 'react-spinners';
 
 import { apiFetch } from '../../axios/global';
 import { News } from '../../types/NewsType';
+
+const override: CSSProperties = {
+    margin: '22% 48%',
+};
 
 function ProductPage() {
     const router = useRouter();
@@ -23,7 +28,12 @@ function ProductPage() {
         }
 
         getProductIdItem().catch(error => console.error(error));
-    }, []);
+    }, [newsId]);
+
+    if (!news)
+        return (
+            <RotateLoader cssOverride={override} color="#4c96e3" size={15} speedMultiplier={1} />
+        );
 
     return <div>{news.title}</div>;
 }
