@@ -108,8 +108,7 @@ class AdminController extends Controller
     {
         $slider = Slider::findOrFail($request['id']);
 
-        if($slider)
-        {
+        if ($slider) {
             $request['title'] === null ?: $slider->title = $request['title'];
             $slider->save();
 
@@ -166,8 +165,7 @@ class AdminController extends Controller
     {
         $brand = Brand::findOrFail($request['id']);
 
-        if($brand)
-        {
+        if ($brand) {
             $request['title'] === null ?: $brand->title = $request['title'];
             $brand->save();
             if ($request->hasFile('file')) {
@@ -215,8 +213,7 @@ class AdminController extends Controller
     public function changeCategory(Request $request)
     {
         $category = Category::findOrFail($request['id']);
-        if($category)
-        {
+        if ($category) {
             $request['title'] === null ?: $category->title = $request['title'];
             $request['property'] === null ?: $category->properties = $request['property'];
 
@@ -268,7 +265,7 @@ class AdminController extends Controller
     {
         $post = Post::findOrFail($request['id']);
 
-        if ($post){
+        if ($post) {
             $request['title'] === null ?: $post->title = $request['title'];
             $post->save();
             if ($request->hasFile('file')) {
@@ -299,14 +296,14 @@ class AdminController extends Controller
         $data = $request->validate([
             'title' => ["required", "string"],
             'shortDesc' => ["required", "string"],
-            'price' => ["required"],
-            'quantity' => ["required"],
-            'art' => ["required"],
+            'price' => ["required", "integer"],
+            'quantity' => ["required", "integer"],
+            'art' => ["required", "integer"],
             'property' => ["required"],
-            'isPopular' => ["required"],
-//            'file' => ['required', 'image', 'max:2048'],
-            'brandId' => ["required"],
-            'categoryId' => ["required"],
+            'isPopular' => ["required", "boolean"],
+            'file' => ['required', 'image', 'max:2048'],
+            'brandId' => ["required, integer"],
+            'categoryId' => ["required, integer"],
         ]);
 
         $product = Product::create([
@@ -315,7 +312,7 @@ class AdminController extends Controller
             'price' => $data['price'],
             'quantity' => $data['quantity'],
             'art' => $data['art'],
-            'property' => $data['property'],
+            'properties' => $data['property'],
             'isPopular' => $data['isPopular'],
             'brand_id' => Brand::query()->where('id', $data['brandId'])->value('id'),
             'category_id' => Category::query()->where('id', $data['categoryId'])->value('id'),
@@ -340,14 +337,13 @@ class AdminController extends Controller
     {
         $product = Product::findOrFail($request['id']);
 
-        if($product)
-        {
+        if ($product) {
             $request['title'] === null ?: $product->title = $request['title'];
             $request['shortDesc'] === null ?: $product->shortDesc = $request['shortDesc'];
             $request['price'] === null ?: $product->price = $request['price'];
             $request['quantity'] === null ?: $product->quantity = $request['quantity'];
             $request['art'] === null ?: $product->art = $request['art'];
-            $request['property'] === null ?: $product->property = $request['property'];
+            $request['property'] === null ?: $product->properties = $request['property'];
             $request['isPopular'] === null ?: $product->isPopular = $request['isPopular'];
             $request['brandId'] === null ?: $product->brand_id = Brand::query()->where('id',
                 $request['brandId'])->value('id');
