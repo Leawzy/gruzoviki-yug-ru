@@ -2,7 +2,7 @@ const path = require('path');
 const { withSentryConfig } = require('@sentry/nextjs');
 
 /**
- * @type {import("next").NextConfig}
+ * @type {{headers: ((function(): Promise<[]|[{headers: [{value: string, key: string}], source: string, locale: boolean},{headers, source: string}]>)|*), images: {disableStaticImages: boolean, dangerouslyAllowSVG: boolean, contentSecurityPolicy: string}, rewrites: (function(): Promise<[{destination: (string|string), source: string}]>), sassOptions: {charset: boolean, indentType: string, includePaths: string[], style: string}, poweredByHeader: boolean, reactStrictMode: boolean, experimental: {enableUndici: boolean}, modularizeImports: {lodash: {transform: string}}}}
  */
 const nextConfig = {
     sassOptions: {
@@ -110,10 +110,12 @@ const withSentry = () => {
 
     return nextConfig;
 };
-module.exports = isProduction ? withSentry() : withBundleAnalyzer(nextConfig);
-module.exports = {
-    images: {
-        unoptimized: true,
-        domains: ['api.ch32081.tw1.ru', '5.167.50.180:8876'],
-    },
-};
+module.exports = isProduction
+    ? withSentry()
+    : withBundleAnalyzer({
+          ...nextConfig,
+          images: {
+              unoptimized: true,
+              domains: ['api.ch32081.tw1.ru', '5.167.50.180:8876'],
+          },
+      });
