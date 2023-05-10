@@ -5,6 +5,7 @@ import { useDispatch } from 'react-redux';
 
 import { addToCart, removeFromCart } from '../../../../redux/actions';
 import { Product } from '../../../../types/ProductType';
+import { noPhoto } from '../../../../utils/images';
 import ButtonAdd from '../../buttons/ButtonAdd';
 import ButtonRemove from '../../buttons/ButtonRemove';
 import cn from './style.module.scss';
@@ -49,13 +50,23 @@ export default function ProductCard({
                 <div className={cn.shortCatalogItemRightInfo}>
                     <span className={cn.shortCatalogAmount}>{`Количество: ${quantity} шт.`}</span>
                 </div>
-                <Image
-                    src={img}
-                    alt="Catalog Img"
-                    width={555}
-                    height={410}
-                    className={cn.catalogImage}
-                />
+                {img === null ? (
+                    <Image
+                        src={noPhoto}
+                        alt="Empty Catalog Img"
+                        width={244}
+                        height={244}
+                        className={cn.catalogImage}
+                    />
+                ) : (
+                    <Image
+                        src={img}
+                        alt="Catalog Img"
+                        width={555}
+                        height={410}
+                        className={cn.catalogImage}
+                    />
+                )}
             </Link>
             <div className={cn.shortCatalogPrice}>
                 <p className={cn.shortCatalogPriceNum}>{`${price} ₽`}</p>
