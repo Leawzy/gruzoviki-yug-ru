@@ -299,14 +299,14 @@ class AdminController extends Controller
         $data = $request->validate([
             'title' => ["required", "string"],
             'shortDesc' => ["required", "string"],
-            'price' => ["required", "string"],
-            'quantity' => ["required", "string"],
-            'art' => ["required", "string"],
+            'price' => ["required"],
+            'quantity' => ["required"],
+            'art' => ["required"],
             'property' => ["required"],
-            'isPopular' => ["required", "string"],
-            'file' => ['required', 'image', 'max:2048'],
-            'brandId' => ["required", "string"],
-            'categoryId' => ["required", "string"],
+            'isPopular' => ["required"],
+//            'file' => ['required', 'image', 'max:2048'],
+            'brandId' => ["required"],
+            'categoryId' => ["required"],
         ]);
 
         $product = Product::create([
