@@ -29,7 +29,7 @@ export default function Header() {
             {profile.role === 'admin' ? (
                 <div className={cn.headerCenterAdmin}>
                     <div>
-                        <Link className={cn.headerCenterAdminLink} href="/controlpanel">
+                        <Link className={cn.headerCenterAdminLink} href="/admin/adminhome">
                             Панель управления
                         </Link>
                     </div>
@@ -51,17 +51,17 @@ export default function Header() {
                             <ul className={cn.headerCenterNavMenu}>
                                 <li className={cn.headerCenterNavMenuItem}>
                                     <Link href="/catalog" className={cn.headerCenterNavLink}>
-                                        Детали
+                                        Каталог
                                     </Link>
                                 </li>
                                 <li className={cn.headerCenterNavMenuItem}>
-                                    <Link href="/catalog" className={cn.headerCenterNavLink}>
-                                        Акссесуары
+                                    <Link href="/recordrepaier" className={cn.headerCenterNavLink}>
+                                        Запись на ремонт
                                     </Link>
                                 </li>
                                 <li className={cn.headerCenterNavMenuItem}>
-                                    <Link href="/catalog" className={cn.headerCenterNavLink}>
-                                        Инстурменты
+                                    <Link href="/recordrepaier" className={cn.headerCenterNavLink}>
+                                        Новости
                                     </Link>
                                 </li>
                             </ul>
@@ -76,7 +76,7 @@ export default function Header() {
                         </form>
                         <div className={cn.headerContact}>
                             <div className={cn.headerContactPhone}>
-                                <a href="tel:89897774245">+8 989 777 42 45</a>
+                                <a href="tel:89897774245">+7 989 777 42 45</a>
                                 <a className={cn.headerContactTimetable}>
                                     8:00 до 19:00 СБ и ВСК выходной
                                 </a>
