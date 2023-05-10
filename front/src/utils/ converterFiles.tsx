@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 
+import cn from '../pages/admin/style.module.scss';
+
 function ImageConverter() {
     const [selectedFile, setSelectedFile] = useState<File | null>(null);
     const [webpFile, setWebpFile] = useState<File | null>(null);
@@ -31,21 +33,20 @@ function ImageConverter() {
     };
 
     return (
-        <div>
-            <h2>Image Converter</h2>
-            <div>
-                <label htmlFor="file-input">Choose PNG file:</label>
-                <input type="file" id="file-input" accept="image/png" onChange={handleFileChange} />
+        <div className={cn.converterBlock}>
+            <h2>Конвертер фотографий</h2>
+            <div className={cn.converterFiles}>
+                <label htmlFor="file-input">Выберете файл:</label>
+                <input type="file" id="file-input" onChange={handleFileChange} />
             </div>
             <button onClick={convertToWebp} disabled={!selectedFile}>
-                Convert to WebP
+                Конвертация в Webp
             </button>
             {webpFile && (
-                <div>
+                <div className={cn.converterFile}>
                     <a href={URL.createObjectURL(webpFile)} download>
-                        Download WebP file
+                        Скачать файл
                     </a>
-                    <img src={URL.createObjectURL(webpFile)} alt="WebP preview" />
                 </div>
             )}
         </div>
