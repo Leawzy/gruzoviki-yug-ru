@@ -21,7 +21,7 @@ class Product extends Model
         'price',
         'art',
         'brand_id',
-        'categoryId',
+        'category_id',
         'properties',
         'isPopular',
     ];
