@@ -42,6 +42,8 @@ export default function Catalog() {
                             </div>
                             <ReactPaginate
                                 pageCount={pageCount}
+                                previousLabel="Назад"
+                                nextLabel="Дальше"
                                 onPageChange={handlePageClick}
                                 containerClassName="pagination"
                                 activeClassName="active"
