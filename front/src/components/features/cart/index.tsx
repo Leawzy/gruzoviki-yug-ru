@@ -8,17 +8,20 @@ import cn from './style.module.scss';
 
 export default function Cart() {
     const [cartItems, setCartItems] = useState<CartItem[]>([]);
+    const [total, setTotal] = useState(0);
+    const [totalCount, setTotalCount] = useState(0);
     const items = useSelector((state: RootState) => state.cart.items);
 
     useEffect(() => {
         setCartItems(items);
+        const totalPrice: number = items.reduce(
+            (accumulator: number, product: CartItem) =>
+                (accumulator + product.price) * product.quantity,
+            0
+        );
+        setTotal(totalPrice);
+        setTotalCount(items.length);
     }, [items]);
-
-    const totalPrice: number = items.reduce(
-        (accumulator: number, product: CartItem) =>
-            (accumulator + product.price) * product.quantity,
-        0
-    );
 
     return (
         <section className={cn.cartPage}>
@@ -29,6 +32,7 @@ export default function Cart() {
                         {cartItems.map(cartItem => (
                             <CartItemBlock
                                 id={cartItem.id}
+                                maxQuantity={cartItem.maxQuantity}
                                 key={cartItem.id}
                                 title={cartItem.title}
                                 img={cartItem.img}
@@ -38,7 +42,7 @@ export default function Cart() {
                         ))}
                     </div>
                     <div className={cn.cartPageRight}>
-                        <CartPriceBlock totalPrice={totalPrice} totalItems={items.length} />
+                        <CartPriceBlock totalPrice={total} totalCount={totalCount} />
                     </div>
                 </div>
             </div>

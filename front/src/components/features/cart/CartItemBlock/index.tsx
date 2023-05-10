@@ -12,9 +12,17 @@ interface CartItemBlock {
     price: number;
     quantity: number;
     img?: string;
+    maxQuantity: number;
 }
 
-export default function CartItemBlock({ title, img, price, quantity, id }: CartItemBlock) {
+export default function CartItemBlock({
+    title,
+    img,
+    price,
+    quantity,
+    id,
+    maxQuantity,
+}: CartItemBlock) {
     const [itemAmount, setItemAmount] = useState(quantity);
     const dispatch = useDispatch();
 
@@ -24,10 +32,16 @@ export default function CartItemBlock({ title, img, price, quantity, id }: CartI
 
     const plusQuantity = () => {
         setItemAmount(itemAmount + 1);
+        if (itemAmount >= maxQuantity) {
+            setItemAmount(maxQuantity);
+        }
     };
 
     const minusQuantity = () => {
         setItemAmount(itemAmount - 1);
+        if (itemAmount <= 1) {
+            setItemAmount(quantity);
+        }
     };
 
     return (

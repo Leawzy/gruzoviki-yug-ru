@@ -1,37 +1,42 @@
-import { GetServerSideProps } from 'next';
 import { useRouter } from 'next/router';
-import React from 'react';
+import React, { CSSProperties, useEffect, useState } from 'react';
+import { RotateLoader } from 'react-spinners';
 
 import { apiFetch } from '../../axios/global';
 import ProductItem from '../../components/features/product/ProductItem';
-import { Product } from '../../types/ProductType';
+import { ProductPage } from '../../types/ProductType';
 
-interface Props {
-    product: Product;
-}
+const override: CSSProperties = {
+    margin: '22% 48%',
+};
 
-export default function ProductPage({ product }: Props) {
+function ProductPage() {
     const router = useRouter();
+    const [product, setProduct] = useState<ProductPage[] | null>(null);
+    const { productId } = router.query;
 
-    if (router.isFallback) {
-        return <div>Загрузка...</div>;
-    }
+    useEffect(() => {
+        async function getProductIdItem() {
+            try {
+                const res: { data: { data: ProductPage[] } } = await apiFetch(
+                    `/api/product/card/${Number(productId)}`
+                );
+                setProduct(res.data.data);
+            } catch (e) {
+                console.error(e);
+            }
+        }
 
+        getProductIdItem().catch(error => console.error(error));
+    }, [productId]);
+
+    if (!product)
+        return (
+            <RotateLoader cssOverride={override} color="#4c96e3" size={15} speedMultiplier={1} />
+        );
+
+    // @ts-ignore
     return <ProductItem product={product} />;
 }
 
-export const getServerSideProps: GetServerSideProps<Props> = async ({ params }) => {
-    const productId = params?.productId;
-    if (!productId) {
-        return { notFound: true };
-    }
-
-    const response = await apiFetch(`/api/product/card/${String(productId)}`);
-    const product: Product = response.data.data as Product;
-
-    return {
-        props: {
-            product,
-        },
-    };
-};
+export default ProductPage;

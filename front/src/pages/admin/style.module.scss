@@ -1,0 +1,180 @@
+@import "../../styles/mixin";
+
+.userAddBlock {
+  h1 {
+    text-align: center;
+    padding: 30px 0;
+    font-size: 20px;
+    font-weight: 800;
+    line-height: 32px;
+  }
+
+  .userAddForm {
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    align-items: center;
+
+    input {
+      width: 400px;
+      height: 42px;
+      margin-bottom: 22px;
+    }
+
+    select {
+      width: 400px;
+      height: 42px;
+      margin-bottom: 22px;
+    }
+  }
+
+  .userAddButtons {
+    margin-top: 22px;
+    display: flex;
+
+    button:first-child {
+      @include cancelButtonAdmin();
+    }
+
+    button:last-child {
+      @include addButtonAdmin();
+    }
+  }
+}
+
+.categoryAddBlock {
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  align-items: center;
+
+  .inputNameCategory {
+    width: 400px;
+    height: 32px;
+    margin-bottom: 10px;
+  }
+
+  h1 {
+    text-align: center;
+    padding: 30px 0;
+    font-size: 20px;
+    font-weight: 800;
+    line-height: 32px;
+  }
+
+  .categoryAddInputs {
+    input {
+      padding: 5px 30px;
+      margin: 0 10px 8px;
+    }
+  }
+
+  .addNewBlock {
+    margin-top: 12px;
+    cursor: pointer;
+    padding: 8px 20px;
+    background: transparent;
+    outline: none;
+  }
+
+  .categoryAddButtons {
+    margin-top: 22px;
+    display: flex;
+
+    button:first-child {
+      @include addButtonAdmin();
+    }
+
+    button:last-child {
+      margin-left: 30px;
+      @include cancelButtonAdmin();
+    }
+  }
+}
+
+.brandAddBlock {
+  h1 {
+    text-align: center;
+    padding: 30px 0;
+    font-size: 20px;
+    font-weight: 800;
+    line-height: 32px;
+  }
+
+  .brandAddForm {
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    align-items: center;
+
+    input {
+      width: 400px;
+      height: 42px;
+      margin-bottom: 22px;
+    }
+
+    .brandAddButtons {
+      margin-top: 22px;
+      display: flex;
+
+      button:first-child {
+        @include cancelButtonAdmin();
+      }
+
+      button:last-child {
+        @include addButtonAdmin();
+      }
+    }
+  }
+}
+
+.converterBlock {
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  align-items: center;
+
+  .converterFiles {
+    label {
+      font-size: 17px;
+      font-weight: 700;
+      margin-right: 20px;
+    }
+  }
+
+  .converterFile {
+    align-items: center;
+    align-content: center;
+    text-align: center;
+    margin-top: 22px;
+
+    a {
+      text-decoration: underline;
+      color: #3758CB;
+      font-size: 17px;
+      font-weight: 800;
+    }
+  }
+
+  button {
+    margin-top: 22px;
+    cursor: pointer;
+    padding: 8px 20px;
+    background: transparent;
+    outline: none;
+  }
+
+  h2 {
+    text-align: center;
+    padding: 30px 0;
+    font-size: 20px;
+    font-weight: 800;
+    line-height: 32px;
+  }
+}
+
+.adminWidets {
+  display: flex;
+  padding: 20px;
+  gap: 20px;
+}

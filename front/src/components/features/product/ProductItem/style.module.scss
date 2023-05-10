@@ -25,7 +25,7 @@
           content: '';
           width: 15px;
           height: 15px;
-          background-image: url("../../../../../public/images/icons/check.svg");
+          background-image: url("../../../../../public/images/icons/check.webp");
         }
       }
 
@@ -37,25 +37,6 @@
       .productPageBottomPopular {
         @include buttonInfoOfProduct(#e04d4d);
       }
-    }
-
-    .productPageBottomLinks {
-      display: flex;
-      align-items: center;
-
-      .productPageTopActionLink {
-        padding: 0 8px;
-        border: none;
-        align-items: center;
-        align-content: center;
-        background: transparent;
-
-        &:hover {
-          cursor: pointer;
-          color: #2d85de;
-        }
-      }
-
     }
   }
 
@@ -74,6 +55,27 @@
 
     .productPageTopAction {
       display: flex;
+
+
+      .productPageBottomLinks {
+        display: flex;
+        align-content: center;
+        align-items: center;
+
+        .productPageTopActionLink {
+          padding: 0 8px;
+          border: none;
+          align-items: center;
+          align-content: center;
+          background: transparent;
+
+          &:hover {
+            cursor: pointer;
+            color: #2d85de;
+          }
+        }
+
+      }
 
       .productPageTopArt {
         margin-left: 30px;

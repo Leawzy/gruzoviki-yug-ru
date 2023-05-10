@@ -18,7 +18,7 @@ const initialState: CartState = getInitialState();
 const cartReducer = (state = initialState, action: any) => {
     switch (action.type) {
         case ADD_TO_CART:
-            const { id, title, price, quantity, img, addedToCart } = action.payload;
+            const { id, title, price, quantity, img, addedToCart, maxQuantity } = action.payload;
             const existingItemIndex = state.items.findIndex(item => item.id === id);
             if (existingItemIndex >= 0) {
                 const existingItem = state.items[existingItemIndex];
@@ -42,6 +42,7 @@ const cartReducer = (state = initialState, action: any) => {
                 img,
                 price,
                 quantity,
+                maxQuantity,
                 addedToCart,
             };
             const newState = {
@@ -69,6 +70,7 @@ const cartReducer = (state = initialState, action: any) => {
                 return newState;
             }
             return state;
+
         default:
             return state;
     }

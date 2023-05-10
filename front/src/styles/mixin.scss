@@ -101,3 +101,27 @@
   padding: 3px 10px;
   margin-bottom: 8px;
 }
+
+@mixin addButtonAdmin() {
+  border: none;
+  margin-left: 30px;
+  padding: 8px 40px;
+  background: #2abf52;
+  color: #e5e5e5;
+  font-size: 17px;
+  font-weight: 600;
+  cursor: pointer;
+  border-radius: 2px;
+}
+
+@mixin cancelButtonAdmin() {
+  border: none;
+  background-color: #d93737;
+  color: #e5e5e5;
+  font-size: 17px;
+  font-weight: 600;
+  width: 100px;
+  cursor: pointer;
+  border-radius: 2px;
+
+}

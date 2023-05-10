@@ -3,10 +3,8 @@ import Link from 'next/link';
 import { destroyCookie, parseCookies } from 'nookies';
 import React, { useEffect, useState } from 'react';
 
-import account from '../../../../../../public/images/icons/account.svg';
-import basket from '../../../../../../public/images/icons/basket.svg';
-import favorite from '../../../../../../public/images/icons/favorite.svg';
 import { useProfileData } from '../../../../../hooks/useGetProfileHook';
+import { account, basket, favorite } from '../../../../../utils/images';
 import cn from './style.module.scss';
 
 export default function Header() {
@@ -31,7 +29,7 @@ export default function Header() {
             {profile.role === 'admin' ? (
                 <div className={cn.headerCenterAdmin}>
                     <div>
-                        <Link className={cn.headerCenterAdminLink} href="/controlpanel">
+                        <Link className={cn.headerCenterAdminLink} href="/admin/adminhome">
                             Панель управления
                         </Link>
                     </div>
@@ -53,17 +51,17 @@ export default function Header() {
                             <ul className={cn.headerCenterNavMenu}>
                                 <li className={cn.headerCenterNavMenuItem}>
                                     <Link href="/catalog" className={cn.headerCenterNavLink}>
-                                        Детали
+                                        Каталог
                                     </Link>
                                 </li>
                                 <li className={cn.headerCenterNavMenuItem}>
-                                    <Link href="/catalog" className={cn.headerCenterNavLink}>
-                                        Акссесуары
+                                    <Link href="/recordrepaier" className={cn.headerCenterNavLink}>
+                                        Запись на ремонт
                                     </Link>
                                 </li>
                                 <li className={cn.headerCenterNavMenuItem}>
-                                    <Link href="/catalog" className={cn.headerCenterNavLink}>
-                                        Инстурменты
+                                    <Link href="/recordrepaier" className={cn.headerCenterNavLink}>
+                                        Новости
                                     </Link>
                                 </li>
                             </ul>
@@ -78,7 +76,7 @@ export default function Header() {
                         </form>
                         <div className={cn.headerContact}>
                             <div className={cn.headerContactPhone}>
-                                <a href="tel:89897774245">+8 989 777 42 45</a>
+                                <a href="tel:89897774245">+7 989 777 42 45</a>
                                 <a className={cn.headerContactTimetable}>
                                     8:00 до 19:00 СБ и ВСК выходной
                                 </a>
@@ -87,7 +85,7 @@ export default function Header() {
                         <div className={cn.headerLinks}>
                             <div className={`${cn.headerLinkItem} ${cn.dropmenu}`}>
                                 <Image
-                                    src={account as string}
+                                    src={account}
                                     className={cn.headerLinkItemIcon}
                                     width={34}
                                     loading="lazy"
@@ -117,7 +115,7 @@ export default function Header() {
                             </div>
                             <a className={cn.headerLinkItem}>
                                 <Image
-                                    src={favorite as string}
+                                    src={favorite}
                                     className={cn.headerLinkItemIcon}
                                     loading="lazy"
                                     width={34}
@@ -127,7 +125,7 @@ export default function Header() {
                             </a>
                             <Link href="/cart" className={cn.headerLinkItem}>
                                 <Image
-                                    src={basket as string}
+                                    src={basket}
                                     className={cn.headerLinkItemIcon}
                                     loading="lazy"
                                     width={34}

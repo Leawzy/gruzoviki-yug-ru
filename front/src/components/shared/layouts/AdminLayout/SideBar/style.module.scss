@@ -59,6 +59,25 @@
           font-weight: 600;
           color: #888;
           margin-left: 10px;
+          transition: .3s ease;
+
+          &:hover {
+            color: #3758CB;
+          }
+        }
+
+        button {
+          font-size: 13px;
+          font-weight: 600;
+          color: #888;
+          margin-left: 5px;
+          background: transparent;
+          border: none;
+          cursor: pointer;
+
+          &:hover {
+            color: #C82132;
+          }
         }
       }
     }

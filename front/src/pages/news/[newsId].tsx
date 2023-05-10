@@ -1,43 +1,41 @@
-import { GetServerSideProps } from 'next';
 import { useRouter } from 'next/router';
-import React from 'react';
+import React, { CSSProperties, useEffect, useState } from 'react';
+import { RotateLoader } from 'react-spinners';
 
 import { apiFetch } from '../../axios/global';
-import BaseLayout from '../../components/shared/layouts/BaseLayout';
-import { Product } from '../../types/ProductType';
+import { News } from '../../types/NewsType';
 
-interface Props {
-    product: Product;
-}
-
-export default function ProductPage({ product }: Props) {
-    const router = useRouter();
-
-    if (router.isFallback) {
-        return <div>Loading...</div>;
-    }
-
-    return (
-        <BaseLayout>
-            <h1>{product.title}</h1>
-            <p>ID: {product.id}</p>
-            <p>Description: {product.description}</p>
-        </BaseLayout>
-    );
-}
-
-export const getServerSideProps: GetServerSideProps<Props> = async ({ params }) => {
-    const newsId = params?.newsId;
-    if (!newsId) {
-        return { notFound: true };
-    }
-
-    const response = await apiFetch(`/api/post/${String(newsId)}`);
-    const product: Product = response.data.data as Product;
-
-    return {
-        props: {
-            product,
-        },
-    };
+const override: CSSProperties = {
+    margin: '22% 48%',
 };
+
+function ProductPage() {
+    const router = useRouter();
+    // @ts-ignore
+    const [news, setNews] = useState<News>({});
+    const { newsId } = router.query;
+
+    useEffect(() => {
+        async function getProductIdItem() {
+            try {
+                const res: { data: { data: News } } = await apiFetch(
+                    `/api/post/card/${Number(newsId)}`
+                );
+                setNews(res.data.data);
+            } catch (e) {
+                console.error(e);
+            }
+        }
+
+        getProductIdItem().catch(error => console.error(error));
+    }, [newsId]);
+
+    if (!news)
+        return (
+            <RotateLoader cssOverride={override} color="#4c96e3" size={15} speedMultiplier={1} />
+        );
+
+    return <div>{news.title}</div>;
+}
+
+export default ProductPage;

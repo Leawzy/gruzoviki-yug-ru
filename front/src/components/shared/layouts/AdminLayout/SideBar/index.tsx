@@ -1,13 +1,24 @@
+import CategoryIcon from '@mui/icons-material/Category';
 import DashboardIcon from '@mui/icons-material/Dashboard';
 import ExitToAppIcon from '@mui/icons-material/ExitToApp';
+import Inventory2Icon from '@mui/icons-material/Inventory2';
 import PersonOutlineIcon from '@mui/icons-material/PersonOutline';
-import StoreIcon from '@mui/icons-material/Store';
+import RepeatOneIcon from '@mui/icons-material/RepeatOne';
 import Link from 'next/link';
+import { useRouter } from 'next/router';
+import { destroyCookie } from 'nookies';
 import React from 'react';
 
 import cn from './style.module.scss';
 
 export default function SideBar() {
+    const router = useRouter();
+
+    async function logOut() {
+        destroyCookie(null, 'token');
+        await router.push('/');
+    }
+
     return (
         <div className={cn.sidebar}>
             <div className={cn.top}>
@@ -19,10 +30,12 @@ export default function SideBar() {
             <div className={cn.center}>
                 <ul>
                     <p className={cn.title}>Главная</p>
-                    <li>
-                        <DashboardIcon className={cn.icon} />
-                        <span>Панель Управления</span>
-                    </li>
+                    <Link href="/admin/adminhome">
+                        <li>
+                            <DashboardIcon className={cn.icon} />
+                            <span>Панель Управления</span>
+                        </li>
+                    </Link>
                     <p className={cn.title}>Управления</p>
                     <Link href="/admin/users/userAdd">
                         <li>
@@ -33,25 +46,43 @@ export default function SideBar() {
                     <Link href="/admin/users/userChange">
                         <li>
                             <PersonOutlineIcon className={cn.icon} />
-                            <span>Отредактровать пользователя</span>
+                            <span>Отредактировать пользователя</span>
                         </li>
                     </Link>
                     <Link href="/admin/brand/brandAdd">
                         <li>
-                            <StoreIcon className={cn.icon} />
+                            <Inventory2Icon className={cn.icon} />
                             <span>Добавить бренд</span>
                         </li>
                     </Link>
-                    <Link href="/">
+                    <Link href="/admin/brand/brandChange">
                         <li>
-                            <StoreIcon className={cn.icon} />
-                            <span>Изменить бренд</span>
+                            <Inventory2Icon className={cn.icon} />
+                            <span>Отредактировать бренд</span>
+                        </li>
+                    </Link>
+                    <Link href="/admin/category/categoryAdd">
+                        <li>
+                            <CategoryIcon className={cn.icon} />
+                            <span>Добавить категорию</span>
+                        </li>
+                    </Link>
+                    <Link href="/admin/category/categoryChange">
+                        <li>
+                            <CategoryIcon className={cn.icon} />
+                            <span>Отредактировать категорию</span>
                         </li>
                     </Link>
                     <p className={cn.title}>Остальное</p>
+                    <Link href="/admin/convertor">
+                        <li>
+                            <RepeatOneIcon className={cn.icon} />
+                            <span>Конвертер файлов</span>
+                        </li>
+                    </Link>
                     <li>
                         <ExitToAppIcon className={cn.icon} />
-                        <span>Выход</span>
+                        <button onClick={logOut}>Выход</button>
                     </li>
                 </ul>
             </div>

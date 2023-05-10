@@ -21,9 +21,9 @@ interface WidgetData {
 export default function Widget({ type, users, brand }: WidgetProps) {
     let data: WidgetData;
     // @ts-ignore
-    const totalUser = String(users.total);
+    const totalUser = String(users.length);
     // @ts-ignore
-    const totalBrands = String(brand.total);
+    const totalBrands = String(brand.length);
     const diff = 20;
 
     switch (type) {
@@ -32,7 +32,7 @@ export default function Widget({ type, users, brand }: WidgetProps) {
                 title: 'Пользователи',
                 amount: String(totalUser),
                 textLink: 'Просмотреть всех пользователей',
-                link: '/admin/users',
+                link: '/admin/users/userChange',
             };
             break;
         case 'order':
@@ -48,7 +48,7 @@ export default function Widget({ type, users, brand }: WidgetProps) {
                 title: 'Бренды',
                 amount: String(totalBrands),
                 textLink: 'Просмотреть все бренды',
-                link: '/admin/brands',
+                link: '/admin/brand/brandChange',
             };
             break;
         default:

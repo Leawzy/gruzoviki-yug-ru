@@ -3,11 +3,9 @@
 
   .adminWrapper {
     flex: 6;
+  }
 
-    .adminWidets {
-      display: flex;
-      padding: 20px;
-      gap: 20px;
-    }
+  .children {
+    padding: 20px;
   }
 }

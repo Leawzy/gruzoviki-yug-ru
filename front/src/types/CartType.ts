@@ -3,7 +3,7 @@ export interface CartItem {
     title: string;
     img: string;
     price: number;
-    maxQuantity?: number;
+    maxQuantity: number;
     quantity: number;
     addedToCart: boolean;
 }
@@ -11,5 +11,6 @@ export interface CartItem {
 export interface RootState {
     cart: {
         items: CartItem[];
+        totalItems: number;
     };
 }
