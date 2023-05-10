@@ -7,6 +7,19 @@ import invoices from '../../public/images/icons/invoices.webp';
 import mail from '../../public/images/icons/mail.webp';
 import masterCard from '../../public/images/icons/payMasterCard.webp';
 import visa from '../../public/images/icons/payVisa.webp';
+import noPhoto from '../../public/images/photo/noPhoto.webp';
 import storage from '../../public/images/photo/storage.webp';
 
-export { account, basket, calendar, call, favorite, invoices, mail, masterCard, storage, visa };
+export {
+    account,
+    basket,
+    calendar,
+    call,
+    favorite,
+    invoices,
+    mail,
+    masterCard,
+    noPhoto,
+    storage,
+    visa,
+};
