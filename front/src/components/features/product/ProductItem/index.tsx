@@ -42,7 +42,8 @@ export default function ProductItem({ product }: ProductItemIF) {
                 product.price,
                 product.img,
                 Boolean(true),
-                itemCount
+                itemCount,
+                product.quantity
             )
         );
     };
@@ -88,6 +89,15 @@ export default function ProductItem({ product }: ProductItemIF) {
                 <div className={cn.productPageTop}>
                     <h1>{product.title}</h1>
                     <div className={cn.productPageTopAction}>
+                        <div className={cn.productPageBottomLinks}>
+                            <p className={cn.productPageTopActionLink}>В избранное</p>
+                            <button
+                                onClick={copyLinkOfProduct}
+                                className={cn.productPageTopActionLink}
+                            >
+                                Поделиться
+                            </button>
+                        </div>
                         <div className={cn.productPageTopArt}>
                             <p>Артикул: {product.art}</p>
                         </div>
@@ -106,12 +116,6 @@ export default function ProductItem({ product }: ProductItemIF) {
                         ) : (
                             <p className={cn.productPageBottomNoCheckIs}>Нет в наличие</p>
                         )}
-                    </div>
-                    <div className={cn.productPageBottomLinks}>
-                        <p className={cn.productPageTopActionLink}>В избранное</p>
-                        <button onClick={copyLinkOfProduct} className={cn.productPageTopActionLink}>
-                            Поделиться
-                        </button>
                     </div>
                 </div>
                 <div className={cn.productPageWrapper}>
@@ -159,9 +163,11 @@ export default function ProductItem({ product }: ProductItemIF) {
                     </div>
                 </div>
                 <div>
-                    {propertyStrings.map((propString, index) => (
-                        <div key={index}>{propString}</div>
-                    ))}
+                    <div>
+                        {propertyStrings.map((propString, index) => (
+                            <div key={index}>{propString}</div>
+                        ))}
+                    </div>
                 </div>
             </div>
         </BaseLayout>
