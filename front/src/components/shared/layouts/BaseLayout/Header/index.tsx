@@ -29,7 +29,7 @@ export default function Header() {
             {profile.role === 'admin' ? (
                 <div className={cn.headerCenterAdmin}>
                     <div>
-                        <Link className={cn.headerCenterAdminLink} href="/admin/adminhome">
+                        <Link className={cn.headerCenterAdminLink} href="/admin/admin">
                             Панель управления
                         </Link>
                     </div>

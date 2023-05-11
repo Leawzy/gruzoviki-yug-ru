@@ -2,14 +2,15 @@ import React from 'react';
 
 import AdminLayout from '../../components/shared/layouts/AdminLayout';
 import Widget from '../../components/shared/layouts/AdminLayout/Widgets';
-import { useAdminBrandData, useAdminUserData } from '../../hooks/useAdminHook';
+import { useGetBrandHook } from '../../hooks/useGetBrandHook';
+import { useGetUserHook } from '../../hooks/useGetUserHook';
 import { withAuth } from '../../utils/withAuth';
 import { withAuthAdmin } from '../../utils/withAuthAdmin';
 import cn from './style.module.scss';
 
-function AdminHome() {
-    const { users } = useAdminUserData();
-    const { brand } = useAdminBrandData();
+function Admin() {
+    const { users } = useGetUserHook();
+    const { brand } = useGetBrandHook();
 
     return (
         <AdminLayout>
@@ -22,4 +23,4 @@ function AdminHome() {
     );
 }
 
-export default withAuth(withAuthAdmin(AdminHome));
+export default withAuth(withAuthAdmin(Admin));

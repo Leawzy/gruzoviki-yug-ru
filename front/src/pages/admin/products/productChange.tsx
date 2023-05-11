@@ -11,18 +11,12 @@ import React, { useEffect, useState } from 'react';
 
 import { adminFetch, setAuthToken } from '../../../axios/global';
 import AdminLayout from '../../../components/shared/layouts/AdminLayout';
-import { useGetBrandHook } from '../../../hooks/useGetBrandHook';
+import { useGetProductsHook } from '../../../hooks/useGetProductsHook';
 import { withAuth } from '../../../utils/withAuth';
 import { withAuthAdmin } from '../../../utils/withAuthAdmin';
 
-interface BrandIF {
-    id: number;
-    title: string;
-    img: string;
-}
-
-function BrandChange() {
-    const { brand } = useGetBrandHook();
+function ProductChange() {
+    const { products } = useGetProductsHook();
     const [rows, setRows] = useState<GridRowsProp>([]);
     const [selectedRow, setSelectedRow] = useState<GridValidRowModel | undefined>([]);
     const [openModal, setOpenModal] = useState(false);
@@ -45,12 +39,12 @@ function BrandChange() {
         setAuthToken();
         try {
             // @ts-ignore
-            const { id, title, img }: BrandIF = selectedRow || {};
+            const { id, title, img } = selectedRow || {};
             const data = {
                 id,
                 title,
                 img,
-            } as BrandIF;
+            };
             const res: Response = await adminFetch('/brand/change', {
                 method: 'post',
                 data,
@@ -64,8 +58,30 @@ function BrandChange() {
     };
 
     const columns: GridColDef[] = [
-        { field: 'id', width: 20 },
-        { field: 'title', headerName: 'Название', width: 250 },
+        { field: 'id', width: 90 },
+        { field: 'title', headerName: 'Название', width: 350 },
+        { field: 'price', headerName: 'Цена', width: 120 },
+        {
+            field: 'quantity',
+            headerAlign: 'center',
+            align: 'center',
+            headerName: 'Кол-во',
+            width: 120,
+        },
+        {
+            field: 'popular',
+            headerAlign: 'center',
+            align: 'center',
+            headerName: 'Популярный',
+            width: 220,
+        },
+        {
+            field: 'art',
+            headerAlign: 'center',
+            align: 'center',
+            headerName: 'Артикул',
+            width: 190,
+        },
         {
             field: 'actions',
             headerName: 'Действие',
@@ -94,13 +110,18 @@ function BrandChange() {
     ];
 
     useEffect(() => {
-        const formattedRows: GridRowsProp = brand.map(item => ({
+        const formattedRows: GridRowsProp = products.map(item => ({
             id: item.id,
             title: item.title,
             img: item.img,
+            art: item.art,
+            popular: item.popular === 1 ? 'Популярный товар' : '',
+            price: item.price === 0 ? '-' : `${item.price}₽`,
+            quantity: item.quantity,
+            shortDesc: item.shortDesc,
         }));
         setRows(formattedRows);
-    }, [brand]);
+    }, [products]);
 
     return (
         <AdminLayout>
@@ -133,4 +154,4 @@ function BrandChange() {
     );
 }
 
-export default withAuth(withAuthAdmin(BrandChange));
+export default withAuth(withAuthAdmin(ProductChange));

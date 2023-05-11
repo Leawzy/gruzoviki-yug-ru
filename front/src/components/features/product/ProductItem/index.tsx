@@ -5,6 +5,7 @@ import { toast, ToastContainer } from 'react-toastify';
 
 import { addToCart, removeFromCart } from '../../../../redux/actions';
 import { ProductPage } from '../../../../types/ProductType';
+import { noPhoto } from '../../../../utils/images';
 import ButtonAdd from '../../../core/buttons/ButtonAdd';
 import ButtonRemove from '../../../core/buttons/ButtonRemove';
 import BaseLayout from '../../../shared/layouts/BaseLayout';
@@ -120,13 +121,23 @@ export default function ProductItem({ product }: ProductItemIF) {
                 </div>
                 <div className={cn.productPageWrapper}>
                     <div className={cn.productPageImage}>
-                        <Image
-                            src={product.img || ''}
-                            width={500}
-                            height={700}
-                            alt="Product Image"
-                            priority
-                        />
+                        {product.img === null ? (
+                            <Image
+                                src={noPhoto}
+                                alt="Empty Catalog Img"
+                                width={400}
+                                height={400}
+                                className={cn.catalogImage}
+                            />
+                        ) : (
+                            <Image
+                                src={product.img}
+                                alt="Catalog Img"
+                                width={500}
+                                height={700}
+                                className={cn.catalogImage}
+                            />
+                        )}
                     </div>
                     <div className={cn.productPageInfo}>
                         <span className={cn.productPageInfoText}>

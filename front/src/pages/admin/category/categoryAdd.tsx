@@ -24,7 +24,7 @@ function CategoryAdd() {
     const route = useRouter();
 
     const cancelCreate = async () => {
-        await route.replace('/controlpanel');
+        await route.replace('/admin/admin');
     };
 
     const createCategory = useCallback(async () => {

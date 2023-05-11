@@ -11,7 +11,7 @@ import React, { useEffect, useState } from 'react';
 
 import { adminFetch, setAuthToken } from '../../../axios/global';
 import AdminLayout from '../../../components/shared/layouts/AdminLayout';
-import { useAdminUserData } from '../../../hooks/useAdminHook';
+import { useGetUserHook } from '../../../hooks/useGetUserHook';
 import { withAuth } from '../../../utils/withAuth';
 import { withAuthAdmin } from '../../../utils/withAuthAdmin';
 
@@ -25,7 +25,7 @@ interface UserDataIF {
 }
 
 function UserChange() {
-    const { users } = useAdminUserData();
+    const { users } = useGetUserHook();
     const [rows, setRows] = useState<GridRowsProp>([]);
     const [selectedRow, setSelectedRow] = useState<GridValidRowModel | undefined>([]);
     const [openModal, setOpenModal] = useState(false);
@@ -101,7 +101,7 @@ function UserChange() {
 
     return (
         <AdminLayout>
-            <div style={{ height: 700, width: '100%' }}>
+            <div style={{ height: 900, width: '100%' }}>
                 <DataGrid
                     localeText={ruRU.components.MuiDataGrid.defaultProps.localeText}
                     rows={rows}

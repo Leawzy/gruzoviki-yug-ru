@@ -9,20 +9,11 @@ import {
 } from '@mui/x-data-grid';
 import React, { useEffect, useState } from 'react';
 
-import { adminFetch, setAuthToken } from '../../../axios/global';
 import AdminLayout from '../../../components/shared/layouts/AdminLayout';
-import { useGetBrandHook } from '../../../hooks/useGetBrandHook';
-import { withAuth } from '../../../utils/withAuth';
-import { withAuthAdmin } from '../../../utils/withAuthAdmin';
+import { useGetSliderHook } from '../../../hooks/useGetSliderHook';
 
-interface BrandIF {
-    id: number;
-    title: string;
-    img: string;
-}
-
-function BrandChange() {
-    const { brand } = useGetBrandHook();
+export default function SliderChange() {
+    const { slider } = useGetSliderHook();
     const [rows, setRows] = useState<GridRowsProp>([]);
     const [selectedRow, setSelectedRow] = useState<GridValidRowModel | undefined>([]);
     const [openModal, setOpenModal] = useState(false);
@@ -33,74 +24,39 @@ function BrandChange() {
         setOpenModal(true);
     };
 
-    const handleDeleteRow = (id: GridRowId) => {
-        const selectedRow = rows.find(row => row.id === id);
-    };
-
     const handleCloseModal = () => {
         setOpenModal(false);
     };
 
-    const handleSaveChanges = async () => {
-        setAuthToken();
-        try {
-            // @ts-ignore
-            const { id, title, img }: BrandIF = selectedRow || {};
-            const data = {
-                id,
-                title,
-                img,
-            } as BrandIF;
-            const res: Response = await adminFetch('/brand/change', {
-                method: 'post',
-                data,
-            });
-            if (res.status === 200) {
-                handleCloseModal();
-            }
-        } catch (e) {
-            console.error(e);
-        }
+    const handleSaveChanges = () => {
+        handleCloseModal();
     };
 
     const columns: GridColDef[] = [
-        { field: 'id', width: 20 },
-        { field: 'title', headerName: 'Название', width: 250 },
+        { field: 'id' },
+        { field: 'title', headerName: 'Название', width: 550 },
         {
             field: 'actions',
             headerName: 'Действие',
-            headerAlign: 'center',
-            align: 'center',
-            width: 300,
+            width: 150,
             renderCell: params => {
                 const handleEdit = () => {
                     handleOpenModal(params.id);
                 };
 
-                const handleDelete = () => {
-                    handleDeleteRow(params.id);
-                };
-
-                return (
-                    <>
-                        <Button onClick={handleEdit}>Изменить</Button>
-                        <Button onClick={handleDelete} color="error">
-                            Удалить
-                        </Button>
-                    </>
-                );
+                return <Button onClick={handleEdit}>Изменить</Button>;
             },
         },
     ];
 
     useEffect(() => {
-        const formattedRows: GridRowsProp = brand.map(item => ({
+        const formattedRows: GridRowsProp = slider.map(item => ({
             id: item.id,
-            title: item.title,
+            title: item.name,
             img: item.img,
         }));
         setRows(formattedRows);
-    }, [brand]);
+    }, [slider]);
 
     return (
         <AdminLayout>
@@ -132,5 +88,3 @@ function BrandChange() {
         </AdminLayout>
     );
 }
-
-export default withAuth(withAuthAdmin(BrandChange));

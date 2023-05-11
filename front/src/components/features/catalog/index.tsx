@@ -12,7 +12,7 @@ export default function Catalog() {
     const { products, pageCount } = usePaginationProduct(currentPage);
 
     const handlePageClick = (selectedItem: { selected: number }) => {
-        setCurrentPage(selectedItem.selected);
+        setCurrentPage(selectedItem.selected + 1);
     };
 
     return (

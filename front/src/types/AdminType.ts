@@ -10,6 +10,7 @@ export interface AdminTypeUser {
 }
 
 export interface AdminTypeBrand {
+    img: string;
     title: string;
     id: string;
     brand: brandType;
