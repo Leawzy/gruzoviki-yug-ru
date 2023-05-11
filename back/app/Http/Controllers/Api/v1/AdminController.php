@@ -272,6 +272,8 @@ class AdminController extends Controller
 
         if ($post) {
             $request['title'] === null ?: $post->title = $request['title'];
+            $request['shortDesc'] === null ?: $post->shortDesc = $request['shortDesc'];
+            $request['description'] === null ?: $post->description = $request['description'];
             $post->save();
             if ($request->hasFile('file')) {
                 $file = $request->file('file');
