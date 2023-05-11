@@ -13,13 +13,13 @@ return new class extends Migration {
     {
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('userId')
+            $table->unsignedBigInteger('user_id')
                 ->nullable();
             $table->foreign('userId')
                 ->references('id')
                 ->on('users');
 
-            $table->dateTime('data')
+            $table->dateTime('date')
                 ->nullable();
             $table->string('total');
             $table->string('delivery');
