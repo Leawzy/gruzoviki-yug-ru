@@ -1,7 +1,7 @@
 import React from 'react';
 import { ToastContainer } from 'react-toastify';
 
-import { useAdminAddHook } from '../../../hooks/useAdminAddHook';
+import { useAdminAddHook } from '../../../hooks/admin/useAdminAddHook';
 import { withAuth } from '../../../utils/withAuth';
 import { withAuthAdmin } from '../../../utils/withAuthAdmin';
 import cn from '../style.module.scss';

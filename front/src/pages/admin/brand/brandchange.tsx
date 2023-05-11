@@ -1,63 +1,41 @@
 import { Button, Dialog, DialogActions, DialogContent, TextField } from '@mui/material';
-import {
-    DataGrid,
-    GridColDef,
-    GridRowId,
-    GridRowsProp,
-    GridValidRowModel,
-    ruRU,
-} from '@mui/x-data-grid';
-import React, { useEffect, useState } from 'react';
+import { DataGrid, GridColDef, GridRowsProp, ruRU } from '@mui/x-data-grid';
+import React, { useEffect } from 'react';
 
-import { adminFetch, setAuthToken } from '../../../axios/global';
 import AdminLayout from '../../../components/shared/layouts/AdminLayout';
-import { useGetBrandHook } from '../../../hooks/useGetBrandHook';
+import { useHandleFileChangeHook } from '../../../hooks/admin/handlers/useHandleFileChangeHook';
+import { useModalHandlerHook } from '../../../hooks/admin/handlers/useModalHandlerHook';
+import { useSendChangeHook } from '../../../hooks/admin/handlers/useSendChangeHook';
+import { useGetBrandHook } from '../../../hooks/admin/useGetBrandHook';
 import { withAuth } from '../../../utils/withAuth';
 import { withAuthAdmin } from '../../../utils/withAuthAdmin';
 
-interface BrandIF {
-    id: number;
-    title: string;
-    img: string;
-}
-
 function BrandChange() {
     const { brand } = useGetBrandHook();
-    const [rows, setRows] = useState<GridRowsProp>([]);
-    const [selectedRow, setSelectedRow] = useState<GridValidRowModel | undefined>([]);
-    const [openModal, setOpenModal] = useState(false);
+    const { selectedImage, selectedImageUrl, handleFileChange } = useHandleFileChangeHook();
+    const {
+        rows,
+        setRows,
+        selectedRow,
+        setSelectedRow,
+        openModal,
+        handleOpenModal,
+        handleDeleteRow,
+        handleCloseModal,
+    } = useModalHandlerHook([]);
 
-    const handleOpenModal = (id: GridRowId) => {
-        const selectedRow = rows.find(row => row.id === id);
-        setSelectedRow(selectedRow);
-        setOpenModal(true);
-    };
-
-    const handleDeleteRow = (id: GridRowId) => {
-        const selectedRow = rows.find(row => row.id === id);
-    };
-
-    const handleCloseModal = () => {
-        setOpenModal(false);
-    };
-
-    const handleSaveChanges = async () => {
-        setAuthToken();
+    const useHandleSaveChanges = async () => {
         try {
-            // @ts-ignore
-            const { id, title, img }: BrandIF = selectedRow || {};
-            const data = {
-                id,
-                title,
-                img,
-            } as BrandIF;
-            const res: Response = await adminFetch('/brand/change', {
-                method: 'post',
-                data,
-            });
-            if (res.status === 200) {
-                handleCloseModal();
-            }
+            await useSendChangeHook(
+                '/brand/change',
+                {
+                    id: selectedRow?.id as string,
+                    title: selectedRow?.title as string,
+                    file: selectedImage,
+                },
+                'post'
+            );
+            handleCloseModal();
         } catch (e) {
             console.error(e);
         }
@@ -78,7 +56,7 @@ function BrandChange() {
                 };
 
                 const handleDelete = () => {
-                    handleDeleteRow(params.id);
+                    handleDeleteRow(params.id, 'brand/delete');
                 };
 
                 return (
@@ -119,11 +97,20 @@ function BrandChange() {
                                 setSelectedRow(prev => ({ ...prev, title: e.target.value }));
                             }}
                         />
-                        <img src={selectedRow?.img as string} alt={selectedRow?.title as string} />
+                        {selectedImage === undefined ? (
+                            <img
+                                src={selectedRow?.img as string}
+                                height={280}
+                                alt={selectedRow?.title as string}
+                            />
+                        ) : (
+                            <img src={selectedImageUrl} height={280} alt="Выбранное изображение" />
+                        )}
+                        <input type="file" accept="image/webp" onChange={handleFileChange} />
                     </DialogContent>
                     <DialogActions>
                         <Button onClick={handleCloseModal}>Отмена</Button>
-                        <Button onClick={handleSaveChanges} variant="contained" color="primary">
+                        <Button onClick={useHandleSaveChanges} variant="contained" color="primary">
                             Сохранить
                         </Button>
                     </DialogActions>
