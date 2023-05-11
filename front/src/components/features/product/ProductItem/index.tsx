@@ -5,7 +5,7 @@ import { toast, ToastContainer } from 'react-toastify';
 
 import { addToCart, removeFromCart } from '../../../../redux/actions';
 import { ProductPage } from '../../../../types/ProductType';
-import { noPhoto } from '../../../../utils/images';
+import { noPhoto } from '../../../../utils/getImages';
 import ButtonAdd from '../../../core/buttons/ButtonAdd';
 import ButtonRemove from '../../../core/buttons/ButtonRemove';
 import BaseLayout from '../../../shared/layouts/BaseLayout';
