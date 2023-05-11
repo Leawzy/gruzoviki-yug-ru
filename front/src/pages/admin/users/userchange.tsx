@@ -1,66 +1,43 @@
 import { Button, Dialog, DialogActions, DialogContent, TextField } from '@mui/material';
-import {
-    DataGrid,
-    GridColDef,
-    GridRowId,
-    GridRowsProp,
-    GridValidRowModel,
-    ruRU,
-} from '@mui/x-data-grid';
-import React, { useEffect, useState } from 'react';
+import { DataGrid, GridColDef, GridRowsProp, ruRU } from '@mui/x-data-grid';
+import React, { useEffect } from 'react';
 
-import { adminFetch, setAuthToken } from '../../../axios/global';
 import AdminLayout from '../../../components/shared/layouts/AdminLayout';
-import { useGetUserHook } from '../../../hooks/useGetUserHook';
+import { useModalHandlerHook } from '../../../hooks/admin/handlers/useModalHandlerHook';
+import { useSendChangeHook } from '../../../hooks/admin/handlers/useSendChangeHook';
+import { useGetUserHook } from '../../../hooks/admin/useGetUserHook';
 import { withAuth } from '../../../utils/withAuth';
 import { withAuthAdmin } from '../../../utils/withAuthAdmin';
 
-interface UserDataIF {
-    id: number;
-    firstName: string;
-    lastName: string;
-    email: string;
-    phoneNumber: string;
-    role: string;
-}
-
 function UserChange() {
     const { users } = useGetUserHook();
-    const [rows, setRows] = useState<GridRowsProp>([]);
-    const [selectedRow, setSelectedRow] = useState<GridValidRowModel | undefined>([]);
-    const [openModal, setOpenModal] = useState(false);
+    const {
+        rows,
+        setRows,
+        selectedRow,
+        setSelectedRow,
+        openModal,
+        handleOpenModal,
+        handleDeleteRow,
+        handleCloseModal,
+    } = useModalHandlerHook([]);
 
-    const handleOpenModal = (id: GridRowId) => {
-        const selectedRow = rows.find(row => row.id === id);
-        setSelectedRow(selectedRow);
-        setOpenModal(true);
-    };
-
-    const handleCloseModal = () => {
-        setOpenModal(false);
-    };
-
-    const handleSaveChanges = async () => {
-        setAuthToken();
+    const useHandleSaveChanges = async () => {
         try {
-            // @ts-ignore
-            const { id, firstName, lastName, email, phoneNumber, role }: UserDataIF =
-                selectedRow || {};
-            const data = {
-                id,
-                firstName,
-                lastName,
-                email,
-                phoneNumber,
-                role,
-            } as UserDataIF;
-            const res: Response = await adminFetch('/user/change', {
-                method: 'patch',
-                data,
-            });
-            if (res.status === 200) {
-                handleCloseModal();
-            }
+            await useSendChangeHook(
+                '/slider/change',
+                {
+                    id: selectedRow?.id as string,
+                    firstName: selectedRow?.firstName as string,
+                    lastName: selectedRow?.lastName as string,
+                    address: selectedRow?.address as string,
+                    phoneNumber: selectedRow?.phoneNumber as number,
+                    email: selectedRow?.email as string,
+                    role: selectedRow?.role as string,
+                },
+                'patch'
+            );
+            handleCloseModal();
         } catch (e) {
             console.error(e);
         }
@@ -70,19 +47,33 @@ function UserChange() {
         { field: 'id' },
         { field: 'firstName', headerName: 'Имя', width: 150 },
         { field: 'lastName', headerName: 'Фамилия', width: 150 },
+        { field: 'address', headerName: 'Адрес', width: 150 },
         { field: 'phoneNumber', headerName: 'Номер телефона', width: 200 },
         { field: 'email', headerName: 'Почта', width: 300 },
         { field: 'role', headerName: 'Роль', width: 150 },
         {
             field: 'actions',
             headerName: 'Действие',
-            width: 150,
+            headerAlign: 'center',
+            align: 'center',
+            width: 300,
             renderCell: params => {
                 const handleEdit = () => {
                     handleOpenModal(params.id);
                 };
 
-                return <Button onClick={handleEdit}>Изменить</Button>;
+                const handleDelete = () => {
+                    handleDeleteRow(params.id, 'user/delete');
+                };
+
+                return (
+                    <>
+                        <Button onClick={handleEdit}>Изменить</Button>
+                        <Button onClick={handleDelete} color="error">
+                            Удалить
+                        </Button>
+                    </>
+                );
             },
         },
     ];
@@ -92,6 +83,7 @@ function UserChange() {
             id: item.id,
             firstName: item.firstName,
             lastName: item.lastName,
+            address: item.address === null ? 'Не указан' : item.address,
             email: item.email,
             role: item.role,
             phoneNumber: item.phoneNumber === null ? 'Отсутствует' : `+${item.phoneNumber}`,
@@ -136,6 +128,14 @@ function UserChange() {
                         />
                         <TextField
                             style={{ padding: '10px' }}
+                            label="Адрес"
+                            value={(selectedRow?.address as string) || ''}
+                            onChange={e => {
+                                setSelectedRow(prev => ({ ...prev, address: e.target.value }));
+                            }}
+                        />
+                        <TextField
+                            style={{ padding: '10px' }}
                             label="Почта"
                             value={(selectedRow?.email as string) || ''}
                             onChange={e => {
@@ -153,7 +153,7 @@ function UserChange() {
                     </DialogContent>
                     <DialogActions>
                         <Button onClick={handleCloseModal}>Отмена</Button>
-                        <Button onClick={handleSaveChanges} variant="contained" color="primary">
+                        <Button onClick={useHandleSaveChanges} variant="contained" color="primary">
                             Сохранить
                         </Button>
                     </DialogActions>
