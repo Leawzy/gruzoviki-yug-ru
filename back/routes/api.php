@@ -72,4 +72,7 @@ Route::middleware(['auth:api', 'admin'])->group(function () {
     Route::get('/admin/product/get', [AdminController::class, 'getAllProduct']);
     Route::post('/admin/product/create', [AdminController::class, 'createProduct']);
     Route::post('/admin/product/change', [AdminController::class, 'changeProduct']);
+
+    //Order section
+    Route::get('/admin/order/get', [AdminController::class, 'getAllOrder']);
 });

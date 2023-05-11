@@ -5,11 +5,13 @@ namespace App\Http\Controllers\Api\v1;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\Brand\BrandResource;
 use App\Http\Resources\Category\CategoryResource;
+use App\Http\Resources\Orders\OrderResource;
 use App\Http\Resources\Other\PostResource;
 use App\Http\Resources\Other\SliderResource;
 use App\Http\Resources\Product\ProductResource;
 use App\Models\Brand;
 use App\Models\Category;
+use App\Models\Order;
 use App\Models\Post;
 use App\Models\Product;
 use App\Models\Slider;
@@ -370,5 +372,11 @@ class AdminController extends Controller
         return response()->json([
             'message' => 'Продукт успешно обновлен',
         ]);
+    }
+
+    //Order section
+    public function getAllOrder()
+    {
+        return OrderResource::collection(Order::all());
     }
 }
