@@ -1,8 +1,8 @@
 import Image from 'next/image';
 import React from 'react';
 
-import { useGetSliderHook } from '../../../hooks/useGetSliderHook';
-import { masterCard, storage, visa } from '../../../utils/images';
+import { useGetSliderHook } from '../../../hooks/admin/useGetSliderHook';
+import { masterCard, storage, visa } from '../../../utils/getImages';
 import News from './News';
 import PopularCards from './PopularCards';
 import Slider from './Slider';
@@ -13,7 +13,7 @@ function Home() {
 
     return (
         <>
-            <Slider images={slider} />
+            {slider.length === 0 ? '' : <Slider images={slider} />}
             <PopularCards />
             <section className={cn.aboutBlock}>
                 <div className={cn.aboutBlockWrapper}>
