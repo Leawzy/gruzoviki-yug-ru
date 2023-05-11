@@ -5,7 +5,7 @@ import { useDispatch } from 'react-redux';
 
 import { addToCart, removeFromCart } from '../../../../redux/actions';
 import { Product } from '../../../../types/ProductType';
-import { noPhoto } from '../../../../utils/images';
+import { noPhoto } from '../../../../utils/getImages';
 import ButtonAdd from '../../buttons/ButtonAdd';
 import ButtonRemove from '../../buttons/ButtonRemove';
 import cn from './style.module.scss';
