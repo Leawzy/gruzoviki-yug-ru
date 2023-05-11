@@ -21,6 +21,8 @@ return new class extends Migration
             $table->string('phoneNumber')
                 ->unique()
                 ->nullable();
+            $table->string('address')
+                ->nullable();
             $table->string('password');
             $table->string('role')
                 ->default('user');

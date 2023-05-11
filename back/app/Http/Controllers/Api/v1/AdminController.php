@@ -5,13 +5,16 @@ namespace App\Http\Controllers\Api\v1;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\Brand\BrandResource;
 use App\Http\Resources\Category\CategoryResource;
+use App\Http\Resources\Orders\OrderResource;
 use App\Http\Resources\Other\PostResource;
 use App\Http\Resources\Other\SliderResource;
 use App\Http\Resources\Product\ProductResource;
 use App\Models\Brand;
 use App\Models\Category;
+use App\Models\Order;
 use App\Models\Post;
 use App\Models\Product;
+use App\Models\Repair;
 use App\Models\Slider;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -33,13 +36,15 @@ class AdminController extends Controller
             'firstName' => ["required", "string"],
             'lastName' => ["required", "string"],
             'email' => ["required", "string"],
-            'password' => ["required", "string"]
+            'password' => ["required", "string"],
+            'address' => ["required", "string"],
         ]);
 
         $user = User::create([
             "firstName" => $data["firstName"],
             "lastName" => $data["lastName"],
             "email" => $data["email"],
+            "address" => $data['address'],
             "password" => bcrypt($data["password"]),
             $request['phoneNumber'] === null ?: "phoneNumber" => $request['phoneNumber'],
             $request['role'] === null ?: "role" => $request['role'],
@@ -59,6 +64,7 @@ class AdminController extends Controller
             $request['firstName'] === null ?: $user->firstName = $request['firstName'];
             $request['lastName'] === null ?: $user->lastName = $request['lastName'];
             $request['email'] === null ?: $user->email = $request['email'];
+            $request['address'] === null ?: $user->address = $request['address'];
             $request['phoneNumber'] === null ?: $user->phoneNumber = $request['phoneNumber'];
             $request['password'] === null ?: $user->password = bcrypt($request['password']);
             $request['role'] === null ?: $user->role = $request['role'];
@@ -71,6 +77,18 @@ class AdminController extends Controller
         return response()->json([
             'message' => 'User not found',
         ], 404);
+    }
+
+    public function deleteUser(Request $request)
+    {
+        $user = User::findOrFail($request['id']);
+        if ($user) {
+            $user->delete();
+        }
+
+        return response()->json([
+            'message' => 'Пользователь успешно удален',
+        ]);
     }
 
     //Slider Section
@@ -108,8 +126,7 @@ class AdminController extends Controller
     {
         $slider = Slider::findOrFail($request['id']);
 
-        if($slider)
-        {
+        if ($slider) {
             $request['title'] === null ?: $slider->title = $request['title'];
             $slider->save();
 
@@ -127,6 +144,18 @@ class AdminController extends Controller
 
         return response()->json([
             'message' => 'Слайдер успешно обновлен',
+        ]);
+    }
+
+    public function deleteSlider(Request $request)
+    {
+        $slider = Slider::findOrFail($request['id']);
+        if ($slider) {
+            $slider->delete();
+        }
+
+        return response()->json([
+            'message' => 'Слайдер успешно удален',
         ]);
     }
 
@@ -166,8 +195,7 @@ class AdminController extends Controller
     {
         $brand = Brand::findOrFail($request['id']);
 
-        if($brand)
-        {
+        if ($brand) {
             $request['title'] === null ?: $brand->title = $request['title'];
             $brand->save();
             if ($request->hasFile('file')) {
@@ -184,6 +212,18 @@ class AdminController extends Controller
 
         return response()->json([
             'message' => 'Бренд успешно обновлен',
+        ]);
+    }
+
+    public function deleteBrand(Request $request)
+    {
+        $brand = Brand::findOrFail($request['id']);
+        if ($brand) {
+            $brand->delete();
+        }
+
+        return response()->json([
+            'message' => 'Бренд успешно удален',
         ]);
     }
 
@@ -215,8 +255,7 @@ class AdminController extends Controller
     public function changeCategory(Request $request)
     {
         $category = Category::findOrFail($request['id']);
-        if($category)
-        {
+        if ($category) {
             $request['title'] === null ?: $category->title = $request['title'];
             $request['property'] === null ?: $category->properties = $request['property'];
 
@@ -225,6 +264,18 @@ class AdminController extends Controller
 
         return response()->json([
             'message' => 'Категория успешно обновлена',
+        ]);
+    }
+
+    public function deleteCategory(Request $request)
+    {
+        $category = Category::findOrFail($request['id']);
+        if ($category) {
+            $category->delete();
+        }
+
+        return response()->json([
+            'message' => 'Категория успешно удалена',
         ]);
     }
 
@@ -268,8 +319,10 @@ class AdminController extends Controller
     {
         $post = Post::findOrFail($request['id']);
 
-        if ($post){
+        if ($post) {
             $request['title'] === null ?: $post->title = $request['title'];
+            $request['shortDesc'] === null ?: $post->shortDesc = $request['shortDesc'];
+            $request['description'] === null ?: $post->description = $request['description'];
             $post->save();
             if ($request->hasFile('file')) {
                 $file = $request->file('file');
@@ -288,6 +341,18 @@ class AdminController extends Controller
         ], 200);
     }
 
+    public function deletePost(Request $request)
+    {
+        $post = Post::findOrFail($request['id']);
+        if ($post) {
+            $post->delete();
+        }
+
+        return response()->json([
+            'message' => 'Пост успешно удален',
+        ]);
+    }
+
     //Product Section
     public function getAllProduct()
     {
@@ -299,14 +364,14 @@ class AdminController extends Controller
         $data = $request->validate([
             'title' => ["required", "string"],
             'shortDesc' => ["required", "string"],
-            'price' => ["required"],
-            'quantity' => ["required"],
-            'art' => ["required"],
+            'price' => ["required", "integer"],
+            'quantity' => ["required", "integer"],
+            'art' => ["required", "integer"],
             'property' => ["required"],
-            'isPopular' => ["required"],
-//            'file' => ['required', 'image', 'max:2048'],
-            'brandId' => ["required"],
-            'categoryId' => ["required"],
+            'isPopular' => ["required", "boolean"],
+            'file' => ['required', 'image', 'max:2048'],
+            'brandId' => ["required", "integer"],
+            'categoryId' => ["required", "integer"],
         ]);
 
         $product = Product::create([
@@ -315,7 +380,7 @@ class AdminController extends Controller
             'price' => $data['price'],
             'quantity' => $data['quantity'],
             'art' => $data['art'],
-            'property' => $data['property'],
+            'properties' => $data['property'],
             'isPopular' => $data['isPopular'],
             'brand_id' => Brand::query()->where('id', $data['brandId'])->value('id'),
             'category_id' => Category::query()->where('id', $data['categoryId'])->value('id'),
@@ -340,14 +405,13 @@ class AdminController extends Controller
     {
         $product = Product::findOrFail($request['id']);
 
-        if($product)
-        {
+        if ($product) {
             $request['title'] === null ?: $product->title = $request['title'];
             $request['shortDesc'] === null ?: $product->shortDesc = $request['shortDesc'];
             $request['price'] === null ?: $product->price = $request['price'];
             $request['quantity'] === null ?: $product->quantity = $request['quantity'];
             $request['art'] === null ?: $product->art = $request['art'];
-            $request['property'] === null ?: $product->property = $request['property'];
+            $request['property'] === null ?: $product->properties = $request['property'];
             $request['isPopular'] === null ?: $product->isPopular = $request['isPopular'];
             $request['brandId'] === null ?: $product->brand_id = Brand::query()->where('id',
                 $request['brandId'])->value('id');
@@ -370,6 +434,84 @@ class AdminController extends Controller
 
         return response()->json([
             'message' => 'Продукт успешно обновлен',
+        ]);
+    }
+
+    public function deleteProduct(Request $request)
+    {
+        $product = Product::findOrFail($request['id']);
+        if ($product) {
+            $product->delete();
+        }
+
+        return response()->json([
+            'message' => 'Продукт успешно удален',
+        ]);
+    }
+
+    //Order section
+    public function getAllOrder()
+    {
+        return OrderResource::collection(Order::all());
+    }
+
+    public function changeOrder(Request $request)
+    {
+        $order = Order::findOrFail($request['id']);
+
+        if ($order) {
+            $request['status'] === null ?: $order->status = $request['status'];
+
+            $order->save();
+        }
+
+        return response()->json([
+            'message' => 'Статус успешно изменен',
+        ], 200);
+    }
+
+    public function deleteOrder(Request $request)
+    {
+        $order = Order::findOrFail($request['id']);
+        if ($order) {
+            $order->delete();
+        }
+
+        return response()->json([
+            'message' => 'Заказ успешно удален',
+        ]);
+    }
+
+    //Repair section
+    public function getAllRecordRepair()
+    {
+        return Repair::all();
+    }
+
+    public function changeRecordRepair(Request $request)
+    {
+        $repair = Repair::findOrFail($request['id']);
+
+        if ($repair) {
+            $request['status'] === null ?: $repair->status = $request['status'];
+            $request['date'] === null ?: $repair->date = $request['date'];
+            $repair['type'] === null ?: $repair->type = $request['type'];
+        }
+
+        return response()->json([
+            'message' => 'Запись успешно изменена',
+        ], 200);
+    }
+
+    public function deleteRecordRepair(Request $request)
+    {
+        $repair = Repair::findOrFail($request['id']);
+        if ($repair) {
+            $repair->delete();
+        }
+
+        return response()->json([
+            'message' => 'Запись на ремонт успешно удалена',
         ]);
     }
 }

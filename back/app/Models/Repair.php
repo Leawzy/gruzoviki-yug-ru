@@ -11,15 +11,17 @@ class Repair extends Model
     use HasFactory;
 
     protected $fillable = [
-        'userId',
+        'user_id',
         'type',
+        'brand',
         'model',
         'description',
-        'status'
+        'status',
+        'date',
     ];
 
     public function user(): BelongsTo
     {
-        return $this->belongsTo(User::class, 'userId');
+        return $this->belongsTo(User::class, 'user_id');
     }
 }

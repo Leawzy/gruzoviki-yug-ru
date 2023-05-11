@@ -239,16 +239,16 @@ class DatabaseSeeder extends Seeder
 
         Order::factory()
             ->create([
-                'userId' => User::query()->where('id', 1)->value('id'),
+                'user_id' => User::query()->where('id', 1)->value('id'),
                 'total' => 2019,
                 'delivery' => 'Самовывоз',
-                'paymentMethod' => "Безналичный",
+                'payment_method' => "Безналичный",
                 'status' => "В обработке",
             ]);
 
         OrderProduct::factory()
             ->create([
-                'orderId' => Order::query()->where('id', 1)->value('id'),
+                'order_id' => Order::query()->where('id', 1)->value('id'),
                 'product_id' => Product::query()->where('id', 1)->value('id'),
             ]);
 
