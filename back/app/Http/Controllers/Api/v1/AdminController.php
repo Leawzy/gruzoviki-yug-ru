@@ -33,13 +33,15 @@ class AdminController extends Controller
             'firstName' => ["required", "string"],
             'lastName' => ["required", "string"],
             'email' => ["required", "string"],
-            'password' => ["required", "string"]
+            'password' => ["required", "string"],
+            'address' => ["required", "string"],
         ]);
 
         $user = User::create([
             "firstName" => $data["firstName"],
             "lastName" => $data["lastName"],
             "email" => $data["email"],
+            "address" => $data['address'],
             "password" => bcrypt($data["password"]),
             $request['phoneNumber'] === null ?: "phoneNumber" => $request['phoneNumber'],
             $request['role'] === null ?: "role" => $request['role'],
@@ -59,6 +61,7 @@ class AdminController extends Controller
             $request['firstName'] === null ?: $user->firstName = $request['firstName'];
             $request['lastName'] === null ?: $user->lastName = $request['lastName'];
             $request['email'] === null ?: $user->email = $request['email'];
+            $request['address'] === null ?: $user->address = $request['address'];
             $request['phoneNumber'] === null ?: $user->phoneNumber = $request['phoneNumber'];
             $request['password'] === null ?: $user->password = bcrypt($request['password']);
             $request['role'] === null ?: $user->role = $request['role'];
