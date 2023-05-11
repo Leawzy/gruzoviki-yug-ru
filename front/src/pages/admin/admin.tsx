@@ -2,8 +2,8 @@ import React from 'react';
 
 import AdminLayout from '../../components/shared/layouts/AdminLayout';
 import Widget from '../../components/shared/layouts/AdminLayout/Widgets';
-import { useGetBrandHook } from '../../hooks/useGetBrandHook';
-import { useGetUserHook } from '../../hooks/useGetUserHook';
+import { useGetBrandHook } from '../../hooks/admin/useGetBrandHook';
+import { useGetUserHook } from '../../hooks/admin/useGetUserHook';
 import { withAuth } from '../../utils/withAuth';
 import { withAuthAdmin } from '../../utils/withAuthAdmin';
 import cn from './style.module.scss';
