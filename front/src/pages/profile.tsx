@@ -4,13 +4,14 @@ import React, { useEffect, useState } from 'react';
 
 import BaseLayout from '../components/shared/layouts/BaseLayout';
 import ProfileLayout from '../components/shared/Profile/ProfileLayout';
-import { useProfileData } from '../hooks/useGetProfileHook';
+import { useProfileData } from '../hooks/admin/useGetProfileHook';
 import { withAuth } from '../utils/withAuth';
 
 function ProfilePage() {
     const { profile } = useProfileData();
     const router = useRouter();
     const [time, setTime] = useState(new Date());
+    const [changeForm, setChangeForm] = useState(false);
 
     useEffect(() => {
         const timer = setInterval(() => {
@@ -26,9 +27,13 @@ function ProfilePage() {
         (hour < 12 && 'Доброе утро') || (hour < 17 && 'Добрый день') || 'Добрый вечер'
     }, `;
 
-    const logoutHandler = async () => {
+    const handlerLogout = async () => {
         destroyCookie(null, 'token');
         await router.push('/');
+    };
+
+    const handlerChangeForm = () => {
+        setChangeForm(true);
     };
 
     return (
@@ -39,13 +44,19 @@ function ProfilePage() {
                     👋 {`${String(currectTime)}${String(profile.firstName)}`}
                 </p>
                 <div>
-                    <button className="profileButton">Редактирование</button>
-                    <button className="profileButton" onClick={logoutHandler}>
+                    <button className="profileButton" onClick={handlerChangeForm}>
+                        Редактирование
+                    </button>
+                    <button className="profileButton" onClick={handlerLogout}>
                         Выход
                     </button>
                 </div>
             </div>
-            <ProfileLayout profileData={profile} />
+            <ProfileLayout
+                profileData={profile}
+                changeForm={changeForm}
+                setChangeForm={setChangeForm}
+            />
             <h2 style={{ borderTop: '1px solid grey' }}>Заказы</h2>
         </BaseLayout>
     );
