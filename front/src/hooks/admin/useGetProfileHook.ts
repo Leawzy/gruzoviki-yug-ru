@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 
-import { apiFetch, setAuthToken } from '../axios/global';
-import { ProfileType } from '../types/ProfileType';
+import { apiFetch, setAuthToken } from '../../axios/global';
+import { ProfileType } from '../../types/ProfileType';
 
 function useProfileData() {
     // @ts-ignore

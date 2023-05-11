@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 
-import { adminFetch, setAuthToken } from '../axios/global';
-import { Product } from '../types/ProductType';
+import { adminFetch, setAuthToken } from '../../axios/global';
+import { Product } from '../../types/ProductType';
 
 function useGetProductsHook() {
     const [products, setProducts] = useState<Product[]>([]);

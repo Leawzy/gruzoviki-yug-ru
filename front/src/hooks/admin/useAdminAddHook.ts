@@ -2,7 +2,7 @@ import { useRouter } from 'next/router';
 import React, { useCallback, useState } from 'react';
 import { toast } from 'react-toastify';
 
-import { adminFetch, setAuthToken } from '../axios/global';
+import { adminFetch, setAuthToken } from '../../axios/global';
 
 export function useAdminAddHook(url: string) {
     const [title, setTitle] = useState('');
