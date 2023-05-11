@@ -13,15 +13,17 @@ return new class extends Migration
     {
         Schema::create('repairs', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('userId')
+            $table->unsignedBigInteger('user_id')
                 ->nullable();
-            $table->foreign('userId')
+            $table->foreign('user_id')
                 ->references('id')
                 ->on('users');
             $table->string('type');
+            $table->string('brand');
             $table->string('model');
             $table->string('description');
             $table->string('status');
+            $table->dateTime('date');
             $table->timestamps();
         });
     }
