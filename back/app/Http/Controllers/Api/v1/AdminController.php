@@ -79,6 +79,18 @@ class AdminController extends Controller
         ], 404);
     }
 
+    public function deleteUser(Request $request)
+    {
+        $user = User::findOrFail($request['id']);
+        if ($user) {
+            $user->delete();
+        }
+
+        return response()->json([
+            'message' => 'Пользователь успешно удален',
+        ]);
+    }
+
     //Slider Section
     public function getAllSlider()
     {
@@ -132,6 +144,18 @@ class AdminController extends Controller
 
         return response()->json([
             'message' => 'Слайдер успешно обновлен',
+        ]);
+    }
+
+    public function deleteSlider(Request $request)
+    {
+        $slider = Slider::findOrFail($request['id']);
+        if ($slider) {
+            $slider->delete();
+        }
+
+        return response()->json([
+            'message' => 'Слайдер успешно удален',
         ]);
     }
 
@@ -191,6 +215,18 @@ class AdminController extends Controller
         ]);
     }
 
+    public function deleteBrand(Request $request)
+    {
+        $brand = Brand::findOrFail($request['id']);
+        if ($brand) {
+            $brand->delete();
+        }
+
+        return response()->json([
+            'message' => 'Бренд успешно удален',
+        ]);
+    }
+
     //Category Section
     public function getAllCategory()
     {
@@ -228,6 +264,18 @@ class AdminController extends Controller
 
         return response()->json([
             'message' => 'Категория успешно обновлена',
+        ]);
+    }
+
+    public function deleteCategory(Request $request)
+    {
+        $category = Category::findOrFail($request['id']);
+        if ($category) {
+            $category->delete();
+        }
+
+        return response()->json([
+            'message' => 'Категория успешно удалена',
         ]);
     }
 
@@ -293,6 +341,18 @@ class AdminController extends Controller
         ], 200);
     }
 
+    public function deletePost(Request $request)
+    {
+        $post = Post::findOrFail($request['id']);
+        if ($post) {
+            $post->delete();
+        }
+
+        return response()->json([
+            'message' => 'Пост успешно удален',
+        ]);
+    }
+
     //Product Section
     public function getAllProduct()
     {
@@ -310,8 +370,8 @@ class AdminController extends Controller
             'property' => ["required"],
             'isPopular' => ["required", "boolean"],
             'file' => ['required', 'image', 'max:2048'],
-            'brandId' => ["required, integer"],
-            'categoryId' => ["required, integer"],
+            'brandId' => ["required", "integer"],
+            'categoryId' => ["required", "integer"],
         ]);
 
         $product = Product::create([
@@ -377,6 +437,18 @@ class AdminController extends Controller
         ]);
     }
 
+    public function deleteProduct(Request $request)
+    {
+        $product = Product::findOrFail($request['id']);
+        if ($product) {
+            $product->delete();
+        }
+
+        return response()->json([
+            'message' => 'Продукт успешно удален',
+        ]);
+    }
+
     //Order section
     public function getAllOrder()
     {
@@ -387,8 +459,7 @@ class AdminController extends Controller
     {
         $order = Order::findOrFail($request['id']);
 
-        if($order)
-        {
+        if ($order) {
             $request['status'] === null ?: $order->status = $request['status'];
 
             $order->save();
@@ -397,6 +468,18 @@ class AdminController extends Controller
         return response()->json([
             'message' => 'Статус успешно изменен',
         ], 200);
+    }
+
+    public function deleteOrder(Request $request)
+    {
+        $order = Order::findOrFail($request['id']);
+        if ($order) {
+            $order->delete();
+        }
+
+        return response()->json([
+            'message' => 'Заказ успешно удален',
+        ]);
     }
 
     //Repair section
@@ -409,8 +492,7 @@ class AdminController extends Controller
     {
         $repair = Repair::findOrFail($request['id']);
 
-        if($repair)
-        {
+        if ($repair) {
             $request['status'] === null ?: $repair->status = $request['status'];
             $request['date'] === null ?: $repair->date = $request['date'];
             $repair['type'] === null ?: $repair->type = $request['type'];
@@ -419,5 +501,17 @@ class AdminController extends Controller
         return response()->json([
             'message' => 'Запись успешно изменена',
         ], 200);
+    }
+
+    public function deleteRecordRepair(Request $request)
+    {
+        $repair = Repair::findOrFail($request['id']);
+        if ($repair) {
+            $repair->delete();
+        }
+
+        return response()->json([
+            'message' => 'Запись на ремонт успешно удалена',
+        ]);
     }
 }
