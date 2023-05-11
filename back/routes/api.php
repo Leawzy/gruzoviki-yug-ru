@@ -32,6 +32,7 @@ Route::post('/login', [UserController::class, 'authUser']);
 Route::get('/slider', [OtherController::class, 'showSlider']);
 Route::get('/posts', [OtherController::class, 'showPost']);
 Route::get('/post/card/{id}', [OtherController::class, 'getPostById']);
+Route::post('/repair', [OtherController::class, 'getRecordRepair']);
 
 //Auth User function
 Route::middleware(['auth:api'])->group(function () {
@@ -75,4 +76,9 @@ Route::middleware(['auth:api', 'admin'])->group(function () {
 
     //Order section
     Route::get('/admin/order/get', [AdminController::class, 'getAllOrder']);
+    Route::patch('/admin/order/change', [AdminController::class, 'changeOrder']);
+
+    //Repair section
+    Route::get('/admin/repair/get', [AdminController::class, 'getAllRecordRepair']);
+    Route::patch('/admin/repair/change', [AdminController::class, 'changeRecordRepair']);
 });

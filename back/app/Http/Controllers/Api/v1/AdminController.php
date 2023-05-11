@@ -14,6 +14,7 @@ use App\Models\Category;
 use App\Models\Order;
 use App\Models\Post;
 use App\Models\Product;
+use App\Models\Repair;
 use App\Models\Slider;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -380,5 +381,43 @@ class AdminController extends Controller
     public function getAllOrder()
     {
         return OrderResource::collection(Order::all());
+    }
+
+    public function changeOrder(Request $request)
+    {
+        $order = Order::findOrFail($request['id']);
+
+        if($order)
+        {
+            $request['status'] === null ?: $order->status = $request['status'];
+
+            $order->save();
+        }
+
+        return response()->json([
+            'message' => 'Статус успешно изменен',
+        ], 200);
+    }
+
+    //Repair section
+    public function getAllRecordRepair()
+    {
+        return Repair::all();
+    }
+
+    public function changeRecordRepair(Request $request)
+    {
+        $repair = Repair::findOrFail($request['id']);
+
+        if($repair)
+        {
+            $request['status'] === null ?: $repair->status = $request['status'];
+            $request['date'] === null ?: $repair->date = $request['date'];
+            $repair['type'] === null ?: $repair->type = $request['type'];
+        }
+
+        return response()->json([
+            'message' => 'Запись успешно изменена',
+        ], 200);
     }
 }
