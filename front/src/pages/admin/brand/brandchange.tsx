@@ -9,6 +9,7 @@ import { useSendChangeHook } from '../../../hooks/admin/handlers/useSendChangeHo
 import { useGetBrandHook } from '../../../hooks/admin/useGetBrandHook';
 import { withAuth } from '../../../utils/withAuth';
 import { withAuthAdmin } from '../../../utils/withAuthAdmin';
+import cn from '../style.module.scss';
 
 function BrandChange() {
     const { brand } = useGetBrandHook();
@@ -89,7 +90,7 @@ function BrandChange() {
                     columns={columns}
                 />
                 <Dialog open={openModal} onClose={handleCloseModal}>
-                    <DialogContent>
+                    <DialogContent className={cn.modalWindow}>
                         <TextField
                             label="Название бренда"
                             value={(selectedRow?.title as string) || ''}
@@ -106,7 +107,10 @@ function BrandChange() {
                         ) : (
                             <img src={selectedImageUrl} height={280} alt="Выбранное изображение" />
                         )}
-                        <input type="file" accept="image/webp" onChange={handleFileChange} />
+                        <label className={cn.FileInput}>
+                            <input type="file" accept="image/webp" onChange={handleFileChange} />
+                            <span className={cn.inputFileBtn}>Выберите файл</span>
+                        </label>
                     </DialogContent>
                     <DialogActions>
                         <Button onClick={handleCloseModal}>Отмена</Button>
