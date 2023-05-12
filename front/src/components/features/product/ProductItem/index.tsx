@@ -3,8 +3,10 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { toast, ToastContainer } from 'react-toastify';
 
+import { useGetFavoriteHook } from '../../../../hooks/favorites/useGetFavoriteHook';
 import { addToCart, removeFromCart } from '../../../../redux/actions';
 import { ProductPage } from '../../../../types/ProductType';
+import { FavoriteBorderIcon, FavoriteIcon, ShareIcon } from '../../../../utils/getIcons';
 import { noPhoto } from '../../../../utils/getImages';
 import ButtonAdd from '../../../core/buttons/ButtonAdd';
 import ButtonRemove from '../../../core/buttons/ButtonRemove';
@@ -19,8 +21,23 @@ export default function ProductItem({ product }: ProductItemIF) {
     const dispatch = useDispatch();
     const [itemCount, setItemCount] = useState(1);
     const [addedToCart, setAddedToCart] = React.useState(false);
+    const [IsFavorite, setIsFavorite] = React.useState(false);
     const { property, category } = product;
     const categoryProperties = category.property;
+    const { favoriteList } = useGetFavoriteHook();
+
+    useEffect(() => {
+        if (favoriteList) {
+            if (Array.isArray(favoriteList.products)) {
+                favoriteList.products.forEach(item => {
+                    // @ts-ignore
+                    if (item && typeof item.id === 'number' && item.id === product.id) {
+                        setIsFavorite(true);
+                    }
+                });
+            }
+        }
+    }, [favoriteList, product.id]);
 
     const propertyStrings = Object.keys(categoryProperties)
         .filter(key => key in property)
@@ -44,7 +61,8 @@ export default function ProductItem({ product }: ProductItemIF) {
                 product.img,
                 Boolean(true),
                 itemCount,
-                product.quantity
+                product.quantity,
+                product.art
             )
         );
     };
@@ -83,6 +101,10 @@ export default function ProductItem({ product }: ProductItemIF) {
         });
     }
 
+    const handleAddToFavorite = () => {
+        setIsFavorite(true);
+    };
+
     return (
         <BaseLayout>
             <ToastContainer />
@@ -91,12 +113,20 @@ export default function ProductItem({ product }: ProductItemIF) {
                     <h1>{product.title}</h1>
                     <div className={cn.productPageTopAction}>
                         <div className={cn.productPageBottomLinks}>
-                            <p className={cn.productPageTopActionLink}>В избранное</p>
+                            <span className={cn.shortCatalogFavorite}>
+                                <button onClick={handleAddToFavorite}>
+                                    {IsFavorite ? (
+                                        <FavoriteIcon className={`${cn.icon} ${cn.iconIsFav}`} />
+                                    ) : (
+                                        <FavoriteBorderIcon className={cn.icon} />
+                                    )}
+                                </button>
+                            </span>
                             <button
                                 onClick={copyLinkOfProduct}
                                 className={cn.productPageTopActionLink}
                             >
-                                Поделиться
+                                <ShareIcon />
                             </button>
                         </div>
                         <div className={cn.productPageTopArt}>
@@ -108,7 +138,7 @@ export default function ProductItem({ product }: ProductItemIF) {
                     <div className={cn.productPageBottomInfo}>
                         <p className={cn.productPageBottomBrand}>{product.brand.title}</p>
                         {product.popular === 1 ? (
-                            <p className={cn.productPageBottomPopular}>Популярный товар</p>
+                            <p className={cn.productPageBottomPopular}>Популярный товар 🔥</p>
                         ) : (
                             ''
                         )}
@@ -133,8 +163,8 @@ export default function ProductItem({ product }: ProductItemIF) {
                             <Image
                                 src={product.img}
                                 alt="Catalog Img"
-                                width={500}
-                                height={700}
+                                width={460}
+                                height={600}
                                 className={cn.catalogImage}
                             />
                         )}
