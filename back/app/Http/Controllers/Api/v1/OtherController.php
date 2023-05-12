@@ -117,7 +117,14 @@ class OtherController extends Controller
 
         $featured = FeaturedProduct::where('user_id', $user->id)->first();
 
-        return new FeaturedProductResource($featured);
+        if($featured){
+            return new FeaturedProductResource($featured);
+        }
+        else {
+            return response()->json([
+               'message' => "Избранных товаров нет"
+            ]);
+        }
     }
 
     public function deleteFeaturedProduct(Request $request)
