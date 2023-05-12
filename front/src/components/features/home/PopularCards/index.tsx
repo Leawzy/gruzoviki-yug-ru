@@ -31,6 +31,7 @@ export default function PopularCards() {
                         title={product.title}
                         sale={product.sale}
                         price={product.price}
+                        art={product.art}
                     />
                 ))}
             </div>
