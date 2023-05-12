@@ -32,7 +32,7 @@ Route::post('/login', [UserController::class, 'authUser']);
 Route::get('/slider', [OtherController::class, 'showSlider']);
 Route::get('/posts', [OtherController::class, 'showPost']);
 Route::get('/post/card/{id}', [OtherController::class, 'getPostById']);
-Route::post('/repair', [OtherController::class, 'getRecordRepair']);
+Route::post('/repair/create', [OtherController::class, 'createRecordRepair']);
 
 //Auth User function
 Route::middleware(['auth:api'])->group(function () {
@@ -40,6 +40,8 @@ Route::middleware(['auth:api'])->group(function () {
     Route::patch('/profile/change/password', [ProfileController::class, 'changeUserPassword']);
     Route::patch('/profile/change/info', [ProfileController::class, 'updateUserData']);
     Route::get('/orders', [OtherController::class, 'getOrders']);
+    Route::post('/featured/create', [OtherController::class, 'createFeaturedProduct']);
+    Route::get('/featured/get', [OtherController::class, 'getFeaturedProduct']);
 });
 
 //Admin function

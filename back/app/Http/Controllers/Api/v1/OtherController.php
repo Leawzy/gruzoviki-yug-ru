@@ -3,14 +3,19 @@
 namespace App\Http\Controllers\Api\v1;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\Featured\FeaturedProductResource;
 use App\Http\Resources\Orders\OrderResource;
 use App\Http\Resources\Other\PostResource;
 use App\Http\Resources\Other\SliderResource;
+use App\Models\FeaturedProduct;
+use App\Models\FeaturedProductList;
 use App\Models\Order;
 use App\Models\Post;
+use App\Models\Product;
 use App\Models\Repair;
 use App\Models\Slider;
 use App\Models\User;
+use http\Env\Response;
 use Illuminate\Http\Request;
 use Tymon\JWTAuth\Facades\JWTAuth;
 
@@ -44,7 +49,7 @@ class OtherController extends Controller
         return 'null';
     }
 
-    public function getRecordRepair(Request $request)
+    public function createRecordRepair(Request $request)
     {
         $token = JWTAuth::parseToken();
         $user = $token->authenticate();
@@ -74,4 +79,46 @@ class OtherController extends Controller
             'message' => "Вы успешно записались"
         ], 200);
     }
+
+    public function createFeaturedProduct(Request $request)
+    {
+        $token = JWTAuth::parseToken();
+        $user = $token->authenticate();
+
+        $data = $request->validate([
+            'productId' => ['required', 'integer'],
+        ]);
+
+        $featured = FeaturedProduct::firstOrCreate([
+            'user_id' => $user->id,
+        ]);
+
+        $product = Product::findOrFail($data['productId']);
+
+        if (FeaturedProductList::where('product_id', $product->id)->exists()) {
+            return response()->json([
+                'message' => "Товар '{$product->title}' уже в избранном",
+            ]);
+        }
+
+        FeaturedProductList::create([
+            'product_id' => $product->id,
+            'featured_products_id' => $featured->id,
+        ]);
+
+        return response()->json([
+            'message' => "Товар '{$product->title}' успешно добавлен в избранное",
+        ]);
+    }
+
+    public function getFeaturedProduct()
+    {
+        $token = JWTAuth::parseToken();
+        $user = $token->authenticate();
+
+        $featured = FeaturedProduct::where('user_id', $user->id)->first();
+
+        return new FeaturedProductResource($featured);
+    }
+
 }
