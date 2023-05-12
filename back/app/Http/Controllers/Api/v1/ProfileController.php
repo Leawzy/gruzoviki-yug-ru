@@ -54,10 +54,10 @@ class ProfileController extends Controller
         $token = JWTAuth::parseToken();
         $user = $token->authenticate();
         return [
-            'firstName' => $user->firstName,
-            'lastName' => $user->lastName,
+            'firstName' => $user->first_name,
+            'lastName' => $user->last_name,
             'email' => $user->email,
-            'phoneNumber' => $user->phoneNumber,
+            'phoneNumber' => $user->phone_number,
             'role' => $user->role
         ];
     }
@@ -208,10 +208,10 @@ class ProfileController extends Controller
         $user = $token->authenticate();
 
         if ($user) {
-            $request['firstName'] === null ?  : $user->firstName = $request['firstName'];
-            $request['lastName'] === null ?  : $user->lastName = $request['lastName'];
+            $request['firstName'] === null ?  : $user->first_name = $request['firstName'];
+            $request['lastName'] === null ?  : $user->last_name = $request['lastName'];
             $request['email'] === null ?  : $user->email = $request['email'];
-            $request['phoneNumber'] === null ?  : $user->phoneNumber = $request['phoneNumber'];
+            $request['phoneNumber'] === null ?  : $user->phone_number = $request['phoneNumber'];
             $user->save();
             return response()->json([
                 'message' => 'Данные успешно обновлены',

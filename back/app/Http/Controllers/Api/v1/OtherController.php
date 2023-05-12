@@ -39,13 +39,13 @@ class OtherController extends Controller
     {
         $token = JWTAuth::parseToken();
         $user = $token->authenticate();
-        $order = Order::where(["userId" => $user->id])->get();
+        $order = Order::where(["user_id" => $user->id])->get();
 
         if ($order) {
             return OrderResource::collection($order);
         }
 
-        return 'null';
+        return null;
     }
 
     public function createRecordRepair(Request $request)

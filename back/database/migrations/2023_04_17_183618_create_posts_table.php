@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('slug');
             $table->string('title')
                 ->unique();
-            $table->string('shortDesc');
+            $table->string('short_desc');
             $table->text('description');
             $table->string('img')
                 ->nullable();

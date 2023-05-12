@@ -20,14 +20,14 @@ class ProductResource extends JsonResource
         return [
             'id' => $this->id,
             'title' => $this->title,
-            'shortDesc' => $this->shortDesc,
+            'shortDesc' => $this->short_desc,
             'price' => $this->price,
             'quantity' => $this->quantity,
             'img' => $this->img === null ? null : $this->imageUrl,
             'brand' => new BrandResource($this->brand),
             'art' => $this->art,
             'property' => $this->properties,
-            'popular' => $this->isPopular,
+            'popular' => $this->is_popular,
             'category' => new CategoryResource($this->category),
         ];
     }
