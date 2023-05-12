@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources\Featured;
 
+use App\Http\Resources\Product\ProductResource;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
@@ -10,15 +11,10 @@ class FeaturedProductListResource extends JsonResource
     /**
      * Transform the resource into an array.
      *
-     * @return array<string, mixed>
+     * @return ProductResource
      */
-    public function toArray(Request $request): array
+    public function toArray(Request $request): ProductResource
     {
-        return [
-            'id' => $this->product->id,
-            'title' => $this->product->title,
-            'price' => $this->product->price,
-            'img' => $this->product->imageUrl,
-        ];
+        return new ProductResource($this->product);
     }
 }
