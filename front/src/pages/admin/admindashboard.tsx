@@ -8,7 +8,7 @@ import { withAuth } from '../../utils/withAuth';
 import { withAuthAdmin } from '../../utils/withAuthAdmin';
 import cn from './style.module.scss';
 
-function Admin() {
+function AdminDashboard() {
     const { users } = useGetUserHook();
     const { brand } = useGetBrandHook();
 
@@ -23,4 +23,4 @@ function Admin() {
     );
 }
 
-export default withAuth(withAuthAdmin(Admin));
+export default withAuth(withAuthAdmin(AdminDashboard));
