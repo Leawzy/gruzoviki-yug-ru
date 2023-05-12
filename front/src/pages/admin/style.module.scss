@@ -52,7 +52,8 @@
 
   .inputNameCategory {
     width: 400px;
-    height: 32px;
+    height: 52px;
+    padding-left: 8px;
     margin-bottom: 10px;
   }
 
@@ -66,7 +67,7 @@
 
   .categoryAddInputs {
     input {
-      padding: 5px 30px;
+      padding: 8px 30px;
       margin: 0 10px 8px;
     }
   }
@@ -83,11 +84,11 @@
     margin-top: 22px;
     display: flex;
 
-    button:first-child {
+    button:last-child  {
       @include addButtonAdmin();
     }
 
-    button:last-child {
+    button:first-child {
       margin-left: 30px;
       @include cancelButtonAdmin();
     }
@@ -283,5 +284,61 @@
       cursor: pointer;
       border-radius: 2px;
     }
+  }
+}
+
+.modalWindow {
+  display: flex;
+  flex-direction: column;
+  .ModalWindowInput {
+    padding-bottom: 20px;
+  }
+  .FileInput {
+    position: relative;
+    display: inline-block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 33px;
+    .inputFileBtn {
+      position: relative;
+      display: inline-block;
+      cursor: pointer;
+      outline: none;
+      text-decoration: none;
+      font-size: 14px;
+      vertical-align: middle;
+      color: rgb(255 255 255);
+      text-align: center;
+      border-radius: 4px;
+      background-color: #2d85de;
+      line-height: 22px;
+      height: 40px;
+      padding: 10px 20px;
+      box-sizing: border-box;
+      border: none;
+      margin: 0;
+      &:hover {
+        background-color: #2abf52;
+      }
+    }
+    input[type=file] {
+      position: absolute;
+      z-index: -1;
+      opacity: 0;
+      display: block;
+      width: 0;
+      height: 0;
+    }
+  }
+  .ModalWindowTextArea {
+    width: 480px;
+    height: 280px;
+    border: 1px solid #6E6E6E;
+    resize: none;
+    padding-top: 10px;
+    padding-left: 8px;
+    padding-right: 8px;
+    border-radius: 8px;
+    margin-bottom: 20px;
   }
 }
