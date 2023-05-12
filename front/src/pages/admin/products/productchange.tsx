@@ -9,6 +9,7 @@ import { useSendChangeHook } from '../../../hooks/admin/handlers/useSendChangeHo
 import { useGetProductsHook } from '../../../hooks/admin/useGetProductsHook';
 import { withAuth } from '../../../utils/withAuth';
 import { withAuthAdmin } from '../../../utils/withAuthAdmin';
+import cn from '../style.module.scss';
 
 function ProductChange() {
     const { products } = useGetProductsHook();
@@ -116,12 +117,45 @@ function ProductChange() {
                     columns={columns}
                 />
                 <Dialog open={openModal} onClose={handleCloseModal}>
-                    <DialogContent>
+                    <DialogContent className={cn.modalWindow}>
                         <TextField
-                            label="Название бренда"
+                            label="Название Продукта"
+                            className={cn.ModalWindowInput}
                             value={(selectedRow?.title as string) || ''}
                             onChange={e => {
                                 setSelectedRow(prev => ({ ...prev, title: e.target.value }));
+                            }}
+                        />
+                        <TextField
+                            label="Артикул"
+                            className={cn.ModalWindowInput}
+                            value={(selectedRow?.art as string) || ''}
+                            onChange={e => {
+                                setSelectedRow(prev => ({ ...prev, art: e.target.value }));
+                            }}
+                        />
+                        <TextField
+                            label="Короткое описание"
+                            className={cn.ModalWindowInput}
+                            value={(selectedRow?.shortDesc as string) || ''}
+                            onChange={e => {
+                                setSelectedRow(prev => ({ ...prev, shortDesc: e.target.value }));
+                            }}
+                        />
+                        <TextField
+                            label="Цена"
+                            className={cn.ModalWindowInput}
+                            value={(selectedRow?.price as string) || ''}
+                            onChange={e => {
+                                setSelectedRow(prev => ({ ...prev, price: e.target.value }));
+                            }}
+                        />
+                        <TextField
+                            label="Кол-во"
+                            className={cn.ModalWindowInput}
+                            value={(selectedRow?.quantity as string) || ''}
+                            onChange={e => {
+                                setSelectedRow(prev => ({ ...prev, quantity: e.target.value }));
                             }}
                         />
                         {selectedImage === undefined ? (
@@ -133,7 +167,10 @@ function ProductChange() {
                         ) : (
                             <img src={selectedImageUrl} height={280} alt="Выбранное изображение" />
                         )}
-                        <input type="file" accept="image/webp" onChange={handleFileChange} />
+                        <label className={cn.FileInput}>
+                            <input type="file" accept="image/webp" onChange={handleFileChange} />
+                            <span className={cn.inputFileBtn}>Выберите файл</span>
+                        </label>
                     </DialogContent>
                     <DialogActions>
                         <Button onClick={handleCloseModal}>Отмена</Button>

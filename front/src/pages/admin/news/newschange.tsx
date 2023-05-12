@@ -9,6 +9,7 @@ import { useSendChangeHook } from '../../../hooks/admin/handlers/useSendChangeHo
 import { useGetNewsHook } from '../../../hooks/admin/useGetNewsHook';
 import { withAuth } from '../../../utils/withAuth';
 import { withAuthAdmin } from '../../../utils/withAuthAdmin';
+import cn from '../style.module.scss';
 
 function NewsChange() {
     const { news } = useGetNewsHook();
@@ -94,10 +95,11 @@ function NewsChange() {
                     columns={columns}
                 />
                 <Dialog open={openModal} onClose={handleCloseModal}>
-                    <DialogContent>
+                    <DialogContent className={cn.modalWindow}>
                         <TextField
                             label="Название новости"
                             value={(selectedRow?.title as string) || ''}
+                            className={cn.ModalWindowInput}
                             onChange={e => {
                                 setSelectedRow(prev => ({ ...prev, title: e.target.value }));
                             }}
@@ -105,12 +107,13 @@ function NewsChange() {
                         <TextField
                             label="Короткое описание новости"
                             value={(selectedRow?.shortDesc as string) || ''}
+                            className={cn.ModalWindowInput}
                             onChange={e => {
                                 setSelectedRow(prev => ({ ...prev, shortDesc: e.target.value }));
                             }}
                         />
                         <textarea
-                            style={{ resize: 'none', width: '420px', height: '300px' }}
+                            className={cn.ModalWindowTextArea}
                             value={(selectedRow?.description as string) || ''}
                             onChange={e => {
                                 setSelectedRow(prev => ({ ...prev, description: e.target.value }));
@@ -125,7 +128,10 @@ function NewsChange() {
                         ) : (
                             <img src={selectedImageUrl} height={280} alt="Выбранное изображение" />
                         )}
-                        <input type="file" accept="image/webp" onChange={handleFileChange} />
+                        <label className={cn.FileInput}>
+                            <input type="file" accept="image/webp" onChange={handleFileChange} />
+                            <span className={cn.inputFileBtn}>Выберите файл</span>
+                        </label>
                     </DialogContent>
                     <DialogActions>
                         <Button style={{ textAlign: 'left' }} onClick={handleCloseModal}>
