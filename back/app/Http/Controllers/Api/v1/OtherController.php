@@ -120,4 +120,26 @@ class OtherController extends Controller
         return new FeaturedProductResource($featured);
     }
 
+    public function deleteFeaturedProduct(Request $request)
+    {
+        $data = $request->validate([
+            'productId' => ["required", "integer"]
+        ]);
+
+        $token = JWTAuth::parseToken();
+        $user = $token->authenticate();
+
+        $product = Product::findOrFail($data['productId']);
+
+        $featured = FeaturedProduct::where('user_id', $user->id)->firstOrFail();
+
+        $featuredProduct = FeaturedProductList::where('featured_products_id', $featured->id)
+            ->where('product_id', $product->id)
+            ->delete();
+
+
+        return response()->json([
+            'message' => "Товар '{$product->title}' успешно удален из избранного",
+        ], 200);
+    }
 }

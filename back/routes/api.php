@@ -42,6 +42,7 @@ Route::middleware(['auth:api'])->group(function () {
     Route::get('/orders', [OtherController::class, 'getOrders']);
     Route::post('/featured/create', [OtherController::class, 'createFeaturedProduct']);
     Route::get('/featured/get', [OtherController::class, 'getFeaturedProduct']);
+    Route::delete('/featured/delete', [OtherController::class, 'deleteFeaturedProduct']);
 });
 
 //Admin function
