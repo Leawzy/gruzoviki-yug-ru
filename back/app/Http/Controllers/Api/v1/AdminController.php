@@ -296,7 +296,7 @@ class AdminController extends Controller
 
         $post = Post::create([
             'title' => $data['title'],
-            'shortDesc' => $data['shortDesc'],
+            'short_desc' => $data['shortDesc'],
             'description' => $data['description']
         ]);
 
@@ -321,7 +321,7 @@ class AdminController extends Controller
 
         if ($post) {
             $request['title'] === null ?: $post->title = $request['title'];
-            $request['shortDesc'] === null ?: $post->shortDesc = $request['shortDesc'];
+            $request['shortDesc'] === null ?: $post->short_desc = $request['shortDesc'];
             $request['description'] === null ?: $post->description = $request['description'];
             $post->save();
             if ($request->hasFile('file')) {
@@ -376,12 +376,12 @@ class AdminController extends Controller
 
         $product = Product::create([
             'title' => $data['title'],
-            'shortDesc' => $data['shortDesc'],
+            'short_desc' => $data['shortDesc'],
             'price' => $data['price'],
             'quantity' => $data['quantity'],
             'art' => $data['art'],
             'properties' => $data['property'],
-            'isPopular' => $data['isPopular'],
+            'is_popular' => $data['isPopular'],
             'brand_id' => Brand::query()->where('id', $data['brandId'])->value('id'),
             'category_id' => Category::query()->where('id', $data['categoryId'])->value('id'),
         ]);
@@ -407,12 +407,12 @@ class AdminController extends Controller
 
         if ($product) {
             $request['title'] === null ?: $product->title = $request['title'];
-            $request['shortDesc'] === null ?: $product->shortDesc = $request['shortDesc'];
+            $request['shortDesc'] === null ?: $product->short_desc = $request['shortDesc'];
             $request['price'] === null ?: $product->price = $request['price'];
             $request['quantity'] === null ?: $product->quantity = $request['quantity'];
             $request['art'] === null ?: $product->art = $request['art'];
             $request['property'] === null ?: $product->properties = $request['property'];
-            $request['isPopular'] === null ?: $product->isPopular = $request['isPopular'];
+            $request['isPopular'] === null ?: $product->is_popular = $request['isPopular'];
             $request['brandId'] === null ?: $product->brand_id = Brand::query()->where('id',
                 $request['brandId'])->value('id');
             $request['categoryId'] === null ?: $product->category_id = Category::query()->where('id',

@@ -2,7 +2,6 @@
 
 use App\Models\Brand;
 use App\Models\Category;
-use App\Models\Characteristic;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -20,7 +19,7 @@ return new class extends Migration
             $table->string('title');
             $table->string('img')
                 ->nullable();
-            $table->string('shortDesc');
+            $table->string('short_desc');
 
             $table->unsignedInteger('quantity')
                 ->default(0);
@@ -29,7 +28,7 @@ return new class extends Migration
             $table->string('art');
             $table->json('properties')
                 ->nullable();
-            $table->boolean('isPopular')
+            $table->boolean('is_popular')
                 ->default(false);
 
             $table->foreignIdFor(Brand::class)

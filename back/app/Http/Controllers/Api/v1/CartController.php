@@ -24,7 +24,7 @@ class CartController extends Controller
            'date' => $data['date'],
            'total' => $data['total'],
            'delivery' => $data['delivery'],
-           'paymentMethod' => $data['paymentMethod'],
+           'payment_method' => $data['paymentMethod'],
            'status' => $data['status'],
         ]);
 

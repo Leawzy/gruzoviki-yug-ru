@@ -16,14 +16,14 @@ class Product extends Model
         'slug',
         'title',
         'img',
-        'shortDesc',
+        'short_desc',
         'quantity',
         'price',
         'art',
         'brand_id',
         'category_id',
         'properties',
-        'isPopular',
+        'is_popular',
     ];
 
     protected $casts = [

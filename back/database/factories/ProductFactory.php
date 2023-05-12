@@ -29,12 +29,12 @@ class ProductFactory extends Factory
             'category_id' => Category::query()->where('id', 1)->value('id'),
             'slug' => 'SINTEC PLATINUM 5W-40',
             'title' => 'SINTEC PLATINUM 5W-40',
-            'shortDesc' => 'Синтетическое 4 л',
+            'short_desc' => 'Синтетическое 4 л',
             'quantity' => '10',
             'price' => '2019',
             'art' => '1',
             'img' => 'productImg/tovar-1.svg',
-            'isPopular' => false,
+            'is_popular' => false,
             'properties' => $propertyOil
         ];
     }

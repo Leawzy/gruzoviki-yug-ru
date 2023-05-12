@@ -21,7 +21,7 @@ class ProductController extends Controller
 
     public function getPopularProduct()
     {
-        return ProductResource::collection(Product::where('isPopular', true)->get());
+        return ProductResource::collection(Product::where('is_popular', true)->get());
     }
 
     public function getCardProduct($id)
