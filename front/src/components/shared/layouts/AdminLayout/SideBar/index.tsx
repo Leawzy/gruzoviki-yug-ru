@@ -35,7 +35,7 @@ export default function SideBar() {
             <div className={cn.center}>
                 <ul>
                     <p className={cn.title}>Главная</p>
-                    <Link href="/admin/admin">
+                    <Link href="/admin/admindashboard">
                         <li>
                             <DashboardIcon className={cn.icon} />
                             <span>Панель Управления</span>
