@@ -10,7 +10,7 @@ export function useAdminAddHook(url: string) {
     const route = useRouter();
 
     const cancelCreate = useCallback(async () => {
-        await route.replace('/admin/admin');
+        await route.replace('/admin/admindashboard');
     }, [route]);
 
     const handleFileChange = useCallback((event: React.ChangeEvent<HTMLInputElement>) => {
