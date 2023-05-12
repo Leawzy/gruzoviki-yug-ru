@@ -4,4 +4,6 @@ export interface News {
     img: string;
     title: string;
     short_desc: string;
+    shortDesc?: string;
+    description?: string;
 }

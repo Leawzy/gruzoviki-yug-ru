@@ -1,15 +1,19 @@
-import AddPhotoAlternateIcon from '@mui/icons-material/AddPhotoAlternate';
-import CategoryIcon from '@mui/icons-material/Category';
-import DashboardIcon from '@mui/icons-material/Dashboard';
-import ExitToAppIcon from '@mui/icons-material/ExitToApp';
-import Inventory2Icon from '@mui/icons-material/Inventory2';
-import PersonOutlineIcon from '@mui/icons-material/PersonOutline';
-import RepeatOneIcon from '@mui/icons-material/RepeatOne';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { destroyCookie } from 'nookies';
 import React from 'react';
 
+import {
+    AddPhotoAlternateIcon,
+    AddShoppingCartIcon,
+    CategoryIcon,
+    DashboardIcon,
+    ExitToAppIcon,
+    Inventory2Icon,
+    NewspaperIcon,
+    PersonOutlineIcon,
+    RepeatOneIcon,
+} from '../../../../../utils/getIcons';
 import cn from './style.module.scss';
 
 export default function SideBar() {
@@ -38,65 +42,71 @@ export default function SideBar() {
                         </li>
                     </Link>
                     <p className={cn.title}>Добавление</p>
-                    <Link href="/admin/users/userAdd">
+                    <Link href="/admin/users/useradd">
                         <li>
                             <PersonOutlineIcon className={cn.icon} />
                             <span>Добавить пользователя</span>
                         </li>
                     </Link>
-                    <Link href="/admin/brand/brandAdd">
+                    <Link href="/admin/brand/brandadd">
                         <li>
                             <Inventory2Icon className={cn.icon} />
                             <span>Добавить бренд</span>
                         </li>
                     </Link>
-                    <Link href="/admin/category/categoryAdd">
+                    <Link href="/admin/category/categoryadd">
                         <li>
                             <CategoryIcon className={cn.icon} />
                             <span>Добавить категорию</span>
                         </li>
                     </Link>
-                    <Link href="/admin/slider/sliderAdd">
+                    <Link href="/admin/slider/slideradd">
                         <li>
                             <AddPhotoAlternateIcon className={cn.icon} />
                             <span>Добавить слайдер</span>
                         </li>
                     </Link>
-                    <Link href="/admin/products/productAdd">
+                    <Link href="/admin/products/productadd">
                         <li>
-                            <AddPhotoAlternateIcon className={cn.icon} />
+                            <AddShoppingCartIcon className={cn.icon} />
                             <span>Добавить продукт</span>
                         </li>
                     </Link>
                     <p className={cn.title}>Редактировать</p>
-                    <Link href="/admin/users/userChange">
+                    <Link href="/admin/users/userchange">
                         <li>
                             <PersonOutlineIcon className={cn.icon} />
                             <span>Отредактировать пользователя</span>
                         </li>
                     </Link>
-                    <Link href="/admin/brand/brandChange">
+                    <Link href="/admin/brand/brandchange">
                         <li>
                             <Inventory2Icon className={cn.icon} />
                             <span>Отредактировать бренд</span>
                         </li>
                     </Link>
-                    <Link href="/admin/category/categoryChange">
+                    <Link href="/admin/category/categorychange">
                         <li>
                             <CategoryIcon className={cn.icon} />
                             <span>Отредактировать категорию</span>
                         </li>
                     </Link>
-                    <Link href="/admin/slider/sliderChange">
+                    <Link href="/admin/slider/sliderchange">
                         <li>
                             <AddPhotoAlternateIcon className={cn.icon} />
                             <span>Отредактировать слайдер</span>
                         </li>
                     </Link>
-                    <Link href="/admin/products/productChange">
+                    <Link href="/admin/products/productchange">
                         <li>
-                            <AddPhotoAlternateIcon className={cn.icon} />
+                            <AddShoppingCartIcon className={cn.icon} />
                             <span>Отредактировать продукты</span>
+                        </li>
+                    </Link>
+                    <Link href="/admin/news/newschange">
+                        <li>
+                            <NewspaperIcon className={cn.icon} />
+                            <span>Отредактировать новости</span>
                         </li>
                     </Link>
                     <p className={cn.title}>Остальное</p>

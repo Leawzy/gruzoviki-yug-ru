@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 
-import { adminFetch, setAuthToken } from '../axios/global';
-import { AdminTypeUser } from '../types/AdminType';
+import { adminFetch, setAuthToken } from '../../axios/global';
+import { AdminTypeUser } from '../../types/AdminType';
 
 function useGetUserHook() {
     const [users, setUsers] = useState<AdminTypeUser[]>([]);

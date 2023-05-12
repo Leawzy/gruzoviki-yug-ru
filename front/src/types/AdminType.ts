@@ -1,4 +1,5 @@
 export interface AdminTypeUser {
+    address: string;
     phoneNumber: string;
     role: string;
     email: string;

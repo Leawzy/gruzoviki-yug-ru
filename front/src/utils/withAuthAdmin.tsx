@@ -1,7 +1,7 @@
 import { useRouter } from 'next/router';
 import React from 'react';
 
-import { useProfileData } from '../hooks/useGetProfileHook';
+import { useProfileData } from '../hooks/admin/useGetProfileHook';
 
 type Props = Record<string, unknown>;
 

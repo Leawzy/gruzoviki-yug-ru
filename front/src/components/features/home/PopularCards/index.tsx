@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { usePopularList } from '../../../../hooks/usePopularCardHook';
+import { usePopularList } from '../../../../hooks/cards/usePopularCardHook';
 import ProductCard from '../../../core/card/ProductCard';
 import SkeletonCard from './SkeletonContainer';
 import cn from './style.module.scss';

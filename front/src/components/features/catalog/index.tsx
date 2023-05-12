@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import ReactPaginate from 'react-paginate';
 
-import { usePaginationProduct } from '../../../hooks/usePaginationProductHook';
+import { usePaginationProduct } from '../../../hooks/cards/usePaginationProductHook';
 import ProductCard from '../../core/card/ProductCard';
 import BaseLayout from '../../shared/layouts/BaseLayout';
 import CatalogFilter from './Filter';

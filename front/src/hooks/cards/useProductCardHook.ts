@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 
-import { apiFetch } from '../axios/global';
-import { Product } from '../types/ProductType';
+import { apiFetch } from '../../axios/global';
+import { Product } from '../../types/ProductType';
 
 function useProductList() {
     const [productList, setProductList] = useState<Product[]>([]);

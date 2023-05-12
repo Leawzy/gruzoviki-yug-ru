@@ -11,13 +11,14 @@ function UserAdd() {
     const [firstName, setFirstName] = useState('');
     const [lastName, setLastName] = useState('');
     const [password, setPassword] = useState('');
+    const [address, setAddress] = useState('');
     const [email, setEmail] = useState('');
     const [phoneNumber, setPhoneNumber] = useState('');
     const [role, setRole] = useState('user');
     const route = useRouter();
 
     const cancelCreate = async () => {
-        await route.replace('/controlpanel');
+        await route.replace('/admin/admin');
     };
 
     async function createUserHandler() {
@@ -28,6 +29,7 @@ function UserAdd() {
                 data: {
                     firstName,
                     lastName,
+                    address,
                     password,
                     email,
                     phoneNumber,
@@ -87,6 +89,7 @@ function UserAdd() {
                     maxLength={11}
                     placeholder="71234567890"
                 />
+                <input onChange={e => setAddress(e.target.value)} type="text" placeholder="Адрес" />
                 <select onChange={e => setRole(e.target.value)}>
                     <option>Выберете роль</option>
                     <option value="user">User</option>

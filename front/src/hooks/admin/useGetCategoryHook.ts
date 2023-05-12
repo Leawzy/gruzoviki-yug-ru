@@ -1,12 +1,12 @@
 import { useEffect, useState } from 'react';
 
-import { adminFetch, setAuthToken } from '../axios/global';
-import { CategoryTypeIF } from '../types/CategoryType';
+import { adminFetch, setAuthToken } from '../../axios/global';
+import { CategoryTypeIF } from '../../types/CategoryType';
 
 function useGetCategoryHook() {
     const [category, setCategory] = useState<CategoryTypeIF[]>([]);
     useEffect(() => {
-        const getProfile = async () => {
+        const getCategory = async () => {
             setAuthToken();
             try {
                 const res: { data: { data: CategoryTypeIF[] } } = await adminFetch.get(
@@ -17,7 +17,7 @@ function useGetCategoryHook() {
                 console.error(e);
             }
         };
-        getProfile().catch(e => console.error(e));
+        getCategory().catch(e => console.error(e));
     }, []);
 
     return { category };

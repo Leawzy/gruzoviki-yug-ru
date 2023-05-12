@@ -1,7 +1,7 @@
 import Image from 'next/image';
 import React from 'react';
 
-import { calendar, call, invoices, mail } from '../../../utils/images';
+import { calendar, call, invoices, mail } from '../../../utils/getImages';
 import cn from './style.module.scss';
 
 export default function Contact() {

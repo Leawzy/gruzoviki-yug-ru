@@ -7,6 +7,7 @@
   grid-template-areas:
     "block-1 block-2 block-5"
     "block-3 block-4 block-5"
+    "block-6 block-6 block-5"
     ". . .";
 }
 
@@ -20,6 +21,10 @@
 
 .blockThird {
   grid-area: block-3;
+}
+
+.blockSix{
+  grid-area: block-6;
 }
 
 .blockFourth {
@@ -41,5 +46,57 @@
     font-weight: 600;
     color: #6e6e6e;
     text-transform: uppercase;
+  }
+}
+
+.profileBlockForm {
+  display: flex;
+  flex-direction: column;
+
+  label {
+    font-size: 18px;
+    font-weight: 800;
+  }
+
+  input {
+    margin-top: 8px;
+    border: 1px solid #2f2f2f;
+    border-radius: 4px;
+    outline: none;
+    padding-left: 8px;
+    width: 410px;
+    height: 48px;
+    &:active {
+     border: 1px solid #437FC8;
+    }
+    &:focus {
+      border: 1px solid #437FC8;
+    }
+  }
+}
+
+.profileBlockFormButton {
+  display: flex;
+  flex-direction: column;
+  button:first-child {
+    margin: 34px auto 40px;
+    width: 250px;
+    height: 48px;
+    border: none;
+    background: rgba(194, 33, 33, 0.82);
+    border-radius: 6px;
+    color: white;
+    cursor: pointer;
+  }
+  button:last-child {
+    margin-left: auto;
+    margin-right: auto;
+    width: 250px;
+    height: 48px;
+    border: none;
+    background: #437FC8;
+    border-radius: 6px;
+    color: white;
+    cursor: pointer;
   }
 }

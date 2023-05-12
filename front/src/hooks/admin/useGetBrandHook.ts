@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 
-import { adminFetch, setAuthToken } from '../axios/global';
-import { AdminTypeBrand } from '../types/AdminType';
+import { adminFetch, setAuthToken } from '../../axios/global';
+import { AdminTypeBrand } from '../../types/AdminType';
 
 function useGetBrandHook() {
     const [brand, setBrand] = useState<AdminTypeBrand[]>([]);

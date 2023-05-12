@@ -1,22 +1,38 @@
-import { useRouter } from 'next/router';
-import { destroyCookie } from 'nookies';
 import React, { useState } from 'react';
-import { toast, ToastContainer } from 'react-toastify';
+import { ToastContainer } from 'react-toastify';
 
-import { apiFetch, setAuthToken } from '../../../../axios/global';
+import { useSendPasswordProfileHook } from '../../../../hooks/actions/useSendPasswordProfileHook';
+import { useSendProfileValuesHook } from '../../../../hooks/actions/useSendProfleValuesHook';
 import { ProfileType } from '../../../../types/ProfileType';
-import ProfileForm from '../../../core/forms/ProfileForm';
+import ChangePasswordForm from '../../../core/forms/ChangePasswordForm';
 import cn from './style.module.scss';
 
 interface ProfileLayoutProps {
     profileData: ProfileType;
+    changeForm: boolean;
+    setChangeForm: (e: boolean) => void;
 }
 
-export default function ProfileLayout({ profileData }: ProfileLayoutProps) {
-    const router = useRouter();
-    const [oldPassword, setOldPassword] = useState('');
-    const [newPassword, setNewPassword] = useState('');
-    const [confirmPassword, setConfirmPassword] = useState('');
+export default function ProfileLayout({
+    profileData,
+    changeForm,
+    setChangeForm,
+}: ProfileLayoutProps) {
+    const [firstName, setFirstName] = useState(profileData?.firstName);
+    const [lastName, setLastName] = useState(profileData.lastName || 'Пустое поле');
+    const [address, setAddress] = useState(profileData.address || 'Пустое поле');
+    const [email, setEmail] = useState(profileData.email);
+    const [phoneNumber, setPhoneNumber] = useState(profileData.phone || 'Пустое поле');
+    const {
+        oldPassword,
+        setOldPassword,
+        newPassword,
+        setNewPassword,
+        confirmPassword,
+        setConfirmPassword,
+        submitHandler,
+    } = useSendPasswordProfileHook();
+    const { handlerFormSubmit } = useSendProfileValuesHook();
 
     const changeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
         const { name, value } = e.target;
@@ -35,86 +51,134 @@ export default function ProfileLayout({ profileData }: ProfileLayoutProps) {
         }
     };
 
-    const submitHandler = async (e: React.FormEvent<HTMLFormElement>) => {
-        e.preventDefault();
-
-        if (newPassword !== confirmPassword) {
-            toast.error('Пароли не совпадают', {
-                position: 'bottom-right',
-                autoClose: 3400,
-                hideProgressBar: false,
-                closeOnClick: true,
-                pauseOnHover: true,
-                draggable: true,
-                progress: undefined,
-                theme: 'light',
-            });
-        }
-        try {
-            setAuthToken();
-            const res = await apiFetch('api/profile/change/password', {
-                method: 'patch',
-                data: {
-                    oldPassword,
-                    newPassword,
-                },
-            });
-            if (res.status === 200) {
-                destroyCookie(null, 'token');
-                await router.push('/authorization');
-            } else {
-                toast.error('Ошибка при смене пароля', {
-                    position: 'bottom-right',
-                    autoClose: 3400,
-                    hideProgressBar: false,
-                    closeOnClick: true,
-                    pauseOnHover: true,
-                    draggable: true,
-                    progress: undefined,
-                    theme: 'light',
-                });
-            }
-        } catch (e) {
-            console.error(e);
-        }
+    const handlerSaveValue = () => {
+        handlerFormSubmit(
+            firstName,
+            lastName,
+            address,
+            Number(email),
+            String(Number(phoneNumber))
+        ).catch(e => console.error(e));
     };
 
     return (
         <div className={cn.profileContainer}>
             <ToastContainer />
-            <div className={`${cn.profileBlock} ${cn.blockFirst}`}>
-                <p className={cn.profileTitle}>ФИО</p>
-                <p className={cn.profileData}>
-                    {!profileData.firstName
-                        ? 'Поле не заполнено'
-                        : `${profileData.firstName} ${profileData.lastName}`}
-                </p>
-            </div>
-            <div className={`${cn.profileBlock} ${cn.blockSecond}`}>
-                <p className={cn.profileTitle}>Адрес</p>
-                <p className={cn.profileData}>Поле не заполнено</p>
-            </div>
-            <div className={`${cn.profileBlock} ${cn.blockThird}`}>
-                <p className={cn.profileTitle}>Email</p>
-                <p className={cn.profileData}>
-                    {!profileData.email ? 'Поле не заполнено' : `${profileData.email}`}
-                </p>
-            </div>
-            <div className={`${cn.profileBlock} ${cn.blockFourth}`}>
-                <p className={cn.profileTitle}>Телефон</p>
-                <p className={cn.profileData}>
-                    {!profileData.phone ? 'Поле не заполнено' : `${profileData.phone}`}
-                </p>
-            </div>
-            <div className={` ${cn.profileBlock} ${cn.blockFiftieth}`}>
-                <ProfileForm
-                    submitHandler={submitHandler}
-                    changeHandler={changeHandler}
-                    newPassword={newPassword}
-                    confirmPassword={confirmPassword}
-                    oldPassword={oldPassword}
-                />
-            </div>
+            {changeForm ? (
+                <>
+                    <div
+                        className={`${
+                            !changeForm ? `${cn.profileBlock}` : `${cn.profileBlockForm}`
+                        } ${cn.blockFirst}`}
+                    >
+                        <label>Имя</label>
+                        <input
+                            type="text"
+                            onChange={event => setFirstName(event.target.value)}
+                            value={firstName}
+                            placeholder={profileData.firstName}
+                        />
+                    </div>
+                    <div
+                        className={`${
+                            !changeForm ? `${cn.profileBlock}` : `${cn.profileBlockForm}`
+                        } ${cn.blockSecond}`}
+                    >
+                        <label>Фамилия</label>
+                        <input
+                            type="text"
+                            value={lastName}
+                            onChange={event => setLastName(event.target.value)}
+                            placeholder={profileData.lastName}
+                        />
+                    </div>
+                    <div
+                        className={`${
+                            !changeForm ? `${cn.profileBlock}` : `${cn.profileBlockForm}`
+                        } ${cn.blockSix}`}
+                    >
+                        <label>Адес</label>
+                        <input
+                            type="text"
+                            value={address}
+                            onChange={event => setAddress(event.target.value)}
+                            placeholder={profileData.email}
+                        />
+                    </div>
+                    <div
+                        className={`${
+                            !changeForm ? `${cn.profileBlock}` : `${cn.profileBlockForm}`
+                        } ${cn.blockThird}`}
+                    >
+                        <label>Email</label>
+                        <input
+                            type="text"
+                            value={email}
+                            onChange={event => setEmail(event.target.value)}
+                            placeholder={profileData.email}
+                        />
+                    </div>
+                    <div
+                        className={`${
+                            !changeForm ? `${cn.profileBlock}` : `${cn.profileBlockForm}`
+                        } ${cn.blockFourth}`}
+                    >
+                        <label>Телефон</label>
+                        <input
+                            type="text"
+                            value={phoneNumber}
+                            onChange={event => setPhoneNumber(event.target.value)}
+                            placeholder={String(profileData.phone)}
+                        />
+                    </div>
+                    <div
+                        className={`${
+                            !changeForm ? `${cn.profileBlock}` : `${cn.profileBlockFormButton}`
+                        } ${cn.blockFiftieth}`}
+                    >
+                        <button type="button" onClick={() => setChangeForm(false)}>
+                            Отмена
+                        </button>
+                        <button onClick={handlerSaveValue}>Сохранить изменения</button>
+                    </div>
+                </>
+            ) : (
+                <>
+                    <div className={`${cn.profileBlock} ${cn.blockFirst}`}>
+                        <p className={cn.profileTitle}>ФИО</p>
+                        <p className={cn.profileData}>
+                            {!profileData.firstName
+                                ? 'Поле не заполнено'
+                                : `${profileData.firstName} ${profileData.lastName}`}
+                        </p>
+                    </div>
+                    <div className={`${cn.profileBlock} ${cn.blockSecond}`}>
+                        <p className={cn.profileTitle}>Адрес</p>
+                        <p className={cn.profileData}>Поле не заполнено</p>
+                    </div>
+                    <div className={`${cn.profileBlock} ${cn.blockThird}`}>
+                        <p className={cn.profileTitle}>Email</p>
+                        <p className={cn.profileData}>
+                            {!profileData.email ? 'Поле не заполнено' : `${profileData.email}`}
+                        </p>
+                    </div>
+                    <div className={`${cn.profileBlock} ${cn.blockFourth}`}>
+                        <p className={cn.profileTitle}>Телефон</p>
+                        <p className={cn.profileData}>
+                            {!profileData.phone ? 'Поле не заполнено' : `${profileData.phone}`}
+                        </p>
+                    </div>
+                    <div className={` ${cn.profileBlock} ${cn.blockFiftieth}`}>
+                        <ChangePasswordForm
+                            submitHandler={submitHandler}
+                            changeHandler={changeHandler}
+                            newPassword={newPassword}
+                            confirmPassword={confirmPassword}
+                            oldPassword={oldPassword}
+                        />
+                    </div>
+                </>
+            )}
         </div>
     );
 }

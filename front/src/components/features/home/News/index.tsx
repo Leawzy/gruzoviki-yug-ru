@@ -37,7 +37,7 @@ export default function News() {
                                 <img className={cn.newsLinkImg} src={item.img} alt="News Pic" />
                                 <div className={cn.newsLinkBg}>
                                     <span className={cn.newsTitle}>{item.title}</span>
-                                    <span className={cn.newsDesc}>{item.short_desc}</span>
+                                    <span className={cn.newsDesc}>{item.shortDesc}</span>
                                     <span className={cn.newsTime}>{formattedDate}</span>
                                 </div>
                             </Link>

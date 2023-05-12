@@ -3,8 +3,8 @@ import Link from 'next/link';
 import { destroyCookie, parseCookies } from 'nookies';
 import React, { useEffect, useState } from 'react';
 
-import { useProfileData } from '../../../../../hooks/useGetProfileHook';
-import { account, basket, favorite } from '../../../../../utils/images';
+import { useProfileData } from '../../../../../hooks/admin/useGetProfileHook';
+import { account, basket, favorite } from '../../../../../utils/getImages';
 import cn from './style.module.scss';
 
 export default function Header() {

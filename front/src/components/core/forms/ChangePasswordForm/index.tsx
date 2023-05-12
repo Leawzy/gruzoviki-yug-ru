@@ -10,7 +10,7 @@ interface ProfileFormProps {
     changeHandler: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
-function ProfileForm({
+function ChangePasswordForm({
     submitHandler,
     oldPassword,
     newPassword,
@@ -56,4 +56,4 @@ function ProfileForm({
     );
 }
 
-export default ProfileForm;
+export default ChangePasswordForm;
