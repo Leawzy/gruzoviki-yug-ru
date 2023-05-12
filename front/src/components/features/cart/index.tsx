@@ -38,6 +38,7 @@ export default function Cart() {
                                 img={cartItem.img}
                                 price={cartItem.price}
                                 quantity={cartItem.quantity}
+                                art={cartItem.art}
                             />
                         ))}
                     </div>
