@@ -29,7 +29,7 @@ export default function Header() {
             {profile.role === 'admin' ? (
                 <div className={cn.headerCenterAdmin}>
                     <div>
-                        <Link className={cn.headerCenterAdminLink} href="/admin/admin">
+                        <Link className={cn.headerCenterAdminLink} href="/admin/admindashboard">
                             Панель управления
                         </Link>
                     </div>
@@ -113,7 +113,7 @@ export default function Header() {
                                     )}
                                 </div>
                             </div>
-                            <a className={cn.headerLinkItem}>
+                            <Link href="/favorite" className={cn.headerLinkItem}>
                                 <Image
                                     src={favorite}
                                     className={cn.headerLinkItemIcon}
@@ -122,7 +122,7 @@ export default function Header() {
                                     height={34}
                                     alt="favorite"
                                 />
-                            </a>
+                            </Link>
                             <Link href="/cart" className={cn.headerLinkItem}>
                                 <Image
                                     src={basket}
