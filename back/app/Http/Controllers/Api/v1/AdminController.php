@@ -8,6 +8,7 @@ use App\Http\Resources\Category\CategoryResource;
 use App\Http\Resources\Orders\OrderResource;
 use App\Http\Resources\Other\PostResource;
 use App\Http\Resources\Other\SliderResource;
+use App\Http\Resources\Other\UserResource;
 use App\Http\Resources\Product\ProductResource;
 use App\Models\Brand;
 use App\Models\Category;
@@ -18,16 +19,15 @@ use App\Models\Repair;
 use App\Models\Slider;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 use Illuminate\Support\Facades\Storage;
 
 class AdminController extends Controller
 {
     //User section
-    public function getAllUser(): \Illuminate\Http\JsonResponse
+    public function getAllUser(): AnonymousResourceCollection
     {
-        return response()->json([
-            'data' => User::all()
-        ], 200);
+        return UserResource::collection(User::all());
     }
 
     public function createUser(Request $request): \Illuminate\Http\JsonResponse
