@@ -67,10 +67,12 @@
 
         .shortCatalogFavorite {
           margin-right: 13px;
+
           .icon {
             font-size: 28px;
             cursor: pointer;
           }
+
           .iconIsFav {
             color: #C82132;
           }
@@ -112,25 +114,50 @@
     display: flex;
 
     .productPageButtons {
+      display: flex;
+      align-items: center;
+      margin-left: 10px;
+      align-content: center;
+
       .productPageBuyButtons {
         display: flex;
+        align-content: center;
+        padding: 10px 12px;
+        align-items: center;
+        .cartPageItemRightMinus {
+          @include minusButton();
+        }
+
+        .cartPageItemRightPlus {
+          @include plusButton();
+        }
+        p {
+          padding: 0 10px;
+        }
       }
     }
 
     .productPageInfo {
+      width: 720px;
       padding: 30px 80px;
 
-      .productPagePrice {
-        margin-top: 43px;
-        margin-bottom: 33px;
-        padding: 20px 90px;
-        border-radius: 9px;
-        box-shadow: 0 20px 12px -16px rgba(0, 30, 85, .04), 0 8px 24px 18px rgba(0, 30, 85, .05);
+      .productPageInfoTop {
+        padding: 30px 0;
+        border-bottom: 1px solid #6E6E6E;
+      }
 
-        p {
-          font-size: 22px;
-          font-weight: 700;
+      .productPageInfoBottom {
+        padding-top: 30px;
+
+        span {
+          display: flex;
+          align-items: center;
+          align-content: center;
+          color: #1e1e1e;
+          font-weight: 400;
+          font-size: 16px;
         }
+
       }
 
       .productPageInfoText {
@@ -138,14 +165,32 @@
         align-items: center;
         align-content: center;
         color: #6e6e6e;
-        font-weight: 600;
-        font-size: 14px;
+        font-weight: 400;
+        font-size: 16px;
 
         .productPageInfoSubject {
           color: #1e1e1e;
           font-size: 18px;
-          font-weight: 700;
+          font-weight: 500;
           padding-left: 4px;
+        }
+      }
+    }
+    .productPageTotal {
+      display: flex;
+      background: #FFFFFF;
+      box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+      border-radius: 10px;
+      flex-direction: column;
+      height: 190px;
+      width: 460px;
+
+      .productPagePrice {
+        padding: 10px 20px;
+        margin-bottom: 20px;
+        p {
+          font-size: 28px;
+          font-weight: 700;
         }
       }
     }
