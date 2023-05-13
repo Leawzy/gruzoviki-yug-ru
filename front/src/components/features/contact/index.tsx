@@ -58,15 +58,15 @@ export default function Contact() {
                     <div className={cn.contactPageFormTop}>
                         <label>
                             ФИО
-                            <input type="text" />
+                            <input type="text" required />
                         </label>
                         <label>
                             Телефон
-                            <input type="text" />
+                            <input type="text" required />
                         </label>
                         <label>
                             Почта
-                            <input type="text" />
+                            <input type="email" required />
                         </label>
                         <label>
                             Выберите отдел
@@ -79,7 +79,7 @@ export default function Contact() {
                         </label>
                     </div>
                     <div className={cn.contactPageFormBottom}>
-                        <textarea />
+                        <textarea required />
                         <button>Отправить</button>
                     </div>
                 </form>
