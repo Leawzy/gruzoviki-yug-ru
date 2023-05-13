@@ -28,4 +28,18 @@ class Category extends Model
             $category->slug = $category->slug ?? Str::slug($category->title);
         });
     }
+    public function products()
+    {
+        return $this->hasMany(Product::class);
+    }
+
+    public function delete()
+    {
+        if ($this->products()->exists()) {
+            // Если на категорию есть ссылки из таблицы products, выбрасываем исключение
+            throw new \Exception('Нельзя удалить категорию, на которую ссылаются продукты.');
+        }
+
+        return parent::delete();
+    }
 }
