@@ -22,10 +22,6 @@ const nextConfig = {
         },
     },
 
-    experimental: {
-        enableUndici: true,
-    },
-
     images: {
         disableStaticImages: true,
         dangerouslyAllowSVG: true,
