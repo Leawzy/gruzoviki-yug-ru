@@ -20,6 +20,7 @@ export const useModalHandlerHook = (initialRows: GridRowsProp) => {
             const res = await adminFetch(url, {
                 method: 'delete',
                 data: {
+                    // @ts-ignore
                     id: selectedRow.id as string,
                 },
             });

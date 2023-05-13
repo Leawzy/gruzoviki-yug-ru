@@ -49,7 +49,7 @@ export function useAdminAddHook(url: string) {
                         progress: undefined,
                         theme: 'light',
                     });
-                    await route.replace('/admin/admin');
+                    await route.replace('/admin/dashboard');
                 }
             } catch (e) {
                 console.error(e);
