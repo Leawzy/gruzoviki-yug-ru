@@ -45,6 +45,6 @@ interface CategoryProduct {
     };
 }
 
-interface BrandProduct {
+export interface BrandProduct {
     title: string;
 }

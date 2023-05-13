@@ -5,7 +5,7 @@
 }
 
 @mixin addToCartButton {
-  padding: 12px 28px;
+  padding: 12px 36px;
   background: cornflowerblue;
   color: white;
   border-radius: 10px;
@@ -19,7 +19,7 @@
 }
 
 @mixin removeFromCartButton {
-  padding: 12px 32px;
+  padding: 12px 40px;
   background: #10c44c;
   color: white;
   border: none;

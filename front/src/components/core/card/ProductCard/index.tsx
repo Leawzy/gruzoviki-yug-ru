@@ -1,10 +1,14 @@
 import Image from 'next/image';
 import Link from 'next/link';
-import React, { useEffect } from 'react';
+import { parseCookies } from 'nookies';
+import React, { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 
+import { apiFetch } from '../../../../axios/global';
+import { useGetFavoriteHook } from '../../../../hooks/favorites/useGetFavoriteHook';
 import { addToCart, removeFromCart } from '../../../../redux/actions';
 import { Product } from '../../../../types/ProductType';
+import { FavoriteBorderIcon, FavoriteIcon } from '../../../../utils/getIcons';
 import { noPhoto } from '../../../../utils/getImages';
 import ButtonAdd from '../../buttons/ButtonAdd';
 import ButtonRemove from '../../buttons/ButtonRemove';
@@ -17,23 +21,49 @@ export default function ProductCard({
     img,
     price,
     title,
+    art,
     shortDesc,
 }: Product) {
-    const [addedToCart, setAddedToCart] = React.useState(false);
-
+    const [addedToCart, setAddedToCart] = useState(false);
+    const [IsFavorite, setIsFavorite] = useState(false);
+    const { favoriteList } = useGetFavoriteHook();
+    const cookies = parseCookies();
+    const { token } = cookies;
     const dispatch = useDispatch();
 
     useEffect(() => {
-        const cartItems = JSON.parse(localStorage.getItem('cartItems') || '[]') as Product[];
-        const item = cartItems.find((item: Product) => item.id === id);
-        if (item) {
-            setAddedToCart(true);
+        if (favoriteList) {
+            if (Array.isArray(favoriteList.products)) {
+                favoriteList.products.forEach(item => {
+                    // @ts-ignore
+                    if (item && typeof item.id === 'number' && item.id === id) {
+                        setIsFavorite(true);
+                    }
+                });
+            }
         }
-    }, [id]);
+    }, [favoriteList, id]);
+
+    const handleAddToFavorite = async () => {
+        try {
+            const res = await apiFetch('api/featured/create', {
+                method: 'post',
+                data: { productId: id },
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                },
+            });
+            if (res.status === 200) {
+                setIsFavorite(true);
+            }
+        } catch (e) {
+            console.error(e);
+        }
+    };
 
     const handleAddToCart = () => {
         setAddedToCart(true);
-        dispatch(addToCart(id, title, price, img, Boolean(true), quantity, 1));
+        dispatch(addToCart(id, title, price, img, Boolean(true), quantity, 1, art));
     };
 
     const handleRemoveToCart = () => {
@@ -70,6 +100,15 @@ export default function ProductCard({
             </Link>
             <div className={cn.shortCatalogPrice}>
                 <p className={cn.shortCatalogPriceNum}>{`${price} ₽`}</p>
+                <span className={cn.shortCatalogFavorite}>
+                    <button onClick={handleAddToFavorite}>
+                        {IsFavorite ? (
+                            <FavoriteIcon className={`${cn.icon} ${cn.iconIsFav}`} />
+                        ) : (
+                            <FavoriteBorderIcon className={cn.icon} />
+                        )}
+                    </button>
+                </span>
             </div>
             <div className={cn.shortCatalogTitle}>
                 <a className={cn.shortCatalogTitleText}>{title}</a>

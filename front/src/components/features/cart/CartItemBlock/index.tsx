@@ -13,6 +13,7 @@ interface CartItemBlock {
     quantity: number;
     img?: string;
     maxQuantity: number;
+    art: string;
 }
 
 export default function CartItemBlock({
@@ -21,6 +22,7 @@ export default function CartItemBlock({
     price,
     quantity,
     id,
+    art,
     maxQuantity,
 }: CartItemBlock) {
     const [itemAmount, setItemAmount] = useState(quantity);
@@ -62,7 +64,7 @@ export default function CartItemBlock({
                     <h2 className={cn.cartPageItemTitle}>
                         <Link href={`/products/${id}`}>{title}</Link>
                     </h2>
-                    <p className={cn.cartPageItemCode}>article</p>
+                    <p className={cn.cartPageItemCode}>Артикул: {art}</p>
                 </div>
             </div>
             <div className={cn.cartPageItemRight}>

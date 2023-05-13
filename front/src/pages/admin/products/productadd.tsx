@@ -6,9 +6,11 @@ import { adminFetch } from '../../../axios/global';
 import { useHandleFileChangeHook } from '../../../hooks/admin/handlers/useHandleFileChangeHook';
 import { useGetBrandHook } from '../../../hooks/admin/useGetBrandHook';
 import { useGetCategoryHook } from '../../../hooks/admin/useGetCategoryHook';
+import { withAuth } from '../../../utils/withAuth';
+import { withAuthAdmin } from '../../../utils/withAuthAdmin';
 import cn from '../style.module.scss';
 
-export default function ProductAdd() {
+function ProductAdd() {
     const { category } = useGetCategoryHook();
     const route = useRouter();
     const { brand } = useGetBrandHook();
@@ -28,7 +30,7 @@ export default function ProductAdd() {
     });
 
     const cancelCreate = async () => {
-        await route.replace('/admin/admin');
+        await route.replace('/admin/admindashboard');
     };
 
     const handleInputChange = (e: FormEvent<HTMLInputElement>) => {
@@ -98,8 +100,6 @@ export default function ProductAdd() {
                         progress: undefined,
                         theme: 'light',
                     });
-                } else {
-                    console.log(res);
                 }
             } catch (e) {
                 console.error(e);
@@ -224,3 +224,5 @@ export default function ProductAdd() {
         </div>
     );
 }
+
+export default withAuth(withAuthAdmin(ProductAdd));

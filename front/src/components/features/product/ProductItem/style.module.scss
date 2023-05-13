@@ -55,12 +55,31 @@
 
     .productPageTopAction {
       display: flex;
-
+      align-content: center;
+      align-items: center;
 
       .productPageBottomLinks {
         display: flex;
         align-content: center;
         align-items: center;
+        flex-wrap: nowrap;
+        justify-content: center;
+
+        .shortCatalogFavorite {
+          margin-right: 13px;
+          .icon {
+            font-size: 28px;
+            cursor: pointer;
+          }
+          .iconIsFav {
+            color: #C82132;
+          }
+
+          button {
+            background: transparent;
+            border: none;
+          }
+        }
 
         .productPageTopActionLink {
           padding: 0 8px;

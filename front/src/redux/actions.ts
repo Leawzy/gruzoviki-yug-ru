@@ -7,10 +7,11 @@ export const addToCart = (
     img: string,
     addedToCart: boolean,
     maxQuantity: number,
-    quantity: number
+    quantity: number,
+    art: string | undefined
 ) => ({
     type: ADD_TO_CART,
-    payload: { id, title, price, img, addedToCart, quantity, maxQuantity },
+    payload: { id, title, price, img, addedToCart, quantity, maxQuantity, art },
 });
 
 export const removeFromCart = (id: number) => ({

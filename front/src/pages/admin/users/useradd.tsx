@@ -18,7 +18,7 @@ function UserAdd() {
     const route = useRouter();
 
     const cancelCreate = async () => {
-        await route.replace('/admin/admin');
+        await route.replace('/admin/admindashboard');
     };
 
     async function createUserHandler() {

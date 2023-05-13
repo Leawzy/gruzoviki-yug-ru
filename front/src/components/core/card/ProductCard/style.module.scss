@@ -17,11 +17,14 @@
       top: 10px;
       z-index: 1;
       display: flex;
-      flex-direction: column;
+      flex-direction: row;
+      align-content: center;
+      align-items: center;
 
       .shortCatalogBrand {
         @include buttonInfoOfProduct(#55BB9F);
       }
+
     }
 
     .shortCatalogItemRightInfo {
@@ -39,7 +42,27 @@
   .shortCatalogPrice {
     padding: 20px 0;
     display: flex;
+    justify-content: space-between;
     align-items: center;
+    align-content: center;
+
+    .shortCatalogFavorite {
+      .icon {
+        align-items: center;
+        align-content: center;
+        text-align: center;
+        font-size: 28px;
+        cursor: pointer;
+      }
+      .iconIsFav {
+        color: #C82132;
+      }
+
+      button {
+        background: transparent;
+        border: none;
+      }
+    }
 
     .shortCatalogPriceNum {
       font-weight: 600;

@@ -1,8 +1,10 @@
+import { Tooltip } from '@mui/material';
 import { useRouter } from 'next/router';
 import React, { ChangeEvent, useCallback, useState } from 'react';
 import { toast, ToastContainer } from 'react-toastify';
 
 import { adminFetch, setAuthToken } from '../../../axios/global';
+import { HelpOutlineIcon } from '../../../utils/getIcons';
 import { withAuth } from '../../../utils/withAuth';
 import { withAuthAdmin } from '../../../utils/withAuthAdmin';
 import cn from '../style.module.scss';
@@ -24,7 +26,7 @@ function CategoryAdd() {
     const route = useRouter();
 
     const cancelCreate = async () => {
-        await route.replace('/admin/admin');
+        await route.replace('/admin/admindashboard');
     };
 
     const createCategory = useCallback(async () => {
@@ -88,6 +90,12 @@ function CategoryAdd() {
         setArray([...array, { key: '', value: '' }]);
     }
 
+    const keyValue =
+        'Данное поле должно быть названо обязательно на английском языке, и в таком формате: ExampleName. (то есть, все слова слитно пишутся, и каждая буква нового слова начинается с большой буквы)';
+
+    const textValue =
+        'Данное поле может быть на любом языке. Тут вы указываете то, что будет выводиться на странице товара. Будь это длина, ширина или другая характеристика продукта.';
+
     return (
         <div className={cn.categoryAddBlock}>
             <h1>Создание Категории</h1>
@@ -97,19 +105,26 @@ function CategoryAdd() {
                 onChange={handleTitleChange}
                 placeholder="Название категории"
             />
+            <div style={{ display: 'flex', justifyContent: 'space-between', width: '520px' }} />
             {array.map((item, i) => (
                 <div key={i} className={cn.categoryAddInputs}>
+                    <Tooltip title={keyValue}>
+                        <HelpOutlineIcon />
+                    </Tooltip>
                     <input
                         name="key"
                         value={item.key}
                         onChange={e => handleChange(i, e)}
-                        placeholder="Key"
+                        placeholder="Ключ"
                     />
+                    <Tooltip title={textValue}>
+                        <HelpOutlineIcon />
+                    </Tooltip>
                     <input
                         name="value"
                         value={item.value}
                         onChange={e => handleChange(i, e)}
-                        placeholder="Value"
+                        placeholder="Значение"
                     />
                 </div>
             ))}
@@ -119,8 +134,8 @@ function CategoryAdd() {
                 </button>
             </div>
             <div className={cn.categoryAddButtons}>
-                <button onClick={createCategory}>Создать категорию</button>
                 <button onClick={cancelCreate}>Отмена</button>
+                <button onClick={createCategory}>Создать категорию</button>
             </div>
         </div>
     );
