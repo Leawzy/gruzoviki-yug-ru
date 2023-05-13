@@ -26,7 +26,7 @@ function CategoryAdd() {
     const route = useRouter();
 
     const cancelCreate = async () => {
-        await route.replace('/admin/admindashboard');
+        await route.replace('/admin/dashboard');
     };
 
     const createCategory = useCallback(async () => {
@@ -54,7 +54,7 @@ function CategoryAdd() {
                     progress: undefined,
                     theme: 'light',
                 });
-                await route.replace('/controlpanel');
+                await route.replace('/admin/dashboard');
             } else {
                 toast.error('Ошибка в создании категории', {
                     position: 'bottom-right',
