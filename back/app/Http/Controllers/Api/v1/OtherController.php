@@ -7,8 +7,10 @@ use App\Http\Resources\Featured\FeaturedProductResource;
 use App\Http\Resources\Orders\OrderResource;
 use App\Http\Resources\Other\PostResource;
 use App\Http\Resources\Other\SliderResource;
+use App\Mail\FeedbackMail;
 use App\Models\FeaturedProduct;
 use App\Models\FeaturedProductList;
+use App\Models\Feedback;
 use App\Models\Order;
 use App\Models\Post;
 use App\Models\Product;
@@ -16,6 +18,7 @@ use App\Models\Repair;
 use App\Models\Slider;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 use Tymon\JWTAuth\Facades\JWTAuth;
 
 class OtherController extends Controller
@@ -148,5 +151,25 @@ class OtherController extends Controller
         return response()->json([
             'message' => "Товар '{$product->title}' успешно удален из избранного",
         ], 200);
+    }
+
+    public function sendFeedback(Request $request)
+    {
+        $feedback = Feedback::create([
+            'name' => $request->input('name'),
+            'email' => $request->input('email'),
+            'message' => $request->input('message'),
+        ]);
+        $feedback->save();
+
+        $mailData = [
+            'name' => $feedback->name,
+            'email' => $feedback->email,
+            'message' => $feedback->message,
+        ];
+
+        Mail::to('tofikdipsize1337228@yandex.ru')->send(new FeedbackMail($mailData));
+
+        return response()->json(['message' => 'Feedback submitted successfully']);
     }
 }

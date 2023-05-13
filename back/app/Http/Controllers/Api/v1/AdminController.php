@@ -8,6 +8,7 @@ use App\Http\Resources\Category\CategoryResource;
 use App\Http\Resources\Orders\OrderResource;
 use App\Http\Resources\Other\PostResource;
 use App\Http\Resources\Other\SliderResource;
+use App\Http\Resources\Other\UserResource;
 use App\Http\Resources\Product\ProductResource;
 use App\Models\Brand;
 use App\Models\Category;
@@ -18,16 +19,15 @@ use App\Models\Repair;
 use App\Models\Slider;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 use Illuminate\Support\Facades\Storage;
 
 class AdminController extends Controller
 {
     //User section
-    public function getAllUser(): \Illuminate\Http\JsonResponse
+    public function getAllUser(): AnonymousResourceCollection
     {
-        return response()->json([
-            'data' => User::all()
-        ], 200);
+        return UserResource::collection(User::all());
     }
 
     public function createUser(Request $request): \Illuminate\Http\JsonResponse
@@ -41,12 +41,12 @@ class AdminController extends Controller
         ]);
 
         $user = User::create([
-            "firstName" => $data["firstName"],
-            "lastName" => $data["lastName"],
+            "first_name" => $data["firstName"],
+            "last_name" => $data["lastName"],
             "email" => $data["email"],
             "address" => $data['address'],
             "password" => bcrypt($data["password"]),
-            $request['phoneNumber'] === null ?: "phoneNumber" => $request['phoneNumber'],
+            $request['phoneNumber'] === null ?: "phone_number" => $request['phoneNumber'],
             $request['role'] === null ?: "role" => $request['role'],
         ]);
         $user->save();
@@ -61,11 +61,11 @@ class AdminController extends Controller
         $user = User::findOrFail($request['id']);
 
         if ($user) {
-            $request['firstName'] === null ?: $user->firstName = $request['firstName'];
-            $request['lastName'] === null ?: $user->lastName = $request['lastName'];
+            $request['firstName'] === null ?: $user->first_name = $request['firstName'];
+            $request['lastName'] === null ?: $user->last_name = $request['lastName'];
             $request['email'] === null ?: $user->email = $request['email'];
             $request['address'] === null ?: $user->address = $request['address'];
-            $request['phoneNumber'] === null ?: $user->phoneNumber = $request['phoneNumber'];
+            $request['phoneNumber'] === null ?: $user->phone_number = $request['phoneNumber'];
             $request['password'] === null ?: $user->password = bcrypt($request['password']);
             $request['role'] === null ?: $user->role = $request['role'];
             $user->save();

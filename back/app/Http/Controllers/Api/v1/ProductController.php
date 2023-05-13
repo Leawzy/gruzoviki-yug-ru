@@ -13,9 +13,26 @@ class ProductController extends Controller
     {
         return ProductResource::collection(Product::all());
     }
-    public function showProducts($page = 1)
+    public function showProducts(Request $request)
     {
-        return ProductResource::collection(Product::paginate(9, ['*'], 'page', $page));
+        $query = Product::query();
+
+//        $params = $request->only([
+//            'category_id',
+//            'brand_id',
+//            'price_min',
+//            'price_max',
+//            'price_range',
+//            'sort_by',
+//            'sort_order',
+//        ]);
+        $filters = $request->query();
+
+        $query->filter($filters);
+
+        $results = $query->paginate(9);
+
+        return ProductResource::collection($results);
     }
 
 
