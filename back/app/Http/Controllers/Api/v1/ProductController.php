@@ -13,7 +13,7 @@ class ProductController extends Controller
     {
         return ProductResource::collection(Product::all());
     }
-    public function showProducts(Request $request, $page = 1)
+    public function showProducts(Request $request)
     {
         $query = Product::query();
 
@@ -30,7 +30,7 @@ class ProductController extends Controller
 
         $query->filter($filters);
 
-        $results = $query->paginate(9, ['*'], 'page', $page);
+        $results = $query->paginate(9);
 
         return ProductResource::collection($results);
     }

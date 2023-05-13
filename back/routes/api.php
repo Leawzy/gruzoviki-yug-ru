@@ -19,7 +19,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 //Product function
-Route::get('/product/list/{page?}', [ProductController::class, 'showProducts']);
+Route::get('/product/list', [ProductController::class, 'showProducts']);
 Route::get('/product/card/{id}', [ProductController::class, 'getCardProduct']);
 Route::get('/product/popular', [ProductController::class, 'getPopularProduct']);
 Route::get('/products', [ProductController::class, 'getAllProducts']);
