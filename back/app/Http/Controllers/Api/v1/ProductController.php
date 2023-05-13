@@ -13,23 +13,7 @@ class ProductController extends Controller
     {
         return ProductResource::collection(Product::all());
     }
-    public function showProducts($page = 1)
-    {
-        return ProductResource::collection(Product::paginate(9, ['*'], 'page', $page));
-    }
-
-
-    public function getPopularProduct()
-    {
-        return ProductResource::collection(Product::where('is_popular', true)->get());
-    }
-
-    public function getCardProduct($id)
-    {
-        return new ProductResource(Product::findOrFail($id));
-    }
-
-    public function productFilter(Request $request)
+    public function showProducts(Request $request, $page = 1)
     {
         $query = Product::query();
 
@@ -46,8 +30,19 @@ class ProductController extends Controller
 
         $query->filter($filters);
 
-        $results = $query->paginate(15);
+        $results = $query->paginate(9, ['*'], 'page', $page);
 
         return ProductResource::collection($results);
+    }
+
+
+    public function getPopularProduct()
+    {
+        return ProductResource::collection(Product::where('is_popular', true)->get());
+    }
+
+    public function getCardProduct($id)
+    {
+        return new ProductResource(Product::findOrFail($id));
     }
 }
