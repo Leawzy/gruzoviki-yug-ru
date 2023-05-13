@@ -46,7 +46,7 @@ export default function Footer() {
                             <a href="#">Доставка</a>
                         </li>
                         <li>
-                            <a href="#">Блог</a>
+                            <Link href="/blog">Блог</Link>
                         </li>
                         <li>
                             <Link href="/contact">Контакты</Link>
@@ -60,13 +60,16 @@ export default function Footer() {
                     <h2 className={cn.navTitle}>Остальное</h2>
                     <ul className={cn.navUl}>
                         <li>
-                            <a>Политика кондифициальности</a>
+                            <Link href="/privacy/privacy">Политика кондифициальности</Link>
                         </li>
                         <li>
-                            <a href="#">Пользовательское соглашение</a>
+                            <Link href="/privacy/privacy">Пользовательское соглашение</Link>
                         </li>
                         <li>
-                            <a href="#">Отзывы о нас</a>
+                            <Link href="/privacy/tos">Использование куки</Link>
+                        </li>
+                        <li>
+                            <Link href="#">Отзывы о нас</Link>
                         </li>
                     </ul>
                 </li>
