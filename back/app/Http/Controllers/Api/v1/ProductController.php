@@ -33,17 +33,18 @@ class ProductController extends Controller
     {
         $query = Product::query();
 
-        $params = $request->only([
-            'category_id',
-            'brand_id',
-            'price_min',
-            'price_max',
-            'price_range',
-            'sort_by',
-            'sort_order',
-        ]);
+//        $params = $request->only([
+//            'category_id',
+//            'brand_id',
+//            'price_min',
+//            'price_max',
+//            'price_range',
+//            'sort_by',
+//            'sort_order',
+//        ]);
+        $filters = $request->query();
 
-        $query->filter($params);
+        $query->filter($filters);
 
         $results = $query->paginate(15);
 
