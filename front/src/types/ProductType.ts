@@ -47,4 +47,5 @@ interface CategoryProduct {
 
 export interface BrandProduct {
     title: string;
+    img?: string;
 }
