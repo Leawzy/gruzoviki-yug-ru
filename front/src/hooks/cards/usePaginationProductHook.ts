@@ -3,9 +3,11 @@ import { useEffect, useState } from 'react';
 import { apiFetch } from '../../axios/global';
 import { MetaIF, Product } from '../../types/ProductType';
 
-export const usePaginationProduct = (currentPage: number) => {
+export const usePaginationProduct = (
+    currentPage: number,
+    filters: { brand: string; minPrice: number; maxPrice: number }
+) => {
     const [products, setProducts] = useState<Product[]>([]);
-    const [pageCount, setPageCount] = useState(0);
     const [perPage, setPerPage] = useState(0);
 
     useEffect(() => {
@@ -16,19 +18,18 @@ export const usePaginationProduct = (currentPage: number) => {
                         meta: MetaIF;
                         data: Product[];
                     };
-                } = await apiFetch(`api/product/list/${currentPage}`);
+                } = await apiFetch(`api/product/list?page=${currentPage}`, { params: filters });
                 setProducts(res.data.data);
-                setPageCount(res.data.meta.last_page);
                 setPerPage(res.data.meta.per_page);
             } catch (e) {
                 console.error(e);
             }
         };
         fetchProducts().catch(e => console.error(e));
-    }, [perPage, currentPage]);
+    }, [currentPage, filters]);
 
     return {
         products,
-        pageCount,
+        pageCount: Math.ceil(products.length / perPage),
     };
 };
