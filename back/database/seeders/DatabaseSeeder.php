@@ -78,7 +78,7 @@ class DatabaseSeeder extends Seeder
                 'quantity' => '10',
                 'price' => '2019',
                 'art' => '1',
-                'img' => 'productImg/tovar-1.svg',
+                'img' => 'productImg/tovar-1.webp',
                 'is_popular' => true,
                 'properties' => $propertyOil
             ])
@@ -91,7 +91,7 @@ class DatabaseSeeder extends Seeder
                 'quantity' => '5',
                 'price' => '3889',
                 'art' => '2',
-                'img' => 'productImg/tovar-1.svg',
+                'img' => 'productImg/tovar-1.webp',
                 'properties' => $propertyOil,
 
             ])
@@ -104,7 +104,7 @@ class DatabaseSeeder extends Seeder
                 'quantity' => '3',
                 'price' => '2500',
                 'art' => '3',
-                'img' => 'productImg/tovar-1.svg',
+                'img' => 'productImg/tovar-1.webp',
                 'is_popular' => true,
                 'properties' => $propertyBearing
             ])
@@ -117,7 +117,7 @@ class DatabaseSeeder extends Seeder
                 'quantity' => '1',
                 'price' => '2000',
                 'art' => '4',
-                'img' => 'productImg/tovar-1.svg',
+                'img' => 'productImg/tovar-1.webp',
                 'properties' => $propertyBearing
             ])
             ->create([
@@ -129,7 +129,7 @@ class DatabaseSeeder extends Seeder
                 'quantity' => '10',
                 'price' => '2019',
                 'art' => '1',
-                'img' => 'productImg/tovar-1.svg',
+                'img' => 'productImg/tovar-1.webp',
                 'properties' => $propertyOil
             ])
             ->create([
@@ -141,7 +141,7 @@ class DatabaseSeeder extends Seeder
                 'quantity' => '5',
                 'price' => '3889',
                 'art' => '2',
-                'img' => 'productImg/tovar-1.svg',
+                'img' => 'productImg/tovar-1.webp',
                 'properties' => $propertyOil
             ])
             ->create([
@@ -153,7 +153,7 @@ class DatabaseSeeder extends Seeder
                 'quantity' => '3',
                 'price' => '2500',
                 'art' => '3',
-                'img' => 'productImg/tovar-1.svg',
+                'img' => 'productImg/tovar-1.webp',
                 'properties' => $propertyBearing
             ])
             ->create([
@@ -165,7 +165,7 @@ class DatabaseSeeder extends Seeder
                 'quantity' => '1',
                 'price' => '2000',
                 'art' => '4',
-                'img' => 'productImg/tovar-1.svg',
+                'img' => 'productImg/tovar-1.webp',
                 'properties' => $propertyBearing
             ]);
 
@@ -176,56 +176,56 @@ class DatabaseSeeder extends Seeder
                 'title' => 'Post 1',
                 'short_desc' => 'Я пост 1',
                 'description' => 'Я пост 1 привет мой дорой друг сегодня мы поговорим как ты меня видишь',
-                'img' => 'postImg/remgruzo-01.jpg'
+                'img' => 'postImg/remgruzo-01.webp'
             ])
             ->create([
                 'slug' => 'Post 2',
                 'title' => 'Post 2',
                 'short_desc' => 'Я пост 2',
                 'description' => 'Я пост 2 привет мой дорой друг сегодня мы поговорим как ты меня видишь',
-                'img' => 'postImg/97b3d592deb17167ac8560466a1b7dd6.jpg'
+                'img' => 'postImg/97b3d592deb17167ac8560466a1b7dd6.webp'
             ])
             ->create([
                 'slug' => 'Post 3',
                 'title' => 'Post 3',
                 'short_desc' => 'Я пост 3',
                 'description' => 'Я пост 3 привет мой дорой друг сегодня мы поговорим как ты меня видишь',
-                'img' => 'postImg/56403082e3eb70182b6d30d2d5ab8536.jpg'
+                'img' => 'postImg/56403082e3eb70182b6d30d2d5ab8536.webp'
             ])
             ->create([
                 'slug' => 'Post 4',
                 'title' => 'Post 4',
                 'short_desc' => 'Я пост 4',
                 'description' => 'Я пост 4 привет мой дорой друг сегодня мы поговорим как ты меня видишь',
-                'img' => 'postImg/161e43dd7d19b8a88b80e035aa9b47c9.jpg'
+                'img' => 'postImg/161e43dd7d19b8a88b80e035aa9b47c9.webp'
             ])
             ->create([
                 'slug' => 'Post 5',
                 'title' => 'Post 5',
                 'short_desc' => 'Я пост 5',
                 'description' => 'Я пост 5 привет мой дорой друг сегодня мы поговорим как ты меня видишь',
-                'img' => 'postImg/075280feb9162bfd2dbc21424641488a.jpg'
+                'img' => 'postImg/075280feb9162bfd2dbc21424641488a.webp'
             ])
             ->create([
                 'slug' => 'Post 6',
                 'title' => 'Post 6',
                 'short_desc' => 'Я пост 6',
                 'description' => 'Я пост 6 привет мой дорой друг сегодня мы поговорим как ты меня видишь',
-                'img' => 'postImg/6cdbbda2cfdfaa669eda140f23092b11.jpg'
+                'img' => 'postImg/6cdbbda2cfdfaa669eda140f23092b11.webp'
             ])
             ->create([
                 'slug' => 'Post 7',
                 'title' => 'Post 7',
                 'short_desc' => 'Я пост 7',
                 'description' => 'Я пост 7 привет мой дорой друг сегодня мы поговорим как ты меня видишь',
-                'img' => 'postImg/ef898b90570442e1466a107d8d5cc3ce.jpg'
+                'img' => 'postImg/ef898b90570442e1466a107d8d5cc3ce.webp'
             ])
             ->create([
                 'slug' => 'Post 8',
                 'title' => 'Post 8',
                 'short_desc' => 'Я пост 8',
                 'description' => 'Я пост 8 привет мой дорой друг сегодня мы поговорим как ты меня видишь',
-                'img' => 'postImg/ddb73ff7e277a6cc1fbede190d79648d.jpg'
+                'img' => 'postImg/ddb73ff7e277a6cc1fbede190d79648d.webp'
             ]);
 
         User::factory()
