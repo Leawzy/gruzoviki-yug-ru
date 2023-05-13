@@ -23,6 +23,7 @@ Route::get('/product/list/{page?}', [ProductController::class, 'showProducts']);
 Route::get('/product/card/{id}', [ProductController::class, 'getCardProduct']);
 Route::get('/product/popular', [ProductController::class, 'getPopularProduct']);
 Route::get('/products', [ProductController::class, 'getAllProducts']);
+Route::get('/products/filter', [ProductController::class, 'productFilter']);
 
 //User function
 Route::post('/register', [UserController::class, 'createUser']);
@@ -33,6 +34,7 @@ Route::get('/slider', [OtherController::class, 'showSlider']);
 Route::get('/posts', [OtherController::class, 'showPost']);
 Route::get('/post/card/{id}', [OtherController::class, 'getPostById']);
 Route::post('/repair/create', [OtherController::class, 'createRecordRepair']);
+Route::post('/feedback', [OtherController::class, 'sendFeedback']);
 
 //Auth User function
 Route::middleware(['auth:api'])->group(function () {

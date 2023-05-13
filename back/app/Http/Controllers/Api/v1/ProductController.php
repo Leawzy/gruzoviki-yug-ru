@@ -28,4 +28,25 @@ class ProductController extends Controller
     {
         return new ProductResource(Product::findOrFail($id));
     }
+
+    public function productFilter(Request $request)
+    {
+        $query = Product::query();
+
+        $params = $request->only([
+            'category_id',
+            'brand_id',
+            'price_min',
+            'price_max',
+            'price_range',
+            'sort_by',
+            'sort_order',
+        ]);
+
+        $query->filter($params);
+
+        $results = $query->paginate(15);
+
+        return ProductResource::collection($results);
+    }
 }
