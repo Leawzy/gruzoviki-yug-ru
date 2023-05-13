@@ -30,7 +30,7 @@ function ProductAdd() {
     });
 
     const cancelCreate = async () => {
-        await route.replace('/admin/admindashboard');
+        await route.replace('/admin/dashboard');
     };
 
     const handleInputChange = (e: FormEvent<HTMLInputElement>) => {
@@ -100,6 +100,7 @@ function ProductAdd() {
                         progress: undefined,
                         theme: 'light',
                     });
+                    await route.replace('/admin/dashboard');
                 }
             } catch (e) {
                 console.error(e);

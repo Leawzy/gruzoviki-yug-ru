@@ -35,7 +35,7 @@ export default function SideBar() {
             <div className={cn.center}>
                 <ul>
                     <p className={cn.title}>Главная</p>
-                    <Link href="/admin/admindashboard">
+                    <Link href="/admin/dashboard">
                         <li>
                             <DashboardIcon className={cn.icon} />
                             <span>Панель Управления</span>
@@ -70,6 +70,12 @@ export default function SideBar() {
                         <li>
                             <AddShoppingCartIcon className={cn.icon} />
                             <span>Добавить продукт</span>
+                        </li>
+                    </Link>
+                    <Link href="/admin/news/newsadd">
+                        <li>
+                            <NewspaperIcon className={cn.icon} />
+                            <span>Добавить новости</span>
                         </li>
                     </Link>
                     <p className={cn.title}>Редактировать</p>

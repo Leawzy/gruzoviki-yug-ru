@@ -25,7 +25,7 @@ function UserChange() {
     const useHandleSaveChanges = async () => {
         try {
             await useSendChangeHook(
-                '/slider/change',
+                '/user/change',
                 {
                     id: selectedRow?.id as string,
                     firstName: selectedRow?.firstName as string,

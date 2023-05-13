@@ -100,9 +100,9 @@ function CategoryChange() {
                                 setSelectedRow(prev => ({ ...prev, title: e.target.value }));
                             }}
                         />
-                        {category[selectedRow?.id - 1]?.property && (
+                        {category[Number(selectedRow?.id) - 1]?.property && (
                             <form>
-                                {Object.entries(category[selectedRow?.id - 1].property).map(
+                                {Object.entries(category[Number(selectedRow?.id) - 1].property).map(
                                     ([key, label]) => (
                                         <input
                                             key={key}

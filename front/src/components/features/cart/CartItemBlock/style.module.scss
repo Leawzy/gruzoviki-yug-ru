@@ -1,3 +1,5 @@
+@import '../../../../styles/mixin';
+
 .cartPageItem {
   display: flex;
   width: 100%;
@@ -91,18 +93,7 @@
       }
 
       .cartPageItemRightMinus {
-        flex: 0 0 auto;
-        width: 35px;
-        height: 35px;
-        border: 1px solid #6e6e6e;
-        border-radius: 50%;
-        text-align: center;
-        font-weight: 800;
-        background: transparent;
-        cursor: pointer;
-        font-size: 18px;
-        line-height: 25px;
-        color: #6e6e6e;
+        @include minusButton();
       }
 
       .cartPageItemRightInput {
@@ -115,18 +106,7 @@
       }
 
       .cartPageItemRightPlus {
-        flex: 0 0 auto;
-        width: 35px;
-        height: 35px;
-        border: 1px solid #6e6e6e;
-        border-radius: 50%;
-        text-align: center;
-        font-weight: 800;
-        background: transparent;
-        cursor: pointer;
-        font-size: 18px;
-        line-height: 25px;
-        color: #6e6e6e;
+        @include plusButton();
       }
     }
 

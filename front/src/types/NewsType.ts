@@ -3,7 +3,14 @@ export interface News {
     id: number | string;
     img: string;
     title: string;
-    short_desc: string;
-    shortDesc?: string;
-    description?: string;
+    shortDesc: string;
+    description: string;
+}
+
+export interface NewsCardIF {
+    createdAt: number | string;
+    id: number | string;
+    img: string;
+    title: string;
+    shortDesc: string;
 }

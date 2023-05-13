@@ -34,7 +34,11 @@ export default function News() {
                             id={String(item.id)}
                         >
                             <Link href={`/news/${item.id}`} className={cn.newsLink}>
-                                <img className={cn.newsLinkImg} src={item.img} alt="News Pic" />
+                                {item.img === null ? (
+                                    <div className={cn.newsLinkImg} />
+                                ) : (
+                                    <img className={cn.newsLinkImg} src={item.img} alt="News Pic" />
+                                )}
                                 <div className={cn.newsLinkBg}>
                                     <span className={cn.newsTitle}>{item.title}</span>
                                     <span className={cn.newsDesc}>{item.shortDesc}</span>

@@ -1,6 +1,7 @@
 import { adminFetch, setAuthToken } from '../../../axios/global';
 
-export const useSendChangeHook = async (url: string, data: any, methodText: string) => {
+// eslint-disable-next-line @typescript-eslint/ban-types
+export const useSendChangeHook = async (url: string, data: {}, methodText: string) => {
     setAuthToken();
     try {
         const res: Response = await adminFetch(url, {

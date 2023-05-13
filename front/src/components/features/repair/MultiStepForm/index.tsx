@@ -50,10 +50,6 @@ function MultiStepForm() {
         event.preventDefault();
     };
 
-    const handleSend = () => {
-        console.log('Submitted data:', formData);
-    };
-
     const renderStep = () => {
         switch (step) {
             case 1:
@@ -126,9 +122,7 @@ function MultiStepForm() {
                         <p>Input 5: {formData.step3.input5}</p>
                         <p>Input 6: {formData.step3.input6}</p>
                         <button onClick={handlePreviousStep}>Previous</button>
-                        <button type="submit" onClick={handleSend}>
-                            Submit
-                        </button>
+                        <button type="submit">Submit</button>
                     </div>
                 );
             default:

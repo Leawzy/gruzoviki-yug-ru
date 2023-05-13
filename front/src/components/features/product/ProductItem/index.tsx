@@ -170,20 +170,43 @@ export default function ProductItem({ product }: ProductItemIF) {
                         )}
                     </div>
                     <div className={cn.productPageInfo}>
-                        <span className={cn.productPageInfoText}>
-                            Тип:
-                            <p className={cn.productPageInfoSubject}>{product.category.title}</p>
-                        </span>
-                        <span className={cn.productPageInfoText}>
-                            Бренд:
-                            <p className={cn.productPageInfoSubject}>{product.brand.title}</p>
-                        </span>
-                        <span className={cn.productPageInfoText}>
-                            Количество:
-                            <p className={cn.productPageInfoSubject}>{product.quantity}</p>
-                        </span>
+                        <div className={cn.productPageInfoTop}>
+                            <span className={cn.productPageInfoText}>
+                                Тип..............................
+                                <p className={cn.productPageInfoSubject}>
+                                    {product.category.title}
+                                </p>
+                            </span>
+                            <span className={cn.productPageInfoText}>
+                                Бренд.........................
+                                <p className={cn.productPageInfoSubject}>{product.brand.title}</p>
+                            </span>
+                            <span className={cn.productPageInfoText}>
+                                Количество.............
+                                <p className={cn.productPageInfoSubject}>{product.quantity}</p>
+                            </span>
+                        </div>
+                        <div className={cn.productPageInfoBottom}>
+                            {propertyStrings.map((propString, index) => (
+                                <span key={index} className={cn.productPageInfoText}>
+                                    <p>{propString}</p>
+                                </span>
+                            ))}
+                        </div>
+                        <div>
+                            {product.brand.img === null ? (
+                                ''
+                            ) : (
+                                <Image
+                                    src={product.brand?.img as string}
+                                    width={101}
+                                    height={101}
+                                    alt="Brand Img"
+                                />
+                            )}
+                        </div>
                     </div>
-                    <div>
+                    <div className={cn.productPageTotal}>
                         <div className={cn.productPagePrice}>
                             <p>{product.price} ₽</p>
                         </div>
@@ -196,18 +219,21 @@ export default function ProductItem({ product }: ProductItemIF) {
                                 <ButtonAdd onClick={handleAddToCart}> Добавить в корзину</ButtonAdd>
                             )}
                             <div className={cn.productPageBuyButtons}>
-                                <button onClick={setMinusHandler}>-</button>
+                                <button
+                                    onClick={setMinusHandler}
+                                    className={cn.cartPageItemRightMinus}
+                                >
+                                    -
+                                </button>
                                 <p>{itemCount}</p>
-                                <button onClick={setPlusHandler}>+</button>
+                                <button
+                                    onClick={setPlusHandler}
+                                    className={cn.cartPageItemRightPlus}
+                                >
+                                    +
+                                </button>
                             </div>
                         </div>
-                    </div>
-                </div>
-                <div>
-                    <div>
-                        {propertyStrings.map((propString, index) => (
-                            <div key={index}>{propString}</div>
-                        ))}
                     </div>
                 </div>
             </div>
