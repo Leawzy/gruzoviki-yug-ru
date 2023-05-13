@@ -41,12 +41,12 @@ class AdminController extends Controller
         ]);
 
         $user = User::create([
-            "firstName" => $data["firstName"],
-            "lastName" => $data["lastName"],
+            "first_name" => $data["firstName"],
+            "last_name" => $data["lastName"],
             "email" => $data["email"],
             "address" => $data['address'],
             "password" => bcrypt($data["password"]),
-            $request['phoneNumber'] === null ?: "phoneNumber" => $request['phoneNumber'],
+            $request['phoneNumber'] === null ?: "phone_number" => $request['phoneNumber'],
             $request['role'] === null ?: "role" => $request['role'],
         ]);
         $user->save();
@@ -61,11 +61,11 @@ class AdminController extends Controller
         $user = User::findOrFail($request['id']);
 
         if ($user) {
-            $request['firstName'] === null ?: $user->firstName = $request['firstName'];
-            $request['lastName'] === null ?: $user->lastName = $request['lastName'];
+            $request['firstName'] === null ?: $user->first_name = $request['firstName'];
+            $request['lastName'] === null ?: $user->last_name = $request['lastName'];
             $request['email'] === null ?: $user->email = $request['email'];
             $request['address'] === null ?: $user->address = $request['address'];
-            $request['phoneNumber'] === null ?: $user->phoneNumber = $request['phoneNumber'];
+            $request['phoneNumber'] === null ?: $user->phone_number = $request['phoneNumber'];
             $request['password'] === null ?: $user->password = bcrypt($request['password']);
             $request['role'] === null ?: $user->role = $request['role'];
             $user->save();
