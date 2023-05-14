@@ -23,8 +23,15 @@ class ProductController extends Controller
 
         $results = $query->paginate(9);
 
-        return ProductResource::collection($results);
+        return response()->json([
+            'data' => ProductResource::collection($results),
+            'meta' => [
+                'last_page' => $results->lastPage(),
+                'per_page' => $results->perPage(),
+            ],
+        ]);
     }
+
 
 
     public function getPopularProduct()
