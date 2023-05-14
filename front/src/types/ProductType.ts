@@ -8,8 +8,22 @@ export interface Product {
     brand: BrandProduct;
     sale: boolean;
     price: number;
-    art?: string;
-    description?: string;
+    art: string;
+    description: string;
+}
+
+export interface ProductCardIF {
+    id: number;
+    title: string;
+    shortDesc: string;
+    popular?: number;
+    img: string;
+    quantity: number;
+    brand: BrandProduct;
+    sale: boolean;
+    price: number;
+    art: string;
+    description: string;
 }
 
 export interface ProductPage {
@@ -46,6 +60,7 @@ interface CategoryProduct {
 }
 
 export interface BrandProduct {
+    id?: string;
     title: string;
     img?: string;
 }
