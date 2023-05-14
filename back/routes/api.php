@@ -22,8 +22,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/product/list', [ProductController::class, 'showProducts']);
 Route::get('/product/card/{id}', [ProductController::class, 'getCardProduct']);
 Route::get('/product/popular', [ProductController::class, 'getPopularProduct']);
-Route::get('/products', [ProductController::class, 'getAllProducts']);
-
+Route::get('/product/search', [ProductController::class, 'searchProduct']);
 //User function
 Route::post('/register', [UserController::class, 'createUser']);
 Route::post('/login', [UserController::class, 'authUser']);
