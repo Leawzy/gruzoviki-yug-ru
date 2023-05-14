@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import ReactPaginate from 'react-paginate';
 
-import { useSendQuery } from '../../../hooks/actions/useSendQueryHook';
 import { usePaginationProduct } from '../../../hooks/cards/usePaginationProductHook';
 import { Product } from '../../../types/ProductType';
 import ProductCard from '../../core/card/ProductCard';
@@ -16,9 +15,6 @@ export default function Catalog() {
     const handlePageClick = (selectedItem: { selected: number }) => {
         setCurrentPage(selectedItem.selected);
     };
-    const { getResponse } = useSendQuery();
-
-    console.log(getResponse());
 
     const handleFilterChange = (filters: {
         brands: string;
