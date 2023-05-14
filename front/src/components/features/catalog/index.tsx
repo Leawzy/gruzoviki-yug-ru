@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import ReactPaginate from 'react-paginate';
 
+import { useSendQuery } from '../../../hooks/actions/useSendQueryHook';
 import { usePaginationProduct } from '../../../hooks/cards/usePaginationProductHook';
 import { Product } from '../../../types/ProductType';
 import ProductCard from '../../core/card/ProductCard';
@@ -10,22 +11,32 @@ import cn from './style.module.scss';
 
 export default function Catalog() {
     const [currentPage, setCurrentPage] = useState(0);
-    const [filter, setFilter] = useState({ brand: '', minPrice: 0, maxPrice: 0 });
+    const [filter, setFilter] = useState({ brands: '', minPrice: 0, maxPrice: 0 });
     const { products, pageCount } = usePaginationProduct(currentPage, filter);
-
     const handlePageClick = (selectedItem: { selected: number }) => {
-        setCurrentPage(selectedItem.selected + 1);
+        setCurrentPage(selectedItem.selected);
     };
+    const { getResponse } = useSendQuery();
 
-    const handleFilterChange = (filters: { brand: string; minPrice: number; maxPrice: number }) => {
+    console.log(getResponse());
+
+    const handleFilterChange = (filters: {
+        brands: string;
+        minPrice: number;
+        maxPrice: number;
+    }) => {
         setCurrentPage(0);
         setFilter(filters);
     };
 
+    if (products.length === 0) {
+        return <div>Загрузка...</div>;
+    }
+
     const filteredProducts = products.filter((product: Product) => {
-        const { brand, minPrice, maxPrice } = filter;
+        const { brands, minPrice, maxPrice } = filter;
         return (
-            (brand === '' || String(product.brand) === brand) &&
+            (brands === '' || String(product.brand.id) === brands) &&
             (minPrice === 0 || product.price >= minPrice) &&
             (maxPrice === 0 || product.price <= maxPrice)
         );
@@ -41,29 +52,39 @@ export default function Catalog() {
                             <CatalogFilter onFilterChange={handleFilterChange} />
                         </div>
                         <div className={cn.categoryPageContent}>
-                            <div className={cn.categoryPageContentWrapper}>
-                                {filteredProducts.map((product: Product) => (
-                                    <ProductCard
-                                        key={product.id}
-                                        id={product.id}
-                                        title={product.title}
-                                        shortDesc={product.shortDesc}
-                                        img={product.img}
-                                        quantity={product.quantity}
-                                        brand={product.brand}
-                                        sale={product.sale}
-                                        price={product.price}
-                                    />
-                                ))}
-                            </div>
-                            <ReactPaginate
-                                pageCount={pageCount}
-                                previousLabel="Назад"
-                                nextLabel="Дальше"
-                                onPageChange={handlePageClick}
-                                containerClassName="pagination"
-                                activeClassName="active"
-                            />
+                            {filteredProducts.length === 0 ? (
+                                <p className={cn.nonFilterItem}>Товаров не найдено</p>
+                            ) : (
+                                <div className={cn.categoryPageContentWrapper}>
+                                    {filteredProducts.map((product: Product) => (
+                                        <ProductCard
+                                            key={product.id}
+                                            id={product.id}
+                                            title={product.title}
+                                            shortDesc={product.shortDesc}
+                                            img={product.img}
+                                            quantity={product.quantity}
+                                            brand={product.brand}
+                                            sale={product.sale}
+                                            price={product.price}
+                                            art={product.art}
+                                            description={product.description}
+                                        />
+                                    ))}
+                                </div>
+                            )}
+                            {filteredProducts.length === 0 ? (
+                                ''
+                            ) : (
+                                <ReactPaginate
+                                    pageCount={pageCount}
+                                    previousLabel="Назад"
+                                    nextLabel="Дальше"
+                                    onPageChange={handlePageClick}
+                                    containerClassName="pagination"
+                                    activeClassName="active"
+                                />
+                            )}
                         </div>
                     </div>
                 </div>
