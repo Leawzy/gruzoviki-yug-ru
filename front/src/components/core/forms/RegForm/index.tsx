@@ -1,11 +1,10 @@
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { setCookie } from 'nookies';
-import React, { useState } from 'react';
+import React from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 
 import { apiFetch, dayOfLiveToken } from '../../../../axios/global';
-import RecaptchaComponent from '../../../../utils/Recaptcha';
 import cn from '../style.module.scss';
 
 type Inputs = {
@@ -22,7 +21,6 @@ interface LoginResponseData {
 
 export default function RegistrationForm() {
     const router = useRouter();
-    const [recaptchaToken, setRecaptchaToken] = useState<string | null>(null);
 
     const {
         register,
@@ -30,31 +28,25 @@ export default function RegistrationForm() {
         formState: { errors },
     } = useForm<Inputs>();
     const onSubmit: SubmitHandler<Inputs> = async data => {
-        if (recaptchaToken) {
-            if (data.password === data.passwordConfirmation) {
-                const res = await apiFetch('api/register', {
-                    method: 'post',
-                    data: {
-                        firstName: data.firstName,
-                        lastName: data.lastName,
-                        email: data.email,
-                        password: data.password,
-                        password_confirmation: data.passwordConfirmation,
-                    },
+        if (data.password === data.passwordConfirmation) {
+            const res = await apiFetch('api/register', {
+                method: 'post',
+                data: {
+                    firstName: data.firstName,
+                    lastName: data.lastName,
+                    email: data.email,
+                    password: data.password,
+                    password_confirmation: data.passwordConfirmation,
+                },
+            });
+            if (res.status === 200) {
+                const { token } = res.data as LoginResponseData;
+                setCookie(null, 'token', token, {
+                    maxAge: dayOfLiveToken(),
                 });
-                if (res.status === 200) {
-                    const { token } = res.data as LoginResponseData;
-                    setCookie(null, 'token', token, {
-                        maxAge: dayOfLiveToken(),
-                    });
-                    await router.push('/');
-                }
+                await router.push('/');
             }
         }
-    };
-
-    const handleRecaptchaChange = (token: string | null) => {
-        setRecaptchaToken(token);
     };
 
     return (
@@ -142,7 +134,6 @@ export default function RegistrationForm() {
                         с<Link href="/privacy/privacy">Политикой использования файлов cookie.</Link>
                     </p>
                 </div>
-                <RecaptchaComponent onChange={handleRecaptchaChange} />
             </form>
         </div>
     );
