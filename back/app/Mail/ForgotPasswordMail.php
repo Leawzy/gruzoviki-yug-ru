@@ -9,23 +9,15 @@ use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
 
-class FeedbackMail extends Mailable
+class ForgotPasswordMail extends Mailable
 {
     use Queueable, SerializesModels;
 
-    public $name;
-    public $email;
-    public $message;
-    public $phoneNumber;
-    public $questionCategory;
+    public $newPassword;
 
-    public function __construct($mailData)
+    public function __construct($password)
     {
-        $this->name = $mailData['name'];
-        $this->email = $mailData['email'];
-        $this->message = $mailData['message'];
-        $this->phoneNumber = $mailData['phoneNumber'];
-        $this->questionCategory = $mailData['questionCategory'];
+        $this->newPassword = $password;
     }
 
     /**
@@ -34,7 +26,7 @@ class FeedbackMail extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: 'Feedback',
+            subject: 'Forgot Password Mail',
         );
     }
 
@@ -44,15 +36,7 @@ class FeedbackMail extends Mailable
     public function content(): Content
     {
         return new Content(
-            view: 'emails.feedback',
-            with: [
-                'name' => $this->name,
-                'email' => $this->email,
-                'phoneNumber' => $this->phoneNumber,
-                'questionCategory' => $this->questionCategory,
-                'msg' => $this->message,
-            ]
-
+            view: 'emails.forgot',
         );
     }
 

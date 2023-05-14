@@ -9,32 +9,30 @@ use Illuminate\Http\Request;
 
 class ProductController extends Controller
 {
-    public function getAllProducts()
-    {
-        return ProductResource::collection(Product::all());
-    }
     public function showProducts(Request $request)
     {
         $query = Product::query();
 
-//        $params = $request->only([
-//            'category_id',
-//            'brand_id',
-//            'price_min',
-//            'price_max',
-//            'price_range',
-//            'sort_by',
-//            'sort_order',
-//        ]);
         $filters = $request->query();
 
         $query->filter($filters);
 
         $results = $query->paginate(9);
 
-        return ProductResource::collection($results);
-    }
+        if ($results->isEmpty()) {
+            return response()->json([
+                'message' => 'Товаров не найдено',
+            ], 404);
+        }
 
+        return response()->json([
+            'data' => ProductResource::collection($results),
+            'meta' => [
+                'last_page' => $results->lastPage(),
+                'per_page' => $results->perPage(),
+            ],
+        ]);
+    }
 
     public function getPopularProduct()
     {
@@ -45,4 +43,30 @@ class ProductController extends Controller
     {
         return new ProductResource(Product::findOrFail($id));
     }
+
+    public function searchProduct(Request $request)
+    {
+        $searchQuery = $request->query('q');
+        $products = Product::where(function ($query) use ($searchQuery) {
+            $query->where('title', 'like', '%' . $searchQuery . '%')
+                ->orWhereHas('category', function ($query) use ($searchQuery) {
+                    $query->where('title', 'like', '%' . $searchQuery . '%');
+                })
+                ->orWhereHas('brand', function ($query) use ($searchQuery) {
+                    $query->where('title', 'like', '%' . $searchQuery . '%');
+                })
+                ->orWhere('art', 'like', '%' . $searchQuery . '%');
+        })->paginate(9);
+
+        $meta = [
+            'last_page' => $products->lastPage(),
+            'per_page' => $products->perPage(),
+        ];
+
+        return response()->json([
+            'data' => ProductResource::collection($products),
+            'meta' => $meta
+        ]);
+    }
+
 }

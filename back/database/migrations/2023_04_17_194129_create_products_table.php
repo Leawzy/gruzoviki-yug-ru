@@ -31,14 +31,14 @@ return new class extends Migration
             $table->boolean('is_popular')
                 ->default(false);
 
-            $table->foreignIdFor(Brand::class)
+            $table->foreignId('brand_id')
                 ->constrained()
-                ->cascadeOnUpdate()
-                ->cascadeOnDelete();
-            $table->foreignIdFor(Category::class)
+                ->onUpdate('cascade')
+                ->onDelete('restrict');
+            $table->foreignId('category_id')
                 ->constrained()
-                ->cascadeOnUpdate()
-                ->cascadeOnDelete();
+                ->onUpdate('cascade')
+                ->onDelete('restrict');
 
             $table->timestamps();
         });

@@ -76,13 +76,13 @@ class Product extends Model
         }
 
         // Фильтрация по минимальной цене
-        if (isset($params['price_min'])) {
-            $query->where('price', '>=', $params['price_min']);
+        if (isset($params['minPrice'])) {
+            $query->where('price', '>=', $params['minPrice']);
         }
 
         // Фильтрация по максимальной цене
-        if (isset($params['price_max'])) {
-            $query->where('price', '<=', $params['price_max']);
+        if (isset($params['maxPrice'])) {
+            $query->where('price', '<=', $params['maxPrice']);
         }
 
         // Фильтрация по диапазону цен

@@ -12,6 +12,8 @@ class Feedback extends Model
     protected $fillable = [
         'name',
         'email',
+        'phone_number',
+        'question_category',
         'message',
     ];
 }

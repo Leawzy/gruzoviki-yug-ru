@@ -28,4 +28,17 @@ class Brand extends Model
     {
         return url('storage/' . $this->img);
     }
+    public function products()
+    {
+        return $this->hasMany(Product::class);
+    }
+    public function delete()
+    {
+        if ($this->products()->exists()) {
+            // Если на бренд есть ссылки из таблицы products, выбрасываем исключение
+            throw new \Exception('Нельзя удалить бренд, на который ссылаются продукты.');
+        }
+
+        return parent::delete();
+    }
 }

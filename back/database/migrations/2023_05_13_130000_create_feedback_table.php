@@ -15,8 +15,12 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('email');
+            $table->string('phone_number');
             $table->text('message');
-            $table->string('status');
+            $table->string('question_category')
+                ->nullable();
+            $table->string('status')
+                ->default('Открыт');
             $table->timestamps();
         });
     }
