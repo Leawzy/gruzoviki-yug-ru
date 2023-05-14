@@ -6,6 +6,7 @@ import AdminLayout from '../../../components/shared/layouts/AdminLayout';
 import { useHandleFileChangeHook } from '../../../hooks/admin/handlers/useHandleFileChangeHook';
 import { useModalHandlerHook } from '../../../hooks/admin/handlers/useModalHandlerHook';
 import { useSendChangeHook } from '../../../hooks/admin/handlers/useSendChangeHook';
+import { useGetBrandHook } from '../../../hooks/admin/useGetBrandHook';
 import { useGetProductsHook } from '../../../hooks/admin/useGetProductsHook';
 import { withAuth } from '../../../utils/withAuth';
 import { withAuthAdmin } from '../../../utils/withAuthAdmin';
@@ -13,6 +14,7 @@ import cn from '../style.module.scss';
 
 function ProductChange() {
     const { products } = useGetProductsHook();
+    const { brand } = useGetBrandHook();
     const { selectedImage, selectedImageUrl, handleFileChange } = useHandleFileChangeHook();
     const {
         rows,
@@ -28,11 +30,15 @@ function ProductChange() {
     const useHandleSaveChanges = async () => {
         try {
             await useSendChangeHook(
-                '/brand/change',
+                '/product/change',
                 {
                     id: selectedRow?.id as string,
                     title: selectedRow?.title as string,
-                    file: selectedImage,
+                    price: selectedRow?.price as string,
+                    quantity: selectedRow?.quantity as string,
+                    art: selectedRow?.art as string,
+                    brandId: selectedRow?.brand.id as string,
+                    shortDesc: selectedRow?.shortDesc as string,
                 },
                 'post'
             );
@@ -104,6 +110,7 @@ function ProductChange() {
             price: item.price === 0 ? '-' : `${item.price}₽`,
             quantity: item.quantity,
             shortDesc: item.shortDesc,
+            brand: item.brand,
         }));
         setRows(formattedRows);
     }, [products]);
@@ -171,6 +178,16 @@ function ProductChange() {
                             <input type="file" accept="image/webp" onChange={handleFileChange} />
                             <span className={cn.inputFileBtn}>Выберите файл</span>
                         </label>
+                        <select>
+                            <option value={selectedRow?.brand.id}>
+                                {selectedRow?.brand.title}
+                            </option>
+                            {brand.map(item => (
+                                <option key={item.id} value={item.id}>
+                                    {item.title}
+                                </option>
+                            ))}
+                        </select>
                     </DialogContent>
                     <DialogActions>
                         <Button onClick={handleCloseModal}>Отмена</Button>
