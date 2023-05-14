@@ -1,10 +1,67 @@
 import Image from 'next/image';
-import React from 'react';
+import { parseCookies } from 'nookies';
+import React, { useEffect, useState } from 'react';
 
+import { apiFetch } from '../../../axios/global';
+import { useProfileData } from '../../../hooks/admin/useGetProfileHook';
 import { calendar, call, invoices, mail } from '../../../utils/getImages';
 import cn from './style.module.scss';
 
 export default function Contact() {
+    const { profile } = useProfileData();
+    const cookies = parseCookies();
+    const [fullName, setFullName] = useState('');
+    const [phoneNumber, setPhoneNumber] = useState('');
+    const [email, setEmail] = useState('');
+    const [message, setMessage] = useState('');
+    const [questionCategory, setQuestionCategory] = useState('');
+    const { token } = cookies;
+
+    useEffect(() => {
+        function isUserAuth() {
+            if (token) {
+                setFullName(`${profile.firstName} ${profile.lastName}`);
+                setPhoneNumber(
+                    `${
+                        profile.phone === undefined
+                            ? 'Номер не указан в профиле'
+                            : `${profile.phone}`
+                    }`
+                );
+                setEmail(profile.email);
+            } else {
+                setFullName('');
+                setPhoneNumber('');
+                setEmail('');
+            }
+        }
+
+        isUserAuth();
+    }, []);
+
+    async function handlerSendFeedBack() {
+        try {
+            const res = await apiFetch('api/feedback', {
+                method: 'post',
+                data: {
+                    name: fullName,
+                    email,
+                    message,
+                    phoneNumber,
+                    questionCategory,
+                },
+            });
+            if (res.status === 200) {
+                setMessage('');
+                setFullName('');
+                setPhoneNumber('');
+                setMessage('');
+            }
+        } catch (e) {
+            console.error(e);
+        }
+    }
+
     return (
         <section className={cn.contactPage}>
             <div className={cn.contactPageLists}>
@@ -58,29 +115,51 @@ export default function Contact() {
                     <div className={cn.contactPageFormTop}>
                         <label>
                             ФИО
-                            <input type="text" required />
+                            <input
+                                type="text"
+                                value={fullName}
+                                onChange={event => setFullName(event.target.value)}
+                                placeholder="Иванов Иван Иванович"
+                                required
+                            />
                         </label>
                         <label>
                             Телефон
-                            <input type="text" required />
+                            <input
+                                type="text"
+                                value={phoneNumber}
+                                onChange={event => setPhoneNumber(event.target.value)}
+                                placeholder="7 000 000 00 00"
+                                required
+                            />
                         </label>
                         <label>
                             Почта
-                            <input type="email" required />
+                            <input
+                                type="email"
+                                value={email}
+                                onChange={event => setEmail(event.target.value)}
+                                placeholder="example@email.ru"
+                                required
+                            />
                         </label>
                         <label>
-                            Выберите отдел
-                            <select>
-                                <option value="1">1</option>
-                                <option value="1">3</option>
-                                <option value="1">2</option>
-                                <option value="1">4</option>
+                            Категория вопроса
+                            <select onChange={event => setQuestionCategory(event.target.value)}>
+                                <option value="Гарантия">Гарантия</option>
+                                <option value="Вопрос по сайту">Вопрос по сайту</option>
+                                <option value="Вопрос по работе">Вопрос по работе</option>
+                                <option value="Остальное">Остальное</option>
                             </select>
                         </label>
                     </div>
                     <div className={cn.contactPageFormBottom}>
-                        <textarea required />
-                        <button>Отправить</button>
+                        <textarea
+                            placeholder="Мой вопрос..."
+                            required
+                            onChange={event => setMessage(event.target.value)}
+                        />
+                        <button onClick={handlerSendFeedBack}>Отправить</button>
                     </div>
                 </form>
             </div>
