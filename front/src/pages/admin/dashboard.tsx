@@ -1,6 +1,7 @@
 import React from 'react';
 
 import AdminLayout from '../../components/shared/layouts/AdminLayout';
+import RenderLineChart from '../../components/shared/layouts/AdminLayout/Chart';
 import Widget from '../../components/shared/layouts/AdminLayout/Widgets';
 import { useGetBrandHook } from '../../hooks/admin/useGetBrandHook';
 import { useGetUserHook } from '../../hooks/admin/useGetUserHook';
@@ -18,6 +19,9 @@ function Dashboard() {
                 <Widget type="user" users={users} brand={brand} />
                 <Widget type="order" users={users} brand={brand} />
                 <Widget type="brands" users={users} brand={brand} />
+            </div>
+            <div>
+                <RenderLineChart />
             </div>
         </AdminLayout>
     );
