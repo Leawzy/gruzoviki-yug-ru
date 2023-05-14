@@ -5,21 +5,35 @@ import { MetaIF, Product } from '../../types/ProductType';
 
 export const usePaginationProduct = (
     currentPage: number,
-    filters: { brand: string; minPrice: number; maxPrice: number }
+    filters: { brands: string; minPrice: number; maxPrice: number }
 ) => {
     const [products, setProducts] = useState<Product[]>([]);
+    const [pageCount, setPageCount] = useState(0);
     const [perPage, setPerPage] = useState(0);
 
     useEffect(() => {
         const fetchProducts = async () => {
             try {
+                let params = {};
+
+                if (filters.brands !== '') {
+                    params = { ...params, brand: filters.brands };
+                }
+                if (filters.minPrice !== 0) {
+                    params = { ...params, minPrice: filters.minPrice };
+                }
+                if (filters.maxPrice !== 0) {
+                    params = { ...params, maxPrice: filters.maxPrice };
+                }
+
                 const res: {
                     data: {
                         meta: MetaIF;
                         data: Product[];
                     };
-                } = await apiFetch(`api/product/list?page=${currentPage}`, { params: filters });
+                } = await apiFetch(`api/product/list?page=${currentPage + 1}`, { params });
                 setProducts(res.data.data);
+                setPageCount(res.data.meta.last_page);
                 setPerPage(res.data.meta.per_page);
             } catch (e) {
                 console.error(e);
@@ -30,6 +44,7 @@ export const usePaginationProduct = (
 
     return {
         products,
-        pageCount: Math.ceil(products.length / perPage),
+        pageCount,
+        perPage,
     };
 };
