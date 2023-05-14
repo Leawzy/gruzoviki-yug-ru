@@ -1,7 +1,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { parseCookies } from 'nookies';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 
 import { apiFetch } from '../../../../axios/global';
@@ -31,18 +31,18 @@ export default function ProductCard({
     const { token } = cookies;
     const dispatch = useDispatch();
 
-    // useEffect(() => {
-    //     if (favoriteList) {
-    //         if (Array.isArray(favoriteList.products)) {
-    //             favoriteList.products.forEach(item => {
-    //                 // @ts-ignore
-    //                 if (item && typeof item.id === 'number' && item.id === id) {
-    //                     setIsFavorite(true);
-    //                 }
-    //             });
-    //         }
-    //     }
-    // }, [favoriteList, id]);
+    useEffect(() => {
+        if (favoriteList) {
+            if (Array.isArray(favoriteList.products)) {
+                favoriteList.products.forEach(item => {
+                    // @ts-ignore
+                    if (item && typeof item.id === 'number' && item.id === id) {
+                        setIsFavorite(true);
+                    }
+                });
+            }
+        }
+    }, [favoriteList, id]);
 
     const handleAddToFavorite = async () => {
         try {
