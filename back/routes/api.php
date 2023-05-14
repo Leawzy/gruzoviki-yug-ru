@@ -26,6 +26,7 @@ Route::get('/product/search', [ProductController::class, 'searchProduct']);
 //User function
 Route::post('/register', [UserController::class, 'createUser']);
 Route::post('/login', [UserController::class, 'authUser']);
+Route::post('/forgot', [UserController::class, 'forgotPassword']);
 
 // Other Function
 Route::get('/slider', [OtherController::class, 'showSlider']);

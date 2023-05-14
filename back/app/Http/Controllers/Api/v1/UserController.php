@@ -3,8 +3,12 @@
 namespace App\Http\Controllers\Api\v1;
 
 use App\Http\Controllers\Controller;
+use App\Mail\ForgotPasswordMail;
 use App\Models\User;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Str;
 use Tymon\JWTAuth\Exceptions\JWTException;
 use Tymon\JWTAuth\Facades\JWTAuth;
 
@@ -186,5 +190,26 @@ class UserController extends Controller
 
         // Если проверка прошла успешно, возвращаем токен
         return response()->json(compact('token'));
+    }
+
+    public function forgotPassword(Request $request)
+    {
+        $data = $request->validate([
+           'email' => ['required', 'string']
+        ]);
+
+        try {
+            $user = User::where('email', $data['email'])->firstOrFail();
+
+            $password = Str::random(12);
+            $user->password = bcrypt($password);
+            $user->save();
+
+            Mail::to($data['email'])->send(new ForgotPasswordMail($password));
+
+            return response()->json(['message' => 'Пароль отправлен на почту']);
+        } catch (ModelNotFoundException $e) {
+            return response()->json(['message' => 'Пользователя с такой почтой не существует']);
+        }
     }
 }
