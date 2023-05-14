@@ -124,6 +124,7 @@
         align-content: center;
         padding: 10px 12px;
         align-items: center;
+
         .cartPageItemRightMinus {
           @include minusButton();
         }
@@ -131,6 +132,7 @@
         .cartPageItemRightPlus {
           @include plusButton();
         }
+
         p {
           padding: 0 10px;
         }
@@ -176,6 +178,7 @@
         }
       }
     }
+
     .productPageTotal {
       display: flex;
       background: #FFFFFF;
@@ -188,11 +191,51 @@
       .productPagePrice {
         padding: 10px 20px;
         margin-bottom: 20px;
+
         p {
           font-size: 28px;
           font-weight: 700;
         }
       }
     }
+  }
+}
+
+@media screen and (max-width: 720px) {
+  .productPageTop {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+  }
+  .productPageTopAction {
+    margin-top: 22px;
+  }
+  .productPageBottomInfo {
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+  }
+  .productPageBottomCheckIs {
+    margin-left: 0 !important;
+  }
+  .productPageBottomBrand {
+    margin-right: 0 !important;
+  }
+  .productPageWrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    .productPageInfo {
+      width: auto !important;
+      padding: 0 !important;
+    }
+  }
+  .productPageTotal {
+    width: 0 !important;
+    height: 300px;
   }
 }

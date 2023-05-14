@@ -11,6 +11,11 @@
     justify-content: center;
     flex-direction: column;
 
+    .catalogImage {
+      width: auto;
+      height: auto;
+    }
+
     .shortCatalogItemLeftInfo {
       position: absolute;
       left: 0;
