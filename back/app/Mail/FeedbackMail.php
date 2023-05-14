@@ -16,12 +16,16 @@ class FeedbackMail extends Mailable
     public $name;
     public $email;
     public $message;
+    public $phoneNumber;
+    public $questionCategory;
 
     public function __construct($mailData)
     {
         $this->name = $mailData['name'];
         $this->email = $mailData['email'];
         $this->message = $mailData['message'];
+        $this->phoneNumber = $mailData['phoneNumber'];
+        $this->questionCategory = $mailData['questionCategory'];
     }
 
     /**
@@ -44,6 +48,8 @@ class FeedbackMail extends Mailable
             with: [
                 'name' => $this->name,
                 'email' => $this->email,
+                'phoneNumber' => $this->phoneNumber,
+                'questionCategory' => $this->questionCategory,
                 'msg' => $this->message,
             ]
 

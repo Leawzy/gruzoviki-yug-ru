@@ -120,12 +120,11 @@ class OtherController extends Controller
 
         $featured = FeaturedProduct::where('user_id', $user->id)->first();
 
-        if($featured){
+        if ($featured) {
             return new FeaturedProductResource($featured);
-        }
-        else {
+        } else {
             return response()->json([
-               'message' => "Избранных товаров нет"
+                'message' => "Избранных товаров нет"
             ]);
         }
     }
@@ -158,7 +157,9 @@ class OtherController extends Controller
         $feedback = Feedback::create([
             'name' => $request->input('name'),
             'email' => $request->input('email'),
+            'phone_number' => $request->input('phoneNumber'),
             'message' => $request->input('message'),
+            $request->input('questionCategory') === null ?: 'question_category' => $request->input('questionCategory')
         ]);
         $feedback->save();
 
@@ -166,6 +167,8 @@ class OtherController extends Controller
             'name' => $feedback->name,
             'email' => $feedback->email,
             'message' => $feedback->message,
+            'phoneNumber' => $feedback->phone_number,
+            'questionCategory' => $feedback->question_category === null ? 'Отсутствует' : $feedback->question_category
         ];
 
         Mail::to('tofikdipsize1337228@yandex.ru')->send(new FeedbackMail($mailData));
