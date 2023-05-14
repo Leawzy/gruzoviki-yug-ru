@@ -39,7 +39,8 @@ export default function Contact() {
         isUserAuth();
     }, []);
 
-    async function handlerSendFeedBack() {
+    async function handlerSendFeedBack(e: React.FormEvent) {
+        e.preventDefault();
         try {
             const res = await apiFetch('api/feedback', {
                 method: 'post',
