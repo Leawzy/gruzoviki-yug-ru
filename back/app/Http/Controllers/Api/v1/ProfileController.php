@@ -57,6 +57,7 @@ class ProfileController extends Controller
             'firstName' => $user->first_name,
             'lastName' => $user->last_name,
             'email' => $user->email,
+            'address' => $user->address,
             'phoneNumber' => $user->phone_number,
             'role' => $user->role
         ];
@@ -211,10 +212,17 @@ class ProfileController extends Controller
             $request['firstName'] === null ?  : $user->first_name = $request['firstName'];
             $request['lastName'] === null ?  : $user->last_name = $request['lastName'];
             $request['email'] === null ?  : $user->email = $request['email'];
+            $request['address'] === null ? : $user->address = $request['address'];
             $request['phoneNumber'] === null ?  : $user->phone_number = $request['phoneNumber'];
             $user->save();
             return response()->json([
                 'message' => 'Данные успешно обновлены',
+                $request['firstName'],
+                $request['lastName'],
+                $request['email'],
+                $request['address'],
+                $request['phoneNumber'],
+
             ], 200);
         }
 

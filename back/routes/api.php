@@ -51,7 +51,7 @@ Route::middleware(['auth:api', 'admin'])->group(function () {
     //User section
     Route::get('/admin/user/get', [AdminController::class, 'getAllUser']);
     Route::post('/admin/user/create', [AdminController::class, 'createUser']);
-    Route::patch('/admin/user/change', [AdminController::class, 'changeUser']);
+    Route::patch('/admin/user/change/{id}', [AdminController::class, 'changeUser']);
     Route::delete('/admin/user/delete', [AdminController::class, 'deleteUser']);
 
     //Brand section
