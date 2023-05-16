@@ -37,7 +37,7 @@ function ProductChange() {
                     price: selectedRow?.price as string,
                     quantity: selectedRow?.quantity as string,
                     art: selectedRow?.art as string,
-                    brandId: selectedRow?.brand.id as string,
+                    brandId: selectedRow?.brandId as string,
                     shortDesc: selectedRow?.shortDesc as string,
                 },
                 'post'
@@ -111,6 +111,8 @@ function ProductChange() {
             quantity: item.quantity,
             shortDesc: item.shortDesc,
             brand: item.brand,
+            brandId: item.brand.id,
+            brandTitle: item.brand.title,
         }));
         setRows(formattedRows);
     }, [products]);
@@ -179,9 +181,8 @@ function ProductChange() {
                             <span className={cn.inputFileBtn}>Выберите файл</span>
                         </label>
                         <select>
-                            <option value={selectedRow?.brand.id}>
-                                {selectedRow?.brand.title}
-                            </option>
+                            {/* eslint-disable-next-line @typescript-eslint/no-unsafe-assignment */}
+                            <option value={selectedRow?.brandId}>{selectedRow?.brandTitle}</option>
                             {brand.map(item => (
                                 <option key={item.id} value={item.id}>
                                     {item.title}
