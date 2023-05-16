@@ -12,8 +12,8 @@ function useProfileData() {
             try {
                 const res: { data: ProfileType } = await apiFetch.get('api/profile');
                 setProfile(res.data);
-            } catch {
-                /* empty */
+            } catch (e) {
+                console.error(e);
             }
         };
         getProfile().catch(e => console.error(e));
