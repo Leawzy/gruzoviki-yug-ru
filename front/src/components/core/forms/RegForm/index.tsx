@@ -126,6 +126,9 @@ export default function RegistrationForm() {
                         <input type="submit" value="Зарегистрироваться" />
                     </div>
                 )}
+                <p>
+                    Есть уже аккаунт? - <Link href="/authorization">Авторизуйтесь</Link>
+                </p>
                 <div className={cn.acceptPrivacy}>
                     <p>
                         Регистрируясь, вы соглашаетесь с
