@@ -18,11 +18,11 @@ export default function ProfileLayout({
     changeForm,
     setChangeForm,
 }: ProfileLayoutProps) {
-    const [firstName, setFirstName] = useState(profileData?.firstName);
-    const [lastName, setLastName] = useState(profileData.lastName || 'Пустое поле');
-    const [address, setAddress] = useState(profileData.address || 'Пустое поле');
+    const [firstName, setFirstName] = useState(profileData.firstName);
+    const [lastName, setLastName] = useState(profileData.lastName);
+    const [address, setAddress] = useState(profileData.address);
     const [email, setEmail] = useState(profileData.email);
-    const [phoneNumber, setPhoneNumber] = useState(profileData.phone || 'Пустое поле');
+    const [phoneNumber, setPhoneNumber] = useState(profileData.phoneNumber);
     const {
         oldPassword,
         setOldPassword,
@@ -52,13 +52,10 @@ export default function ProfileLayout({
     };
 
     const handlerSaveValue = () => {
-        handlerFormSubmit(
-            firstName,
-            lastName,
-            address,
-            Number(email),
-            String(Number(phoneNumber))
-        ).catch(e => console.error(e));
+        handlerFormSubmit(firstName, lastName, email, address, phoneNumber).catch(e =>
+            console.error(e)
+        );
+        setChangeForm(false);
     };
 
     return (
@@ -97,12 +94,12 @@ export default function ProfileLayout({
                             !changeForm ? `${cn.profileBlock}` : `${cn.profileBlockForm}`
                         } ${cn.blockSix}`}
                     >
-                        <label>Адес</label>
+                        <label>Адрес</label>
                         <input
                             type="text"
                             value={address}
                             onChange={event => setAddress(event.target.value)}
-                            placeholder={profileData.email}
+                            placeholder={profileData.address}
                         />
                     </div>
                     <div
@@ -112,7 +109,7 @@ export default function ProfileLayout({
                     >
                         <label>Email</label>
                         <input
-                            type="text"
+                            type="email"
                             value={email}
                             onChange={event => setEmail(event.target.value)}
                             placeholder={profileData.email}
@@ -125,10 +122,10 @@ export default function ProfileLayout({
                     >
                         <label>Телефон</label>
                         <input
-                            type="text"
+                            type="number"
                             value={phoneNumber}
                             onChange={event => setPhoneNumber(event.target.value)}
-                            placeholder={String(profileData.phone)}
+                            placeholder={profileData.phoneNumber}
                         />
                     </div>
                     <div
@@ -147,14 +144,16 @@ export default function ProfileLayout({
                     <div className={`${cn.profileBlock} ${cn.blockFirst}`}>
                         <p className={cn.profileTitle}>ФИО</p>
                         <p className={cn.profileData}>
-                            {!profileData.firstName
-                                ? 'Поле не заполнено'
-                                : `${profileData.firstName} ${profileData.lastName}`}
+                            {profileData.firstName
+                                ? `${profileData.firstName} ${profileData.lastName}`
+                                : 'Поле не заполнено'}
                         </p>
                     </div>
                     <div className={`${cn.profileBlock} ${cn.blockSecond}`}>
                         <p className={cn.profileTitle}>Адрес</p>
-                        <p className={cn.profileData}>Поле не заполнено</p>
+                        <p className={cn.profileData}>
+                            {!profileData.address ? 'Поле не заполнено' : `${profileData.address}`}
+                        </p>
                     </div>
                     <div className={`${cn.profileBlock} ${cn.blockThird}`}>
                         <p className={cn.profileTitle}>Email</p>
@@ -165,7 +164,9 @@ export default function ProfileLayout({
                     <div className={`${cn.profileBlock} ${cn.blockFourth}`}>
                         <p className={cn.profileTitle}>Телефон</p>
                         <p className={cn.profileData}>
-                            {!profileData.phone ? 'Поле не заполнено' : `${profileData.phone}`}
+                            {!profileData.phoneNumber
+                                ? 'Поле не заполнено'
+                                : `${profileData.phoneNumber}`}
                         </p>
                     </div>
                     <div className={` ${cn.profileBlock} ${cn.blockFiftieth}`}>
