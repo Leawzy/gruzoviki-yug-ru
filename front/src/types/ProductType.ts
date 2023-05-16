@@ -1,4 +1,7 @@
 export interface Product {
+    category?: {
+        id: number;
+    };
     id: number;
     title: string;
     shortDesc: string;
@@ -10,20 +13,7 @@ export interface Product {
     price: number;
     art: string;
     description: string;
-}
-
-export interface ProductCardIF {
-    id: number;
-    title: string;
-    shortDesc: string;
-    popular?: number;
-    img: string;
-    quantity: number;
-    brand: BrandProduct;
-    sale: boolean;
-    price: number;
-    art: string;
-    description: string;
+    IsFavorite?: boolean;
 }
 
 export interface ProductPage {
