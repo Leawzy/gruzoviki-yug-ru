@@ -25,15 +25,15 @@ function UserChange() {
     const useHandleSaveChanges = async () => {
         try {
             await useSendChangeHook(
-                '/user/change',
+                `user/change/${selectedRow?.id}`,
                 {
-                    id: selectedRow?.id as string,
                     firstName: selectedRow?.firstName as string,
                     lastName: selectedRow?.lastName as string,
                     address: selectedRow?.address as string,
                     phoneNumber: selectedRow?.phoneNumber as number,
                     email: selectedRow?.email as string,
                     role: selectedRow?.role as string,
+                    password: selectedRow?.password as string,
                 },
                 'patch'
             );
@@ -86,6 +86,7 @@ function UserChange() {
             address: item.address === null ? 'Не указан' : item.address,
             email: item.email,
             role: item.role,
+            password: item?.password,
             phoneNumber: item.phoneNumber === null ? 'Отсутствует' : `+${item.phoneNumber}`,
         }));
         setRows(formattedRows);
@@ -148,6 +149,14 @@ function UserChange() {
                             value={(selectedRow?.role as string) || ''}
                             onChange={e => {
                                 setSelectedRow(prev => ({ ...prev, role: e.target.value }));
+                            }}
+                        />
+                        <TextField
+                            style={{ padding: '10px' }}
+                            label="Пароль"
+                            value={(selectedRow?.password as string) || ''}
+                            onChange={e => {
+                                setSelectedRow(prev => ({ ...prev, password: e.target.value }));
                             }}
                         />
                     </DialogContent>
