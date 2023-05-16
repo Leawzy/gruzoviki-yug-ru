@@ -1,11 +1,11 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { parseCookies } from 'nookies';
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 
 import { apiFetch } from '../../../../axios/global';
-import { useGetFavoriteHook } from '../../../../hooks/favorites/useGetFavoriteHook';
+import { useFavoriteStatus } from '../../../../hooks/favorites/useCheckFavoriteHook';
 import { addToCart, removeFromCart } from '../../../../redux/actions';
 import { Product } from '../../../../types/ProductType';
 import { FavoriteBorderIcon, FavoriteIcon } from '../../../../utils/getIcons';
@@ -25,24 +25,10 @@ export default function ProductCard({
     shortDesc,
 }: Product) {
     const [addedToCart, setAddedToCart] = useState(false);
-    const [IsFavorite, setIsFavorite] = useState(false);
-    const { favoriteList } = useGetFavoriteHook();
     const cookies = parseCookies();
     const { token } = cookies;
     const dispatch = useDispatch();
-
-    useEffect(() => {
-        if (favoriteList) {
-            if (Array.isArray(favoriteList.products)) {
-                favoriteList.products.forEach(item => {
-                    // @ts-ignore
-                    if (item && typeof item.id === 'number' && item.id === id) {
-                        setIsFavorite(true);
-                    }
-                });
-            }
-        }
-    }, [favoriteList, id]);
+    const { isFavorite, setIsFavorite } = useFavoriteStatus(id);
 
     const handleAddToFavorite = async () => {
         try {
@@ -102,7 +88,7 @@ export default function ProductCard({
                 <p className={cn.shortCatalogPriceNum}>{`${price} ₽`}</p>
                 <span className={cn.shortCatalogFavorite}>
                     <button onClick={handleAddToFavorite}>
-                        {IsFavorite ? (
+                        {isFavorite ? (
                             <FavoriteIcon className={`${cn.icon} ${cn.iconIsFav}`} />
                         ) : (
                             <FavoriteBorderIcon className={cn.icon} />
