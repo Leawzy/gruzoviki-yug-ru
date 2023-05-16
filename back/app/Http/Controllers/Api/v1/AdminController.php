@@ -56,9 +56,9 @@ class AdminController extends Controller
         ], 200);
     }
 
-    public function changeUser(Request $request)
+    public function changeUser(Request $request, $id)
     {
-        $user = User::findOrFail($request['id']);
+        $user = User::findOrFail($id);
 
         if ($user) {
             $request['firstName'] === null ?: $user->first_name = $request['firstName'];
