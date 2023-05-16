@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { setCookie } from 'nookies';
 import React from 'react';
@@ -76,6 +77,13 @@ export default function AuthorizationForm() {
                         <input type="submit" value="Авторизироваться" />
                     </div>
                 )}
+                <p>
+                    Не помните свой пароль? -{' '}
+                    <Link href="/passwordrecovery">Восстановите пароль</Link>
+                </p>
+                <p>
+                    Нет аккаунта? - <Link href="/registration">Зарегистрируйтесь</Link>
+                </p>
             </form>
         </div>
     );
