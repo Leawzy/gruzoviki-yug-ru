@@ -1,4 +1,3 @@
-import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 import Link from 'next/link';
 import React from 'react';
 
@@ -22,7 +21,6 @@ export default function Widget({ type, users, brand }: WidgetProps) {
     let data: WidgetData;
     const totalUser = String(users.length);
     const totalBrands = String(brand.length);
-    const diff = 20;
 
     switch (type) {
         case 'user':
@@ -83,12 +81,6 @@ export default function Widget({ type, users, brand }: WidgetProps) {
                 <Link href={data.link}>
                     <span className={cn.link}>{data.textLink}</span>
                 </Link>
-            </div>
-            <div className={cn.right}>
-                <div className={`${cn.percentage} ${cn.positive}`}>
-                    <KeyboardArrowUpIcon />
-                    {diff} %
-                </div>
             </div>
         </div>
     );

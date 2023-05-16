@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 
+import cn from './style.module.scss';
+
 type FormData = {
     step1: {
         input1: string;
@@ -54,32 +56,37 @@ function MultiStepForm() {
         switch (step) {
             case 1:
                 return (
-                    <div>
-                        <h2>Step 1</h2>
+                    <div className={cn.formRepair}>
+                        <h2>Шаг 1</h2>
                         <input
                             type="text"
                             name="input1"
                             value={formData.step1.input1}
                             onChange={event => handleInputChange(event, 'step1', 'input1')}
+                            placeholder="Укажите своё ФИО"
                         />
                         <input
-                            type="text"
+                            type="email"
                             name="input2"
                             value={formData.step1.input2}
                             onChange={event => handleInputChange(event, 'step1', 'input2')}
+                            placeholder="Укажите свой e-mail"
                         />
-                        <button onClick={handleNextStep}>Next</button>
+                        <button className={cn.formRepairNext} onClick={handleNextStep}>
+                            Дальше
+                        </button>
                     </div>
                 );
             case 2:
                 return (
-                    <div>
-                        <h2>Step 2</h2>
+                    <div className={cn.formRepair}>
+                        <h2>Шаг 2</h2>
                         <input
                             type="text"
                             name="input3"
                             value={formData.step2.input3}
                             onChange={event => handleInputChange(event, 'step2', 'input3')}
+                            placeholder="Укажите свою модель автомобиля"
                         />
                         <input
                             type="text"
@@ -87,14 +94,16 @@ function MultiStepForm() {
                             value={formData.step2.input4}
                             onChange={event => handleInputChange(event, 'step2', 'input4')}
                         />
-                        <button onClick={handlePreviousStep}>Previous</button>
-                        <button onClick={handleNextStep}>Next</button>
+                        <div className={cn.formRepairButtons}>
+                            <button onClick={handlePreviousStep}>Назад</button>
+                            <button onClick={handleNextStep}>Дальше</button>
+                        </div>
                     </div>
                 );
             case 3:
                 return (
-                    <div>
-                        <h2>Step 3</h2>
+                    <div className={cn.formRepair}>
+                        <h2>Шаг 3</h2>
                         <input
                             type="text"
                             name="input5"
@@ -107,20 +116,52 @@ function MultiStepForm() {
                             value={formData.step3.input6}
                             onChange={event => handleInputChange(event, 'step3', 'input6')}
                         />
-                        <button onClick={handlePreviousStep}>Previous</button>
-                        <button onClick={handleNextStep}>Next</button>
+                        <div className={cn.formRepairButtons}>
+                            <button onClick={handlePreviousStep}>Назад</button>
+                            <button onClick={handleNextStep}>Дальше</button>
+                        </div>
                     </div>
                 );
             case 4:
                 return (
-                    <div>
-                        <h2>Confirmation</h2>
-                        <p>Input 1: {formData.step1.input1}</p>
-                        <p>Input 2: {formData.step1.input2}</p>
-                        <p>Input 3: {formData.step2.input3}</p>
-                        <p>Input 4: {formData.step2.input4}</p>
-                        <p>Input 5: {formData.step3.input5}</p>
-                        <p>Input 6: {formData.step3.input6}</p>
+                    <div className={cn.formRepairTotal}>
+                        <h2>Потвердите вписанные поля</h2>
+                        <p>
+                            ФИО:
+                            {formData.step1.input1 === ''
+                                ? ' Поле не заполнено'
+                                : formData.step1.input1}
+                        </p>
+                        <p>
+                            E-mail:
+                            {formData.step1.input2 === ''
+                                ? ' Поле не заполнено'
+                                : formData.step1.input2}
+                        </p>
+                        <p>
+                            Input 3:
+                            {formData.step2.input3 === ''
+                                ? ' Поле не заполнено'
+                                : formData.step2.input3}
+                        </p>
+                        <p>
+                            Input 4:
+                            {formData.step2.input4 === ''
+                                ? ' Поле не заполнено'
+                                : formData.step2.input4}
+                        </p>
+                        <p>
+                            Input 5:
+                            {formData.step3.input5 === ''
+                                ? ' Поле не заполнено'
+                                : formData.step3.input5}
+                        </p>
+                        <p>
+                            Input 6:
+                            {formData.step3.input6 === ''
+                                ? ' Поле не заполнено'
+                                : formData.step3.input6}
+                        </p>
                         <button onClick={handlePreviousStep}>Previous</button>
                         <button type="submit">Submit</button>
                     </div>

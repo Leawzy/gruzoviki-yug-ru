@@ -164,7 +164,7 @@ export default function ProductItem({ product }: ProductItemIF) {
                                 src={product.img}
                                 alt="Catalog Img"
                                 width={460}
-                                height={600}
+                                height={400}
                                 className={cn.catalogImage}
                             />
                         )}

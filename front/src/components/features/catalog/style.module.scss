@@ -21,6 +21,7 @@
         .categoryPageContentWrapper {
           display: grid;
           grid-template-columns: repeat(3, 1fr);
+
           @media screen and (max-width: 991px) {
             grid-template-columns: repeat(2, 1fr);
           }
@@ -31,4 +32,12 @@
       }
     }
   }
+}
+
+.nonFilterItem {
+  padding: 80px 0;
+  text-align: center;
+  display: block;
+  font-size: 22px;
+  font-weight: 800;
 }

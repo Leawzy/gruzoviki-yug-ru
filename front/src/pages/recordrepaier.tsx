@@ -6,7 +6,7 @@ import BaseLayout from '../components/shared/layouts/BaseLayout';
 export default function RecordRepaier() {
     return (
         <BaseLayout>
-            <h1>My Page</h1>
+            <h1>Запись на ремонт</h1>
             <MultiStepForm />
         </BaseLayout>
     );

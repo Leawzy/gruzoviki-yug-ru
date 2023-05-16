@@ -1,19 +1,21 @@
 import React, { useState } from 'react';
 
+import { useGetBrandHook } from '../../../../hooks/admin/useGetBrandHook';
 import cn from './style.module.scss';
 
 interface Props {
-    onFilterChange: (filters: { brand: string; minPrice: number; maxPrice: number }) => void;
+    onFilterChange: (filters: { brands: string; minPrice: number; maxPrice: number }) => void;
 }
 
 export default function CatalogFilter({ onFilterChange }: Props) {
-    const [brand, setBrand] = useState('');
+    const { brand } = useGetBrandHook();
+    const [brands, setBrands] = useState('');
     const [minPrice, setMinPrice] = useState(0);
     const [maxPrice, setMaxPrice] = useState(0);
 
-    const handleBrandFilterChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const handleBrandFilterChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
         const brand = event.target.value;
-        setBrand(brand);
+        setBrands(brand);
     };
 
     const handleMinPriceFilterChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -27,7 +29,14 @@ export default function CatalogFilter({ onFilterChange }: Props) {
     };
 
     const handleFilterClick = () => {
-        onFilterChange({ brand, minPrice, maxPrice });
+        onFilterChange({ brands, minPrice, maxPrice });
+    };
+
+    const handleFilterClear = () => {
+        onFilterChange({ brands: '', minPrice: 0, maxPrice: 0 });
+        setBrands('');
+        setMinPrice(0);
+        setMaxPrice(0);
     };
 
     return (
@@ -35,7 +44,16 @@ export default function CatalogFilter({ onFilterChange }: Props) {
             <h3>Фильтры</h3>
             <div className={cn.filterGroup}>
                 <label>Бренд</label>
-                <input type="text" value={brand} onChange={handleBrandFilterChange} />
+                <select onChange={handleBrandFilterChange}>
+                    <option value="none" disabled selected>
+                        Выберите бренд
+                    </option>
+                    {brand.map(item => (
+                        <option key={item.id} value={item.id}>
+                            {item.title}
+                        </option>
+                    ))}
+                </select>
             </div>
             <div className={cn.filterGroup}>
                 <label>Минимальная цена</label>
@@ -46,6 +64,7 @@ export default function CatalogFilter({ onFilterChange }: Props) {
                 <input type="number" value={maxPrice} onChange={handleMaxPriceFilterChange} />
             </div>
             <button onClick={handleFilterClick}>Применить фильтр</button>
+            <button onClick={handleFilterClear}>Очистить фильтр</button>
         </div>
     );
 }

@@ -21,6 +21,7 @@ interface LoginResponseData {
 
 export default function RegistrationForm() {
     const router = useRouter();
+
     const {
         register,
         handleSubmit,
@@ -61,7 +62,7 @@ export default function RegistrationForm() {
                         {...register('firstName', { required: true })}
                     />
                     {errors.firstName && (
-                        <span className={cn.FormLabelError}>Это поле должно быть заполненым</span>
+                        <span className={cn.FormLabelError}>Это поле должно быть заполненным</span>
                     )}
                 </label>
                 <label className={cn.FormLabel}>
@@ -73,7 +74,7 @@ export default function RegistrationForm() {
                         {...register('lastName', { required: true })}
                     />
                     {errors.lastName && (
-                        <span className={cn.FormLabelError}>Это поле должно быть заполненым</span>
+                        <span className={cn.FormLabelError}>Это поле должно быть заполненным</span>
                     )}
                 </label>
                 <label className={cn.FormLabel}>
@@ -85,7 +86,7 @@ export default function RegistrationForm() {
                         {...register('email', { required: true })}
                     />
                     {errors.email && (
-                        <span className={cn.FormLabelError}>Это поле должно быть заполненым</span>
+                        <span className={cn.FormLabelError}>Это поле должно быть заполненным</span>
                     )}
                 </label>
                 <label className={cn.FormLabel}>
@@ -97,7 +98,7 @@ export default function RegistrationForm() {
                         {...register('password', { required: true })}
                     />
                     {errors.password && (
-                        <span className={cn.FormLabelError}>Это поле должно быть заполненым</span>
+                        <span className={cn.FormLabelError}>Это поле должно быть заполненным</span>
                     )}
                 </label>
                 <label className={cn.FormLabel}>
@@ -109,7 +110,7 @@ export default function RegistrationForm() {
                         {...register('passwordConfirmation', { required: true })}
                     />
                     {errors.passwordConfirmation && (
-                        <span className={cn.FormLabelError}>Это поле должно быть заполненым</span>
+                        <span className={cn.FormLabelError}>Это поле должно быть заполненным</span>
                     )}
                 </label>
                 {errors.email ||
