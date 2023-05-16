@@ -8,7 +8,7 @@ export const useSendChangeHook = async (url: string, data: {}, methodText: strin
             method: methodText,
             data,
             headers: {
-                'Content-Type': 'multipart/form-data',
+                'Content-Type': 'application/x-www-form-urlencoded',
             },
         });
         if (res.status === 200) {
