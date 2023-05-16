@@ -69,7 +69,7 @@
         label {
           display: flex;
           flex-direction: column;
-          margin-left: 20px;
+          margin-left: 48px;
           @media screen and (max-width: 440px) {
             margin-left: 0;
           }
@@ -108,6 +108,26 @@
           flex-direction: column;
           margin-left: 40px;
           text-align: center;
+        }
+        .contactPageFormButtons {
+          display: flex;
+          flex-direction: column;
+          max-width: 388px;
+          label {
+            position: relative;
+            display: flex;
+            padding: 10px 45px;
+            flex-direction: row-reverse;
+            font-size: 12px;
+            text-decoration: underline;
+
+            input {
+              position: absolute;
+              top: 12px;
+              left: 22px;
+            }
+
+          }
         }
 
         textarea {

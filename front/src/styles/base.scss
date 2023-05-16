@@ -72,6 +72,7 @@ $cardMargin: 16px;
 .load-more {
   margin-top: 44px;
   display: flex;
+
   .load-more-button {
     margin-left: auto;
     margin-right: auto;
@@ -86,5 +87,42 @@ $cardMargin: 16px;
 
   .load-more-button:hover {
     background-color: #e0e0e0;
+  }
+}
+
+.favoriteWrapper {
+  display: grid;
+  row-gap: 25px;
+  grid-template-columns: repeat(4, 1fr);
+  @media screen and (max-width: 991px) {
+    grid-template-columns: repeat(3, 1fr);
+    row-gap: 0;
+  }
+  @media screen and (max-width: 768px) {
+    grid-template-columns: repeat(2, 1fr);
+    row-gap: 0;
+  }
+  @media screen and (max-width: 576px) {
+    grid-template-columns: repeat(1, 1fr);
+    row-gap: 0;
+  }
+}
+
+.favoriteTitle {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  align-content: center;
+  margin-top: 40px;
+  margin-bottom: 40px;
+ h1 {
+   padding: 0;
+   margin: 0;
+   text-transform: uppercase;
+   font-size: 32px;
+   font-weight: 700;
+ }
+  p {
+    padding: 0 40px;
   }
 }
