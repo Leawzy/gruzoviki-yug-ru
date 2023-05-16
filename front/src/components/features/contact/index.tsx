@@ -1,6 +1,7 @@
 import Image from 'next/image';
 import { parseCookies } from 'nookies';
 import React, { useEffect, useState } from 'react';
+import { toast, ToastContainer } from 'react-toastify';
 
 import { apiFetch } from '../../../axios/global';
 import { useProfileData } from '../../../hooks/admin/useGetProfileHook';
@@ -15,17 +16,24 @@ export default function Contact() {
     const [email, setEmail] = useState('');
     const [message, setMessage] = useState('');
     const [questionCategory, setQuestionCategory] = useState('');
+    const [checkBox, setCheckBox] = useState<boolean>(false);
     const { token } = cookies;
 
     useEffect(() => {
         function isUserAuth() {
             if (token) {
-                setFullName(`${profile.firstName} ${profile.lastName}`);
+                setFullName(
+                    `${
+                        profile.firstName === undefined
+                            ? ''
+                            : `${profile.firstName} ${profile.lastName}`
+                    }`
+                );
                 setPhoneNumber(
                     `${
-                        profile.phone === undefined
+                        profile.phoneNumber === undefined
                             ? 'Номер не указан в профиле'
-                            : `${profile.phone}`
+                            : `${profile.phoneNumber}`
                     }`
                 );
                 setEmail(profile.email);
@@ -37,34 +45,57 @@ export default function Contact() {
         }
 
         isUserAuth();
-    }, []);
+    }, [profile]);
 
     async function handlerSendFeedBack(e: React.FormEvent) {
         e.preventDefault();
-        try {
-            const res = await apiFetch('api/feedback', {
-                method: 'post',
-                data: {
-                    name: fullName,
-                    email,
-                    message,
-                    phoneNumber,
-                    questionCategory,
-                },
-            });
-            if (res.status === 200) {
-                setMessage('');
-                setFullName('');
-                setPhoneNumber('');
-                setMessage('');
+        if (checkBox) {
+            try {
+                const res = await apiFetch('api/feedback', {
+                    method: 'post',
+                    data: {
+                        name: fullName,
+                        email,
+                        message,
+                        phoneNumber,
+                        questionCategory,
+                    },
+                });
+                if (res.status === 200) {
+                    setMessage('');
+                    setFullName('');
+                    setPhoneNumber('');
+                    setMessage('');
+                    toast.success('Форма успешна отправлена', {
+                        position: 'bottom-right',
+                        autoClose: 3400,
+                        hideProgressBar: false,
+                        closeOnClick: true,
+                        pauseOnHover: true,
+                        draggable: true,
+                        progress: undefined,
+                        theme: 'light',
+                    });
+                }
+            } catch (e) {
+                console.error(e);
+                toast.error('Заполните все понял верно.', {
+                    position: 'bottom-right',
+                    autoClose: 3400,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                    theme: 'light',
+                });
             }
-        } catch (e) {
-            console.error(e);
         }
     }
 
     return (
         <section className={cn.contactPage}>
+            <ToastContainer />
             <div className={cn.contactPageLists}>
                 <h1>Контакты</h1>
                 <ul className={cn.contactPageList}>
@@ -127,7 +158,7 @@ export default function Contact() {
                         <label>
                             Телефон
                             <input
-                                type="text"
+                                type="number"
                                 value={phoneNumber}
                                 onChange={event => setPhoneNumber(event.target.value)}
                                 placeholder="7 000 000 00 00"
@@ -160,7 +191,18 @@ export default function Contact() {
                             required
                             onChange={event => setMessage(event.target.value)}
                         />
-                        <button onClick={handlerSendFeedBack}>Отправить</button>
+                        <div className={cn.contactPageFormButtons}>
+                            <button onClick={handlerSendFeedBack}>Отправить</button>
+                            <label>
+                                Отправляя форму, Вы соглашаетесь с Условиями предоставления услуг и
+                                Политикой конфиденциальности , а также сПолитикой использования
+                                файлов cookie.
+                                <input
+                                    type="checkbox"
+                                    onChange={event => setCheckBox(event.target.checked)}
+                                />
+                            </label>
+                        </div>
                     </div>
                 </form>
             </div>
