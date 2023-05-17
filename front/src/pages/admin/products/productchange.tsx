@@ -26,7 +26,6 @@ function ProductChange() {
         handleDeleteRow,
         handleCloseModal,
     } = useModalHandlerHook([]);
-
     const useHandleSaveChanges = async () => {
         try {
             await useSendChangeHook(
@@ -38,11 +37,11 @@ function ProductChange() {
                     quantity: selectedRow?.quantity as string,
                     art: selectedRow?.art as string,
                     brandId: selectedRow?.brandId as string,
+                    categoryId: selectedRow?.categoryId as string,
                     shortDesc: selectedRow?.shortDesc as string,
                 },
                 'post'
             );
-            handleCloseModal();
         } catch (e) {
             console.error(e);
         }
@@ -51,7 +50,7 @@ function ProductChange() {
     const columns: GridColDef[] = [
         { field: 'id', width: 90 },
         { field: 'title', headerName: 'Название', width: 350 },
-        { field: 'price', headerName: 'Цена', width: 120 },
+        { field: 'price', headerName: 'Цена, ₽', width: 120 },
         {
             field: 'quantity',
             headerAlign: 'center',
@@ -107,12 +106,14 @@ function ProductChange() {
             img: item.img,
             art: item.art,
             popular: item.popular === 1 ? 'Популярный товар' : '',
-            price: item.price === 0 ? '-' : `${item.price}₽`,
+            price: item.price === 0 ? '-' : `${item.price}`,
             quantity: item.quantity,
             shortDesc: item.shortDesc,
             brand: item.brand,
             brandId: item.brand.id,
+            categoryId: item.category.id,
             brandTitle: item.brand.title,
+            categoryTitle: item.category.title,
         }));
         setRows(formattedRows);
     }, [products]);
@@ -180,9 +181,11 @@ function ProductChange() {
                             <input type="file" accept="image/webp" onChange={handleFileChange} />
                             <span className={cn.inputFileBtn}>Выберите файл</span>
                         </label>
-                        <select>
-                            {/* eslint-disable-next-line @typescript-eslint/no-unsafe-assignment */}
-                            <option value={selectedRow?.brandId}>{selectedRow?.brandTitle}</option>
+                        <select
+                            onChange={e =>
+                                setSelectedRow(prev => ({ ...prev, brandId: e.target.value }))
+                            }
+                        >
                             {brand.map(item => (
                                 <option key={item.id} value={item.id}>
                                     {item.title}
