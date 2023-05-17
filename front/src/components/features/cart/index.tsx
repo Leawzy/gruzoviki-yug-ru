@@ -29,21 +29,29 @@ export default function Cart() {
                 <h1 className={cn.cartPageTitle}>Корзина</h1>
                 <div className={cn.cartPageWrapper}>
                     <div className={cn.cartPageLeft}>
-                        {cartItems.map(cartItem => (
-                            <CartItemBlock
-                                id={cartItem.id}
-                                maxQuantity={cartItem.maxQuantity}
-                                key={cartItem.id}
-                                title={cartItem.title}
-                                img={cartItem.img}
-                                price={cartItem.price}
-                                quantity={cartItem.quantity}
-                                art={cartItem.art}
-                            />
-                        ))}
+                        {cartItems.length === 0 ? (
+                            <p className={cn.noneCart}>Корзина пустая</p>
+                        ) : (
+                            cartItems.map(cartItem => (
+                                <CartItemBlock
+                                    id={cartItem.id}
+                                    maxQuantity={cartItem.maxQuantity}
+                                    key={cartItem.id}
+                                    title={cartItem.title}
+                                    img={cartItem.img}
+                                    price={cartItem.price}
+                                    quantity={cartItem.quantity}
+                                    art={cartItem.art}
+                                />
+                            ))
+                        )}
                     </div>
                     <div className={cn.cartPageRight}>
-                        <CartPriceBlock totalPrice={total} totalCount={totalCount} />
+                        <CartPriceBlock
+                            totalPrice={total}
+                            totalCount={totalCount}
+                            cartItems={cartItems}
+                        />
                     </div>
                 </div>
             </div>
