@@ -19,8 +19,6 @@ return new class extends Migration {
                 ->references('id')
                 ->on('users');
 
-            $table->dateTime('date')
-                ->nullable();
             $table->string('total');
             $table->string('delivery');
             $table->string('payment_method');

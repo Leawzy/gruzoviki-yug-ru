@@ -97,7 +97,9 @@ class OtherController extends Controller
 
         $product = Product::findOrFail($data['productId']);
 
-        if (FeaturedProductList::where('product_id', $product->id)->exists()) {
+        if (FeaturedProductList::where('product_id', $product->id)
+            ->where('featured_products_id', $featured->id)
+            ->exists()) {
             return response()->json([
                 'message' => "Товар '{$product->title}' уже в избранном",
             ]);

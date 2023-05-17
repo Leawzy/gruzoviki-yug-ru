@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Api\v1\AdminController;
+use App\Http\Controllers\Api\v1\CartController;
 use App\Http\Controllers\Api\v1\OtherController;
 use App\Http\Controllers\Api\v1\ProductController;
 use App\Http\Controllers\Api\v1\ProfileController;
@@ -18,6 +19,7 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "api" middleware group. Make something great!
 |
 */
+
 //Product function
 Route::get('/product/list', [ProductController::class, 'showProducts']);
 Route::get('/product/card/{id}', [ProductController::class, 'getCardProduct']);
@@ -37,10 +39,16 @@ Route::post('/feedback', [OtherController::class, 'sendFeedback']);
 
 //Auth User function
 Route::middleware(['auth:api'])->group(function () {
+    //Profile
     Route::get('/profile', [ProfileController::class, 'getUserProfile']);
     Route::patch('/profile/change/password', [ProfileController::class, 'changeUserPassword']);
     Route::patch('/profile/change/info', [ProfileController::class, 'updateUserData']);
+
+    //Order
     Route::get('/orders', [OtherController::class, 'getOrders']);
+    Route::post('/order/create', [CartController::class, 'createOrder']);
+
+    //Featured
     Route::post('/featured/create', [OtherController::class, 'createFeaturedProduct']);
     Route::get('/featured/get', [OtherController::class, 'getFeaturedProduct']);
     Route::delete('/featured/delete', [OtherController::class, 'deleteFeaturedProduct']);
