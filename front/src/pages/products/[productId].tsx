@@ -1,14 +1,10 @@
 import { useRouter } from 'next/router';
-import React, { CSSProperties, useEffect, useState } from 'react';
-import { RotateLoader } from 'react-spinners';
+import React, { useEffect, useState } from 'react';
 
 import { apiFetch } from '../../axios/global';
+import Preloader from '../../components/core/loaders/Preloader';
 import ProductItem from '../../components/features/product/ProductItem';
 import { ProductPage } from '../../types/ProductType';
-
-const override: CSSProperties = {
-    margin: '22% 48%',
-};
 
 function ProductPage() {
     const router = useRouter();
@@ -16,7 +12,7 @@ function ProductPage() {
     const { productId } = router.query;
 
     useEffect(() => {
-        async function getProductIdItem() {
+        async function getProductByIdItem() {
             try {
                 const res: { data: { data: ProductPage[] } } = await apiFetch(
                     `/api/product/card/${Number(productId)}`
@@ -27,13 +23,10 @@ function ProductPage() {
             }
         }
 
-        getProductIdItem().catch(error => console.error(error));
+        getProductByIdItem().catch(error => console.error(error));
     }, [productId]);
 
-    if (!product)
-        return (
-            <RotateLoader cssOverride={override} color="#4c96e3" size={15} speedMultiplier={1} />
-        );
+    if (!product) return <Preloader />;
 
     // @ts-ignore
     return <ProductItem product={product} />;
