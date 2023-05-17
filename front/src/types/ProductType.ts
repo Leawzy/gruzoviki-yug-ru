@@ -1,5 +1,6 @@
-export interface Product {
-    category?: {
+export interface ProductIF {
+    category: {
+        title: string;
         id: number;
     };
     id: number;
@@ -14,6 +15,19 @@ export interface Product {
     art: string;
     description: string;
     IsFavorite?: boolean;
+}
+
+export interface ProductCardIF {
+    id: number;
+    title: string;
+    shortDesc: string;
+    popular?: number;
+    img: string;
+    quantity: number;
+    sale: boolean;
+    price: number;
+    art: string;
+    brand: BrandProduct;
 }
 
 export interface ProductPage {
