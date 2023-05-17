@@ -1,18 +1,21 @@
 import { useEffect, useState } from 'react';
 
 import { apiFetch } from '../../axios/global';
-import { Product } from '../../types/ProductType';
+import { ProductCardIF } from '../../types/ProductType';
 
 function usePopularList() {
-    const [productList, setProductList] = useState<Product[]>([]);
+    const [productList, setProductList] = useState<ProductCardIF[]>([]);
     const [loading, setLoading] = useState(false);
 
     useEffect(() => {
         async function fetchPopularProductList() {
             try {
-                const res: { data: { data: Product[] } } = await apiFetch('api/product/popular', {
-                    method: 'get',
-                });
+                const res: { data: { data: ProductCardIF[] } } = await apiFetch(
+                    'api/product/popular',
+                    {
+                        method: 'get',
+                    }
+                );
                 setProductList(res.data.data);
                 setLoading(true);
             } catch (e) {
