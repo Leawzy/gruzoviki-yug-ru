@@ -2,12 +2,14 @@ import Link from 'next/link';
 import React from 'react';
 
 import { AdminTypeBrand, AdminTypeUser } from '../../../../../types/AdminType';
+import { ProductIF } from '../../../../../types/ProductType';
 import cn from './style.module.scss';
 
 interface WidgetProps {
     type: string;
     users: AdminTypeUser[];
     brand: AdminTypeBrand[];
+    products: ProductIF[];
 }
 
 interface WidgetData {
@@ -17,9 +19,10 @@ interface WidgetData {
     link: string;
 }
 
-export default function Widget({ type, users, brand }: WidgetProps) {
+export default function Widget({ type, users, brand, products }: WidgetProps) {
     let data: WidgetData;
     const totalUser = String(users.length);
+    const totalProducts = String(products.length);
     const totalBrands = String(brand.length);
 
     switch (type) {
@@ -58,9 +61,9 @@ export default function Widget({ type, users, brand }: WidgetProps) {
         case 'products':
             data = {
                 title: 'Продукты',
-                amount: String(totalBrands),
+                amount: String(totalProducts),
                 textLink: 'Просмотреть все бренды',
-                link: '/admin/brand/brandChange',
+                link: '/admin/products/productschange',
             };
             break;
         default:
