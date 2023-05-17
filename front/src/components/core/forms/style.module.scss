@@ -6,6 +6,12 @@
 
   .Form {
     @include AuthenticationForm(580px, 820px);
+    p {
+      text-align: center;
+      a {
+        color: #2d85de;
+      }
+    }
   }
 }
 
@@ -13,7 +19,16 @@
   @include FormTop(120px);
 
   .Form {
-    @include AuthenticationForm(580px, 460px);
+    @include AuthenticationForm(580px, 510px);
+    p:last-child {
+      padding-top: 24px;
+    }
+    p {
+      text-align: center;
+      a {
+        color: #2d85de;
+      }
+    }
   }
 }
 

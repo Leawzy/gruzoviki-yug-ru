@@ -1,10 +1,9 @@
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import { setCookie } from 'nookies';
 import React from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 
-import { apiFetch, dayOfLiveToken } from '../../../../axios/global';
+import { apiFetch } from '../../../../axios/global';
 import cn from '../style.module.scss';
 
 type Inputs = {
@@ -16,7 +15,7 @@ interface ResponseData {
     token: string;
 }
 
-export default function AuthorizationForm() {
+export default function PasswordRecoveryForm() {
     const router = useRouter();
     const {
         register,
@@ -24,26 +23,21 @@ export default function AuthorizationForm() {
         formState: { errors },
     } = useForm<Inputs>();
     const onSubmit: SubmitHandler<Inputs> = async data => {
-        const res: { status: number; data: ResponseData } = await apiFetch('api/login', {
+        const res: { status: number; data: ResponseData } = await apiFetch('api/forgot', {
             method: 'post',
             data: {
                 email: data.email,
-                password: data.password,
             },
         });
         if (res.status === 200) {
-            const { token } = res.data;
-            setCookie(null, 'token', token, {
-                maxAge: dayOfLiveToken(),
-            });
-            await router.push('/');
+            await router.push('/authorization');
         }
     };
 
     return (
         <div className={cn.AuthForm}>
             <form className={cn.Form} onSubmit={handleSubmit(onSubmit)}>
-                <h1>Авторизация</h1>
+                <h1>Восстановление пароля</h1>
                 <label className={cn.FormLabel}>
                     E-mail
                     <input
@@ -56,33 +50,17 @@ export default function AuthorizationForm() {
                         <span className={cn.FormLabelError}>Это поле должно быть заполненным</span>
                     )}
                 </label>
-                <label className={cn.FormLabel}>
-                    Пароль
-                    <input
-                        className={errors.password ? `${cn.errorInput}` : ''}
-                        type="password"
-                        placeholder="Введите пароль"
-                        {...register('password', { required: true })}
-                    />
-                    {errors.password && (
-                        <span className={cn.FormLabelError}>Это поле должно быть заполненным</span>
-                    )}
-                </label>
                 {errors.email || errors.password ? (
                     <div className={cn.FormBtn}>
-                        <input disabled type="submit" value="Авторизироваться" />
+                        <input disabled type="submit" value="Восстановить пароль" />
                     </div>
                 ) : (
                     <div className={cn.FormBtn}>
-                        <input type="submit" value="Авторизироваться" />
+                        <input type="submit" value="Восстановить пароль" />
                     </div>
                 )}
                 <p>
-                    Не помните свой пароль? -{' '}
-                    <Link href="/passwordrecovery">Восстановите пароль</Link>
-                </p>
-                <p>
-                    Нет аккаунта? - <Link href="/registration">Зарегистрируйтесь</Link>
+                    Вспомнили пароль всё же? - <Link href="/authorization">Авторизоваться</Link>
                 </p>
             </form>
         </div>

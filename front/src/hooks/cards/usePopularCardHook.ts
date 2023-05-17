@@ -6,6 +6,7 @@ import { Product } from '../../types/ProductType';
 function usePopularList() {
     const [productList, setProductList] = useState<Product[]>([]);
     const [loading, setLoading] = useState(false);
+
     useEffect(() => {
         async function fetchPopularProductList() {
             try {
@@ -21,6 +22,12 @@ function usePopularList() {
         }
 
         fetchPopularProductList().catch(e => console.error(e));
+
+        const interval = setInterval(() => {
+            fetchPopularProductList().catch(e => console.error(e));
+        }, 85000);
+
+        return () => clearInterval(interval);
     }, []);
 
     return { productList, loading };

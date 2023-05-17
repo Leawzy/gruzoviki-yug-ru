@@ -25,6 +25,12 @@ function useProductList() {
         }
 
         fetchProductList().catch(e => console.error(e));
+
+        const interval = setInterval(() => {
+            fetchProductList().catch(e => console.error(e));
+        }, 85000);
+
+        return () => clearInterval(interval);
     }, []);
 
     return { productList, loading };

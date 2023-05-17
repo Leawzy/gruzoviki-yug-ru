@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
+import React, { CSSProperties, useState } from 'react';
 import ReactPaginate from 'react-paginate';
+import { RotateLoader } from 'react-spinners';
 
 import { usePaginationProduct } from '../../../hooks/cards/usePaginationProductHook';
 import { Product } from '../../../types/ProductType';
@@ -8,9 +9,13 @@ import BaseLayout from '../../shared/layouts/BaseLayout';
 import CatalogFilter from './Filter';
 import cn from './style.module.scss';
 
+const override: CSSProperties = {
+    margin: '22% 48%',
+};
+
 export default function Catalog() {
     const [currentPage, setCurrentPage] = useState(0);
-    const [filter, setFilter] = useState({ brands: '', minPrice: 0, maxPrice: 0 });
+    const [filter, setFilter] = useState({ brands: '', minPrice: 0, maxPrice: 0, categories: '' });
     const { products, pageCount } = usePaginationProduct(currentPage, filter);
     const handlePageClick = (selectedItem: { selected: number }) => {
         setCurrentPage(selectedItem.selected);
@@ -20,20 +25,24 @@ export default function Catalog() {
         brands: string;
         minPrice: number;
         maxPrice: number;
+        categories: string;
     }) => {
         setCurrentPage(0);
         setFilter(filters);
     };
 
     if (products.length === 0) {
-        return <div>Загрузка...</div>;
+        return (
+            <RotateLoader cssOverride={override} color="#4c96e3" size={15} speedMultiplier={1} />
+        );
     }
 
     const filteredProducts = products.filter((product: Product) => {
-        const { brands, minPrice, maxPrice } = filter;
+        const { brands, minPrice, maxPrice, categories } = filter;
         return (
             (brands === '' || String(product.brand.id) === brands) &&
             (minPrice === 0 || product.price >= minPrice) &&
+            (categories === '' || String(product?.category?.id) === categories) &&
             (maxPrice === 0 || product.price <= maxPrice)
         );
     });
@@ -42,7 +51,6 @@ export default function Catalog() {
         <BaseLayout>
             <section className={cn.categoryPage}>
                 <div className={cn.categoryContainer}>
-                    <h1 className={cn.categoryPageTitle}>1</h1>
                     <div className={cn.categoryPageWrapper}>
                         <div className={cn.categoryPageFilter}>
                             <CatalogFilter onFilterChange={handleFilterChange} />

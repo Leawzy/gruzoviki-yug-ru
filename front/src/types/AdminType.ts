@@ -1,4 +1,5 @@
 export interface AdminTypeUser {
+    password?: string;
     address: string;
     phoneNumber: string;
     role: string;

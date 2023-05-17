@@ -7,20 +7,20 @@ const useSendProfileValuesHook = () => {
     const handlerFormSubmit = useCallback(
         async (
             firstName: string,
-            address: string,
+            lastName: string,
             email: string,
-            phoneNumber: number,
-            lastName: string
+            address: string,
+            phoneNumber: string
         ) => {
             try {
                 setAuthToken();
                 const res = await apiFetch('api/profile/change/info', {
-                    method: 'post',
+                    method: 'patch',
                     data: {
                         firstName,
-                        address,
-                        email,
                         lastName,
+                        email,
+                        address,
                         phoneNumber,
                     },
                 });

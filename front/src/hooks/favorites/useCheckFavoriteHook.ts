@@ -1,12 +1,12 @@
-import { useCallback, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import { useGetFavoriteHook } from './useGetFavoriteHook';
 
-export const useFavoriteStatus = (id: number) => {
-    const [isFavorite, setIsFavorite] = useState(false);
+export function useFavoriteStatus(id: number) {
     const { favoriteList } = useGetFavoriteHook();
+    const [isFavorite, setIsFavorite] = useState(false);
 
-    const checkIsFavorite = useCallback(() => {
+    useEffect(() => {
         if (favoriteList) {
             if (Array.isArray(favoriteList.products)) {
                 favoriteList.products.forEach(item => {
@@ -19,9 +19,5 @@ export const useFavoriteStatus = (id: number) => {
         }
     }, [favoriteList, id]);
 
-    useEffect(() => {
-        checkIsFavorite();
-    }, [checkIsFavorite]);
-
     return { isFavorite, setIsFavorite };
-};
+}

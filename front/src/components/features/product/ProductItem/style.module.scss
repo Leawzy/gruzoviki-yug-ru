@@ -113,6 +113,13 @@
   .productPageWrapper {
     display: flex;
 
+    .productPageImage {
+      img {
+        width: 300px;
+        height: 250px;
+      }
+    }
+
     .productPageButtons {
       display: flex;
       align-items: center;

@@ -1,8 +1,8 @@
 export interface ProfileType {
-    address?: string;
+    phoneNumber: string;
+    address: string;
     firstName: string;
     lastName: string;
     email: string;
-    phone: string;
     role: string;
 }

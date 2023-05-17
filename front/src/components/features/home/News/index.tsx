@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import Link from 'next/link';
 import React from 'react';
 
@@ -37,7 +38,13 @@ export default function News() {
                                 {item.img === null ? (
                                     <div className={cn.newsLinkImg} />
                                 ) : (
-                                    <img className={cn.newsLinkImg} src={item.img} alt="News Pic" />
+                                    <Image
+                                        className={cn.newsLinkImg}
+                                        src={item.img}
+                                        width={400}
+                                        height={248}
+                                        alt="News Pic"
+                                    />
                                 )}
                                 <div className={cn.newsLinkBg}>
                                     <span className={cn.newsTitle}>{item.title}</span>

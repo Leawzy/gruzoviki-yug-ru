@@ -5,7 +5,7 @@ import { MetaIF, Product } from '../../types/ProductType';
 
 export const usePaginationProduct = (
     currentPage: number,
-    filters: { brands: string; minPrice: number; maxPrice: number }
+    filters: { brands: string; minPrice: number; maxPrice: number; categories: string }
 ) => {
     const [products, setProducts] = useState<Product[]>([]);
     const [pageCount, setPageCount] = useState(0);
@@ -18,6 +18,9 @@ export const usePaginationProduct = (
 
                 if (filters.brands !== '') {
                     params = { ...params, brand: filters.brands };
+                }
+                if (filters.categories !== '') {
+                    params = { ...params, category: filters.categories };
                 }
                 if (filters.minPrice !== 0) {
                     params = { ...params, minPrice: filters.minPrice };

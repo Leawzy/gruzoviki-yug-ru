@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 
-import { apiFetch } from '../../axios/global';
+import { apiFetch, setAuthToken } from '../../axios/global';
 import { FavoriteTypeIF } from '../../types/FavoriteType';
 
 function useGetFavoriteHook() {
@@ -8,6 +8,7 @@ function useGetFavoriteHook() {
     const [loading, setLoading] = useState(false);
 
     useEffect(() => {
+        setAuthToken();
         async function fetchFavoriteList() {
             try {
                 const res: { data: { data: FavoriteTypeIF } } = await apiFetch('api/featured/get', {
