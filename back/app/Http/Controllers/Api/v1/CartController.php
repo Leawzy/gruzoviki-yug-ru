@@ -7,13 +7,16 @@ use App\Models\Order;
 use App\Models\OrderProduct;
 use App\Models\Product;
 use Illuminate\Http\Request;
+use Tymon\JWTAuth\Facades\JWTAuth;
 
 class CartController extends Controller
 {
     public function createOrder(Request $request)
     {
+        $token = JWTAuth::parseToken();
+        $user = $token->authenticate();
+
         $data = $request->validate([
-            'userId' => ['request', 'integer'],
             'date' => ['request'],
             'total' => ['request', 'integer'],
             'delivery' => ['request', 'string'],
@@ -22,7 +25,7 @@ class CartController extends Controller
         ]);
 
         $order = Order::create([
-            'user_id' => $data['userId'],
+            'user_id' => $user->id,
             'date' => $data['date'],
             'total' => $data['total'],
             'delivery' => $data['delivery'],
