@@ -15,6 +15,13 @@
 
       .cartPageLeft {
         flex: 1 1 auto;
+
+        .noneCart {
+          margin-top: 120px;
+          text-align: center;
+          font-size: 22px;
+          font-weight: 600;
+        }
       }
 
       .cartPageRight {

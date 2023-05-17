@@ -49,4 +49,18 @@
       border: none;
     }
   }
+  .cartPageType {
+    display: flex;
+    flex-direction: column;
+    padding: 20px 0;
+
+    p {
+      font-size: 17px;
+      font-weight: 800;
+    }
+
+    label {
+      padding: 5px 0;
+    }
+  }
 }
