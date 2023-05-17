@@ -17,7 +17,6 @@ class CartController extends Controller
         $user = $token->authenticate();
 
         $data = $request->validate([
-            'date' => ['request'],
             'total' => ['request', 'integer'],
             'delivery' => ['request', 'string'],
             'paymentMethod' => ['request', 'string'],
@@ -26,7 +25,6 @@ class CartController extends Controller
 
         $order = Order::create([
             'user_id' => $user->id,
-            'date' => $data['date'],
             'total' => $data['total'],
             'delivery' => $data['delivery'],
             'payment_method' => $data['paymentMethod'],
