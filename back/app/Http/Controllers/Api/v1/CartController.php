@@ -17,10 +17,10 @@ class CartController extends Controller
         $user = $token->authenticate();
 
         $data = $request->validate([
-            'total' => ['request', 'integer'],
-            'delivery' => ['request', 'string'],
-            'paymentMethod' => ['request', 'string'],
-            'status' => ['request', 'string'],
+            'total' => ['required', 'integer'],
+            'delivery' => ['required', 'string'],
+            'paymentMethod' => ['required', 'string'],
+            'status' => ['required', 'string'],
         ]);
 
         $order = Order::create([
@@ -37,12 +37,12 @@ class CartController extends Controller
 
         foreach ($products as $product) {
             $orderProduct = new OrderProduct();
-            $orderProduct->order_id = $order->order_id;
+            $orderProduct->order_id = $order->id;
             $orderProduct->product_id = $product['id'];
             $orderProduct->save();
 
             $productModel = Product::find($product['id']);
-            $productModel->quantity = -$product['quantity'];
+            $productModel->quantity = $productModel->quantity - $product['quantity'];
             $productModel->save();
         }
 
