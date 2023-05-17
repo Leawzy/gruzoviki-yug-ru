@@ -3,7 +3,7 @@ import ReactPaginate from 'react-paginate';
 import { RotateLoader } from 'react-spinners';
 
 import { usePaginationProduct } from '../../../hooks/cards/usePaginationProductHook';
-import { Product } from '../../../types/ProductType';
+import { ProductCardIF, ProductIF } from '../../../types/ProductType';
 import ProductCard from '../../core/card/ProductCard';
 import BaseLayout from '../../shared/layouts/BaseLayout';
 import CatalogFilter from './Filter';
@@ -37,7 +37,7 @@ export default function Catalog() {
         );
     }
 
-    const filteredProducts = products.filter((product: Product) => {
+    const filteredProducts = products.filter((product: ProductIF) => {
         const { brands, minPrice, maxPrice, categories } = filter;
         return (
             (brands === '' || String(product.brand.id) === brands) &&
@@ -60,7 +60,7 @@ export default function Catalog() {
                                 <p className={cn.nonFilterItem}>Товаров не найдено</p>
                             ) : (
                                 <div className={cn.categoryPageContentWrapper}>
-                                    {filteredProducts.map((product: Product) => (
+                                    {filteredProducts.map((product: ProductCardIF) => (
                                         <ProductCard
                                             key={product.id}
                                             id={product.id}
@@ -72,7 +72,6 @@ export default function Catalog() {
                                             sale={product.sale}
                                             price={product.price}
                                             art={product.art}
-                                            description={product.description}
                                         />
                                     ))}
                                 </div>
