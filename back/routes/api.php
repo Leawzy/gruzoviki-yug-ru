@@ -101,4 +101,8 @@ Route::middleware(['auth:api', 'admin'])->group(function () {
     Route::get('/admin/repair/get', [AdminController::class, 'getAllRecordRepair']);
     Route::patch('/admin/repair/change', [AdminController::class, 'changeRecordRepair']);
     Route::delete('/admin/repair/delete', [AdminController::class, 'deleteRecordRepair']);
+
+    //Feedback section
+    Route::get('/admin/feedback/get', [AdminController::class, 'getFeedback']);
+    Route::patch('/admin/feedback/change', [AdminController::class, 'changeFeedback']);
 });
