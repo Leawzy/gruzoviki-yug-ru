@@ -497,6 +497,8 @@ class AdminController extends Controller
             $request['status'] === null ?: $repair->status = $request['status'];
             $request['date'] === null ?: $repair->date = $request['date'];
             $repair['type'] === null ?: $repair->type = $request['type'];
+
+            $repair->save();
         }
 
         return response()->json([
@@ -529,6 +531,8 @@ class AdminController extends Controller
         if ($feedback)
         {
             $request['status'] === null ?: $feedback->status = $request['status'];
+
+            $feedback->save();
         }
 
         return response()->json([
