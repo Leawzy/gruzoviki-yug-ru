@@ -1,0 +1,49 @@
+.orderCard {
+  margin-top: 10px;
+  margin-bottom: 20px;
+  .orderCardTop {
+    background-color: #EFF3F9;
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 20px;
+    .orderCardTopInfo {
+      display: flex;
+      p:last-child{
+        padding: 0 20px;
+        color: #437FC8;
+      }
+    }
+  }
+  .orderCardBottom {
+    padding: 10px 20px;
+    border: 1px solid #E5E5E5;
+    border-radius: 0 0 10px 10px;
+    display: flex;
+    justify-content: space-between;
+    .orderCardStatus {
+      border-radius: 2px;
+      text-align: center;
+      p {
+        color: #e5e5e5;
+      }
+    }
+    .orderCardStatusWorking {
+      background: #b4bb55;
+      width: 180px;
+    }
+    .orderCardDelivery {
+      padding: 12px 0;
+      font-size: 17px;
+      font-weight: 700;
+    }
+    .orderCardList {
+      padding: 0;
+      margin: 0;
+      .orderCardBottomInfo {
+        font-size: 15px;
+        font-weight: 400;
+        color: #5e5e5e;
+      }
+    }
+  }
+}

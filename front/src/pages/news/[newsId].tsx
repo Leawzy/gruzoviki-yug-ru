@@ -1,16 +1,12 @@
 import Image from 'next/image';
 import { useRouter } from 'next/router';
-import React, { CSSProperties, useEffect, useState } from 'react';
-import { RotateLoader } from 'react-spinners';
+import React, { useEffect, useState } from 'react';
 
 import { apiFetch } from '../../axios/global';
+import Preloader from '../../components/core/loaders/Preloader';
 import BaseLayout from '../../components/shared/layouts/BaseLayout';
 import { News } from '../../types/NewsType';
 import cn from './style.module.scss';
-
-const override: CSSProperties = {
-    margin: '22% 48%',
-};
 
 function ProductPage() {
     const router = useRouter();
@@ -19,7 +15,7 @@ function ProductPage() {
     const { newsId } = router.query;
 
     useEffect(() => {
-        async function getProductIdItem() {
+        async function getNewsByIdItem() {
             try {
                 const res: { data: { data: News } } = await apiFetch(
                     `/api/post/card/${Number(newsId)}`
@@ -30,13 +26,10 @@ function ProductPage() {
             }
         }
 
-        getProductIdItem().catch(error => console.error(error));
+        getNewsByIdItem().catch(error => console.error(error));
     }, [newsId]);
 
-    if (!news)
-        return (
-            <RotateLoader cssOverride={override} color="#4c96e3" size={15} speedMultiplier={1} />
-        );
+    if (!news) return <Preloader />;
 
     return (
         <BaseLayout>

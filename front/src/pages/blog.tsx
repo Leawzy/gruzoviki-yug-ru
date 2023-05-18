@@ -1,27 +1,20 @@
-import React, { CSSProperties, useState } from 'react';
-import { RotateLoader } from 'react-spinners';
+import React, { useState } from 'react';
 
 import NewsCard from '../components/core/card/NewsCard';
+import Preloader from '../components/core/loaders/Preloader';
 import BaseLayout from '../components/shared/layouts/BaseLayout';
-import { useNewsList } from '../hooks/useNewsHook';
+import { useNewsList } from '../hooks/useGetNewsHook';
 
 export default function BlogPage() {
     const [visibleNewsCount, setVisibleNewsCount] = useState(6);
     const itemsPerPage = 6;
     const { newsList, loading } = useNewsList();
 
-    const override: CSSProperties = {
-        margin: '22% 48%',
-    };
-
     const handleLoadMore = () => {
         setVisibleNewsCount(prevCount => prevCount + itemsPerPage);
     };
 
-    if (!loading)
-        return (
-            <RotateLoader cssOverride={override} color="#4c96e3" size={15} speedMultiplier={1} />
-        );
+    if (!loading) return <Preloader />;
 
     const visibleNews = newsList.slice(0, visibleNewsCount);
 

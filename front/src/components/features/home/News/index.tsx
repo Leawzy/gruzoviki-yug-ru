@@ -2,7 +2,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import React from 'react';
 
-import { useNewsList } from '../../../../hooks/useNewsHook';
+import { useNewsList } from '../../../../hooks/useGetNewsHook';
 import SkeletonCard from '../PopularCards/SkeletonContainer';
 import cn from './style.module.scss';
 

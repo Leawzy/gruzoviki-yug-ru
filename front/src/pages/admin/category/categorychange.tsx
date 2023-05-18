@@ -1,4 +1,4 @@
-import { Button, Dialog, DialogActions, DialogContent, TextField } from '@mui/material';
+import { Button, Dialog, DialogActions, DialogContent, TextField, Tooltip } from '@mui/material';
 import { DataGrid, GridColDef, GridRowsProp, ruRU } from '@mui/x-data-grid';
 import React, { FormEvent, useEffect, useState } from 'react';
 
@@ -6,8 +6,10 @@ import AdminLayout from '../../../components/shared/layouts/AdminLayout';
 import { useModalHandlerHook } from '../../../hooks/admin/handlers/useModalHandlerHook';
 import { useSendChangeHook } from '../../../hooks/admin/handlers/useSendChangeHook';
 import { useGetCategoryHook } from '../../../hooks/admin/useGetCategoryHook';
+import { HelpOutlineIcon } from '../../../utils/getIcons';
 import { withAuth } from '../../../utils/withAuth';
 import { withAuthAdmin } from '../../../utils/withAuthAdmin';
+import cn from '../style.module.scss';
 
 function CategoryChange() {
     const { category } = useGetCategoryHook();
@@ -75,6 +77,8 @@ function CategoryChange() {
         },
     ];
 
+    const keyValue = 'Данное поле должно быть обязательно заполненым';
+
     useEffect(() => {
         const formattedRows: GridRowsProp = category.map(item => ({
             id: item.id,
@@ -92,7 +96,7 @@ function CategoryChange() {
                     columns={columns}
                 />
                 <Dialog open={openModal} onClose={handleCloseModal}>
-                    <DialogContent>
+                    <DialogContent className={cn.modalWindow}>
                         <TextField
                             label="Название Категории"
                             value={(selectedRow?.title as string) || ''}
@@ -100,17 +104,22 @@ function CategoryChange() {
                                 setSelectedRow(prev => ({ ...prev, title: e.target.value }));
                             }}
                         />
+                        <Tooltip title={keyValue}>
+                            <HelpOutlineIcon />
+                        </Tooltip>
                         {category[Number(selectedRow?.id) - 1]?.property && (
                             <form>
                                 {Object.entries(category[Number(selectedRow?.id) - 1].property).map(
                                     ([key, label]) => (
-                                        <input
-                                            key={key}
-                                            name={key}
-                                            placeholder={label}
-                                            onChange={handleInputChange}
-                                            required
-                                        />
+                                        <div key={key}>
+                                            <input
+                                                key={key}
+                                                name={key}
+                                                placeholder={label}
+                                                onChange={handleInputChange}
+                                                required
+                                            />
+                                        </div>
                                     )
                                 )}
                             </form>

@@ -2,13 +2,17 @@ import { useRouter } from 'next/router';
 import { destroyCookie } from 'nookies';
 import React, { useEffect, useState } from 'react';
 
+import Preloader from '../components/core/loaders/Preloader';
 import BaseLayout from '../components/shared/layouts/BaseLayout';
 import ProfileLayout from '../components/shared/Profile/ProfileLayout';
+import ProfileOrders from '../components/shared/Profile/ProfileOrders';
 import { useProfileData } from '../hooks/admin/useGetProfileHook';
+import { useGetOrdersHook } from '../hooks/useGetOrdersHook';
 import { withAuth } from '../utils/withAuth';
 
 function ProfilePage() {
-    const { profile } = useProfileData();
+    const { profile, loading } = useProfileData();
+    const { orderList } = useGetOrdersHook();
     const router = useRouter();
     const [time, setTime] = useState(new Date());
     const [changeForm, setChangeForm] = useState(false);
@@ -36,6 +40,10 @@ function ProfilePage() {
         setChangeForm(true);
     };
 
+    if (!loading) {
+        return <Preloader />;
+    }
+
     return (
         <BaseLayout>
             <h1 className="profileTitle">Мой профиль</h1>
@@ -57,7 +65,12 @@ function ProfilePage() {
                 changeForm={changeForm}
                 setChangeForm={setChangeForm}
             />
-            <h2 style={{ borderTop: '1px solid grey' }}>Заказы</h2>
+            <h2 className="profileTitle" style={{ borderTop: '1px solid grey', padding: '20px 0' }}>
+                Заказы
+            </h2>
+            <div>
+                <ProfileOrders orders={orderList} />
+            </div>
         </BaseLayout>
     );
 }
