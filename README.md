@@ -6,7 +6,7 @@
 
 ## Tech Stack
 
-**Client:** Next, Axios, Scss modules
+**Client:** Next, Axios, SCSS, MUI UI elements
 
 **Server:** Laravel 9
 
