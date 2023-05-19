@@ -3,6 +3,9 @@
     font-size: 17px;
     font-weight: 600;
     padding-bottom: 10px;
+    @media screen and (max-width: 480px) {
+      text-align: center;
+    }
   }
   margin-top: 22px;
   .filterSelected {
@@ -10,6 +13,10 @@
     .filterSelect {
       display: flex;
       flex-direction: column;
+      @media screen and (max-width: 480px) {
+        align-content: center;
+        align-items: center;
+      }
       select {
         padding-left: 10px;
         width: 300px;
@@ -17,6 +24,10 @@
         border-radius: 6px;
         border: 1px solid #3758CB;
         margin-bottom: 18px;
+        @media screen and (max-width: 480px) {
+          width: 240px;
+          height: 32px;
+        }
       }
     }
   }
@@ -25,6 +36,10 @@
     .filterGroup {
       display: flex;
       flex-direction: column;
+      @media screen and (max-width: 480px) {
+        align-content: center;
+        align-items: center;
+      }
       input {
         padding-left: 10px;
         width: 300px;
@@ -32,8 +47,17 @@
         border-radius: 6px;
         border: 1px solid #3758CB;
         margin-bottom: 18px;
+        @media screen and (max-width: 480px) {
+          width: 240px;
+          height: 32px;
+        }
       }
     }
+  }
+}
+.filterButtons {
+  @media screen and (max-width: 480px) {
+    margin-left: 20px;
   }
   button {
     width: 300px;
@@ -44,8 +68,13 @@
     cursor: pointer;
     outline: none;
     margin-bottom: 10px;
+    @media screen and (max-width: 480px) {
+      width: 240px;
+      height: 32px;
+    }
     &:hover {
       background-color: rgba(100, 149, 237, 0.71);
     }
   }
 }
+

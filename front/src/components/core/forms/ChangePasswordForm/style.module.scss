@@ -17,6 +17,10 @@
     padding-left: 10px;
     border: 1px solid #C4C4C4;
     border-radius: 6px;
+    @media screen and (max-width: 480px) {
+      width: 300px;
+      height: 30px;
+    }
 
     &:focus {
       border: 1px solid #437FC8;
@@ -34,5 +38,8 @@
     border-radius: 6px;
     color: white;
     cursor: pointer;
+    @media screen and (max-width: 480px) {
+      margin-bottom: 40px;
+    }
   }
 }
