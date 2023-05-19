@@ -12,6 +12,7 @@ use App\Http\Resources\Other\UserResource;
 use App\Http\Resources\Product\ProductResource;
 use App\Models\Brand;
 use App\Models\Category;
+use App\Models\Feedback;
 use App\Models\Order;
 use App\Models\Post;
 use App\Models\Product;
@@ -496,6 +497,8 @@ class AdminController extends Controller
             $request['status'] === null ?: $repair->status = $request['status'];
             $request['date'] === null ?: $repair->date = $request['date'];
             $repair['type'] === null ?: $repair->type = $request['type'];
+
+            $repair->save();
         }
 
         return response()->json([
@@ -513,5 +516,27 @@ class AdminController extends Controller
         return response()->json([
             'message' => 'Запись на ремонт успешно удалена',
         ]);
+    }
+
+    public function getFeedback()
+    {
+        return response()->json([
+           Feedback::all()
+        ]);
+    }
+
+    public function changeFeedback(Request $request)
+    {
+        $feedback = Feedback::findOrFail($request['id']);
+        if ($feedback)
+        {
+            $request['status'] === null ?: $feedback->status = $request['status'];
+
+            $feedback->save();
+        }
+
+        return response()->json([
+            'message' => 'Статус успешно изменена',
+        ], 200);
     }
 }

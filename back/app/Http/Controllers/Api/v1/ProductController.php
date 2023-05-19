@@ -24,6 +24,32 @@ class ProductController extends Controller
                 'message' => 'Товаров не найдено',
             ], 404);
         }
+        //Поиск товаров через ?q=
+        $searchQuery = $request->query('q');
+
+        if(!empty($searchQuery))
+        {
+            $products = Product::where(function ($query) use ($searchQuery) {
+                $query->where('title', 'like', '%' . $searchQuery . '%')
+                    ->orWhereHas('category', function ($query) use ($searchQuery) {
+                        $query->where('title', 'like', '%' . $searchQuery . '%');
+                    })
+                    ->orWhereHas('brand', function ($query) use ($searchQuery) {
+                        $query->where('title', 'like', '%' . $searchQuery . '%');
+                    })
+                    ->orWhere('art', 'like', '%' . $searchQuery . '%');
+            })->paginate(9);
+
+            $meta = [
+                'last_page' => $products->lastPage(),
+                'per_page' => $products->perPage(),
+            ];
+
+            return response()->json([
+                'data' => ProductResource::collection($products),
+                'meta' => $meta
+            ]);
+        }
 
         return response()->json([
             'data' => ProductResource::collection($results),
@@ -42,31 +68,6 @@ class ProductController extends Controller
     public function getCardProduct($id)
     {
         return new ProductResource(Product::findOrFail($id));
-    }
-
-    public function searchProduct(Request $request)
-    {
-        $searchQuery = $request->query('q');
-        $products = Product::where(function ($query) use ($searchQuery) {
-            $query->where('title', 'like', '%' . $searchQuery . '%')
-                ->orWhereHas('category', function ($query) use ($searchQuery) {
-                    $query->where('title', 'like', '%' . $searchQuery . '%');
-                })
-                ->orWhereHas('brand', function ($query) use ($searchQuery) {
-                    $query->where('title', 'like', '%' . $searchQuery . '%');
-                })
-                ->orWhere('art', 'like', '%' . $searchQuery . '%');
-        })->paginate(9);
-
-        $meta = [
-            'last_page' => $products->lastPage(),
-            'per_page' => $products->perPage(),
-        ];
-
-        return response()->json([
-            'data' => ProductResource::collection($products),
-            'meta' => $meta
-        ]);
     }
 
 }

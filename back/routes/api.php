@@ -24,7 +24,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/product/list', [ProductController::class, 'showProducts']);
 Route::get('/product/card/{id}', [ProductController::class, 'getCardProduct']);
 Route::get('/product/popular', [ProductController::class, 'getPopularProduct']);
-Route::get('/product/search', [ProductController::class, 'searchProduct']);
+
 //User function
 Route::post('/register', [UserController::class, 'createUser']);
 Route::post('/login', [UserController::class, 'authUser']);
@@ -101,4 +101,8 @@ Route::middleware(['auth:api', 'admin'])->group(function () {
     Route::get('/admin/repair/get', [AdminController::class, 'getAllRecordRepair']);
     Route::patch('/admin/repair/change', [AdminController::class, 'changeRecordRepair']);
     Route::delete('/admin/repair/delete', [AdminController::class, 'deleteRecordRepair']);
+
+    //Feedback section
+    Route::get('/admin/feedback/get', [AdminController::class, 'getFeedback']);
+    Route::patch('/admin/feedback/change', [AdminController::class, 'changeFeedback']);
 });

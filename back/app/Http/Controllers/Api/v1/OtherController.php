@@ -57,12 +57,12 @@ class OtherController extends Controller
         $user = $token->authenticate();
 
         $data = $request->validate([
-            'type' => $request['type'],
-            'brand' => $request['brand'],
-            'model' => $request['model'],
-            'description' => $request['description'],
-            'status' => $request['status'],
-            'date' => $request['date'],
+            'type' => ['required', 'string'],
+            'brand' => ['required', 'string'],
+            'model' => ['required', 'string'],
+            'description' => ['required', 'string'],
+            'status' => ['required', 'string'],
+            'date' => ['required'],
         ]);
 
         $repair = Repair::create([
