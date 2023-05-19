@@ -9,22 +9,27 @@ import { ProductPage } from '../../types/ProductType';
 function ProductPage() {
     const router = useRouter();
     const [product, setProduct] = useState<ProductPage[] | null>(null);
-    const { productId } = router.query;
+    const { productSlug } = router.query;
 
     useEffect(() => {
         async function getProductByIdItem() {
             try {
-                const res: { data: { data: ProductPage[] } } = await apiFetch(
-                    `/api/product/card/${Number(productId)}`
-                );
-                setProduct(res.data.data);
+                const slugParts = (productSlug as string)?.split('-');
+                const productId = slugParts?.[0];
+
+                if (productId) {
+                    const res: { data: { data: ProductPage[] } } = await apiFetch(
+                        `/api/product/card/${Number(productId)}`
+                    );
+                    setProduct(res.data.data);
+                }
             } catch (e) {
                 console.error(e);
             }
         }
 
         getProductByIdItem().catch(error => console.error(error));
-    }, [productId]);
+    }, [productSlug]);
 
     if (!product) return <Preloader />;
 

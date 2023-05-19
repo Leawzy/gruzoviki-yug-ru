@@ -12,11 +12,14 @@ function ProductPage() {
     const router = useRouter();
     // @ts-ignore
     const [news, setNews] = useState<News>({});
-    const { newsId } = router.query;
+    const { newsSlug } = router.query;
 
     useEffect(() => {
         async function getNewsByIdItem() {
             try {
+                const slugParts = (newsSlug as string)?.split('-');
+                const newsId = slugParts?.[0];
+
                 const res: { data: { data: News } } = await apiFetch(
                     `/api/post/card/${Number(newsId)}`
                 );
@@ -27,7 +30,7 @@ function ProductPage() {
         }
 
         getNewsByIdItem().catch(error => console.error(error));
-    }, [newsId]);
+    }, [newsSlug]);
 
     if (!news) return <Preloader />;
 
