@@ -23,7 +23,6 @@ return new class extends Migration
                 ->on('featured_products');
 
             $table->foreignIdFor(Product::class)
-                ->unique()
                 ->constrained()
                 ->cascadeOnUpdate()
                 ->cascadeOnDelete();
