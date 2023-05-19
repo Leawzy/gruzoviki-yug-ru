@@ -1,13 +1,14 @@
 import { useEffect, useState } from 'react';
 
 import { apiFetch } from '../../axios/global';
-import { MetaIF, Product } from '../../types/ProductType';
+import { MetaIF, ProductCardIF } from '../../types/ProductType';
 
 export const usePaginationProduct = (
     currentPage: number,
-    filters: { brands: string; minPrice: number; maxPrice: number; categories: string }
+    filters: { brands: string; minPrice: number; maxPrice: number; categories: string },
+    searchQuery: string
 ) => {
-    const [products, setProducts] = useState<Product[]>([]);
+    const [products, setProducts] = useState<ProductCardIF[]>([]);
     const [pageCount, setPageCount] = useState(0);
     const [perPage, setPerPage] = useState(0);
 
@@ -32,9 +33,16 @@ export const usePaginationProduct = (
                 const res: {
                     data: {
                         meta: MetaIF;
-                        data: Product[];
+                        data: ProductCardIF[];
                     };
-                } = await apiFetch(`api/product/list?page=${currentPage + 1}`, { params });
+                } = await apiFetch(
+                    `api/product/list?page=${currentPage + 1}&q=${
+                        searchQuery === undefined ? '' : searchQuery
+                    }`,
+                    {
+                        params,
+                    }
+                );
                 setProducts(res.data.data);
                 setPageCount(res.data.meta.last_page);
                 setPerPage(res.data.meta.per_page);
@@ -43,7 +51,7 @@ export const usePaginationProduct = (
             }
         };
         fetchProducts().catch(e => console.error(e));
-    }, [currentPage, filters]);
+    }, [currentPage, filters, searchQuery]);
 
     return {
         products,
