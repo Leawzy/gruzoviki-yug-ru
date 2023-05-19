@@ -38,7 +38,7 @@ export default function Cart() {
                         )}
                     </div>
                     <div className={cn.cartPageRight}>
-                        <CartPriceBlock cartItems={cartItems} />
+                        <CartPriceBlock />
                     </div>
                 </div>
             </div>
