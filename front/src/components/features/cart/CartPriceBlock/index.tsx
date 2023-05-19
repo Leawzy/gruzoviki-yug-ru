@@ -1,17 +1,44 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import { apiFetch } from '../../../../axios/global';
+import { CartItem } from '../../../../types/CartType';
+import { ProductCardIF } from '../../../../types/ProductType';
 import cn from './style.module.scss';
 
 interface CartPriceBlockProps {
-    totalPrice: number;
-    totalCount: number;
-    cartItems: object;
+    cartItems: CartItem[];
 }
 
-export default function CartPriceBlock({ totalPrice, totalCount, cartItems }: CartPriceBlockProps) {
+export default function CartPriceBlock({ cartItems }: CartPriceBlockProps) {
     const [delivery, setDelivery] = useState('Cамовывоз');
     const [payMethod, setPayMethod] = useState('Наличными');
+    const [count, setCount] = useState(0);
+    const [price, setPrice] = useState(0);
+    // @ts-ignore
+    const cart: ProductCardIF[] =
+        typeof window !== 'undefined' ? JSON.parse(localStorage.getItem('cartItems') || '[]') : [];
+
+    useEffect(() => {
+        let totalCount = 0;
+        let totalPrice = 0;
+
+        const updateCartData = () => {
+            cart.forEach(item => {
+                totalCount += item.quantity;
+                totalPrice += item.price * item.quantity;
+            });
+            setCount(totalCount);
+            setPrice(totalPrice);
+        };
+
+        updateCartData();
+
+        const interval = setInterval(updateCartData, 100);
+
+        return () => {
+            clearInterval(interval);
+        };
+    }, [cart]);
 
     async function handleSubmitCart() {
         try {
@@ -19,7 +46,7 @@ export default function CartPriceBlock({ totalPrice, totalCount, cartItems }: Ca
                 method: 'post',
                 data: {
                     products: cartItems,
-                    total: totalPrice,
+                    total: price,
                     delivery,
                     paymentMethod: payMethod,
                     status: 'В обработке',
@@ -37,11 +64,11 @@ export default function CartPriceBlock({ totalPrice, totalCount, cartItems }: Ca
         <div className={cn.cartPageInfo}>
             <div className={cn.cartPageTotalPrice}>
                 <p>Итого</p>
-                <p>{totalPrice} ₽</p>
+                <p>{price} ₽</p>
             </div>
             <div className={cn.cartPageTotalItem}>
                 <p>Количество</p>
-                <p>{totalCount} шт.</p>
+                <p>{count} шт.</p>
             </div>
             <div className={cn.cartPageTotalItem}>
                 <p>Доставка</p>
@@ -94,7 +121,13 @@ export default function CartPriceBlock({ totalPrice, totalCount, cartItems }: Ca
                 </label>
             </div>
             <div className={cn.cartPageDeliveryBtn}>
-                <button onClick={handleSubmitCart}>Оформить заказ</button>
+                {cartItems.length === 0 ? (
+                    <button disabled onClick={handleSubmitCart}>
+                        Оформить заказ
+                    </button>
+                ) : (
+                    <button onClick={handleSubmitCart}>Оформить заказ</button>
+                )}
             </div>
         </div>
     );
