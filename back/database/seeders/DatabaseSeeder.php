@@ -234,6 +234,7 @@ class DatabaseSeeder extends Seeder
             ->create([
                 'order_id' => Order::query()->where('id', 1)->value('id'),
                 'product_id' => Product::query()->where('id', 1)->value('id'),
+                'quantity' => '1'
             ]);
 
 //        $numberOfProduct = 200;
