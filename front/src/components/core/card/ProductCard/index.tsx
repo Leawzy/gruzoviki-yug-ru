@@ -1,13 +1,13 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { parseCookies } from 'nookies';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 
 import { apiFetch } from '../../../../axios/global';
 import { useFavoriteStatus } from '../../../../hooks/favorites/useCheckFavoriteHook';
 import { addToCart, removeFromCart } from '../../../../redux/actions';
-import { Product } from '../../../../types/ProductType';
+import { ProductCardIF, ProductPage } from '../../../../types/ProductType';
 import { FavoriteBorderIcon, FavoriteIcon } from '../../../../utils/getIcons';
 import { noPhoto } from '../../../../utils/getImages';
 import ButtonAdd from '../../buttons/ButtonAdd';
@@ -22,8 +22,9 @@ export default function ProductCard({
     price,
     title,
     art,
+    slug,
     shortDesc,
-}: Product) {
+}: ProductCardIF) {
     const [addedToCart, setAddedToCart] = useState(false);
     const cookies = parseCookies();
     const { token } = cookies;
@@ -47,6 +48,14 @@ export default function ProductCard({
         }
     };
 
+    useEffect(() => {
+        const cartItems = JSON.parse(localStorage.getItem('cartItems') || '[]') as ProductPage[];
+        const item = cartItems.find((item: ProductPage) => item.id === id);
+        if (item) {
+            setAddedToCart(true);
+        }
+    }, [id]);
+
     const handleAddToCart = () => {
         setAddedToCart(true);
         dispatch(addToCart(id, title, price, img, Boolean(true), quantity, 1, art));
@@ -59,7 +68,7 @@ export default function ProductCard({
 
     return (
         <article className={cn.shortCatalogItem}>
-            <Link href={`/products/${id}`} className={cn.shortCatalogItemLink}>
+            <Link href={`/products/${id}-${slug}`} className={cn.shortCatalogItemLink}>
                 <div className={cn.shortCatalogItemLeftInfo}>
                     <span className={cn.shortCatalogBrand}>{`Бренд: ${brand.title}`}</span>
                 </div>
@@ -101,7 +110,9 @@ export default function ProductCard({
                 <p>{shortDesc}</p>
             </div>
             <div className={cn.shortButtons}>
-                {addedToCart ? (
+                {quantity === 0 ? (
+                    'Товара нет в наличии'
+                ) : addedToCart ? (
                     <ButtonRemove onClick={handleRemoveToCart}>Убрать из корзины</ButtonRemove>
                 ) : (
                     <ButtonAdd onClick={handleAddToCart}>Добавить в корзину</ButtonAdd>
