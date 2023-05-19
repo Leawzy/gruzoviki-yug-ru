@@ -104,15 +104,32 @@ function CategoryChange() {
                                 setSelectedRow(prev => ({ ...prev, title: e.target.value }));
                             }}
                         />
-                        <Tooltip title={keyValue}>
-                            <HelpOutlineIcon />
-                        </Tooltip>
                         {category[Number(selectedRow?.id) - 1]?.property && (
                             <form>
                                 {Object.entries(category[Number(selectedRow?.id) - 1].property).map(
                                     ([key, label]) => (
-                                        <div key={key}>
+                                        <div
+                                            key={key}
+                                            style={{
+                                                display: 'flex',
+                                                flexDirection: 'row-reverse',
+                                                marginBottom: '20px',
+                                                marginTop: '10px',
+                                                alignContent: 'center',
+                                                alignItems: 'center',
+                                            }}
+                                        >
+                                            <Tooltip
+                                                title={keyValue}
+                                                style={{ marginLeft: '10px' }}
+                                            >
+                                                <HelpOutlineIcon />
+                                            </Tooltip>
                                             <input
+                                                style={{
+                                                    width: '320px',
+                                                    height: '50px',
+                                                }}
                                                 key={key}
                                                 name={key}
                                                 placeholder={label}
