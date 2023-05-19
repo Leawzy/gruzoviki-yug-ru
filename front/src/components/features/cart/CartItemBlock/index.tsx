@@ -1,9 +1,10 @@
 import Image from 'next/image';
 import Link from 'next/link';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 
 import { removeFromCart } from '../../../../redux/actions';
+import { CartItem } from '../../../../types/CartType';
 import cn from './style.module.scss';
 
 interface CartItemBlock {
@@ -16,34 +17,39 @@ interface CartItemBlock {
     art: string;
 }
 
-export default function CartItemBlock({
-    title,
-    img,
-    price,
-    quantity,
-    id,
-    art,
-    maxQuantity,
-}: CartItemBlock) {
+function CartItemBlock({ title, img, price, quantity, id, art, maxQuantity }: CartItemBlock) {
     const [itemAmount, setItemAmount] = useState(quantity);
     const dispatch = useDispatch();
+
+    useEffect(() => {
+        const cartItems = JSON.parse(localStorage.getItem('cartItems') || '[]');
+        // @ts-ignore
+        // eslint-disable-next-line @typescript-eslint/no-unsafe-call,@typescript-eslint/no-unsafe-assignment
+        const updatedCartItems: CartItem[] = cartItems.map((item: CartItem) => {
+            if (item.id === id) {
+                return { ...item, quantity: itemAmount };
+            }
+            return item;
+        });
+        localStorage.setItem('cartItems', JSON.stringify(updatedCartItems));
+    }, [id, itemAmount]);
 
     const handleRemoveToCart = () => {
         dispatch(removeFromCart(id));
     };
 
     const plusQuantity = () => {
-        setItemAmount(itemAmount + 1);
-        if (itemAmount >= maxQuantity) {
-            setItemAmount(maxQuantity);
-        }
+        setItemAmount(prevAmount => {
+            const newAmount = prevAmount + 1;
+            return newAmount > maxQuantity ? maxQuantity : newAmount;
+        });
     };
 
     const minusQuantity = () => {
-        setItemAmount(itemAmount - 1);
-        if (itemAmount <= 1) {
-            setItemAmount(quantity);
-        }
+        setItemAmount(prevAmount => {
+            const newAmount = prevAmount - 1;
+            return newAmount < 1 ? quantity : newAmount;
+        });
     };
 
     return (
@@ -87,3 +93,5 @@ export default function CartItemBlock({
         </div>
     );
 }
+
+export { CartItemBlock };
