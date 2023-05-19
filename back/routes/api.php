@@ -36,6 +36,7 @@ Route::get('/posts', [OtherController::class, 'showPost']);
 Route::get('/post/card/{id}', [OtherController::class, 'getPostById']);
 Route::post('/repair/create', [OtherController::class, 'createRecordRepair']);
 Route::post('/feedback', [OtherController::class, 'sendFeedback']);
+Route::get('/special', [OtherController::class, 'getAllBrandAndCategory']);
 
 //Auth User function
 Route::middleware(['auth:api'])->group(function () {
