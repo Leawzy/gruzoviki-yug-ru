@@ -110,6 +110,7 @@ export default function ProductCard({
                 <p>{shortDesc}</p>
             </div>
             <div className={cn.shortButtons}>
+                {/* eslint-disable-next-line no-nested-ternary */}
                 {quantity === 0 ? (
                     'Товара нет в наличии'
                 ) : addedToCart ? (
