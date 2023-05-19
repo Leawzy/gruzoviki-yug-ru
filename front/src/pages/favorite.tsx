@@ -4,7 +4,7 @@ import { RotateLoader } from 'react-spinners';
 import ProductCard from '../components/core/card/ProductCard';
 import BaseLayout from '../components/shared/layouts/BaseLayout';
 import { useGetFavoriteHook } from '../hooks/favorites/useGetFavoriteHook';
-import { Product } from '../types/ProductType';
+import { ProductCardIF } from '../types/ProductType';
 import { withAuth } from '../utils/withAuth';
 
 const override: CSSProperties = {
@@ -25,12 +25,15 @@ function FavoritePage() {
             <div>
                 <div className="favoriteTitle">
                     <h1>Избранный товар</h1>
-                    {/* eslint-disable-next-line @typescript-eslint/no-unsafe-member-access */}
-                    <p>Всего в избранном: {favoriteList?.products?.length}</p>
+                    <p>
+                        Всего в избранном:{' '}
+                        {/* eslint-disable-next-line @typescript-eslint/no-unsafe-member-access */}
+                        {favoriteList?.products?.length ? favoriteList?.products?.length : 0}
+                    </p>
                 </div>
                 <div className="favoriteWrapper">
                     {/* eslint-disable-next-line @typescript-eslint/no-unsafe-call,@typescript-eslint/no-unsafe-member-access */}
-                    {favoriteList?.products?.map((item: Product) => (
+                    {favoriteList?.products?.map((item: ProductCardIF) => (
                         <ProductCard
                             key={item.id}
                             id={item.id}
@@ -42,7 +45,7 @@ function FavoritePage() {
                             sale={item.sale}
                             price={item.price}
                             art={item.art}
-                            description={item.description}
+                            slug={item.slug}
                         />
                     ))}
                 </div>

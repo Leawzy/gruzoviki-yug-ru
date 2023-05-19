@@ -32,8 +32,6 @@ export default function ProductCard({
     const dispatch = useDispatch();
     const favorites = useSelector((state: RootState) => state.favorites);
 
-    console.log(favorites);
-
     const isFavorite = favorites.some(
         (item: { id: string }) => item.id.toString() === id.toString()
     );
@@ -41,9 +39,11 @@ export default function ProductCard({
     const handleToggleFavorite = () => {
         if (isFavorite) {
             // @ts-ignore
+            // eslint-disable-next-line @typescript-eslint/no-unsafe-call
             dispatch(removeFromFavorites(id) as string);
         } else {
             // @ts-ignore
+            // eslint-disable-next-line @typescript-eslint/no-unsafe-call
             dispatch(addToFavorites(id) as string);
         }
     };
