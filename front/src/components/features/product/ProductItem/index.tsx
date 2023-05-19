@@ -60,8 +60,8 @@ export default function ProductItem({ product }: ProductItemIF) {
                 product.price,
                 product.img,
                 Boolean(true),
-                itemCount,
                 product.quantity,
+                itemCount,
                 product.art
             )
         );
@@ -210,30 +210,37 @@ export default function ProductItem({ product }: ProductItemIF) {
                         <div className={cn.productPagePrice}>
                             <p>{product.price} ₽</p>
                         </div>
-                        <div className={cn.productPageButtons}>
-                            {addedToCart ? (
-                                <ButtonRemove onClick={handleRemoveToCart}>
-                                    Удалить с корзины
-                                </ButtonRemove>
-                            ) : (
-                                <ButtonAdd onClick={handleAddToCart}> Добавить в корзину</ButtonAdd>
-                            )}
-                            <div className={cn.productPageBuyButtons}>
-                                <button
-                                    onClick={setMinusHandler}
-                                    className={cn.cartPageItemRightMinus}
-                                >
-                                    -
-                                </button>
-                                <p>{itemCount}</p>
-                                <button
-                                    onClick={setPlusHandler}
-                                    className={cn.cartPageItemRightPlus}
-                                >
-                                    +
-                                </button>
+                        {product.quantity === 0 ? (
+                            'Товара нет в наличии'
+                        ) : (
+                            <div className={cn.productPageButtons}>
+                                {addedToCart ? (
+                                    <ButtonRemove onClick={handleRemoveToCart}>
+                                        Удалить с корзины
+                                    </ButtonRemove>
+                                ) : (
+                                    <ButtonAdd onClick={handleAddToCart}>
+                                        {' '}
+                                        Добавить в корзину
+                                    </ButtonAdd>
+                                )}
+                                <div className={cn.productPageBuyButtons}>
+                                    <button
+                                        onClick={setMinusHandler}
+                                        className={cn.cartPageItemRightMinus}
+                                    >
+                                        -
+                                    </button>
+                                    <p>{itemCount}</p>
+                                    <button
+                                        onClick={setPlusHandler}
+                                        className={cn.cartPageItemRightPlus}
+                                    >
+                                        +
+                                    </button>
+                                </div>
                             </div>
-                        </div>
+                        )}
                     </div>
                 </div>
             </div>

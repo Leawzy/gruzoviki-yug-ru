@@ -34,7 +34,7 @@ export default function News() {
                             key={item.id}
                             id={String(item.id)}
                         >
-                            <Link href={`/news/${item.id}`} className={cn.newsLink}>
+                            <Link href={`/news/${item.id}-${item.slug}`} className={cn.newsLink}>
                                 {item.img === null ? (
                                     <div className={cn.newsLinkImg} />
                                 ) : (

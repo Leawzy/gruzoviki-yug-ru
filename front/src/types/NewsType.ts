@@ -1,4 +1,5 @@
 export interface News {
+    slug: string;
     createdAt: number | string;
     id: number | string;
     img: string;
@@ -8,6 +9,7 @@ export interface News {
 }
 
 export interface NewsCardIF {
+    slug: string;
     createdAt: number | string;
     id: number | string;
     img: string;

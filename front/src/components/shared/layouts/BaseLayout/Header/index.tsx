@@ -3,14 +3,13 @@ import Link from 'next/link';
 import { destroyCookie, parseCookies } from 'nookies';
 import React, { useEffect, useState } from 'react';
 
-import { useSendQuery } from '../../../../../hooks/actions/useSendQueryHook';
 import { useProfileData } from '../../../../../hooks/admin/useGetProfileHook';
 import { account, basket, favorite } from '../../../../../utils/getImages';
+import SearchBar from '../SearchBar';
 import cn from './style.module.scss';
 
 export default function Header() {
     const [login, setIsLogged] = useState(false);
-    const [query, setQuery] = useState('');
     const { profile } = useProfileData();
     const cookies = parseCookies();
     const { token } = cookies;
@@ -24,13 +23,6 @@ export default function Header() {
     const logOut = () => {
         destroyCookie(null, 'token');
         location.reload();
-    };
-
-    const sendQuery = useSendQuery();
-
-    const handleQuerySubmit = (e: React.FormEvent) => {
-        // @ts-ignore
-        sendQuery(query, e);
     };
 
     return (
@@ -75,15 +67,7 @@ export default function Header() {
                                 </li>
                             </ul>
                         </div>
-                        <form className={cn.headerSearch} onSubmit={handleQuerySubmit}>
-                            <input
-                                className={cn.headerSearchInput}
-                                type="text"
-                                onChange={e => setQuery(e.target.value)}
-                                placeholder="Что будем искать?"
-                            />
-                            <button type="submit" className={cn.headerSearchSubmit} />
-                        </form>
+                        <SearchBar />
                         <div className={cn.headerContact}>
                             <div className={cn.headerContactPhone}>
                                 <a href="tel:89897774245">+7 989 777 42 45</a>

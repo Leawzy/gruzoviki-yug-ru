@@ -4,10 +4,10 @@ import React from 'react';
 import { NewsCardIF } from '../../../../types/NewsType';
 import cn from './style.module.scss';
 
-export default function NewsCard({ title, img, createdAt, id, shortDesc }: NewsCardIF) {
+export default function NewsCard({ title, img, createdAt, id, slug, shortDesc }: NewsCardIF) {
     const formattedDate = new Date(createdAt).toLocaleString('ru-RU', { dateStyle: 'full' });
     return (
-        <Link href={`/news/${id}`}>
+        <Link href={`/news/${id}-${slug}`}>
             <div className={cn.cardNews}>
                 <div className={cn.cardHeader}>
                     <img src={img} alt="News card" className={cn.cardImage} />

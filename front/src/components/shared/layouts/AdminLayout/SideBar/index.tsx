@@ -116,6 +116,25 @@ export default function SideBar() {
                         </li>
                     </Link>
                     <p className={cn.title}>Остальное</p>
+                    <Link href="/admin/orders/orderschange">
+                        <li>
+                            <NewspaperIcon className={cn.icon} />
+                            <span>Просмотреть заказы</span>
+                        </li>
+                    </Link>
+                    <Link href="/admin/repair/repairchange">
+                        <li>
+                            <NewspaperIcon className={cn.icon} />
+                            <span>Просмотреть записи на ремонт</span>
+                        </li>
+                    </Link>
+                    <Link href="/admin/feedback/feedbackchange">
+                        <li>
+                            <NewspaperIcon className={cn.icon} />
+                            <span>Просмотреть обратную связь</span>
+                        </li>
+                    </Link>
+                    <p className={cn.title}>Инструменты</p>
                     <Link href="/admin/convertor">
                         <li>
                             <RepeatOneIcon className={cn.icon} />
