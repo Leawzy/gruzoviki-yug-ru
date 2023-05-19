@@ -40,6 +40,8 @@ export default function Contact() {
             } else {
                 setFullName('');
                 setPhoneNumber('');
+                setQuestionCategory('');
+                setMessage('');
                 setEmail('');
             }
         }
@@ -65,6 +67,7 @@ export default function Contact() {
                     setMessage('');
                     setFullName('');
                     setPhoneNumber('');
+                    setQuestionCategory('');
                     setMessage('');
                     toast.success('Форма успешна отправлена', {
                         position: 'bottom-right',
@@ -79,7 +82,7 @@ export default function Contact() {
                 }
             } catch (e) {
                 console.error(e);
-                toast.error('Заполните все понял верно.', {
+                toast.error('Ошибка при отправке.', {
                     position: 'bottom-right',
                     autoClose: 3400,
                     hideProgressBar: false,
@@ -160,6 +163,7 @@ export default function Contact() {
                             <input
                                 type="number"
                                 value={phoneNumber}
+                                maxLength={8}
                                 onChange={event => setPhoneNumber(event.target.value)}
                                 placeholder="7 000 000 00 00"
                                 required
@@ -192,7 +196,13 @@ export default function Contact() {
                             onChange={event => setMessage(event.target.value)}
                         />
                         <div className={cn.contactPageFormButtons}>
-                            <button onClick={handlerSendFeedBack}>Отправить</button>
+                            {checkBox === true ? (
+                                <button onClick={handlerSendFeedBack}>Отправить</button>
+                            ) : (
+                                <button disabled onClick={handlerSendFeedBack}>
+                                    Отправить
+                                </button>
+                            )}
                             <label>
                                 Отправляя форму, Вы соглашаетесь с Условиями предоставления услуг и
                                 Политикой конфиденциальности , а также сПолитикой использования
