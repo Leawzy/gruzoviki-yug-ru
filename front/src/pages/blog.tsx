@@ -24,6 +24,7 @@ export default function BlogPage() {
                 {visibleNews.map(news => (
                     <NewsCard
                         id={news.id}
+                        slug={news.slug}
                         createdAt={news.createdAt}
                         shortDesc={news.shortDesc}
                         key={news.id}
