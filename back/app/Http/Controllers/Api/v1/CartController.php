@@ -3,10 +3,12 @@
 namespace App\Http\Controllers\Api\v1;
 
 use App\Http\Controllers\Controller;
+use App\Mail\OrderMail;
 use App\Models\Order;
 use App\Models\OrderProduct;
 use App\Models\Product;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 use Tymon\JWTAuth\Facades\JWTAuth;
 
 class CartController extends Controller
@@ -46,6 +48,7 @@ class CartController extends Controller
             $productModel->quantity = $productModel->quantity - $product['quantity'];
             $productModel->save();
         }
+        Mail::to($user->email)->send(new OrderMail($order->id, $order->total, $products, $order->status));
 
         return response()->json([
             'message' => "Заказ успешно создан"
