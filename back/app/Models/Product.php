@@ -58,20 +58,20 @@ class Product extends Model
     public function scopeFilter($query, $params)
     {
         // Фильтрация по категории
-        if (isset($params['category_id'])) {
-            if (is_array($params['category_id'])) {
-                $query->whereIn('category_id', $params['category_id']);
+        if (isset($params['category'])) {
+            if (is_array($params['category'])) {
+                $query->whereIn('category_id', $params['category']);
             } else {
-                $query->where('category_id', $params['category_id']);
+                $query->where('category_id', $params['category']);
             }
         }
 
         // Фильтрация по бренду
-        if (isset($params['brand_id'])) {
-            if (is_array($params['brand_id'])) {
-                $query->whereIn('brand_id', $params['brand_id']);
+        if (isset($params['brand'])) {
+            if (is_array($params['brand'])) {
+                $query->whereIn('brand_id', $params['brand']);
             } else {
-                $query->where('brand_id', $params['brand_id']);
+                $query->where('brand_id', $params['brand']);
             }
         }
 
