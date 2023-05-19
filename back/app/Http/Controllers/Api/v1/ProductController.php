@@ -24,10 +24,10 @@ class ProductController extends Controller
                 'message' => 'Товаров не найдено',
             ], 404);
         }
-
+        //Поиск товаров через ?q=
         $searchQuery = $request->query('q');
 
-        if($searchQuery)
+        if(!empty($searchQuery))
         {
             $products = Product::where(function ($query) use ($searchQuery) {
                 $query->where('title', 'like', '%' . $searchQuery . '%')
