@@ -1,4 +1,5 @@
 export interface OrderTypeIF {
+    slug: string;
     title: string;
     products: {
         id: number;
