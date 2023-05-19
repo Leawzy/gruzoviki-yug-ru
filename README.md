@@ -25,11 +25,12 @@
 
 ## Installation
 
-Install my-project with npm
+Install Front-end
 
 ```bash
   git clone <url>
-  npm install my-project
-  cd my-project
+  cd front
+  npm install / npm i
+  npm run dev
 ```
     
