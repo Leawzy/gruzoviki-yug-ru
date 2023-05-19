@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import Link from 'next/link';
 import React from 'react';
 
@@ -10,7 +11,13 @@ export default function NewsCard({ title, img, createdAt, id, slug, shortDesc }:
         <Link href={`/news/${id}-${slug}`}>
             <div className={cn.cardNews}>
                 <div className={cn.cardHeader}>
-                    <img src={img} alt="News card" className={cn.cardImage} />
+                    <Image
+                        width={400}
+                        height={300}
+                        src={img}
+                        alt="News image card"
+                        className={cn.cardImage}
+                    />
                 </div>
                 <div className={cn.cardBody}>
                     <h4>{title}</h4>
