@@ -1,9 +1,10 @@
+import { useRouter } from 'next/router';
 import React, { CSSProperties, useState } from 'react';
 import ReactPaginate from 'react-paginate';
 import { RotateLoader } from 'react-spinners';
 
 import { usePaginationProduct } from '../../../hooks/cards/usePaginationProductHook';
-import { ProductCardIF, ProductIF } from '../../../types/ProductType';
+import { ProductCardIF } from '../../../types/ProductType';
 import ProductCard from '../../core/card/ProductCard';
 import BaseLayout from '../../shared/layouts/BaseLayout';
 import CatalogFilter from './Filter';
@@ -14,9 +15,11 @@ const override: CSSProperties = {
 };
 
 export default function Catalog() {
+    const router = useRouter();
+    const searchQuery = router.query.q as string;
     const [currentPage, setCurrentPage] = useState(0);
     const [filter, setFilter] = useState({ brands: '', minPrice: 0, maxPrice: 0, categories: '' });
-    const { products, pageCount } = usePaginationProduct(currentPage, filter);
+    const { products, pageCount } = usePaginationProduct(currentPage, filter, searchQuery);
     const handlePageClick = (selectedItem: { selected: number }) => {
         setCurrentPage(selectedItem.selected);
     };
@@ -37,7 +40,7 @@ export default function Catalog() {
         );
     }
 
-    const filteredProducts = products.filter((product: ProductIF) => {
+    const filteredProducts = products.filter((product: ProductCardIF) => {
         const { brands, minPrice, maxPrice, categories } = filter;
         return (
             (brands === '' || String(product.brand.id) === brands) &&
@@ -64,6 +67,7 @@ export default function Catalog() {
                                         <ProductCard
                                             key={product.id}
                                             id={product.id}
+                                            slug={product.slug}
                                             title={product.title}
                                             shortDesc={product.shortDesc}
                                             img={product.img}
