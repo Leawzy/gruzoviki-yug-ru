@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 
-import { useGetBrandHook } from '../../../../hooks/admin/useGetBrandHook';
-import { useGetCategoryHook } from '../../../../hooks/admin/useGetCategoryHook';
+import { useGetBrandAndCategoryHook } from '../../../../hooks/useGetBrandAndCategoryHook';
 import cn from './style.module.scss';
 
 interface Props {
@@ -14,8 +13,7 @@ interface Props {
 }
 
 export default function CatalogFilter({ onFilterChange }: Props) {
-    const { brand } = useGetBrandHook();
-    const { category } = useGetCategoryHook();
+    const { brand, category } = useGetBrandAndCategoryHook();
     const [brands, setBrands] = useState('');
     const [categories, setCategories] = useState('');
     const [minPrice, setMinPrice] = useState(0);
@@ -94,8 +92,10 @@ export default function CatalogFilter({ onFilterChange }: Props) {
                     <input type="number" value={maxPrice} onChange={handleMaxPriceFilterChange} />
                 </div>
             </div>
-            <button onClick={handleFilterClick}>Применить фильтр</button>
-            <button onClick={handleFilterClear}>Очистить фильтр</button>
+            <div className={cn.filterButtons}>
+                <button onClick={handleFilterClick}>Применить фильтр</button>
+                <button onClick={handleFilterClear}>Очистить фильтр</button>
+            </div>
         </div>
     );
 }
