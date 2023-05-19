@@ -10,6 +10,10 @@ export interface CartItem {
 }
 
 export interface RootState {
+    favorites: {
+        id: string;
+        some(param: (item: { id: string }) => boolean): string;
+    };
     cart: {
         items: CartItem[];
         totalItems: number;
