@@ -1,15 +1,11 @@
+import { useRouter } from 'next/router';
 import React, { useEffect, useState } from 'react';
 
 import { apiFetch } from '../../../../axios/global';
-import { CartItem } from '../../../../types/CartType';
 import { ProductCardIF } from '../../../../types/ProductType';
 import cn from './style.module.scss';
 
-interface CartPriceBlockProps {
-    cartItems: CartItem[];
-}
-
-export default function CartPriceBlock({ cartItems }: CartPriceBlockProps) {
+export default function CartPriceBlock() {
     const [delivery, setDelivery] = useState('Cамовывоз');
     const [payMethod, setPayMethod] = useState('Наличными');
     const [count, setCount] = useState(0);
@@ -17,6 +13,7 @@ export default function CartPriceBlock({ cartItems }: CartPriceBlockProps) {
     // @ts-ignore
     const cart: ProductCardIF[] =
         typeof window !== 'undefined' ? JSON.parse(localStorage.getItem('cartItems') || '[]') : [];
+    const route = useRouter();
 
     useEffect(() => {
         let totalCount = 0;
@@ -45,7 +42,7 @@ export default function CartPriceBlock({ cartItems }: CartPriceBlockProps) {
             const res = await apiFetch('api/order/create', {
                 method: 'post',
                 data: {
-                    products: cartItems,
+                    products: cart,
                     total: price,
                     delivery,
                     paymentMethod: payMethod,
@@ -54,6 +51,7 @@ export default function CartPriceBlock({ cartItems }: CartPriceBlockProps) {
             });
             if (res.status === 200) {
                 localStorage.removeItem('cartItems');
+                await route.push('/payment');
             }
         } catch (e) {
             console.error(e);
@@ -121,7 +119,7 @@ export default function CartPriceBlock({ cartItems }: CartPriceBlockProps) {
                 </label>
             </div>
             <div className={cn.cartPageDeliveryBtn}>
-                {cartItems.length === 0 ? (
+                {cart.length === 0 ? (
                     <button disabled onClick={handleSubmitCart}>
                         Оформить заказ
                     </button>

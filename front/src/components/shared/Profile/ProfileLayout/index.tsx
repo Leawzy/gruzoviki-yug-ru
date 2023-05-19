@@ -125,7 +125,7 @@ export default function ProfileLayout({
                             type="number"
                             value={phoneNumber}
                             onChange={event => setPhoneNumber(event.target.value)}
-                            placeholder={profileData.phoneNumber}
+                            placeholder={profileData.phoneNumber || '79998882345'}
                         />
                     </div>
                     <div

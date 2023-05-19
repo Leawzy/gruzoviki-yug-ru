@@ -8,15 +8,31 @@
 
     .categoryPageWrapper {
       display: flex;
+      @media screen and (max-width: 480px) {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+      }
 
       .categoryPageFilter {
         flex: 0 0 auto;
         width: 338px;
         min-width: 338px;
+        @media screen and (max-width: 480px) {
+          width: 288px;
+          min-width: 250px;
+        }
       }
 
       .categoryPageContent {
         flex: 1 1 auto;
+        .categoryPageContentTop {
+          display: flex;
+          justify-content: space-between;
+          p {
+            justify-content: flex-end;
+          }
+        }
 
         .categoryPageContentWrapper {
           display: grid;

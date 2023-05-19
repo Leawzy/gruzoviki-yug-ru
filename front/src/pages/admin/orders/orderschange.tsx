@@ -58,7 +58,7 @@ function OrdersChange() {
                 };
 
                 const handleDelete = () => {
-                    handleDeleteRow(params.id, 'post/delete');
+                    handleDeleteRow(params.id, 'order/delete');
                 };
 
                 return (

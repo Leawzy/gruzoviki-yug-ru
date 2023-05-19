@@ -6,6 +6,10 @@
     display: flex;
     justify-content: space-between;
     padding: 10px 20px;
+    @media screen and (max-width: 480px) {
+      display: flex;
+      flex-direction: column;
+    }
     .orderCardTopInfo {
       display: flex;
       p {
@@ -25,6 +29,11 @@
     border-radius: 0 0 10px 10px;
     display: flex;
     justify-content: space-between;
+    @media screen and (max-width: 480px) {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
     .orderCardStatus {
       border-radius: 2px;
       height: 28px;
@@ -59,4 +68,25 @@
       }
     }
   }
+}
+
+@media screen and (max-width: 480px) {
+  .orderCardItemList {
+    margin: 0;
+    padding: 10px 0;
+  }
+}
+
+.orderCardItem {
+  padding: 4px 0;
+}
+
+.orderCardItemTitle {
+  font-size: 17px;
+  font-weight: 700;
+  margin-bottom: 11px;
+}
+
+.orderCardItemLink:hover {
+  color: #2d85de;
 }

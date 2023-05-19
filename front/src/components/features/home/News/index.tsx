@@ -3,20 +3,11 @@ import Link from 'next/link';
 import React from 'react';
 
 import { useNewsList } from '../../../../hooks/useGetNewsHook';
-import SkeletonCard from '../PopularCards/SkeletonContainer';
 import cn from './style.module.scss';
 
 export default function News() {
-    const { newsList, loading } = useNewsList();
+    const { newsList } = useNewsList();
     const maxItems = 6;
-
-    if (!loading) {
-        newsList.map(item => (
-            <div key={item.id}>
-                <SkeletonCard />
-            </div>
-        ));
-    }
 
     return (
         <section key="news-section" className={cn.news}>

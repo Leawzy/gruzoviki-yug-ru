@@ -1,12 +1,15 @@
 import Image from 'next/image';
 import Link from 'next/link';
-import { parseCookies } from 'nookies';
 import React, { useEffect, useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
-import { apiFetch } from '../../../../axios/global';
-import { useFavoriteStatus } from '../../../../hooks/favorites/useCheckFavoriteHook';
-import { addToCart, removeFromCart } from '../../../../redux/actions';
+import {
+    addToCart,
+    addToFavorites,
+    removeFromCart,
+    removeFromFavorites,
+} from '../../../../redux/actions';
+import { RootState } from '../../../../types/CartType';
 import { ProductCardIF, ProductPage } from '../../../../types/ProductType';
 import { FavoriteBorderIcon, FavoriteIcon } from '../../../../utils/getIcons';
 import { noPhoto } from '../../../../utils/getImages';
@@ -26,25 +29,22 @@ export default function ProductCard({
     shortDesc,
 }: ProductCardIF) {
     const [addedToCart, setAddedToCart] = useState(false);
-    const cookies = parseCookies();
-    const { token } = cookies;
     const dispatch = useDispatch();
-    const { isFavorite, setIsFavorite } = useFavoriteStatus(id);
+    const favorites = useSelector((state: RootState) => state.favorites);
 
-    const handleAddToFavorite = async () => {
-        try {
-            const res = await apiFetch('api/featured/create', {
-                method: 'post',
-                data: { productId: id },
-                headers: {
-                    Authorization: `Bearer ${token}`,
-                },
-            });
-            if (res.status === 200) {
-                setIsFavorite(true);
-            }
-        } catch (e) {
-            console.error(e);
+    console.log(favorites);
+
+    const isFavorite = favorites.some(
+        (item: { id: string }) => item.id.toString() === id.toString()
+    );
+
+    const handleToggleFavorite = () => {
+        if (isFavorite) {
+            // @ts-ignore
+            dispatch(removeFromFavorites(id) as string);
+        } else {
+            // @ts-ignore
+            dispatch(addToFavorites(id) as string);
         }
     };
 
@@ -96,7 +96,7 @@ export default function ProductCard({
             <div className={cn.shortCatalogPrice}>
                 <p className={cn.shortCatalogPriceNum}>{`${price} ₽`}</p>
                 <span className={cn.shortCatalogFavorite}>
-                    <button onClick={handleAddToFavorite}>
+                    <button onClick={handleToggleFavorite}>
                         {isFavorite ? (
                             <FavoriteIcon className={`${cn.icon} ${cn.iconIsFav}`} />
                         ) : (

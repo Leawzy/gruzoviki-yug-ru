@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import React from 'react';
 
 import { OrderTypeIF } from '../../../../types/OrderType';
@@ -56,11 +57,18 @@ export default function ProfileOrders({ orders }: { orders: OrderTypeIF[] }) {
                             </div>
                             <div>
                                 <div>
-                                    <ul>
-                                        <li>Название товара</li>
+                                    <ul className={cn.orderCardItemList}>
+                                        <li className={cn.orderCardItemTitle}>Название товара</li>
                                         {/* eslint-disable-next-line @typescript-eslint/no-unsafe-call */}
                                         {order.products.map((item: OrderTypeIF) => (
-                                            <li key={item.id}>{item.title}</li>
+                                            <li key={item.id} className={cn.orderCardItem}>
+                                                <Link
+                                                    className={cn.orderCardItemLink}
+                                                    href={`/products/${item.id}-${item.slug}`}
+                                                >
+                                                    {item.title}
+                                                </Link>
+                                            </li>
                                         ))}
                                     </ul>
                                 </div>
