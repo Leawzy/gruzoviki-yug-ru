@@ -14,7 +14,6 @@
       text-align: center;
 
       .productPageBottomCheckIs {
-        margin-left: 72px;
         display: inline-block;
         position: relative;
 
@@ -30,11 +29,13 @@
       }
 
       .productPageBottomBrand {
-        margin-right: 22px;
+        margin-left: 20px;
+        margin-right: 40px;
         @include buttonInfoOfProduct(#55BB9F);
       }
 
       .productPageBottomPopular {
+        margin-right: 50px;
         @include buttonInfoOfProduct(#e04d4d);
       }
     }
@@ -189,7 +190,6 @@
     .productPageTotal {
       display: flex;
       background: #FFFFFF;
-      box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
       border-radius: 10px;
       flex-direction: column;
       height: 190px;
@@ -200,7 +200,8 @@
         margin-bottom: 20px;
 
         p {
-          font-size: 28px;
+          font-size: 38px;
+          line-height: 33px;
           font-weight: 700;
         }
       }

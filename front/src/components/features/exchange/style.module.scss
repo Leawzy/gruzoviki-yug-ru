@@ -1,0 +1,48 @@
+.exChangeSection {
+  .exChangeBlock {
+    padding: 30px 0;
+    .exChangeTop {
+      display: flex;
+      align-items: center;
+      align-content: center;
+      padding: 10px 0;
+      p {
+        padding: 0 10px;
+        font-style: normal;
+        font-weight: 500;
+        font-size: 18px;
+        line-height: 25px;
+        color: #1E1E1E;
+      }
+    }
+    .exChangeTitle {
+      font-style: normal;
+      font-weight: 400;
+      font-size: 30px;
+      line-height: 35px;
+      color: #1E1E1E;
+      padding-bottom: 22px;
+    }
+    .exChangeText {
+      padding: 10px 0;
+      font-style: normal;
+      font-weight: 400;
+      font-size: 16px;
+      line-height: 25px;
+      color: #1E1E1E;
+    }
+    .exChangeList {
+      list-style-type: ' - ';
+      padding: 20px 10px;
+      margin: 0;
+
+      li {
+        font-style: normal;
+        font-weight: 400;
+        font-size: 16px;
+        line-height: 25px;
+        color: #1E1E1E;
+      }
+    }
+  }
+}

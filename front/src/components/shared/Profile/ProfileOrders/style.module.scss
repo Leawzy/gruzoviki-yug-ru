@@ -8,6 +8,11 @@
     padding: 10px 20px;
     .orderCardTopInfo {
       display: flex;
+      p {
+        span {
+          font-weight: 700;
+        }
+      }
       p:last-child{
         padding: 0 20px;
         color: #437FC8;
@@ -22,13 +27,21 @@
     justify-content: space-between;
     .orderCardStatus {
       border-radius: 2px;
+      height: 28px;
       text-align: center;
+      align-content: center;
+      align-items: center;
+      justify-content: center;
       p {
         color: #e5e5e5;
       }
     }
     .orderCardStatusWorking {
       background: #b4bb55;
+      width: 180px;
+    }
+    .orderCardStatusWait {
+      background: #69bb49;
       width: 180px;
     }
     .orderCardDelivery {

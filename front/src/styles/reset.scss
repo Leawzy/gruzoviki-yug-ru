@@ -7,9 +7,12 @@
   font-style: normal;
   font-family: 'Montserrat', sans-serif;
   text-decoration: none;
-  list-style: none;
   outline: none;
   transition: .4s ease;
+}
+
+ul {
+  list-style: none;
 }
 
 body,
@@ -76,12 +79,6 @@ button,
 textarea,
 select {
   font: inherit;
-}
-
-
-ul[role='list'],
-ol[role='list'] {
-  list-style: none
 }
 
 
