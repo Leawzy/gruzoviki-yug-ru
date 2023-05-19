@@ -102,4 +102,16 @@ class Product extends Model
 
         return $query;
     }
+
+    public function delete()
+    {
+        $orderProduct = OrderProduct::where('product_id', $this->id)->first();
+
+        if ($orderProduct) {
+            // Продукт есть в заказе, прервать удаление
+            abort(403, 'Нельзя удалить продукт, так как он уже есть в заказе.');
+        }
+
+        return parent::delete();
+    }
 }

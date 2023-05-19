@@ -43,6 +43,7 @@ class ProductController extends Controller
             $meta = [
                 'last_page' => $products->lastPage(),
                 'per_page' => $products->perPage(),
+                'total' => $products->total(),
             ];
 
             return response()->json([
@@ -56,6 +57,7 @@ class ProductController extends Controller
             'meta' => [
                 'last_page' => $results->lastPage(),
                 'per_page' => $results->perPage(),
+                'total' => $results->total(),
             ],
         ]);
     }

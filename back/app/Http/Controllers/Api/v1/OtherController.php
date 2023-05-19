@@ -3,11 +3,15 @@
 namespace App\Http\Controllers\Api\v1;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\Brand\BrandResource;
+use App\Http\Resources\Category\CategoryResource;
 use App\Http\Resources\Featured\FeaturedProductResource;
 use App\Http\Resources\Orders\OrderResource;
 use App\Http\Resources\Other\PostResource;
 use App\Http\Resources\Other\SliderResource;
 use App\Mail\FeedbackMail;
+use App\Models\Brand;
+use App\Models\Category;
 use App\Models\FeaturedProduct;
 use App\Models\FeaturedProductList;
 use App\Models\Feedback;
@@ -176,5 +180,16 @@ class OtherController extends Controller
         Mail::to('tofikdipsize1337228@yandex.ru')->send(new FeedbackMail($mailData));
 
         return response()->json(['message' => 'Feedback submitted successfully']);
+    }
+
+    public function getAllBrandAndCategory()
+    {
+        $brand = BrandResource::collection(Brand::all());
+        $category = CategoryResource::collection(Category::all());
+
+        return response()->json([
+            'brand' => $brand,
+            'category' => $category,
+        ], 200);
     }
 }

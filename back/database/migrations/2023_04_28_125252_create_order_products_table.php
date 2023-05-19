@@ -26,6 +26,8 @@ return new class extends Migration
                 ->cascadeOnUpdate()
                 ->cascadeOnDelete();
 
+            $table->string('quantity');
+
             $table->timestamps();
         });
     }
