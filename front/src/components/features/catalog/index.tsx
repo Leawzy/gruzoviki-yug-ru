@@ -19,7 +19,11 @@ export default function Catalog() {
     const searchQuery = router.query.q as string;
     const [currentPage, setCurrentPage] = useState(0);
     const [filter, setFilter] = useState({ brands: '', minPrice: 0, maxPrice: 0, categories: '' });
-    const { products, pageCount } = usePaginationProduct(currentPage, filter, searchQuery);
+    const { products, pageCount, totalItems } = usePaginationProduct(
+        currentPage,
+        filter,
+        searchQuery
+    );
     const handlePageClick = (selectedItem: { selected: number }) => {
         setCurrentPage(selectedItem.selected);
     };
@@ -40,6 +44,8 @@ export default function Catalog() {
         );
     }
 
+    const handleRemoveQuery = () => {};
+
     const filteredProducts = products.filter((product: ProductCardIF) => {
         const { brands, minPrice, maxPrice, categories } = filter;
         return (
@@ -59,6 +65,14 @@ export default function Catalog() {
                             <CatalogFilter onFilterChange={handleFilterChange} />
                         </div>
                         <div className={cn.categoryPageContent}>
+                            <div className={cn.categoryPageContentTop}>
+                                {searchQuery === undefined && ' ' ? (
+                                    ''
+                                ) : (
+                                    <button onClick={handleRemoveQuery}>{searchQuery}</button>
+                                )}
+                                <p>{totalItems}</p>
+                            </div>
                             {filteredProducts.length === 0 ? (
                                 <p className={cn.nonFilterItem}>Товаров не найдено</p>
                             ) : (
