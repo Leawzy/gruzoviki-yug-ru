@@ -12,3 +12,8 @@ export interface OrderTypeIF {
     delivery: string;
     paymentMethod: string;
 }
+
+export interface OrderChangeIF {
+    id: number;
+    status: string;
+}

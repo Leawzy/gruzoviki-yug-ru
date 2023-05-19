@@ -18,6 +18,8 @@ export interface ProductIF {
 }
 
 export interface ProductCardIF {
+    slug: string;
+    category?: { id: number };
     id: number;
     title: string;
     shortDesc: string;
