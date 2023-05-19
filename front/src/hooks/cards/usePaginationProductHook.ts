@@ -11,6 +11,7 @@ export const usePaginationProduct = (
     const [products, setProducts] = useState<ProductCardIF[]>([]);
     const [pageCount, setPageCount] = useState(0);
     const [perPage, setPerPage] = useState(0);
+    const [totalItems, setTotalItems] = useState(0);
 
     useEffect(() => {
         const fetchProducts = async () => {
@@ -46,16 +47,18 @@ export const usePaginationProduct = (
                 setProducts(res.data.data);
                 setPageCount(res.data.meta.last_page);
                 setPerPage(res.data.meta.per_page);
+                setTotalItems(res.data.meta.total);
             } catch (e) {
                 console.error(e);
             }
         };
         fetchProducts().catch(e => console.error(e));
-    }, [currentPage, filters, searchQuery]);
+    }, [currentPage, filters, searchQuery, totalItems]);
 
     return {
         products,
         pageCount,
         perPage,
+        totalItems,
     };
 };
