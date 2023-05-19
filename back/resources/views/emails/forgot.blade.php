@@ -2,7 +2,7 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <title>Обратная связь</title>
+    <title>Восстановление пароля</title>
 </head>
 <body>
 <h1>Восстановление пароля</h1>
