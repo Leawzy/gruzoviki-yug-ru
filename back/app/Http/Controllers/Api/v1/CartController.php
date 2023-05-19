@@ -39,6 +39,7 @@ class CartController extends Controller
             $orderProduct = new OrderProduct();
             $orderProduct->order_id = $order->id;
             $orderProduct->product_id = $product['id'];
+            $orderProduct->quantity = $product['quantity'];
             $orderProduct->save();
 
             $productModel = Product::find($product['id']);
