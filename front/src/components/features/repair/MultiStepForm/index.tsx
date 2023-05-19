@@ -146,37 +146,49 @@ function MultiStepForm() {
                     <div className={cn.formRepairTotal}>
                         <h2>Потвердите вписанные поля</h2>
                         <p>
-                            ФИО:
-                            {formData.step1.type === ''
-                                ? ' Поле не заполнено'
-                                : formData.step1.type}
+                            Тип поломки:
+                            <span>
+                                {formData.step1.type === ''
+                                    ? ' Поле не заполнено'
+                                    : formData.step1.type}
+                            </span>
                         </p>
                         <p>
-                            E-mail:
-                            {formData.step1.brand === ''
-                                ? ' Поле не заполнено'
-                                : formData.step1.brand}
+                            Бред автомобиля:
+                            <span>
+                                {formData.step1.brand === ''
+                                    ? ' Поле не заполнено'
+                                    : formData.step1.brand}
+                            </span>
                         </p>
                         <p>
-                            Input 3:
-                            {formData.step2.model === ''
-                                ? ' Поле не заполнено'
-                                : formData.step2.model}
+                            Модель автомобиля:
+                            <span>
+                                {formData.step2.model === ''
+                                    ? ' Поле не заполнено'
+                                    : formData.step2.model}
+                            </span>
                         </p>
                         <p>
-                            Input 4:
-                            {formData.step2.description === ''
-                                ? ' Поле не заполнено'
-                                : formData.step2.description}
+                            Описание проблемы:
+                            <span>
+                                {formData.step2.description === ''
+                                    ? ' Поле не заполнено'
+                                    : formData.step2.description}
+                            </span>
                         </p>
                         <p>
-                            Input 5:
-                            {formData.step3.date === ''
-                                ? ' Поле не заполнено'
-                                : formData.step3.date}
+                            Дата записи:
+                            <span>
+                                {formData.step3.date === ''
+                                    ? ' Поле не заполнено'
+                                    : formData.step3.date}
+                            </span>
                         </p>
-                        <button onClick={handlePreviousStep}>Previous</button>
-                        <button type="submit">Submit</button>
+                        <div className={cn.formRepairButtons}>
+                            <button onClick={handlePreviousStep}>Назад</button>
+                            <button type="submit">Отправить</button>
+                        </div>
                     </div>
                 );
             default:
