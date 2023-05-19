@@ -1,28 +1,28 @@
 import React, { useState } from 'react';
 
+import { apiFetch, setAuthToken } from '../../../../axios/global';
 import cn from './style.module.scss';
 
 type FormData = {
     step1: {
-        input1: string;
-        input2: string;
+        type: string;
+        brand: string;
     };
     step2: {
-        input3: string;
-        input4: string;
+        model: string;
+        description: string;
     };
     step3: {
-        input5: string;
-        input6: string;
+        date: string;
     };
 };
 
 function MultiStepForm() {
     const [step, setStep] = useState(1);
     const [formData, setFormData] = useState<FormData>({
-        step1: { input1: '', input2: '' },
-        step2: { input3: '', input4: '' },
-        step3: { input5: '', input6: '' },
+        step1: { type: '', brand: '' },
+        step2: { model: '', description: '' },
+        step3: { date: '' },
     });
 
     const handleInputChange = (
@@ -48,8 +48,32 @@ function MultiStepForm() {
         setStep(prevStep => prevStep - 1);
     };
 
-    const handleSubmit = (event: React.FormEvent) => {
+    const handleSubmit = async (event: React.FormEvent) => {
         event.preventDefault();
+        setAuthToken();
+        try {
+            const res = await apiFetch('api/repair/create', {
+                method: 'post',
+                data: {
+                    type: formData.step1.type,
+                    brand: formData.step1.brand,
+                    model: formData.step2.model,
+                    description: formData.step2.description,
+                    date: formData.step3.date,
+                    status: 'Открыт',
+                },
+            });
+            if (res.status === 200) {
+                setFormData({
+                    step1: { type: '', brand: '' },
+                    step2: { model: '', description: '' },
+                    step3: { date: '' },
+                });
+                setStep(1);
+            }
+        } catch (e) {
+            console.error(e);
+        }
     };
 
     const renderStep = () => {
@@ -60,17 +84,17 @@ function MultiStepForm() {
                         <h2>Шаг 1</h2>
                         <input
                             type="text"
-                            name="input1"
-                            value={formData.step1.input1}
-                            onChange={event => handleInputChange(event, 'step1', 'input1')}
-                            placeholder="Укажите своё ФИО"
+                            name="type"
+                            value={formData.step1.type}
+                            onChange={event => handleInputChange(event, 'step1', 'type')}
+                            placeholder="Укажите тип поломки"
                         />
                         <input
                             type="email"
-                            name="input2"
-                            value={formData.step1.input2}
-                            onChange={event => handleInputChange(event, 'step1', 'input2')}
-                            placeholder="Укажите свой e-mail"
+                            name="brand"
+                            value={formData.step1.brand}
+                            onChange={event => handleInputChange(event, 'step1', 'brand')}
+                            placeholder="Укажите марку автомобиля"
                         />
                         <button className={cn.formRepairNext} onClick={handleNextStep}>
                             Дальше
@@ -83,16 +107,17 @@ function MultiStepForm() {
                         <h2>Шаг 2</h2>
                         <input
                             type="text"
-                            name="input3"
-                            value={formData.step2.input3}
-                            onChange={event => handleInputChange(event, 'step2', 'input3')}
+                            name="model"
+                            value={formData.step2.model}
+                            onChange={event => handleInputChange(event, 'step2', 'model')}
                             placeholder="Укажите свою модель автомобиля"
                         />
                         <input
                             type="text"
-                            name="input4"
-                            value={formData.step2.input4}
-                            onChange={event => handleInputChange(event, 'step2', 'input4')}
+                            name="description"
+                            value={formData.step2.description}
+                            onChange={event => handleInputChange(event, 'step2', 'description')}
+                            placeholder="Опишите свою проблему"
                         />
                         <div className={cn.formRepairButtons}>
                             <button onClick={handlePreviousStep}>Назад</button>
@@ -105,16 +130,10 @@ function MultiStepForm() {
                     <div className={cn.formRepair}>
                         <h2>Шаг 3</h2>
                         <input
-                            type="text"
-                            name="input5"
-                            value={formData.step3.input5}
-                            onChange={event => handleInputChange(event, 'step3', 'input5')}
-                        />
-                        <input
-                            type="text"
-                            name="input6"
-                            value={formData.step3.input6}
-                            onChange={event => handleInputChange(event, 'step3', 'input6')}
+                            type="date"
+                            name="date"
+                            value={formData.step3.date}
+                            onChange={event => handleInputChange(event, 'step3', 'date')}
                         />
                         <div className={cn.formRepairButtons}>
                             <button onClick={handlePreviousStep}>Назад</button>
@@ -128,39 +147,33 @@ function MultiStepForm() {
                         <h2>Потвердите вписанные поля</h2>
                         <p>
                             ФИО:
-                            {formData.step1.input1 === ''
+                            {formData.step1.type === ''
                                 ? ' Поле не заполнено'
-                                : formData.step1.input1}
+                                : formData.step1.type}
                         </p>
                         <p>
                             E-mail:
-                            {formData.step1.input2 === ''
+                            {formData.step1.brand === ''
                                 ? ' Поле не заполнено'
-                                : formData.step1.input2}
+                                : formData.step1.brand}
                         </p>
                         <p>
                             Input 3:
-                            {formData.step2.input3 === ''
+                            {formData.step2.model === ''
                                 ? ' Поле не заполнено'
-                                : formData.step2.input3}
+                                : formData.step2.model}
                         </p>
                         <p>
                             Input 4:
-                            {formData.step2.input4 === ''
+                            {formData.step2.description === ''
                                 ? ' Поле не заполнено'
-                                : formData.step2.input4}
+                                : formData.step2.description}
                         </p>
                         <p>
                             Input 5:
-                            {formData.step3.input5 === ''
+                            {formData.step3.date === ''
                                 ? ' Поле не заполнено'
-                                : formData.step3.input5}
-                        </p>
-                        <p>
-                            Input 6:
-                            {formData.step3.input6 === ''
-                                ? ' Поле не заполнено'
-                                : formData.step3.input6}
+                                : formData.step3.date}
                         </p>
                         <button onClick={handlePreviousStep}>Previous</button>
                         <button type="submit">Submit</button>
