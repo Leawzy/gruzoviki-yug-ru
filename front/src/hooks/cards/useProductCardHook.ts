@@ -1,17 +1,17 @@
 import { useEffect, useState } from 'react';
 
 import { apiFetch } from '../../axios/global';
-import { Product } from '../../types/ProductType';
+import { ProductIF } from '../../types/ProductType';
 
 function useProductList() {
-    const [productList, setProductList] = useState<Product[]>([]);
+    const [productList, setProductList] = useState<ProductIF[]>([]);
     const [loading, setLoading] = useState(false);
     useEffect(() => {
         async function fetchProductList() {
             try {
                 const res: {
                     data: {
-                        data: Product[];
+                        data: ProductIF[];
                     };
                 } = await apiFetch('api/product/list', {
                     method: 'get',
