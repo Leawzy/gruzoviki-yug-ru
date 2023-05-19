@@ -26,16 +26,13 @@ export default function Footer() {
                     <h2 className={cn.navTitle}>Покупка</h2>
                     <ul className={cn.navUl}>
                         <li className={cn.navUlList}>
-                            <a href="#">Как заказать?</a>
+                            <Link href="/exchange">Гарантии на товар</Link>
                         </li>
                         <li className={cn.navUlList}>
-                            <a href="#">Гарантии на товар</a>
+                            <Link href="/exchange">Возрат товара</Link>
                         </li>
                         <li className={cn.navUlList}>
-                            <a href="#">Возрат товара</a>
-                        </li>
-                        <li className={cn.navUlList}>
-                            <a href="#">Оплата</a>
+                            <Link href="/exchange">Оплата</Link>
                         </li>
                     </ul>
                 </li>
@@ -67,9 +64,6 @@ export default function Footer() {
                         </li>
                         <li>
                             <Link href="/privacy/tos">Использование куки</Link>
-                        </li>
-                        <li>
-                            <Link href="#">Отзывы о нас</Link>
                         </li>
                     </ul>
                 </li>
