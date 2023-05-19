@@ -25,6 +25,7 @@ export default function PopularCards() {
                         key={product.id}
                         img={product.img}
                         id={product.id}
+                        slug={product.slug}
                         shortDesc={product.shortDesc}
                         quantity={product.quantity}
                         brand={product.brand}
