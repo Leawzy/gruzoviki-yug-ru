@@ -44,8 +44,6 @@ export default function Catalog() {
         );
     }
 
-    const handleRemoveQuery = () => {};
-
     const filteredProducts = products.filter((product: ProductCardIF) => {
         const { brands, minPrice, maxPrice, categories } = filter;
         return (
@@ -69,7 +67,7 @@ export default function Catalog() {
                                 {searchQuery === undefined && ' ' ? (
                                     ''
                                 ) : (
-                                    <button onClick={handleRemoveQuery}>{searchQuery}</button>
+                                    <button>{searchQuery}</button>
                                 )}
                                 <p>{totalItems}</p>
                             </div>

@@ -25,6 +25,7 @@ function UserChange() {
     const useHandleSaveChanges = async () => {
         try {
             await useSendChangeHook(
+                // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
                 `user/change/${selectedRow?.id}`,
                 {
                     firstName: selectedRow?.firstName as string,

@@ -1,0 +1,32 @@
+[
+  {
+    "id":  1,
+    "type": "user",
+    "title": "Пользователи",
+    "link": "/admin/users/userchange"
+  },
+  {
+    "id":  2,
+    "type": "order",
+    "title": "Заказы",
+    "link": "/admin/orders/orderschange"
+  },
+  {
+    "id":  3,
+    "type": "brands",
+    "title": "Бренды",
+    "link": "/admin/admin/brand/brandchange"
+  },
+  {
+    "id":  4,
+    "type": "category",
+    "title": "Категорий",
+    "link": "/admin/admin/category/categorychange"
+  },
+  {
+    "id":  5,
+    "type": "products",
+    "title": "Продукты",
+    "link": "/admin/admin/products/productschange"
+  }
+]

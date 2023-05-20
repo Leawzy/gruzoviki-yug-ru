@@ -31,23 +31,25 @@ export const usePaginationProduct = (
                     params = { ...params, maxPrice: filters.maxPrice };
                 }
 
-                const res: {
-                    data: {
-                        meta: MetaIF;
-                        data: ProductCardIF[];
-                    };
-                } = await apiFetch(
-                    `api/product/list?page=${currentPage + 1}&q=${
-                        searchQuery === undefined ? '' : searchQuery
-                    }`,
-                    {
-                        params,
-                    }
-                );
-                setProducts(res.data.data);
-                setPageCount(res.data.meta.last_page);
-                setPerPage(res.data.meta.per_page);
-                setTotalItems(res.data.meta.total);
+                if (searchQuery !== undefined || '') {
+                    const res: {
+                        data: {
+                            meta: MetaIF;
+                            data: ProductCardIF[];
+                        };
+                    } = await apiFetch(
+                        `api/product/list?page=${currentPage + 1}&q=${
+                            searchQuery === undefined || '' ? '' : searchQuery
+                        }`,
+                        {
+                            params,
+                        }
+                    );
+                    setProducts(res.data.data);
+                    setPageCount(res.data.meta.last_page);
+                    setPerPage(res.data.meta.per_page);
+                    setTotalItems(res.data.meta.total);
+                }
             } catch (e) {
                 console.error(e);
             }

@@ -2,72 +2,94 @@ import Link from 'next/link';
 import React from 'react';
 
 import { AdminTypeBrand, AdminTypeUser } from '../../../../../types/AdminType';
+import { OrderTypeIF } from '../../../../../types/OrderType';
 import { ProductIF } from '../../../../../types/ProductType';
 import cn from './style.module.scss';
 
 interface WidgetProps {
+    id: number;
+    title: string;
+    link: string;
     type: string;
     users: AdminTypeUser[];
     brand: AdminTypeBrand[];
     products: ProductIF[];
+    orderList: OrderTypeIF[];
 }
 
 interface WidgetData {
+    id: number;
     title: string;
     amount: string;
     textLink: string;
     link: string;
 }
 
-export default function Widget({ type, users, brand, products }: WidgetProps) {
+export default function Widget({
+    id,
+    type,
+    users,
+    brand,
+    products,
+    orderList,
+    title,
+    link,
+}: WidgetProps) {
     let data: WidgetData;
     const totalUser = String(users.length);
     const totalProducts = String(products.length);
     const totalBrands = String(brand.length);
+    const totalOrders = String(orderList.length);
 
     switch (type) {
         case 'user':
             data = {
-                title: 'Пользователи',
+                id,
+                title,
                 amount: String(totalUser),
                 textLink: 'Просмотреть всех пользователей',
-                link: '/admin/users/userChange',
+                link,
             };
             break;
         case 'order':
             data = {
-                title: 'Заказы',
-                amount: String(0),
+                id,
+                title,
+                amount: String(totalOrders),
                 textLink: 'Просмотреть все заказы',
-                link: '/admin/orders',
+                link,
             };
             break;
         case 'brands':
             data = {
-                title: 'Бренды',
+                id,
+                title,
                 amount: String(totalBrands),
                 textLink: 'Просмотреть все бренды',
-                link: '/admin/brand/brandChange',
+                link,
             };
             break;
         case 'category':
             data = {
-                title: 'Категорий',
+                id,
+                title,
                 amount: String(totalBrands),
                 textLink: 'Просмотреть все бренды',
-                link: '/admin/brand/brandChange',
+                link,
             };
             break;
         case 'products':
             data = {
-                title: 'Продукты',
+                id,
+                title,
                 amount: String(totalProducts),
                 textLink: 'Просмотреть все бренды',
-                link: '/admin/products/productschange',
+                link,
             };
             break;
         default:
             data = {
+                id,
                 title: '',
                 amount: String(1),
                 textLink: '',
@@ -77,7 +99,7 @@ export default function Widget({ type, users, brand, products }: WidgetProps) {
     }
 
     return (
-        <div className={cn.widget}>
+        <div className={cn.widget} id={String(id)}>
             <div className={cn.left}>
                 <span className={cn.title}>{data.title}</span>
                 <span className={cn.counter}>{data.amount}</span>
