@@ -12,6 +12,9 @@
   cursor: pointer;
   outline: none;
   border: none;
+  &:hover {
+    background: rgba(100, 149, 237, 0.81);
+  }
   @media only screen and (max-width: 700px) and (min-width: 300px) {
     padding: 12px 18px;
     font-size: 14px;
@@ -25,6 +28,9 @@
   border: none;
   border-radius: 10px;
   cursor: pointer;
+  &:hover {
+    background: rgba(16, 196, 76, 0.8);
+  }
   @media only screen and (max-width: 700px) and (min-width: 300px) {
     padding: 12px 18px;
     font-size: 14px;
@@ -139,6 +145,10 @@
   font-size: 18px;
   line-height: 25px;
   color: #6e6e6e;
+  &:hover {
+    border: 1px solid rgba(45, 133, 222, 0.89);
+    color: #2d85de;
+  }
 }
 
 @mixin minusButton {
@@ -154,4 +164,8 @@
   font-size: 18px;
   line-height: 25px;
   color: #6e6e6e;
+  &:hover {
+    border: 1px solid rgba(45, 133, 222, 0.89);
+    color: #2d85de;
+  }
 }
