@@ -102,7 +102,12 @@ class Product extends Model
         // Сортировка по цене desc || asc
         if (isset($params['filterBy'])) {
             $sortOrder = $params['filterBy'] == 'desc' ? 'desc' : 'asc';
-            $query->orderBy('price', $sortOrder);
+
+            if ($sortOrder == 'desc') {
+                $query->whereNotNull('price')->orderByDesc('price');
+            } else {
+                $query->whereNotNull('price')->orderBy('price');
+            }
         }
 
         return $query;
