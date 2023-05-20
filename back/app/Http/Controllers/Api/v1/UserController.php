@@ -53,7 +53,6 @@ class UserController extends Controller
      */
     public function createUser(Request $request): \Illuminate\Http\JsonResponse
     {
-
         $data = $request->validate([
             "firstName" => ["required", "string"],
             "lastName" => ["required", "string"],
@@ -61,18 +60,25 @@ class UserController extends Controller
             "password" => ["required", "confirmed"],
         ]);
 
+        $userExists = User::where('email', $data["email"])->exists();
+        if ($userExists) {
+            return response()->json([
+                "error" => "Пользователь с такой почтой уже зарегистрирован"
+            ], 400);
+        }
+
         $user = User::create([
             "first_name" => $data["firstName"],
             "last_name" => $data["lastName"],
             "email" => $data["email"],
             "password" => bcrypt($data["password"]),
         ]);
-        $user->save();
 
         $token = JWTAuth::fromUser($user);
 
         return response()->json(compact('token'));
     }
+
 
     /**
      * @OA\Post(
@@ -181,7 +187,7 @@ class UserController extends Controller
             // Проверяем email и пароль пользователя
             if (!$token = JWTAuth::attempt($credentials)) {
                 // Если email или пароль неверны, возвращаем ошибку
-                return response()->json(['error' => 'Invalid credentials'], 401);
+                return response()->json(['error' => 'Неверная почта или пароль'], 401);
             }
         } catch (JWTException $e) {
             // Если не удалось создать токен, возвращаем ошибку
