@@ -4,15 +4,6 @@ import React from 'react';
 import { usePasswordRecoveryHook } from '../../../../hooks/actions/usePasswordRecoveryHook';
 import cn from '../style.module.scss';
 
-type Inputs = {
-    email: string;
-    password: string;
-};
-
-interface ResponseData {
-    token: string;
-}
-
 export default function PasswordRecoveryForm() {
     const { register, handleSubmit, errors } = usePasswordRecoveryHook();
 
