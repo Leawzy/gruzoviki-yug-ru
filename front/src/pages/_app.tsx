@@ -4,12 +4,10 @@ import '../styles/index.scss';
 import { AppProps } from 'next/app';
 import { DefaultSeo } from 'next-seo';
 import SEO from 'next-seo.config';
-import React, { useEffect } from 'react';
+import React from 'react';
 import { Provider } from 'react-redux';
 
 import store from '../redux/store';
-import { fetchFavorites } from '../redux/actions';
-import { parseCookies } from 'nookies';
 import { ToastContainer } from 'react-toastify';
 
 function MyApp({ Component, pageProps }: AppProps) {
