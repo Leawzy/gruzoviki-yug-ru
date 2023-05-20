@@ -1,11 +1,13 @@
 import Image from 'next/image';
 import Link from 'next/link';
+import { parseCookies } from 'nookies';
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import {
     addToCart,
     addToFavorites,
+    fetchFavorites,
     removeFromCart,
     removeFromFavorites,
 } from '../../../../redux/actions';
@@ -29,24 +31,11 @@ export default function ProductCard({
     shortDesc,
 }: ProductCardIF) {
     const [addedToCart, setAddedToCart] = useState(false);
+    const [isFavorite, setIsFavorite] = useState(false);
     const dispatch = useDispatch();
     const favorites = useSelector((state: RootState) => state.favorites);
-
-    const isFavorite = favorites.some(
-        (item: { id: string }) => item.id.toString() === id.toString()
-    );
-
-    const handleToggleFavorite = () => {
-        if (isFavorite) {
-            // @ts-ignore
-            // eslint-disable-next-line @typescript-eslint/no-unsafe-call
-            dispatch(removeFromFavorites(id) as string);
-        } else {
-            // @ts-ignore
-            // eslint-disable-next-line @typescript-eslint/no-unsafe-call
-            dispatch(addToFavorites(id) as string);
-        }
-    };
+    const cookies = parseCookies();
+    const { token } = cookies;
 
     useEffect(() => {
         const cartItems = JSON.parse(localStorage.getItem('cartItems') || '[]') as ProductPage[];
@@ -55,6 +44,32 @@ export default function ProductCard({
             setAddedToCart(true);
         }
     }, [id]);
+
+    useEffect(() => {
+        if (token) {
+            // @ts-ignore
+            dispatch(fetchFavorites());
+        }
+    }, []);
+
+    useEffect(() => {
+        // @ts-ignore
+        setIsFavorite(favorites.some(item => item.id.toString() === id.toString()));
+    }, [favorites, id]);
+
+    const handleToggleFavorite = () => {
+        if (isFavorite) {
+            // @ts-ignore
+            dispatch(removeFromFavorites(id));
+        } else {
+            // @ts-ignore
+            dispatch(addToFavorites(id));
+        }
+
+        setTimeout(() => {
+            setIsFavorite(!isFavorite);
+        }, 500);
+    };
 
     const handleAddToCart = () => {
         setAddedToCart(true);
