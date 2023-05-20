@@ -1,9 +1,7 @@
 import Link from 'next/link';
-import { useRouter } from 'next/router';
 import React from 'react';
-import { SubmitHandler, useForm } from 'react-hook-form';
 
-import { apiFetch } from '../../../../axios/global';
+import { usePasswordRecoveryHook } from '../../../../hooks/actions/usePasswordRecoveryHook';
 import cn from '../style.module.scss';
 
 type Inputs = {
@@ -16,27 +14,11 @@ interface ResponseData {
 }
 
 export default function PasswordRecoveryForm() {
-    const router = useRouter();
-    const {
-        register,
-        handleSubmit,
-        formState: { errors },
-    } = useForm<Inputs>();
-    const onSubmit: SubmitHandler<Inputs> = async data => {
-        const res: { status: number; data: ResponseData } = await apiFetch('api/forgot', {
-            method: 'post',
-            data: {
-                email: data.email,
-            },
-        });
-        if (res.status === 200) {
-            await router.push('/authorization');
-        }
-    };
+    const { register, handleSubmit, errors } = usePasswordRecoveryHook();
 
     return (
         <div className={cn.AuthForm}>
-            <form className={cn.Form} onSubmit={handleSubmit(onSubmit)}>
+            <form className={cn.Form} onSubmit={handleSubmit}>
                 <h1>Восстановление пароля</h1>
                 <label className={cn.FormLabel}>
                     E-mail

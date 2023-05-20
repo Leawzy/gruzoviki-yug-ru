@@ -1,57 +1,15 @@
 import Link from 'next/link';
-import { useRouter } from 'next/router';
-import { setCookie } from 'nookies';
 import React from 'react';
-import { SubmitHandler, useForm } from 'react-hook-form';
 
-import { apiFetch, dayOfLiveToken } from '../../../../axios/global';
+import { useRegisterHook } from '../../../../hooks/actions/useRegisterHook';
 import cn from '../style.module.scss';
 
-type Inputs = {
-    firstName: string;
-    lastName: string;
-    email: string;
-    password: string;
-    passwordConfirmation: string;
-};
-
-interface LoginResponseData {
-    token: string;
-}
-
 export default function RegistrationForm() {
-    const router = useRouter();
-
-    const {
-        register,
-        handleSubmit,
-        formState: { errors },
-    } = useForm<Inputs>();
-    const onSubmit: SubmitHandler<Inputs> = async data => {
-        if (data.password === data.passwordConfirmation) {
-            const res = await apiFetch('api/register', {
-                method: 'post',
-                data: {
-                    firstName: data.firstName,
-                    lastName: data.lastName,
-                    email: data.email,
-                    password: data.password,
-                    password_confirmation: data.passwordConfirmation,
-                },
-            });
-            if (res.status === 200) {
-                const { token } = res.data as LoginResponseData;
-                setCookie(null, 'token', token, {
-                    maxAge: dayOfLiveToken(),
-                });
-                await router.push('/');
-            }
-        }
-    };
+    const { register, handleSubmit, errors } = useRegisterHook();
 
     return (
         <div className={cn.RegisterForm}>
-            <form className={cn.Form} onSubmit={handleSubmit(onSubmit)}>
+            <form className={cn.Form} onSubmit={handleSubmit}>
                 <h1>Регистрация</h1>
                 <label className={cn.FormLabel}>
                     Имя
