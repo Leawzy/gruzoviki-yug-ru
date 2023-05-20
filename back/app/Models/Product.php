@@ -94,10 +94,20 @@ class Product extends Model
         }
 
         // Сортировка результатов
-        if (isset($params['sort_by'])) {
-            $sortField = $params['sort_by'];
-            $sortOrder = isset($params['sort_order']) && $params['sort_order'] == 'desc' ? 'desc' : 'asc';
-            $query->orderBy($sortField, $sortOrder);
+//        if (isset($params['sort_by'])) {
+//            $sortField = $params['sort_by'];
+//            $sortOrder = isset($params['sort_order']) && $params['sort_order'] == 'desc' ? 'desc' : 'asc';
+//            $query->orderBy($sortField, $sortOrder);
+//        }
+        // Сортировка по цене desc || asc
+        if (isset($params['filterBy'])) {
+            $sortOrder = $params['filterBy'] == 'desc' ? 'desc' : 'asc';
+
+            if ($sortOrder == 'desc') {
+                $query->whereNotNull('price')->orderByDesc('price');
+            } else {
+                $query->whereNotNull('price')->orderBy('price');
+            }
         }
 
         return $query;
