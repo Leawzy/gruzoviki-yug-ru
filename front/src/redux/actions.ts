@@ -34,7 +34,7 @@ export const addToFavorites = (id: string) => {
     return (dispatch: Dispatch) => {
         setAuthToken();
         apiFetch('api/featured/create', { method: 'post', data: { productId: id } })
-            .then(response => {
+            .then(() => {
                 dispatch({ type: ADD_TO_FAVORITES, payload: id });
             })
             .catch(error => {
@@ -48,7 +48,7 @@ export const removeFromFavorites = (id: string) => {
     return (dispatch: Dispatch) => {
         setAuthToken();
         apiFetch(`/api/featured/delete`, { method: 'delete', data: { productId: id } })
-            .then(response => {
+            .then(() => {
                 dispatch({ type: REMOVE_FROM_FAVORITES, payload: id });
             })
             .catch(error => {
