@@ -182,7 +182,7 @@ class OtherController extends Controller
         return response()->json(['message' => 'Feedback submitted successfully']);
     }
 
-    public function getAllBrandAndCategory()
+    public function getSpecialProperty()
     {
         $brand = BrandResource::collection(Brand::all());
         $category = CategoryResource::collection(Category::all());
@@ -190,6 +190,8 @@ class OtherController extends Controller
         return response()->json([
             'brand' => $brand,
             'category' => $category,
+            'maxPrice' => Product::max('price'),
+            'minPrice' => Product::min('price'),
         ], 200);
     }
 }
