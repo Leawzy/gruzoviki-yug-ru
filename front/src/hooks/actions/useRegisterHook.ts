@@ -48,6 +48,7 @@ const useRegisterHook = () => {
                 }
             } catch (e) {
                 const errorMessage: string =
+                    // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
                     (e.response?.data?.error as string) || 'Произошла ошибка при регистрации';
                 toast.error(errorMessage);
             }

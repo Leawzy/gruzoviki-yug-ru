@@ -52,7 +52,7 @@ export default function Catalog() {
     }
 
     const filteredProducts = products.filter((product: ProductCardIF) => {
-        const { brands, minPrice, maxPrice, categories, filterBy } = filter;
+        const { brands, minPrice, maxPrice, categories } = filter;
         return (
             (brands === '' || String(product.brand.id) === brands) &&
             (minPrice === 0 || product.price >= minPrice) &&
