@@ -9,6 +9,7 @@ import { AnyAction, Dispatch } from 'redux';
 import { apiFetch, setAuthToken } from '../axios/global';
 import { RootState } from '../types/CartType';
 import { ThunkDispatch } from 'redux-thunk';
+import { toast } from 'react-toastify';
 
 export const addToCart = (
     id: number,
@@ -38,6 +39,7 @@ export const addToFavorites = (id: string) => {
             })
             .catch(error => {
                 console.error(error);
+                toast.error('Чтобы добавить в избранное, нужно авторизоваться');
             });
     };
 };
@@ -74,7 +76,7 @@ export const fetchFavorites = () => {
                 }
             })
             .catch(error => {
-                console.error(error);
+                console.error(error + '1');
             });
     };
 };
