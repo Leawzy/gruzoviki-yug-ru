@@ -215,7 +215,7 @@ class UserController extends Controller
 
             return response()->json(['message' => 'Пароль отправлен на почту']);
         } catch (ModelNotFoundException $e) {
-            return response()->json(['message' => 'Пользователя с такой почтой не существует']);
+            return response()->json(['error' => 'Пользователя с такой почтой не существует']);
         }
     }
 }
