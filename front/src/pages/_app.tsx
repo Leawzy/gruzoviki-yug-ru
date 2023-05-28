@@ -16,13 +16,11 @@ function MyApp({ Component, pageProps }: AppProps) {
             <DefaultSeo {...SEO} />
             <ToastContainer
                 position="bottom-right"
-                autoClose={3000}
-                hideProgressBar={false}
+                autoClose={3560}
                 closeOnClick
                 pauseOnHover
                 draggable
                 newestOnTop={false}
-                rtl={false}
                 limit={1}
                 closeButton={undefined}
             />
