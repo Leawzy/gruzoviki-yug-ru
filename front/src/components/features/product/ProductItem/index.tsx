@@ -104,15 +104,15 @@ export default function ProductItem({ product }: ProductItemIF) {
                                 <p className={cn.productPageInfoSubject}>{product.brand.title}</p>
                             </span>
                             <span className={cn.productPageInfoText}>
-                                Количество.............
+                                Количество...........
                                 <p className={cn.productPageInfoSubject}>{product.quantity}</p>
                             </span>
                         </div>
                         <div className={cn.productPageInfoBottom}>
                             {propertyStrings.map((propString, index) => (
-                                <span key={index} className={cn.productPageInfoText}>
+                                <div key={index}>
                                     <p>{propString}</p>
-                                </span>
+                                </div>
                             ))}
                         </div>
                         <div>
