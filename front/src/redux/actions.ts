@@ -36,10 +36,11 @@ export const addToFavorites = (id: string) => {
         apiFetch('api/featured/create', { method: 'post', data: { productId: id } })
             .then(() => {
                 dispatch({ type: ADD_TO_FAVORITES, payload: id });
+                toast.success('Товар был успешно добавлен в Избранное.');
             })
             .catch(error => {
                 console.error(error);
-                toast.error('Чтобы добавить в избранное, нужно авторизоваться');
+                toast.error('Чтобы добавить в избранное, нужно авторизоваться.');
             });
     };
 };
@@ -50,6 +51,7 @@ export const removeFromFavorites = (id: string) => {
         apiFetch(`/api/featured/delete`, { method: 'delete', data: { productId: id } })
             .then(() => {
                 dispatch({ type: REMOVE_FROM_FAVORITES, payload: id });
+                toast.success('Товар был успешно удален из Избранное.');
             })
             .catch(error => {
                 console.error(error);
@@ -76,7 +78,7 @@ export const fetchFavorites = () => {
                 }
             })
             .catch(error => {
-                console.error(error + '1');
+                console.error(error);
             });
     };
 };
