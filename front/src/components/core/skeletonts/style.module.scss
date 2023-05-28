@@ -1,0 +1,15 @@
+.skeletonWrap {
+  @media (max-width: 720px) {
+    flex-direction: column;
+  }
+  .skeletonContent {
+    @media (max-width: 720px) {
+      width: 300px;
+    }
+  }
+  .skeletonContentImg {
+    @media (max-width: 720px) {
+      width: 310px !important;
+    }
+  }
+}
