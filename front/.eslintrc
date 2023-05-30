@@ -105,7 +105,7 @@
         ]
       }
     ],
-    "react/no-danger": "warn",
+    "react/no-danger": "off",
     "react/no-unescaped-entities": "off",
     "react-hooks/exhaustive-deps": "off",
     "react/prop-types": "off",
