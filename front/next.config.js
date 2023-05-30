@@ -112,6 +112,6 @@ module.exports = isProduction
           ...nextConfig,
           images: {
               unoptimized: true,
-              domains: ['api.ch32081.tw1.ru', '5.167.50.180:8876'],
+              domains: ['api.ch32081.tw1.ru', '5.167.50.180:8876', 'api.грузовики-юг.рф'],
           },
       });
