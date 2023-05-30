@@ -48,6 +48,7 @@ class CartController extends Controller
             $productModel->quantity = $productModel->quantity - $product['quantity'];
             $productModel->save();
         }
+
         Mail::to($user->email)->send(new OrderMail($order->id, $order->total, $products, $order->status));
 
         return response()->json([

@@ -213,9 +213,9 @@ class UserController extends Controller
 
             Mail::to($data['email'])->send(new ForgotPasswordMail($password));
 
-            return response()->json(['message' => 'Пароль отправлен на почту']);
+            return response()->json(['message' => 'Пароль отправлен на почту'], 200);
         } catch (ModelNotFoundException $e) {
-            return response()->json(['error' => 'Пользователя с такой почтой не существует']);
+            return response()->json(['error' => 'Пользователя с такой почтой не существует'], 400);
         }
     }
 }
