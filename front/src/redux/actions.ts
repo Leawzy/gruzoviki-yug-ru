@@ -9,6 +9,7 @@ import { AnyAction, Dispatch } from 'redux';
 import { apiFetch, setAuthToken } from '../axios/global';
 import { RootState } from '../types/CartType';
 import { ThunkDispatch } from 'redux-thunk';
+import { toast } from 'react-toastify';
 
 export const addToCart = (
     id: number,
@@ -33,11 +34,13 @@ export const addToFavorites = (id: string) => {
     return (dispatch: Dispatch) => {
         setAuthToken();
         apiFetch('api/featured/create', { method: 'post', data: { productId: id } })
-            .then(response => {
+            .then(() => {
                 dispatch({ type: ADD_TO_FAVORITES, payload: id });
+                toast.success('Товар был успешно добавлен в Избранное.');
             })
             .catch(error => {
                 console.error(error);
+                toast.error('Чтобы добавить в избранное, нужно авторизоваться.');
             });
     };
 };
@@ -46,8 +49,9 @@ export const removeFromFavorites = (id: string) => {
     return (dispatch: Dispatch) => {
         setAuthToken();
         apiFetch(`/api/featured/delete`, { method: 'delete', data: { productId: id } })
-            .then(response => {
+            .then(() => {
                 dispatch({ type: REMOVE_FROM_FAVORITES, payload: id });
+                toast.success('Товар был успешно удален из Избранное.');
             })
             .catch(error => {
                 console.error(error);

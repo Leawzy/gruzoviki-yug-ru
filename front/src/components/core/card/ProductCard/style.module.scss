@@ -2,6 +2,9 @@
 
 .shortCatalogItem {
   padding: 15px 55px;
+  &:hover {
+    transform: translateY(-4px);
+  }
 
   .shortCatalogItemLink {
     display: flex;
@@ -52,6 +55,15 @@
     align-content: center;
 
     .shortCatalogFavorite {
+      .icon {
+        cursor: pointer;
+        &:hover {
+          color: #C82132;
+        }
+      }
+      .iconIsFav {
+        color: #e00f27;
+      }
 
       button {
         background: transparent;

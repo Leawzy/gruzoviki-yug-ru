@@ -5,7 +5,13 @@ import { MetaIF, ProductCardIF } from '../../types/ProductType';
 
 export const usePaginationProduct = (
     currentPage: number,
-    filters: { brands: string; minPrice: number; maxPrice: number; categories: string },
+    filters: {
+        brands: string;
+        minPrice: number;
+        maxPrice: number;
+        categories: string;
+        filterBy: string;
+    },
     searchQuery: string
 ) => {
     const [products, setProducts] = useState<ProductCardIF[]>([]);
@@ -21,6 +27,9 @@ export const usePaginationProduct = (
                 if (filters.brands !== '') {
                     params = { ...params, brand: filters.brands };
                 }
+                if (filters.filterBy === 'asc' || filters.filterBy === 'desc') {
+                    params = { ...params, filterBy: filters.filterBy };
+                }
                 if (filters.categories !== '') {
                     params = { ...params, category: filters.categories };
                 }
@@ -31,25 +40,23 @@ export const usePaginationProduct = (
                     params = { ...params, maxPrice: filters.maxPrice };
                 }
 
-                if (searchQuery !== undefined || '') {
-                    const res: {
-                        data: {
-                            meta: MetaIF;
-                            data: ProductCardIF[];
-                        };
-                    } = await apiFetch(
-                        `api/product/list?page=${currentPage + 1}&q=${
-                            searchQuery === undefined || '' ? '' : searchQuery
-                        }`,
-                        {
-                            params,
-                        }
-                    );
-                    setProducts(res.data.data);
-                    setPageCount(res.data.meta.last_page);
-                    setPerPage(res.data.meta.per_page);
-                    setTotalItems(res.data.meta.total);
-                }
+                const res: {
+                    data: {
+                        meta: MetaIF;
+                        data: ProductCardIF[];
+                    };
+                } = await apiFetch(
+                    `api/product/list?page=${currentPage + 1}&q=${
+                        searchQuery === undefined || '' ? '' : searchQuery
+                    }`,
+                    {
+                        params,
+                    }
+                );
+                setProducts(res.data.data);
+                setPageCount(res.data.meta.last_page);
+                setPerPage(res.data.meta.per_page);
+                setTotalItems(res.data.meta.total);
             } catch (e) {
                 console.error(e);
             }

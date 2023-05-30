@@ -18,7 +18,13 @@ export default function Catalog() {
     const router = useRouter();
     const searchQuery = router.query.q as string;
     const [currentPage, setCurrentPage] = useState(0);
-    const [filter, setFilter] = useState({ brands: '', minPrice: 0, maxPrice: 0, categories: '' });
+    const [filter, setFilter] = useState({
+        brands: '',
+        minPrice: 0,
+        maxPrice: 0,
+        categories: '',
+        filterBy: '',
+    });
     const { products, pageCount, totalItems } = usePaginationProduct(
         currentPage,
         filter,
@@ -33,6 +39,7 @@ export default function Catalog() {
         minPrice: number;
         maxPrice: number;
         categories: string;
+        filterBy: string;
     }) => {
         setCurrentPage(0);
         setFilter(filters);
@@ -49,6 +56,7 @@ export default function Catalog() {
         return (
             (brands === '' || String(product.brand.id) === brands) &&
             (minPrice === 0 || product.price >= minPrice) &&
+            (categories === '' || String(product?.category?.id) === categories) &&
             (categories === '' || String(product?.category?.id) === categories) &&
             (maxPrice === 0 || product.price <= maxPrice)
         );
@@ -69,7 +77,7 @@ export default function Catalog() {
                                 ) : (
                                     <button>{searchQuery}</button>
                                 )}
-                                <p>{totalItems}</p>
+                                <p>На странице: {totalItems}</p>
                             </div>
                             {filteredProducts.length === 0 ? (
                                 <p className={cn.nonFilterItem}>Товаров не найдено</p>

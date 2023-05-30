@@ -9,6 +9,7 @@ interface Props {
         minPrice: number;
         maxPrice: number;
         categories: string;
+        filterBy: string;
     }) => void;
 }
 
@@ -18,6 +19,7 @@ export default function CatalogFilter({ onFilterChange }: Props) {
     const [categories, setCategories] = useState('');
     const [minPrice, setMinPrice] = useState(0);
     const [maxPrice, setMaxPrice] = useState(0);
+    const [filterBy, setFilterBy] = useState('');
 
     const handleCategoryFilterChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
         const group = event.target.value;
@@ -27,6 +29,11 @@ export default function CatalogFilter({ onFilterChange }: Props) {
     const handleBrandFilterChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
         const brand = event.target.value;
         setBrands(brand);
+    };
+
+    const handleFilterByChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+        const filtersItem = event.target.value;
+        setFilterBy(filtersItem);
     };
 
     const handleMinPriceFilterChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -40,15 +47,16 @@ export default function CatalogFilter({ onFilterChange }: Props) {
     };
 
     const handleFilterClick = () => {
-        onFilterChange({ brands, minPrice, maxPrice, categories });
+        onFilterChange({ brands, minPrice, maxPrice, categories, filterBy });
     };
 
     const handleFilterClear = () => {
-        onFilterChange({ brands: '', minPrice: 0, maxPrice: 0, categories: '' });
+        onFilterChange({ brands: '', minPrice: 0, maxPrice: 0, categories: '', filterBy: '' });
         setBrands('');
         setMinPrice(0);
         setMaxPrice(0);
         setCategories('');
+        setFilterBy('');
     };
 
     return (
@@ -79,6 +87,16 @@ export default function CatalogFilter({ onFilterChange }: Props) {
                                 {item.title}
                             </option>
                         ))}
+                    </select>
+                </div>
+                <div className={cn.filterSelect}>
+                    <label>Фильтрация</label>
+                    <select onChange={handleFilterByChange}>
+                        <option value="none" disabled selected>
+                            Фильтр
+                        </option>
+                        <option value="asc">По возрастания</option>
+                        <option value="desc">По убыванию</option>
                     </select>
                 </div>
             </div>

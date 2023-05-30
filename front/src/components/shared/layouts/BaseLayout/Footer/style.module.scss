@@ -3,7 +3,7 @@
   display: flex;
   flex-flow: row wrap;
   margin: 55px auto;
-  padding: 10px 10px 20px 20px;
+  padding: 40px 10px 20px 20px;
   color: #2f2f2f;
   background-color: #fff;
   border-top: 1px solid #e5e5e5;
@@ -11,7 +11,7 @@
 
 .mapAddress {
   &:hover {
-    color: #437FC8;
+    color: #C82132;
     text-decoration: underline;
   }
 }
@@ -70,12 +70,19 @@
   margin-top: 33px;
   display: flex;
   flex-direction: column;
+  a {
+    font-weight: 600;
+    &:hover {
+      text-decoration: underline;
+      color: #C82132;
+    }
+  }
 }
 
 .navUl a {
   color: #999;
   &:hover {
-    color: #437FC8;
+    color: #C82132;
     text-decoration: underline;
   }
 }

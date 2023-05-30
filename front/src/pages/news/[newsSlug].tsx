@@ -10,8 +10,7 @@ import cn from './style.module.scss';
 
 function ProductPage() {
     const router = useRouter();
-    // @ts-ignore
-    const [news, setNews] = useState<News>({});
+    const [news, setNews] = useState<News>();
     const { newsSlug } = router.query;
 
     useEffect(() => {

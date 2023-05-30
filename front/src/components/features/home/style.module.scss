@@ -1,5 +1,8 @@
 .aboutBlock {
   margin: 120px 0;
+  @media screen and (max-width: 576px) {
+    margin: 10px 0;
+  }
   .aboutBlockWrapper {
     display: flex;
     @media screen and (max-width: 576px) {

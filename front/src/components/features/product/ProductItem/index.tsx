@@ -1,10 +1,7 @@
 import Image from 'next/image';
-import React, { useEffect, useState } from 'react';
-import { useDispatch } from 'react-redux';
-import { toast, ToastContainer } from 'react-toastify';
+import React from 'react';
 
-import { useGetFavoriteHook } from '../../../../hooks/favorites/useGetFavoriteHook';
-import { addToCart, removeFromCart } from '../../../../redux/actions';
+import { useProductItem } from '../../../../hooks/products/useProductItem';
 import { ProductPage } from '../../../../types/ProductType';
 import { FavoriteBorderIcon, FavoriteIcon, ShareIcon } from '../../../../utils/getIcons';
 import { noPhoto } from '../../../../utils/getImages';
@@ -18,104 +15,29 @@ interface ProductItemIF {
 }
 
 export default function ProductItem({ product }: ProductItemIF) {
-    const dispatch = useDispatch();
-    const [itemCount, setItemCount] = useState(1);
-    const [addedToCart, setAddedToCart] = React.useState(false);
-    const [IsFavorite, setIsFavorite] = React.useState(false);
-    const { property, category } = product;
-    const categoryProperties = category.property;
-    const { favoriteList } = useGetFavoriteHook();
-
-    useEffect(() => {
-        if (favoriteList) {
-            if (Array.isArray(favoriteList.products)) {
-                favoriteList.products.forEach(item => {
-                    // @ts-ignore
-                    if (item && typeof item.id === 'number' && item.id === product.id) {
-                        setIsFavorite(true);
-                    }
-                });
-            }
-        }
-    }, [favoriteList, product.id]);
-
-    const propertyStrings = Object.keys(categoryProperties)
-        .filter(key => key in property)
-        .map(key => `${categoryProperties[key]} ${property[key]}`);
-
-    useEffect(() => {
-        const cartItems = JSON.parse(localStorage.getItem('cartItems') || '[]') as ProductPage[];
-        const item = cartItems.find((item: ProductPage) => item.id === product.id);
-        if (item) {
-            setAddedToCart(true);
-        }
-    }, [product.id]);
-
-    const handleAddToCart = () => {
-        setAddedToCart(true);
-        dispatch(
-            addToCart(
-                product.id,
-                product.title,
-                product.price,
-                product.img,
-                Boolean(true),
-                product.quantity,
-                itemCount,
-                product.art
-            )
-        );
-    };
-
-    const handleRemoveToCart = () => {
-        dispatch(removeFromCart(product.id));
-        setAddedToCart(false);
-    };
-
-    function setPlusHandler() {
-        setItemCount(itemCount + 1);
-        if (itemCount >= Number(product.quantity)) {
-            setItemCount(Number(product.quantity));
-        }
-    }
-
-    function setMinusHandler() {
-        setItemCount(itemCount - 1);
-        if (itemCount <= 1) {
-            setItemCount(1);
-        }
-    }
-
-    async function copyLinkOfProduct() {
-        const cpLink = window.location.href;
-        await navigator.clipboard.writeText(cpLink);
-        toast.success('🔗 Ссылка успешна скопирована!', {
-            position: 'bottom-right',
-            autoClose: 3400,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-            theme: 'light',
-        });
-    }
-
-    const handleAddToFavorite = () => {
-        setIsFavorite(true);
-    };
+    const {
+        itemCount,
+        addedToCart,
+        isFavorite,
+        handleToggleFavorite,
+        handleAddToCart,
+        handleRemoveToCart,
+        setPlusHandler,
+        setMinusHandler,
+        propertyStrings,
+        copyLinkOfProduct,
+    } = useProductItem({ id: 0, product });
 
     return (
         <BaseLayout>
-            <ToastContainer />
             <div className={cn.productPage} key={product.id}>
                 <div className={cn.productPageTop}>
                     <h1>{product.title}</h1>
                     <div className={cn.productPageTopAction}>
                         <div className={cn.productPageBottomLinks}>
                             <span className={cn.shortCatalogFavorite}>
-                                <button onClick={handleAddToFavorite}>
-                                    {IsFavorite ? (
+                                <button onClick={handleToggleFavorite}>
+                                    {isFavorite ? (
                                         <FavoriteIcon className={`${cn.icon} ${cn.iconIsFav}`} />
                                     ) : (
                                         <FavoriteBorderIcon className={cn.icon} />
@@ -151,7 +73,7 @@ export default function ProductItem({ product }: ProductItemIF) {
                 </div>
                 <div className={cn.productPageWrapper}>
                     <div className={cn.productPageImage}>
-                        {product.img === null ? (
+                        {product.img === null || undefined ? (
                             <Image
                                 src={noPhoto}
                                 alt="Empty Catalog Img"
@@ -182,15 +104,15 @@ export default function ProductItem({ product }: ProductItemIF) {
                                 <p className={cn.productPageInfoSubject}>{product.brand.title}</p>
                             </span>
                             <span className={cn.productPageInfoText}>
-                                Количество.............
+                                Количество...........
                                 <p className={cn.productPageInfoSubject}>{product.quantity}</p>
                             </span>
                         </div>
                         <div className={cn.productPageInfoBottom}>
                             {propertyStrings.map((propString, index) => (
-                                <span key={index} className={cn.productPageInfoText}>
+                                <div key={index}>
                                     <p>{propString}</p>
-                                </span>
+                                </div>
                             ))}
                         </div>
                         <div>

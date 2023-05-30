@@ -6,9 +6,9 @@
 
 ## Tech Stack
 
-**Client:** Next, Axios, SCSS, MUI UI elements
+**Client:** Next.js, TypeScript, Redux, Axios, SCSS, MUI UI elements
 
-**Server:** Laravel 9
+**Server:** Laravel 10, Swagger, JWT
 
 **DataBase:** MySQL
  
@@ -56,7 +56,12 @@ UI компоненты, либо настроенные обертки над �
 Компоненты, которые подключаются только на определенной странице, соответственно название директории должно
 соответствовать названию страницы. Смесь custom, shared и core компонентов, настроенных под конкретную фичу.
 
+Back-end
 
+1. ***app*** - основной код приложения
+2. ***resource*** - содержит основные шаблоны приложения
+3. ***databases*** - содержит миграции и классы для наполнения начальными данными приложения
+4. ***routes*** - определения маршрутов приложения
 
 ## Authors
 
@@ -73,5 +78,19 @@ Install Front-end
   cd front
   npm install / npm i
   npm run dev
+```
+
+Install Back-end
+
+```bash
+  git clone <url>
+  cd back
+  create .env
+  composer install
+  php artisan key:generate
+  php artisan cache:clear
+  php artisan optimize
+  php artisan storage:link
+  php artisan migrate --seed
 ```
     

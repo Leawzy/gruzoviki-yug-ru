@@ -8,17 +8,22 @@ import React from 'react';
 import { Provider } from 'react-redux';
 
 import store from '../redux/store';
-import { fetchFavorites } from '../redux/actions';
-import { parseCookies } from 'nookies';
+import { ToastContainer } from 'react-toastify';
 
 function MyApp({ Component, pageProps }: AppProps) {
-    const cookies = parseCookies();
-    const { token } = cookies;
-    // @ts-ignore
-    token ? store.dispatch(fetchFavorites()) : '';
     return (
         <Provider store={store}>
             <DefaultSeo {...SEO} />
+            <ToastContainer
+                position="bottom-right"
+                autoClose={3560}
+                closeOnClick
+                pauseOnHover
+                draggable
+                newestOnTop={false}
+                limit={1}
+                closeButton={undefined}
+            />
             <Component {...pageProps} />
         </Provider>
     );

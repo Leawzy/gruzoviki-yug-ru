@@ -32,11 +32,17 @@
         margin-left: 20px;
         margin-right: 40px;
         @include buttonInfoOfProduct(#55BB9F);
+        @media screen and (max-width: 720px) {
+          margin: 10px 0;
+        }
       }
 
       .productPageBottomPopular {
         margin-right: 50px;
         @include buttonInfoOfProduct(#e04d4d);
+        @media screen and (max-width: 720px) {
+          margin: 10px 0;
+        }
       }
     }
   }
@@ -159,7 +165,7 @@
       .productPageInfoBottom {
         padding-top: 30px;
 
-        span {
+        p {
           display: flex;
           align-items: center;
           align-content: center;

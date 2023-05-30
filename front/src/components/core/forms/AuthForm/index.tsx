@@ -1,48 +1,15 @@
 import Link from 'next/link';
-import { useRouter } from 'next/router';
-import { setCookie } from 'nookies';
 import React from 'react';
-import { SubmitHandler, useForm } from 'react-hook-form';
 
-import { apiFetch, dayOfLiveToken } from '../../../../axios/global';
+import { useAuthHook } from '../../../../hooks/actions/useAuthHook';
 import cn from '../style.module.scss';
 
-type Inputs = {
-    email: string;
-    password: string;
-};
-
-interface ResponseData {
-    token: string;
-}
-
 export default function AuthorizationForm() {
-    const router = useRouter();
-    const {
-        register,
-        handleSubmit,
-        formState: { errors },
-    } = useForm<Inputs>();
-    const onSubmit: SubmitHandler<Inputs> = async data => {
-        const res: { status: number; data: ResponseData } = await apiFetch('api/login', {
-            method: 'post',
-            data: {
-                email: data.email,
-                password: data.password,
-            },
-        });
-        if (res.status === 200) {
-            const { token } = res.data;
-            setCookie(null, 'token', token, {
-                maxAge: dayOfLiveToken(),
-            });
-            await router.push('/');
-        }
-    };
+    const { register, handleSubmit, errors } = useAuthHook();
 
     return (
         <div className={cn.AuthForm}>
-            <form className={cn.Form} onSubmit={handleSubmit(onSubmit)}>
+            <form className={cn.Form} onSubmit={handleSubmit}>
                 <h1>Авторизация</h1>
                 <label className={cn.FormLabel}>
                     E-mail

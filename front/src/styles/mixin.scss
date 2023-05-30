@@ -12,6 +12,9 @@
   cursor: pointer;
   outline: none;
   border: none;
+  &:hover {
+    background: rgba(100, 149, 237, 0.81);
+  }
   @media only screen and (max-width: 700px) and (min-width: 300px) {
     padding: 12px 18px;
     font-size: 14px;
@@ -25,6 +28,9 @@
   border: none;
   border-radius: 10px;
   cursor: pointer;
+  &:hover {
+    background: rgba(16, 196, 76, 0.8);
+  }
   @media only screen and (max-width: 700px) and (min-width: 300px) {
     padding: 12px 18px;
     font-size: 14px;
@@ -40,6 +46,10 @@
   box-shadow: -4px -2px 31px 1px rgba(34, 60, 80, 0.23);
   margin: 0 auto 0 auto;
   border-radius: 6px;
+  @media only screen and (max-width: 700px) and (min-width: 300px) {
+    width: auto;
+    height: auto;
+  }
   h1 {
     text-align: center;
     font-size: 28px;
@@ -51,6 +61,9 @@
     display: flex;
     flex-direction: column;
     padding: 0 52px;
+    @media only screen and (max-width: 700px) and (min-width: 300px) {
+      padding: 0 12px;
+    }
 
     input {
       width: 480px;
@@ -60,6 +73,10 @@
       border: 2px solid #6e6e6e;
       border-radius: 4px;
       outline: none;
+      @media only screen and (max-width: 700px) and (min-width: 300px) {
+        width: 290px;
+        height: 48px;
+      }
 
       &:active {
         border: 2px solid #3758CB;
@@ -89,6 +106,9 @@
 
 @mixin FormTop($pTop) {
   padding-top: $pTop;
+  @media only screen and (max-width: 700px) and (min-width: 300px) {
+    padding: 0;
+  }
 }
 
 @mixin buttonInfoOfProduct($colorOfBG) {
@@ -139,6 +159,10 @@
   font-size: 18px;
   line-height: 25px;
   color: #6e6e6e;
+  &:hover {
+    border: 1px solid rgba(45, 133, 222, 0.89);
+    color: #2d85de;
+  }
 }
 
 @mixin minusButton {
@@ -154,4 +178,8 @@
   font-size: 18px;
   line-height: 25px;
   color: #6e6e6e;
+  &:hover {
+    border: 1px solid rgba(45, 133, 222, 0.89);
+    color: #2d85de;
+  }
 }

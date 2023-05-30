@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { toast } from 'react-toastify';
 
 import { apiFetch, setAuthToken } from '../../../../axios/global';
 import cn from './style.module.scss';
@@ -72,6 +73,7 @@ function MultiStepForm() {
                 setStep(1);
             }
         } catch (e) {
+            toast.error('Не все поняли были заполнены.');
             console.error(e);
         }
     };
