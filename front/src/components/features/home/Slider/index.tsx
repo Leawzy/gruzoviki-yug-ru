@@ -34,7 +34,7 @@ export default function Slider({ images }: SliderIF) {
                     width={1200}
                     height={200}
                     src={slide.img}
-                    priority
+                    loading="lazy"
                     alt={`Image ${slideIndex + 1}`}
                     style={{ display: slideIndex === currentIndex ? 'block' : 'none' }}
                 />
