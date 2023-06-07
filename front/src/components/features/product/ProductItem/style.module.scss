@@ -124,6 +124,10 @@
       img {
         width: 300px;
         height: 250px;
+        @media screen and (min-width: 400px) and (max-width: 720px){
+          width: auto;
+          height: auto;
+        }
       }
     }
 
@@ -132,6 +136,10 @@
       align-items: center;
       margin-left: 10px;
       align-content: center;
+      @media screen and (min-width: 400px) and (max-width: 720px) {
+        display: flex;
+        flex-direction: column-reverse;
+      }
 
       .productPageBuyButtons {
         display: flex;
@@ -160,10 +168,18 @@
       .productPageInfoTop {
         padding: 30px 0;
         border-bottom: 1px solid #6E6E6E;
+        @media screen and (min-width: 400px) and (max-width: 720px) {
+          padding: 30px 90px;
+        }
       }
 
       .productPageInfoBottom {
         padding-top: 30px;
+        @media screen and (min-width: 400px) and (max-width: 720px) {
+          display: flex;
+          flex-direction: column;
+          padding: 20px 90px;
+        }
 
         p {
           display: flex;
@@ -200,6 +216,11 @@
       flex-direction: column;
       height: 190px;
       width: 460px;
+      @media screen and (min-width: 400px) and (max-width: 720px) {
+        padding: 30px 0;
+        text-align: center;
+        width: 420px !important;
+      }
 
       .productPagePrice {
         padding: 10px 20px;

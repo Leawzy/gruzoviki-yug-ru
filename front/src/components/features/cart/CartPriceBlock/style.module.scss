@@ -88,4 +88,8 @@
 .cartTextError {
   font-weight: 800;
   text-align: center;
+  a {
+    text-decoration: underline;
+    color: #2d85de;
+  }
 }

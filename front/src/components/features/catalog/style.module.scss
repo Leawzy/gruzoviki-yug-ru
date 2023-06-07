@@ -22,6 +22,10 @@
           width: 288px;
           min-width: 250px;
         }
+        @media screen and (min-width: 400px) {
+          width: 388px;
+          min-width: 250px;
+        }
       }
 
       .categoryPageContent {

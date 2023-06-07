@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import { useRouter } from 'next/router';
 import React, { useEffect, useState } from 'react';
 
@@ -140,7 +141,8 @@ export default function CartPriceBlock() {
             <div>
                 {token === undefined ? (
                     <p className={cn.cartTextError}>
-                        Чтобы совершить оплату, вам требуется Авторизоваться
+                        Чтобы оформить заказ, вам требуется{' '}
+                        <Link href="/authorization">Авторизоваться</Link>
                     </p>
                 ) : (
                     ''
