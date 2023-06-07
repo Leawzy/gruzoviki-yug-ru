@@ -9,11 +9,11 @@ import Slider from './Slider';
 import cn from './style.module.scss';
 
 function Home() {
-    const { slider } = useGetSliderHook();
+    const { slider, loading } = useGetSliderHook();
 
     return (
         <>
-            {slider.length === 0 ? '' : <Slider images={slider} />}
+            {slider.length === 0 ? '' : <Slider images={slider} loading={loading} />}
             <PopularCards />
             <section className={cn.aboutBlock}>
                 <div className={cn.aboutBlockWrapper}>

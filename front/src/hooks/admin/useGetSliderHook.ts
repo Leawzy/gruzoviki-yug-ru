@@ -10,11 +10,19 @@ function useGetSliderHook() {
         async function fetchSliderImage() {
             setAuthToken();
             try {
-                const res: { data: { data: SliderTypeIF[] } } = await apiFetch('api/slider', {
+                const res: {
+                    status: number;
+                    data: { data: SliderTypeIF[] };
+                } = await apiFetch('api/slider', {
                     method: 'get',
                 });
                 setSlider(res.data.data);
                 setLoading(true);
+                if (res.status === 200) {
+                    setLoading(true);
+                } else {
+                    setLoading(false);
+                }
             } catch (e) {
                 console.error(e);
                 setLoading(false);
