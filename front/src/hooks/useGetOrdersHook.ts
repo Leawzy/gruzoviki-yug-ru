@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 
-import { adminFetch, setAuthToken } from '../axios/global';
+import { apiFetch, setAuthToken } from '../axios/global';
 import { OrderTypeIF } from '../types/OrderType';
 
 function useGetOrdersHook() {
@@ -10,7 +10,7 @@ function useGetOrdersHook() {
     async function fetchOrdersList() {
         setAuthToken();
         try {
-            const res: { data: { data: OrderTypeIF[] } } = await adminFetch('/order/get', {
+            const res: { data: { data: OrderTypeIF[] } } = await apiFetch('/orders', {
                 method: 'get',
             });
             setOrderList(res.data.data);
