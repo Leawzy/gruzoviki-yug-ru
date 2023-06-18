@@ -1,7 +1,6 @@
 .container {
-  max-width: 800px;
-  margin: 0 auto;
   padding: 20px;
+  display: flex;
 }
 
 .title {
@@ -10,11 +9,32 @@
   margin-bottom: 10px;
 }
 
+.imageNews {
+  width: 480px;
+}
+
 .imageContainer {
   margin-bottom: 20px;
+}
+
+.newsContent {
+  padding-left: 80px;
 }
 
 .description {
   font-size: 16px;
   line-height: 1.5;
+}
+
+@media screen and (min-width: 300px) and (max-width: 720px) {
+  .container {
+    display: flex;
+    flex-direction: column;
+    .imageNews {
+      height: 280px;
+    }
+  }
+  .newsContent {
+    padding-left: 0;
+  }
 }

@@ -36,15 +36,23 @@ function ProductPage() {
     return (
         <BaseLayout>
             <div className={cn.container}>
-                <h1 className={cn.title}>{news.title}</h1>
                 <div className={cn.imageContainer}>
                     {news.img === null && undefined ? (
                         ''
                     ) : (
-                        <Image src={news.img} alt={news.title} width={600} height={400} />
+                        <Image
+                            className={cn.imageNews}
+                            src={news.img}
+                            alt={news.title}
+                            width={600}
+                            height={400}
+                        />
                     )}
                 </div>
-                <p className={cn.description}>{news.description}</p>
+                <div className={cn.newsContent}>
+                    <h1 className={cn.title}>{news.title}</h1>
+                    <p className={cn.description}>{news.description}</p>
+                </div>
             </div>
         </BaseLayout>
     );

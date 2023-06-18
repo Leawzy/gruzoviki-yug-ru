@@ -154,3 +154,29 @@ $cardMargin: 16px;
   font-weight: 600;
   text-decoration: underline;
 }
+
+.paymentPage {
+  margin-top: 50px;
+  text-align: center;
+
+  h1 {
+    font-size: 34px;
+    font-weight: 600;
+  }
+
+  p {
+    font-size: 22px;
+    font-weight: 300;
+    margin-bottom: 60px;
+  }
+
+  a {
+    border-radius: 6px;
+    padding: 10px 10px;
+    background: #2d85de;
+    color: #fff;
+    &:hover {
+      background: rgba(45, 133, 222, 0.7);
+    }
+  }
+}
