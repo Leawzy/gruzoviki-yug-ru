@@ -1,15 +1,15 @@
 import { useEffect, useState } from 'react';
 
 import { adminFetch, setAuthToken } from '../../axios/global';
-import { OrderChangeIF } from '../../types/OrderType';
+import { OrderTypeIF } from '../../types/OrderType';
 
 function useGetOrderHook() {
-    const [order, setOrder] = useState<OrderChangeIF[]>([]);
+    const [order, setOrder] = useState<OrderTypeIF[]>([]);
     useEffect(() => {
         const getOrders = async () => {
             setAuthToken();
             try {
-                const res: { data: { data: OrderChangeIF[] } } = await adminFetch.get('/order/get');
+                const res: { data: { data: OrderTypeIF[] } } = await adminFetch.get('/order/get');
                 setOrder(res.data.data);
             } catch (e) {
                 console.error(e);

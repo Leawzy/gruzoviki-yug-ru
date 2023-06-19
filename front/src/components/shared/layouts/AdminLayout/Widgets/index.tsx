@@ -14,7 +14,7 @@ interface WidgetProps {
     users: AdminTypeUser[];
     brand: AdminTypeBrand[];
     products: ProductIF[];
-    orderList: OrderTypeIF[];
+    order: OrderTypeIF[];
 }
 
 interface WidgetData {
@@ -31,7 +31,7 @@ export default function Widget({
     users,
     brand,
     products,
-    orderList,
+    order,
     title,
     link,
 }: WidgetProps) {
@@ -39,7 +39,7 @@ export default function Widget({
     const totalUser = String(users.length);
     const totalProducts = String(products.length);
     const totalBrands = String(brand.length);
-    const totalOrders = String(orderList.length);
+    const totalOrders = String(order.length);
 
     switch (type) {
         case 'user':
