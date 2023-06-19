@@ -87,7 +87,7 @@ function UserAdd() {
                     onChange={e => setPhoneNumber(e.target.value)}
                     type="text"
                     maxLength={11}
-                    placeholder="71234567890"
+                    placeholder="Например: 71234567890"
                 />
                 <input onChange={e => setAddress(e.target.value)} type="text" placeholder="Адрес" />
                 <select onChange={e => setRole(e.target.value)}>

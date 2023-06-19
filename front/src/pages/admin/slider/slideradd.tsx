@@ -18,7 +18,7 @@ function SliderAdd() {
                 <input
                     onChange={e => setTitle(e.target.value)}
                     type="text"
-                    placeholder="Введите имя"
+                    placeholder="Введите название слайдера"
                     required
                 />
                 <input type="file" accept="image/webp" onChange={handleFileChange} />
