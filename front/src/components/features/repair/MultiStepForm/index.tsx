@@ -71,6 +71,7 @@ function MultiStepForm() {
                     step3: { date: '' },
                 });
                 setStep(1);
+                toast.success('Запись на ремонт отправлена');
             }
         } catch (e) {
             toast.error('Не все поняли были заполнены.');

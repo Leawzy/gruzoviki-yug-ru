@@ -45,6 +45,7 @@
       background: #437FC8;
       border-radius: 5px;
       cursor: pointer;
+      margin-bottom: 20px;
       color: #f9f9f9;
       border: none;
       &:disabled {
@@ -81,5 +82,14 @@
     label {
       padding: 5px 0;
     }
+  }
+}
+
+.cartTextError {
+  font-weight: 800;
+  text-align: center;
+  a {
+    text-decoration: underline;
+    color: #2d85de;
   }
 }

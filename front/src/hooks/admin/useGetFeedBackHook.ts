@@ -1,15 +1,15 @@
 import { useEffect, useState } from 'react';
 
 import { adminFetch, setAuthToken } from '../../axios/global';
-import { OrderChangeIF } from '../../types/OrderType';
+import { FeedBackIF } from '../../types/FeedBack';
 
 function useGetFeedBackHook() {
-    const [feedBack, setFeedBack] = useState<OrderChangeIF[]>([]);
+    const [feedBack, setFeedBack] = useState<FeedBackIF[]>([]);
     useEffect(() => {
         const getFeedBack = async () => {
             setAuthToken();
             try {
-                const res: { data: OrderChangeIF[] } = await adminFetch.get('/feedback/get');
+                const res: { data: FeedBackIF[] } = await adminFetch.get('/feedback/get');
                 setFeedBack(res.data);
             } catch (e) {
                 console.error(e);

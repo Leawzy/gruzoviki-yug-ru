@@ -6,9 +6,10 @@ import cn from './style.module.scss';
 
 interface SliderIF {
     images: SliderTypeIF[];
+    loading: boolean;
 }
 
-export default function Slider({ images }: SliderIF) {
+export default function Slider({ images, loading }: SliderIF) {
     const [currentIndex, setCurrentIndex] = useState(0);
 
     const handleClick = useCallback(
@@ -27,18 +28,20 @@ export default function Slider({ images }: SliderIF) {
             <button className={cn.prevButton} onClick={() => handleClick('prev')}>
                 &lt;
             </button>
-            {images.map((slide, slideIndex) => (
-                <Image
-                    key={slide.id}
-                    className={cn.sliderImage}
-                    width={1200}
-                    height={200}
-                    src={slide.img}
-                    priority
-                    alt={`Image ${slideIndex + 1}`}
-                    style={{ display: slideIndex === currentIndex ? 'block' : 'none' }}
-                />
-            ))}
+            {loading === false
+                ? '1'
+                : images.map((slide, slideIndex) => (
+                      <Image
+                          key={slide.id}
+                          className={cn.sliderImage}
+                          width={1200}
+                          height={200}
+                          src={slide.img}
+                          priority
+                          alt={`Image ${slideIndex + 1}`}
+                          style={{ display: slideIndex === currentIndex ? 'block' : 'none' }}
+                      />
+                  ))}
             <button className={cn.nextButton} onClick={() => handleClick('next')}>
                 &gt;
             </button>

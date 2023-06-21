@@ -12,18 +12,18 @@
     .aboutBlockImage {
       img {
         width: 662px;
-        height: 464px;
+        height: 585px;
         @media screen and (max-width: 576px) {
           height: 264px;
         }
       }
     }
     .aboutBlockContent {
-      margin: 60px 40px;
+      margin: 0 40px;
       max-width: 700px;
       @media screen and (max-width: 576px) {
         margin: 60px 0;
-        text-align: center;
+        padding: 10px 10px;
       }
       h1 {
         text-transform: uppercase;

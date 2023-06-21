@@ -58,6 +58,11 @@
 .filterButtons {
   @media screen and (max-width: 480px) {
     margin-left: 20px;
+    margin-bottom: 30px;
+  }
+  @media screen and (min-width: 400px) and (max-width: 720px){
+    margin-left: 70px;
+    margin-bottom: 30px;
   }
   button {
     width: 300px;

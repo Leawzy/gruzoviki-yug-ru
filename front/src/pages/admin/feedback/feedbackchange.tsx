@@ -19,7 +19,6 @@ function FeedBackChange() {
         setSelectedRow,
         openModal,
         handleOpenModal,
-        handleDeleteRow,
         handleCloseModal,
     } = useModalHandlerHook([]);
 
@@ -45,7 +44,10 @@ function FeedBackChange() {
             headerName: 'Номер обращения',
             width: 200,
         },
-        { field: 'status', headerName: 'Статус', width: 250 },
+        { field: 'email', headerName: 'E-mail', width: 250 },
+        { field: 'name', headerName: 'Имя', width: 250 },
+        { field: 'message', headerName: 'Сообщение', width: 250 },
+        { field: 'status', headerName: 'Сообщение', width: 120 },
         {
             field: 'actions',
             headerName: 'Действие',
@@ -57,18 +59,7 @@ function FeedBackChange() {
                     handleOpenModal(params.id);
                 };
 
-                const handleDelete = () => {
-                    handleDeleteRow(params.id, 'feedback/delete');
-                };
-
-                return (
-                    <>
-                        <Button onClick={handleEdit}>Изменить</Button>
-                        <Button onClick={handleDelete} color="error">
-                            Удалить
-                        </Button>
-                    </>
-                );
+                return <Button onClick={handleEdit}>Изменить</Button>;
             },
         },
     ];
@@ -76,6 +67,9 @@ function FeedBackChange() {
     useEffect(() => {
         const formattedRows: GridRowsProp = feedBack.map(item => ({
             id: item.id,
+            email: item.email,
+            name: item.name,
+            message: item.message,
             status: item.status,
         }));
         setRows(formattedRows);
@@ -97,7 +91,7 @@ function FeedBackChange() {
                             }
                         >
                             <option value="Открыт">Открыт</option>
-                            <option value="Завершен">Закрыт</option>
+                            <option value="Закрыт">Закрыт</option>
                         </select>
                     </DialogContent>
                     <DialogActions>

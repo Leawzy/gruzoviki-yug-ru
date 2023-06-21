@@ -2,14 +2,14 @@ import axios from 'axios';
 import { parseCookies } from 'nookies';
 
 const apiFetch = axios.create({
-    baseURL: 'http://5.167.50.180:8876',
+    baseURL: 'https://api.грузовики-юг.рф',
     headers: {
         Accept: 'application/json',
     },
 });
 
 const adminFetch = axios.create({
-    baseURL: 'http://5.167.50.180:8876/api/admin',
+    baseURL: 'https://api.грузовики-юг.рф/api/admin',
     headers: {
         Accept: 'application/json',
     },

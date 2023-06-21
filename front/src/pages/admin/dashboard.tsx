@@ -4,9 +4,9 @@ import AdminLayout from '../../components/shared/layouts/AdminLayout';
 import RenderLineChart from '../../components/shared/layouts/AdminLayout/Chart';
 import Widget from '../../components/shared/layouts/AdminLayout/Widgets';
 import { useGetBrandHook } from '../../hooks/admin/useGetBrandHook';
+import { useGetOrderHook } from '../../hooks/admin/useGetOrderHook';
 import { useGetProductsHook } from '../../hooks/admin/useGetProductsHook';
 import { useGetUserHook } from '../../hooks/admin/useGetUserHook';
-import { useGetOrdersHook } from '../../hooks/useGetOrdersHook';
 import { withAuth } from '../../utils/withAuth';
 import { withAuthAdmin } from '../../utils/withAuthAdmin';
 import cn from './style.module.scss';
@@ -16,7 +16,7 @@ function Dashboard() {
     const { users } = useGetUserHook();
     const { brand } = useGetBrandHook();
     const { products } = useGetProductsHook();
-    const { orderList } = useGetOrdersHook();
+    const { order } = useGetOrderHook();
 
     return (
         <AdminLayout>
@@ -29,7 +29,7 @@ function Dashboard() {
                         users={users}
                         brand={brand}
                         products={products}
-                        orderList={orderList}
+                        order={order}
                         title={widget.title}
                         link={widget.link}
                     />
