@@ -12,8 +12,12 @@ use Illuminate\Routing\Controller as BaseController;
  *     version="1.0"
  * )
  * @OA\Server(
- *     description="Gruzoviki-Yug server",
+ *     description="Грузовики-ЮГ dev server",
  *     url="http://127.0.0.1:8000/api/"
+ * )
+ *  * @OA\Server(
+ *     description="Грузовики-ЮГ prod server",
+ *     url="https://api.грузовики-юг.рф/api/"
  * )
  * @OA\SecurityScheme(
  *     type="apiKey",
