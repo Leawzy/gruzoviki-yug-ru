@@ -1,0 +1,65 @@
+@import "../../../styles/mixin";
+
+
+.RegisterForm {
+  @include FormTop(50px);
+
+  .Form {
+    @include AuthenticationForm(580px, 820px);
+    p {
+      text-align: center;
+      a {
+        color: #2d85de;
+      }
+    }
+  }
+}
+
+.AuthForm {
+  @include FormTop(120px);
+
+  .Form {
+    @include AuthenticationForm(580px, 510px);
+    p:last-child {
+      padding-top: 24px;
+    }
+    p {
+      text-align: center;
+      a {
+        color: #2d85de;
+      }
+    }
+  }
+}
+
+.acceptPrivacy {
+  padding-top: 50px;
+  text-align: center;
+
+  a {
+    color: #437FC8;
+    text-decoration: underline;
+
+    &:hover {
+      color: #6e6e6e;
+    }
+  }
+}
+
+.FormLabelError {
+  color: #bf1650;
+}
+
+.errorInput {
+  border: 2px solid #e80c0c !important;
+  background: rgba(229, 38, 38, 0.55);
+
+  &::placeholder {
+    color: #000000;
+  }
+}
+
+.FormLabelError::before {
+  display: inline;
+  content: "⚠ ";
+}

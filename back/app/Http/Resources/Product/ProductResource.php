@@ -2,9 +2,9 @@
 
 namespace App\Http\Resources\Product;
 
+use App\Http\Resources\Brand\BrandResource;
 use App\Http\Resources\Category\CategoryResource;
-use App\Http\Resources\Property\PropertyBearingResource;
-use App\Http\Resources\Property\PropertyOilResource;
+use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class ProductResource extends JsonResource
@@ -12,38 +12,23 @@ class ProductResource extends JsonResource
     /**
      * Transform the resource into an array.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return array|\Illuminate\Contracts\Support\Arrayable|\JsonSerializable
+     * @return array<string, mixed>
      */
-    protected $related = [
-        'oils' => PropertyOilResource::class,
-        'bearing' => PropertyBearingResource::class,
-        // Add more related models and their resource classes here
-    ];
 
     public function toArray($request)
     {
-        $properties = [];
-
-        foreach ($this->related as $relationName => $resourceClass) {
-            $relatedModels = $this->{$relationName};
-
-            foreach ($relatedModels as $relatedModel) {
-                $resource = new $resourceClass($relatedModel);
-                $properties[] = $resource->toArray($request);
-            }
-        }
-
         return [
             'id' => $this->id,
+            'slug' => $this->slug,
             'title' => $this->title,
-            'short_desc' => $this->short_desc,
+            'shortDesc' => $this->short_desc,
             'price' => $this->price,
             'quantity' => $this->quantity,
-            'img' => $this->imageUrl,
-            'brand' => $this->brand->title,
+            'img' => $this->img === null ? null : $this->imageUrl,
+            'brand' => new BrandResource($this->brand),
             'art' => $this->art,
-            'property' => $properties,
+            'property' => $this->properties,
+            'popular' => $this->is_popular,
             'category' => new CategoryResource($this->category),
         ];
     }

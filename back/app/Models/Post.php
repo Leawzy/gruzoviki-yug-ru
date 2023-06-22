@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Str;
 
 class Post extends Model
 {
@@ -17,17 +18,17 @@ class Post extends Model
         'img'
     ];
 
-    protected static function boot()
+    protected static function boot(): void
     {
         parent::boot();
 
-        static::creating(function (Post $post) {
-            $post->slug = $post->slug ?? str($post->title)->slug();
+        static::creating(function ($post) {
+            $post->slug = $post->slug ?? Str::slug($post->title);
         });
     }
 
     public function getImageUrlAttribute()
     {
-       return url('storage/' . $this->img);
+        return url('storage/' . $this->img);
     }
 }

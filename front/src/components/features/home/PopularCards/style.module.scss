@@ -1,0 +1,32 @@
+.mainSection {
+  margin-top: 70px;
+  margin-bottom: 90px;
+
+  .mainSectionTitle {
+    text-transform: uppercase;
+    font-size: 32px;
+    font-weight: 700;
+    padding-bottom: 38px;
+    @media screen and (max-width: 576px) {
+      text-align: center;
+    }
+  }
+
+  .mainPopularCardsCatalog {
+    display: grid;
+    row-gap: 25px;
+    grid-template-columns: repeat(4, 1fr);
+    @media screen and (max-width: 991px) {
+      grid-template-columns: repeat(3, 1fr);
+      row-gap: 0;
+    }
+    @media screen and (max-width: 768px) {
+      grid-template-columns: repeat(2, 1fr);
+      row-gap: 0;
+    }
+    @media screen and (max-width: 576px) {
+      grid-template-columns: repeat(1, 1fr);
+      row-gap: 0;
+    }
+  }
+}

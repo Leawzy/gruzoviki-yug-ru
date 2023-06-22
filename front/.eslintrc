@@ -1,0 +1,163 @@
+{
+  "root": true,
+  "env": {
+    "browser": true,
+    "node": true,
+    "es2022": true
+  },
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "ecmaVersion": 2020,
+    "sourceType": "module",
+    "project": "./tsconfig.json",
+    "ecmaFeatures": {
+      "jsx": true
+    }
+  },
+  "extends": [
+    "next",
+    "next/core-web-vitals",
+    "airbnb",
+    "airbnb/hooks",
+    "prettier",
+    "plugin:@typescript-eslint/recommended",
+    "plugin:@typescript-eslint/recommended-requiring-type-checking",
+    "plugin:react/recommended"
+  ],
+  "plugins": [
+    "@typescript-eslint",
+    "react",
+    "react-hooks",
+    "prettier",
+    "jsx-a11y",
+    "import",
+    "simple-import-sort",
+    "unused-imports"
+  ],
+  "rules": {
+    "react/no-array-index-key": "off",
+    "@typescript-eslint/ban-ts-ignore": "off",
+    "no-restricted-globals": "off",
+    "jsx-a11y/control-has-associated-label": "off",
+    "@typescript-eslint/ban-ts-comment": "off",
+    "no-plusplus": "off",
+    "import/no-extraneous-dependencies": "off",
+    "no-duplicate-imports": "error",
+    "@next/next/no-img-element": "off",
+    "no-unused-vars": "off",
+    "no-empty-pattern": "error",
+    "no-use-before-define": "off",
+    "no-underscore-dangle": "off",
+    "no-shadow": "off",
+    "no-console": [
+      "warn",
+      {
+        "allow": [
+          "warn",
+          "error"
+        ]
+      }
+    ],
+    "yoda": "error",
+    "max-len": [
+      2,
+      {
+        "code": 250,
+        "ignoreUrls": true
+      }
+    ],
+    "consistent-return": [
+      "error",
+      {
+        "treatUndefinedAsUnspecified": true
+      }
+    ],
+    "@typescript-eslint/no-misused-promises": [
+      "error",
+      {
+        "checksVoidReturn": {
+          "attributes": false
+        }
+      }
+    ],
+    "class-methods-use-this": "warn",
+    "react/display-name": "off",
+    "react/jsx-filename-extension": [
+      1,
+      {
+        "extensions": [
+          ".ts",
+          ".tsx"
+        ]
+      }
+    ],
+    "react/jsx-props-no-spreading": [
+      "warn",
+      {
+        "html": "ignore",
+        "custom": "enforce",
+        "explicitSpread": "enforce",
+        "exceptions": [
+          "Component",
+          "NextSeo",
+          "StoreProvider",
+          "ErrorBoundary"
+        ]
+      }
+    ],
+    "react/no-danger": "off",
+    "react/no-unescaped-entities": "off",
+    "react-hooks/exhaustive-deps": "off",
+    "react/prop-types": "off",
+    "react/jsx-indent": "off",
+    "react/jsx-indent-props": "off",
+    "react/require-default-props": "off",
+    "react/button-has-type": "off",
+    "react/jsx-no-useless-fragment": [
+      "error",
+      {
+        "allowExpressions": true
+      }
+    ],
+    "import/extensions": "off",
+    "import/prefer-default-export": "off",
+    "jsx-a11y/anchor-is-valid": "off",
+    "jsx-a11y/label-has-associated-control": "off",
+    "jsx-a11y/click-events-have-key-events": "off",
+    "prettier/prettier": "error",
+    "@typescript-eslint/no-use-before-define": "error",
+    "@typescript-eslint/explicit-module-boundary-types": "off",
+    "@typescript-eslint/no-unused-vars": "error",
+    "simple-import-sort/imports": "warn",
+    "simple-import-sort/exports": "warn",
+    "unused-imports/no-unused-imports": "error",
+    "unused-imports/no-unused-vars": [
+      "error",
+      {
+        "vars": "all",
+        "varsIgnorePattern": "^_",
+        "args": "after-used",
+        "argsIgnorePattern": "^_"
+      }
+    ]
+  },
+  "settings": {
+    "import/parsers": {
+      "@typescript-eslint/parser": [
+        ".ts",
+        ".tsx"
+      ]
+    },
+    "import/resolver": {
+      "typescript": {
+        "project": "./"
+      }
+    },
+    "react": {
+      "version": "detect"
+    }
+  },
+  "globals": {
+    "window": true
+  }
+}

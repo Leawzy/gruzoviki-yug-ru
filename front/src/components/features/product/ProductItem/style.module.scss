@@ -1,0 +1,276 @@
+@import "../../../../styles/mixin";
+
+.productPage {
+
+  .productPageBottom {
+    display: flex;
+    padding: 30px 0;
+    align-items: center;
+    justify-content: space-between;
+
+    .productPageBottomInfo {
+      display: flex;
+      align-items: center;
+      text-align: center;
+
+      .productPageBottomCheckIs {
+        display: inline-block;
+        position: relative;
+
+        &::before {
+          position: absolute;
+          top: 2px;
+          left: -22px;
+          content: '';
+          width: 15px;
+          height: 15px;
+          background-image: url("../../../../../public/images/icons/check.webp");
+        }
+      }
+
+      .productPageBottomBrand {
+        margin-left: 20px;
+        margin-right: 40px;
+        @include buttonInfoOfProduct(#55BB9F);
+        @media screen and (max-width: 720px) {
+          margin: 10px 0;
+        }
+      }
+
+      .productPageBottomPopular {
+        margin-right: 50px;
+        @include buttonInfoOfProduct(#e04d4d);
+        @media screen and (max-width: 720px) {
+          margin: 10px 0;
+        }
+      }
+    }
+  }
+
+  .productPageTop {
+    display: flex;
+    justify-content: space-between;
+    align-content: center;
+    align-items: center;
+    padding: 12px 12px;
+    border-bottom: 1px solid #E5E5E5;
+
+    h1 {
+      font-size: 28px;
+      font-weight: bold;
+    }
+
+    .productPageTopAction {
+      display: flex;
+      align-content: center;
+      align-items: center;
+
+      .productPageBottomLinks {
+        display: flex;
+        align-content: center;
+        align-items: center;
+        flex-wrap: nowrap;
+        justify-content: center;
+
+        .shortCatalogFavorite {
+          margin-right: 13px;
+
+          .icon {
+            font-size: 28px;
+            cursor: pointer;
+          }
+
+          .iconIsFav {
+            color: #C82132;
+          }
+
+          button {
+            background: transparent;
+            border: none;
+          }
+        }
+
+        .productPageTopActionLink {
+          padding: 0 8px;
+          border: none;
+          align-items: center;
+          align-content: center;
+          background: transparent;
+
+          &:hover {
+            cursor: pointer;
+            color: #2d85de;
+          }
+        }
+
+      }
+
+      .productPageTopArt {
+        margin-left: 30px;
+
+        p {
+          font-size: 14px;
+          font-weight: 400;
+          color: #6e6e6e;
+        }
+      }
+    }
+  }
+
+  .productPageWrapper {
+    display: flex;
+
+    .productPageImage {
+      img {
+        width: 300px;
+        height: 250px;
+        @media screen and (min-width: 400px) and (max-width: 720px){
+          width: auto;
+          height: auto;
+        }
+      }
+    }
+
+    .productPageButtons {
+      display: flex;
+      align-items: center;
+      margin-left: 10px;
+      align-content: center;
+      @media screen and (min-width: 400px) and (max-width: 720px) {
+        display: flex;
+        flex-direction: column-reverse;
+      }
+
+      .productPageBuyButtons {
+        display: flex;
+        align-content: center;
+        padding: 10px 12px;
+        align-items: center;
+
+        .cartPageItemRightMinus {
+          @include minusButton();
+        }
+
+        .cartPageItemRightPlus {
+          @include plusButton();
+        }
+
+        p {
+          padding: 0 10px;
+        }
+      }
+    }
+
+    .productPageInfo {
+      width: 720px;
+      padding: 30px 80px;
+
+      .productPageInfoTop {
+        padding: 30px 0;
+        border-bottom: 1px solid #6E6E6E;
+        @media screen and (min-width: 400px) and (max-width: 720px) {
+          padding: 30px 90px;
+        }
+      }
+
+      .productPageInfoBottom {
+        padding-top: 30px;
+        @media screen and (min-width: 400px) and (max-width: 720px) {
+          display: flex;
+          flex-direction: column;
+          padding: 20px 90px;
+        }
+
+        p {
+          display: flex;
+          align-items: center;
+          align-content: center;
+          color: #1e1e1e;
+          font-weight: 400;
+          font-size: 16px;
+        }
+
+      }
+
+      .productPageInfoText {
+        display: flex;
+        align-items: center;
+        align-content: center;
+        color: #6e6e6e;
+        font-weight: 400;
+        font-size: 16px;
+
+        .productPageInfoSubject {
+          color: #1e1e1e;
+          font-size: 18px;
+          font-weight: 500;
+          padding-left: 4px;
+        }
+      }
+    }
+
+    .productPageTotal {
+      display: flex;
+      background: #FFFFFF;
+      border-radius: 10px;
+      flex-direction: column;
+      height: 190px;
+      width: 460px;
+      @media screen and (min-width: 400px) and (max-width: 720px) {
+        padding: 30px 0;
+        text-align: center;
+        width: 420px !important;
+      }
+
+      .productPagePrice {
+        padding: 10px 20px;
+        margin-bottom: 20px;
+
+        p {
+          font-size: 38px;
+          line-height: 33px;
+          font-weight: 700;
+        }
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 720px) {
+  .productPageTop {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+  }
+  .productPageTopAction {
+    margin-top: 22px;
+  }
+  .productPageBottomInfo {
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+  }
+  .productPageBottomCheckIs {
+    margin-left: 0 !important;
+  }
+  .productPageBottomBrand {
+    margin-right: 0 !important;
+  }
+  .productPageWrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    .productPageInfo {
+      width: auto !important;
+      padding: 0 !important;
+    }
+  }
+  .productPageTotal {
+    width: 0 !important;
+    height: 300px;
+  }
+}

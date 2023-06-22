@@ -1,0 +1,43 @@
+.imageSlider {
+  margin-top: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+
+  .prevButton,
+  .nextButton {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: transparent;
+    border: none;
+    color: #d93737;
+    font-size: 2rem;
+    cursor: pointer;
+    transition: opacity 0.2s ease-in-out;
+
+    &:hover {
+      opacity: 0.8;
+    }
+  }
+
+  .prevButton {
+    left: 22px;
+  }
+
+  .nextButton {
+    right: 22px;
+  }
+
+  .sliderImage {
+    width: 1500px;
+    height: 511px;
+  }
+  @media screen and (max-width: 768px){
+    display: none;
+  }
+  @media screen and (max-width: 1200px){
+    display: none;
+  }
+}

@@ -1,0 +1,185 @@
+@mixin imageSettingsHeader {
+  background-position: left top;
+  background-size: 100%;
+  background-repeat: no-repeat;
+}
+
+@mixin addToCartButton {
+  padding: 12px 36px;
+  background: cornflowerblue;
+  color: white;
+  border-radius: 10px;
+  cursor: pointer;
+  outline: none;
+  border: none;
+  &:hover {
+    background: rgba(100, 149, 237, 0.81);
+  }
+  @media only screen and (max-width: 700px) and (min-width: 300px) {
+    padding: 12px 18px;
+    font-size: 14px;
+  }
+}
+
+@mixin removeFromCartButton {
+  padding: 12px 40px;
+  background: #10c44c;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  &:hover {
+    background: rgba(16, 196, 76, 0.8);
+  }
+  @media only screen and (max-width: 700px) and (min-width: 300px) {
+    padding: 12px 18px;
+    font-size: 14px;
+  }
+}
+
+@mixin AuthenticationForm($wight, $height) {
+  width: $wight;
+  height: $height;
+  justify-content: center;
+  -webkit-box-shadow: -4px -2px 31px 1px rgba(34, 60, 80, 0.23);
+  -moz-box-shadow: -4px -2px 31px 1px rgba(34, 60, 80, 0.23);
+  box-shadow: -4px -2px 31px 1px rgba(34, 60, 80, 0.23);
+  margin: 0 auto 0 auto;
+  border-radius: 6px;
+  @media only screen and (max-width: 700px) and (min-width: 300px) {
+    width: auto;
+    height: auto;
+  }
+  h1 {
+    text-align: center;
+    font-size: 28px;
+    font-weight: 700;
+    padding: 30px 0;
+  }
+
+  .FormLabel {
+    display: flex;
+    flex-direction: column;
+    padding: 0 52px;
+    @media only screen and (max-width: 700px) and (min-width: 300px) {
+      padding: 0 12px;
+    }
+
+    input {
+      width: 480px;
+      height: 48px;
+      padding-left: 5px;
+      margin-bottom: 12px;
+      border: 2px solid #6e6e6e;
+      border-radius: 4px;
+      outline: none;
+      @media only screen and (max-width: 700px) and (min-width: 300px) {
+        width: 290px;
+        height: 48px;
+      }
+
+      &:active {
+        border: 2px solid #3758CB;
+      }
+
+      &:hover {
+        border: 2px solid #3758CB;
+      }
+
+      &:focus {
+        border: 2px solid #3758CB;
+      }
+    }
+  }
+  .FormBtn {
+    margin-top: 22px;
+    margin-bottom: 23px;
+    text-align: center;
+
+    input {
+      padding: 10px 60px;
+      background: transparent;
+      cursor: pointer;
+    }
+  }
+}
+
+@mixin FormTop($pTop) {
+  padding-top: $pTop;
+  @media only screen and (max-width: 700px) and (min-width: 300px) {
+    padding: 0;
+  }
+}
+
+@mixin buttonInfoOfProduct($colorOfBG) {
+  display: inline-block;
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 25px;
+  color: white;
+  background-color: $colorOfBG;
+  border-radius: 5px;
+  padding: 3px 10px;
+  margin-bottom: 8px;
+}
+
+@mixin addButtonAdmin() {
+  border: none;
+  margin-left: 30px;
+  padding: 8px 40px;
+  background: #2abf52;
+  color: #e5e5e5;
+  font-size: 17px;
+  font-weight: 600;
+  cursor: pointer;
+  border-radius: 2px;
+}
+
+@mixin cancelButtonAdmin() {
+  border: none;
+  background-color: #d93737;
+  color: #e5e5e5;
+  font-size: 17px;
+  font-weight: 600;
+  width: 100px;
+  cursor: pointer;
+  border-radius: 2px;
+}
+
+@mixin plusButton {
+  flex: 0 0 auto;
+  width: 35px;
+  height: 35px;
+  border: 1px solid #6e6e6e;
+  border-radius: 50%;
+  text-align: center;
+  font-weight: 800;
+  background: transparent;
+  cursor: pointer;
+  font-size: 18px;
+  line-height: 25px;
+  color: #6e6e6e;
+  &:hover {
+    border: 1px solid rgba(45, 133, 222, 0.89);
+    color: #2d85de;
+  }
+}
+
+@mixin minusButton {
+  flex: 0 0 auto;
+  width: 35px;
+  height: 35px;
+  border: 1px solid #6e6e6e;
+  border-radius: 50%;
+  text-align: center;
+  font-weight: 800;
+  background: transparent;
+  cursor: pointer;
+  font-size: 18px;
+  line-height: 25px;
+  color: #6e6e6e;
+  &:hover {
+    border: 1px solid rgba(45, 133, 222, 0.89);
+    color: #2d85de;
+  }
+}

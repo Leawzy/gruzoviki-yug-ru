@@ -33,11 +33,7 @@
 /front/dist-ssr
 /front/coverage
 /front/*.local
-
-/front//cypress/videos/
-/front//cypress/screenshots/
-
-# Editor directories and files
+/front/.next
 /front/.vscode/*
 /front/!.vscode/extensions.json
 /front/.idea

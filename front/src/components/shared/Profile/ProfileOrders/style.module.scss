@@ -1,0 +1,92 @@
+.orderCard {
+  margin-top: 10px;
+  margin-bottom: 20px;
+  .orderCardTop {
+    background-color: #EFF3F9;
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 20px;
+    @media screen and (max-width: 480px) {
+      display: flex;
+      flex-direction: column;
+    }
+    .orderCardTopInfo {
+      display: flex;
+      p {
+        span {
+          font-weight: 700;
+        }
+      }
+      p:last-child{
+        padding: 0 20px;
+        color: #437FC8;
+      }
+    }
+  }
+  .orderCardBottom {
+    padding: 10px 20px;
+    border: 1px solid #E5E5E5;
+    border-radius: 0 0 10px 10px;
+    display: flex;
+    justify-content: space-between;
+    @media screen and (max-width: 480px) {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+    .orderCardStatus {
+      border-radius: 2px;
+      height: 28px;
+      text-align: center;
+      align-content: center;
+      align-items: center;
+      justify-content: center;
+      p {
+        color: #e5e5e5;
+      }
+    }
+    .orderCardStatusWorking {
+      background: #b4bb55;
+      width: 180px;
+    }
+    .orderCardStatusWait {
+      background: #69bb49;
+      width: 180px;
+    }
+    .orderCardDelivery {
+      padding: 12px 0;
+      font-size: 17px;
+      font-weight: 700;
+    }
+    .orderCardList {
+      padding: 0;
+      margin: 0;
+      .orderCardBottomInfo {
+        font-size: 15px;
+        font-weight: 400;
+        color: #5e5e5e;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .orderCardItemList {
+    margin: 0;
+    padding: 10px 0;
+  }
+}
+
+.orderCardItem {
+  padding: 4px 0;
+}
+
+.orderCardItemTitle {
+  font-size: 17px;
+  font-weight: 700;
+  margin-bottom: 11px;
+}
+
+.orderCardItemLink:hover {
+  color: #2d85de;
+}

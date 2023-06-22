@@ -1,0 +1,58 @@
+.cardNews {
+  display: flex;
+  flex-direction: column;
+  width: clamp(30rem, calc(20rem + 2vw), 22rem);
+  overflow: hidden;
+  box-shadow: 0 .1rem 1rem rgba(0, 0, 0, 0.1);
+  border-radius: 1em;
+  background: #ECE9E6;
+  background: linear-gradient(to right, #FFFFFF, #f1f1f1);
+  @media screen and (max-width: 720px) {
+    width: clamp(17rem, calc(18rem + 2vw), 18rem);
+  }
+
+  .cardHeader {
+    img {
+      width: 100%;
+      height: 380px;
+      background-size: 100%;
+    }
+  }
+  @media screen and (max-width: 720px) {
+    img {
+      width: 100%;
+      height: 230px !important;
+      background-size: 100%;
+    }
+  }
+
+  &:hover {
+    transform: translateY(-10px);
+  }
+
+  .cardBody {
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: .7rem;
+    .cardDesc {
+      padding-bottom: 1rem;
+      border-bottom: 1px solid #1E1E1E;
+      font-size: 18px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .cardDate {
+      color: #6E6E6E;
+      font-size: 14px;
+      font-weight: 600;
+    }
+
+    h4 {
+      font-size: 20px;
+      font-weight: 700;
+      text-transform: uppercase;
+    }
+  }
+}

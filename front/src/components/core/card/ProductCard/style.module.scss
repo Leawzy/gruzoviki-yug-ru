@@ -1,0 +1,104 @@
+@import "../../../../styles/mixin";
+
+.shortCatalogItem {
+  padding: 15px 55px;
+  &:hover {
+    transform: translateY(-4px);
+  }
+
+  .shortCatalogItemLink {
+    display: flex;
+    position: relative;
+    height: 300px;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+
+    .catalogImage {
+      width: auto;
+      height: auto;
+    }
+
+    .shortCatalogItemLeftInfo {
+      position: absolute;
+      left: 0;
+      top: 10px;
+      z-index: 1;
+      display: flex;
+      flex-direction: row;
+      align-content: center;
+      align-items: center;
+
+      .shortCatalogBrand {
+        @include buttonInfoOfProduct(#55BB9F);
+      }
+
+    }
+
+    .shortCatalogItemRightInfo {
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      z-index: 1;
+
+      .shortCatalogAmount {
+        @include buttonInfoOfProduct(#e04d4d);
+      }
+    }
+  }
+
+  .shortCatalogPrice {
+    padding: 20px 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    align-content: center;
+
+    .shortCatalogFavorite {
+      .icon {
+        cursor: pointer;
+        &:hover {
+          color: #C82132;
+        }
+      }
+      .iconIsFav {
+        color: #e00f27;
+      }
+
+      button {
+        background: transparent;
+        border: none;
+      }
+    }
+
+    .shortCatalogPriceNum {
+      font-weight: 600;
+      font-size: 22px;
+      line-height: 28px;
+      color: #404040;
+      padding-right: 20px;
+    }
+  }
+
+  .shortCatalogTitle {
+    margin-bottom: 30px;
+
+    .shortCatalogTitleText {
+      font-size: 17px;
+      line-height: 22px;
+      padding-top: 5px;
+      padding-bottom: 10px;
+      min-height: 80px;
+    }
+  }
+
+  .shortButtons {
+    .removeFromCart {
+      @include removeFromCartButton
+    }
+
+    .AddToCart {
+      @include addToCartButton
+    }
+  }
+}
