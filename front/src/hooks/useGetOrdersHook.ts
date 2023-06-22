@@ -10,7 +10,7 @@ function useGetOrdersHook() {
     async function fetchOrdersList() {
         setAuthToken();
         try {
-            const res: { data: { data: OrderTypeIF[] } } = await apiFetch('/orders', {
+            const res: { data: { data: OrderTypeIF[] } } = await apiFetch('/api/orders', {
                 method: 'get',
             });
             setOrderList(res.data.data);
