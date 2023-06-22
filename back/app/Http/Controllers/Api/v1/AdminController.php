@@ -514,7 +514,7 @@ class AdminController extends Controller
         }
 
         return response()->json([
-            'message' => 'Запись на ремонт успешно удалена',
+            'message' => 'Запись на ремонт успешно удалена.',
         ]);
     }
 
