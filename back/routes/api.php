@@ -34,7 +34,6 @@ Route::post('/forgot', [UserController::class, 'forgotPassword']);
 Route::get('/slider', [OtherController::class, 'showSlider']);
 Route::get('/posts', [OtherController::class, 'showPost']);
 Route::get('/post/card/{id}', [OtherController::class, 'getPostById']);
-Route::post('/repair/create', [OtherController::class, 'createRecordRepair']);
 Route::post('/feedback', [OtherController::class, 'sendFeedback']);
 Route::get('/special', [OtherController::class, 'getSpecialProperty']);
 
@@ -53,6 +52,9 @@ Route::middleware(['auth:api'])->group(function () {
     Route::post('/featured/create', [OtherController::class, 'createFeaturedProduct']);
     Route::get('/featured/get', [OtherController::class, 'getFeaturedProduct']);
     Route::delete('/featured/delete', [OtherController::class, 'deleteFeaturedProduct']);
+
+    //Other
+    Route::post('/repair/create', [OtherController::class, 'createRecordRepair']);
 });
 
 //Admin function

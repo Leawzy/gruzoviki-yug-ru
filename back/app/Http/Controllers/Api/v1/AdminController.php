@@ -520,9 +520,7 @@ class AdminController extends Controller
 
     public function getFeedback()
     {
-        return response()->json([
-           Feedback::all()
-        ]);
+        return Feedback::all();
     }
 
     public function changeFeedback(Request $request)

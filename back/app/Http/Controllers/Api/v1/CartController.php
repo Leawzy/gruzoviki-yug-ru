@@ -13,6 +13,37 @@ use Tymon\JWTAuth\Facades\JWTAuth;
 
 class CartController extends Controller
 {
+    /**
+     * @OA\Post(
+     *     path="/order/create",
+     *     summary="Create an order",
+     *     tags={"Cart"},
+     *     operationId="createOrder",
+     *     @OA\RequestBody(
+     *         required=true,
+     *         @OA\MediaType(
+     *             mediaType="application/json",
+     *             @OA\Schema(
+     *                 @OA\Property(property="total", type="integer", example=100),
+     *                 @OA\Property(property="delivery", type="string", example="Express"),
+     *                 @OA\Property(property="paymentMethod", type="string", example="Credit Card"),
+     *                 @OA\Property(property="status", type="string", example="Pending"),
+     *                 @OA\Property(property="products", type="array", @OA\Items(
+     *                     @OA\Property(property="id", type="integer"),
+     *                     @OA\Property(property="quantity", type="integer"),
+     *                 )),
+     *             ),
+     *         ),
+     *     ),
+     *     @OA\Response(
+     *         response=200,
+     *         description="Success",
+     *         @OA\JsonContent(
+     *             @OA\Property(property="message", type="string", example="Заказ успешно создан"),
+     *         ),
+     *     ),
+     * )
+     */
     public function createOrder(Request $request)
     {
         $token = JWTAuth::parseToken();

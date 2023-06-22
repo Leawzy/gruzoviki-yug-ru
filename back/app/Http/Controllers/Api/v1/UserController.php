@@ -198,6 +198,37 @@ class UserController extends Controller
         return response()->json(compact('token'));
     }
 
+    /**
+     * @OA\Post(
+     *     path="/forgot",
+     *     summary="Forgot Password",
+     *     tags={"Users"},
+     *     operationId="forgotPassword",
+     *     @OA\RequestBody(
+     *         required=true,
+     *         @OA\MediaType(
+     *             mediaType="application/json",
+     *             @OA\Schema(
+     *                 @OA\Property(property="email", type="string", format="email", example="johndoe@example.com"),
+     *             ),
+     *         ),
+     *     ),
+     *     @OA\Response(
+     *         response=200,
+     *         description="Success",
+     *         @OA\JsonContent(
+     *             @OA\Property(property="message", type="string", example="Пароль отправлен на почту"),
+     *         ),
+     *     ),
+     *     @OA\Response(
+     *         response=400,
+     *         description="Bad Request",
+     *         @OA\JsonContent(
+     *             @OA\Property(property="error", type="string", example="Пользователя с такой почтой не существует"),
+     *         ),
+     *     ),
+     * )
+     */
     public function forgotPassword(Request $request)
     {
         $data = $request->validate([
