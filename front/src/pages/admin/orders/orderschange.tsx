@@ -19,7 +19,6 @@ function OrdersChange() {
         setSelectedRow,
         openModal,
         handleOpenModal,
-        handleDeleteRow,
         handleCloseModal,
     } = useModalHandlerHook([]);
 
@@ -57,18 +56,7 @@ function OrdersChange() {
                     handleOpenModal(params.id);
                 };
 
-                const handleDelete = () => {
-                    handleDeleteRow(params.id, 'order/delete');
-                };
-
-                return (
-                    <>
-                        <Button onClick={handleEdit}>Изменить</Button>
-                        <Button onClick={handleDelete} color="error">
-                            Удалить
-                        </Button>
-                    </>
-                );
+                return <Button onClick={handleEdit}>Изменить</Button>;
             },
         },
     ];

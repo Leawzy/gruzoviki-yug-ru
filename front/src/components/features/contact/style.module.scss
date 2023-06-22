@@ -71,6 +71,7 @@
           flex-direction: column;
           margin-left: 48px;
           @media screen and (max-width: 440px) {
+            padding: 12px 0;
             margin-left: 0;
           }
 
@@ -118,7 +119,7 @@
             display: flex;
             padding: 10px 45px;
             flex-direction: row-reverse;
-            font-size: 12px;
+            font-size: 15px;
             text-decoration: underline;
 
             input {
@@ -153,7 +154,7 @@
           outline: none;
           border: none;
           @media only screen and (max-width: 700px) and (min-width: 300px) {
-            margin-top: 10px;
+            margin-top: 20px;
             padding: 12px 18px;
             font-size: 14px;
           }
@@ -168,7 +169,7 @@
           outline: none;
           border: none;
           @media only screen and (max-width: 700px) and (min-width: 300px) {
-            margin-top: 10px;
+            margin-top: 20px;
             padding: 12px 18px;
             font-size: 14px;
           }

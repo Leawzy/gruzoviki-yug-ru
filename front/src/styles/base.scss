@@ -144,6 +144,18 @@ $cardMargin: 16px;
   }
 }
 
+@media screen and (min-width: 300px) and (max-width: 450px) {
+  .favoriteTitle {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+
+    p {
+      padding: 20px 0;
+    }
+  }
+}
+
 .privacyTitle {
   font-size: 17px;
   font-weight: 800;

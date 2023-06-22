@@ -39,7 +39,7 @@ export function useAdminAddHook(url: string) {
                     },
                 });
                 if (res.status === 200) {
-                    toast.success('Файл успешно создан', {
+                    toast.success('Бренд успешно создан', {
                         position: 'bottom-right',
                         autoClose: 3400,
                         hideProgressBar: false,

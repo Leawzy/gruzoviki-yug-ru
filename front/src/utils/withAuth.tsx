@@ -1,5 +1,6 @@
 import { useRouter } from 'next/router';
 import React, { useEffect } from 'react';
+import { toast } from 'react-toastify';
 
 import { isAuthenticated } from './checkAuth';
 
@@ -14,6 +15,7 @@ export function withAuth<P extends Props>(Component: React.ComponentType<P>): Re
                 if (!isAuthenticated()) {
                     try {
                         await router.replace('/');
+                        toast.error('Чтобы зайти на данную страницу. Надо Авторизоваться.');
                     } catch (error) {
                         console.error(error);
                     }

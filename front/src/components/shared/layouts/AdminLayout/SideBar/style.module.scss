@@ -39,6 +39,33 @@
         margin-bottom: 5px;
       }
 
+      button {
+        display: flex;
+        align-content: center;
+        align-items: center;
+        background: transparent;
+        border: none;
+        font-size: 14px;
+        color: #999;
+        cursor: pointer;
+
+        &:hover {
+          text-decoration: underline;
+          color: #C82132;
+        }
+
+        p {
+          padding-left: 10px;
+          font-size: 14px;
+        }
+
+        .icon {
+          font-size: 18px;
+          color: #2d85de;
+        }
+
+      }
+
       li {
         display: flex;
         align-items: center;

@@ -19,7 +19,6 @@ function RepairChange() {
         setSelectedRow,
         openModal,
         handleOpenModal,
-        handleDeleteRow,
         handleCloseModal,
     } = useModalHandlerHook([]);
 
@@ -70,18 +69,7 @@ function RepairChange() {
                     handleOpenModal(params.id);
                 };
 
-                const handleDelete = () => {
-                    handleDeleteRow(params.id, 'post/delete');
-                };
-
-                return (
-                    <>
-                        <Button onClick={handleEdit}>Изменить</Button>
-                        <Button onClick={handleDelete} color="error">
-                            Удалить
-                        </Button>
-                    </>
-                );
+                return <Button onClick={handleEdit}>Изменить</Button>;
             },
         },
     ];

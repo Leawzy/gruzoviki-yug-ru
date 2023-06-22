@@ -204,9 +204,7 @@ export default function Contact() {
                                 </button>
                             )}
                             <label>
-                                Отправляя форму, Вы соглашаетесь с Условиями предоставления услуг и
-                                Политикой конфиденциальности , а также сПолитикой использования
-                                файлов cookie.
+                                Даю согласие на обработку персональных данных
                                 <input
                                     type="checkbox"
                                     onChange={event => setCheckBox(event.target.checked)}

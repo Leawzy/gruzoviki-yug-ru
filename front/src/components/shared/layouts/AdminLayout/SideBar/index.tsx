@@ -141,10 +141,10 @@ export default function SideBar() {
                             <span>Конвертер файлов</span>
                         </li>
                     </Link>
-                    <li>
+                    <button onClick={logOut}>
                         <ExitToAppIcon className={cn.icon} />
-                        <button onClick={logOut}>Выход</button>
-                    </li>
+                        <p>Выход</p>
+                    </button>
                 </ul>
             </div>
         </div>

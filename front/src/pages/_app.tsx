@@ -16,7 +16,7 @@ function MyApp({ Component, pageProps }: AppProps) {
             <DefaultSeo {...SEO} />
             <ToastContainer
                 position="bottom-right"
-                autoClose={3560}
+                autoClose={2000}
                 closeOnClick
                 pauseOnHover
                 draggable

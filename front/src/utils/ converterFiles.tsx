@@ -40,6 +40,9 @@ function ImageConverter() {
                 <input type="file" id="file-input" onChange={handleFileChange} />
             </div>
             <button onClick={convertToWebp} disabled={!selectedFile}>
+                Отмена
+            </button>
+            <button onClick={convertToWebp} disabled={!selectedFile}>
                 Конвертация в Webp
             </button>
             {webpFile && (
