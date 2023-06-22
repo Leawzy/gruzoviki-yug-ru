@@ -28,7 +28,6 @@ export default function ProductCard({
     title,
     art,
     slug,
-    shortDesc,
 }: ProductCardIF) {
     const [addedToCart, setAddedToCart] = useState(false);
     const [isFavorite, setIsFavorite] = useState(false);
@@ -122,7 +121,6 @@ export default function ProductCard({
             </div>
             <div className={cn.shortCatalogTitle}>
                 <a className={cn.shortCatalogTitleText}>{title}</a>
-                <p>{shortDesc}</p>
             </div>
             <div className={cn.shortButtons}>
                 {/* eslint-disable-next-line no-nested-ternary */}

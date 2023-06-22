@@ -121,10 +121,16 @@
     display: flex;
 
     .productPageImage {
+      width: 500px;
+      height: 500px;
+      @media screen and (min-width: 220px) and (max-width: 720px){
+        width: auto;
+        height: auto;
+      }
       img {
-        width: 300px;
-        height: 250px;
-        @media screen and (min-width: 400px) and (max-width: 720px){
+        width: auto;
+        height: auto;
+        @media screen and (min-width: 220px) and (max-width: 720px){
           width: auto;
           height: auto;
         }
@@ -163,7 +169,22 @@
 
     .productPageInfo {
       width: 720px;
-      padding: 30px 80px;
+      padding: 0 80px;
+
+      .productPageBrand {
+        width: 170px;
+        height: 40px;
+        padding: 40px 0;
+        margin-bottom: 70px;
+        @media screen and (min-width: 220px) and (max-width: 720px){
+          width: auto;
+          height: auto;
+        }
+        img {
+          width: auto;
+          margin-right: auto;
+        }
+      }
 
       .productPageInfoTop {
         padding: 30px 0;
@@ -175,6 +196,13 @@
 
       .productPageInfoBottom {
         padding-top: 30px;
+        .productPageInfoText {
+          padding: 4px 0;
+          p {
+            color: #2f2f2f;
+            font-size: 16px;
+          }
+        }
         @media screen and (min-width: 400px) and (max-width: 720px) {
           display: flex;
           flex-direction: column;
@@ -227,6 +255,7 @@
         margin-bottom: 20px;
 
         p {
+          width: 200px;
           font-size: 38px;
           line-height: 33px;
           font-weight: 700;

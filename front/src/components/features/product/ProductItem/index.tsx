@@ -110,19 +110,19 @@ export default function ProductItem({ product }: ProductItemIF) {
                         </div>
                         <div className={cn.productPageInfoBottom}>
                             {propertyStrings.map((propString, index) => (
-                                <div key={index}>
+                                <div key={index} className={cn.productPageInfoText}>
                                     <p>{propString}</p>
                                 </div>
                             ))}
                         </div>
-                        <div>
+                        <div className={cn.productPageBrand}>
                             {product.brand.img === null ? (
                                 ''
                             ) : (
                                 <Image
                                     src={product.brand?.img as string}
-                                    width={101}
-                                    height={101}
+                                    width={100}
+                                    height={100}
                                     alt="Brand Img"
                                 />
                             )}

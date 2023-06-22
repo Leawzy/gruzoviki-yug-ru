@@ -33,6 +33,11 @@
         .categoryPageContentTop {
           display: flex;
           justify-content: space-between;
+          button {
+            background: transparent;
+            padding: 6px 6px;
+            border-radius: 6px;
+          }
           p {
             justify-content: flex-end;
           }
