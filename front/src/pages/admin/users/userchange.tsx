@@ -88,7 +88,7 @@ function UserChange() {
             email: item.email,
             role: item.role,
             password: item?.password,
-            phoneNumber: item.phoneNumber === null ? 'Отсутствует' : `+${item.phoneNumber}`,
+            phoneNumber: item.phoneNumber === null ? 'Отсутствует' : `${item.phoneNumber}`,
         }));
         setRows(formattedRows);
     }, [users]);

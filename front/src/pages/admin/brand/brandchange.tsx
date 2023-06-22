@@ -5,7 +5,7 @@ import React, { useEffect } from 'react';
 import AdminLayout from '../../../components/shared/layouts/AdminLayout';
 import { useHandleFileChangeHook } from '../../../hooks/admin/handlers/useHandleFileChangeHook';
 import { useModalHandlerHook } from '../../../hooks/admin/handlers/useModalHandlerHook';
-import { useSendChangeHook } from '../../../hooks/admin/handlers/useSendChangeHook';
+import { useSendChangeImageHook } from '../../../hooks/admin/handlers/useSendChangeImageHook';
 import { useGetBrandHook } from '../../../hooks/admin/useGetBrandHook';
 import { withAuth } from '../../../utils/withAuth';
 import { withAuthAdmin } from '../../../utils/withAuthAdmin';
@@ -27,7 +27,7 @@ function BrandChange() {
 
     const useHandleSaveChanges = async () => {
         try {
-            await useSendChangeHook(
+            await useSendChangeImageHook(
                 '/brand/change',
                 {
                     id: selectedRow?.id as string,

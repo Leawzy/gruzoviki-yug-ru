@@ -5,8 +5,7 @@ import React, { useEffect } from 'react';
 import AdminLayout from '../../../components/shared/layouts/AdminLayout';
 import { useHandleFileChangeHook } from '../../../hooks/admin/handlers/useHandleFileChangeHook';
 import { useModalHandlerHook } from '../../../hooks/admin/handlers/useModalHandlerHook';
-import { useSendChangeHook } from '../../../hooks/admin/handlers/useSendChangeHook';
-import { useGetBrandHook } from '../../../hooks/admin/useGetBrandHook';
+import { useSendChangeImageHook } from '../../../hooks/admin/handlers/useSendChangeImageHook';
 import { useGetProductsHook } from '../../../hooks/admin/useGetProductsHook';
 import { withAuth } from '../../../utils/withAuth';
 import { withAuthAdmin } from '../../../utils/withAuthAdmin';
@@ -14,7 +13,6 @@ import cn from '../style.module.scss';
 
 function ProductChange() {
     const { products } = useGetProductsHook();
-    const { brand } = useGetBrandHook();
     const { selectedImage, selectedImageUrl, handleFileChange } = useHandleFileChangeHook();
     const {
         rows,
@@ -28,7 +26,7 @@ function ProductChange() {
     } = useModalHandlerHook([]);
     const useHandleSaveChanges = async () => {
         try {
-            await useSendChangeHook(
+            await useSendChangeImageHook(
                 '/product/change',
                 {
                     id: selectedRow?.id as string,
@@ -36,7 +34,6 @@ function ProductChange() {
                     price: selectedRow?.price as string,
                     quantity: selectedRow?.quantity as string,
                     art: selectedRow?.art as string,
-                    brandId: selectedRow?.brandId as string,
                     categoryId: selectedRow?.categoryId as string,
                     shortDesc: selectedRow?.shortDesc as string,
                 },
@@ -110,7 +107,6 @@ function ProductChange() {
             quantity: item.quantity,
             shortDesc: item.shortDesc,
             brand: item.brand,
-            brandId: item.brand.id,
             categoryId: item.category.id,
             brandTitle: item.brand.title,
             categoryTitle: item.category.title,
@@ -181,17 +177,6 @@ function ProductChange() {
                             <input type="file" accept="image/webp" onChange={handleFileChange} />
                             <span className={cn.inputFileBtn}>Выберите файл</span>
                         </label>
-                        <select
-                            onChange={e =>
-                                setSelectedRow(prev => ({ ...prev, brandId: e.target.value }))
-                            }
-                        >
-                            {brand.map(item => (
-                                <option key={item.id} value={item.id}>
-                                    {item.title}
-                                </option>
-                            ))}
-                        </select>
                     </DialogContent>
                     <DialogActions>
                         <Button onClick={handleCloseModal}>Отмена</Button>
