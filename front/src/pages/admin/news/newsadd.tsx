@@ -55,6 +55,7 @@ function NewsAdd() {
                     progress: undefined,
                     theme: 'light',
                 });
+                await route.replace('/admin/dashboard');
             }
         } catch (e) {
             console.error(e);
