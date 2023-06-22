@@ -1,9 +1,13 @@
 import React from 'react';
 import { CartesianGrid, Line, LineChart, Tooltip, XAxis, YAxis } from 'recharts';
 
-const data = [{ name: 'Page A', uv: 400, pv: 2400, amt: 2400 }];
+import { useGetUserHook } from '../../../../../hooks/admin/useGetUserHook';
 
 export default function RenderLineChart() {
+    const { users } = useGetUserHook();
+    const totalUser = String(users.length);
+    const data = [{ name: 'Пользователи', uv: totalUser, pv: 5400, amt: 5400 }];
+
     return (
         <LineChart
             width={1600}
