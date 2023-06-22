@@ -1,6 +1,12 @@
 .container {
   padding: 20px;
   display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.newsContent {
+  max-width: 800px;
 }
 
 .title {
@@ -15,10 +21,6 @@
 
 .imageContainer {
   margin-bottom: 20px;
-}
-
-.newsContent {
-  padding-left: 80px;
 }
 
 .description {
