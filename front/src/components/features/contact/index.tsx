@@ -118,9 +118,15 @@ export default function Contact() {
                         <p>График работы отдела продаж</p>
                     </div>
                     <div className={cn.contactPageListContent}>
-                        <li>7 000 000 00 00</li>
-                        <li>7 000 000 00 00</li>
-                        <li>7 000 000 00 00</li>
+                        <li>
+                            <a href="tel:89185269203">+8 918 526 92 03</a>
+                        </li>
+                        <li>
+                            <a href="tel:89185545022">+8 918 554 50 22</a>
+                        </li>
+                        <li>
+                            <a href="tel:89185269203">+8 918 526 92 03</a>
+                        </li>
                     </div>
                 </ul>
                 <ul className={cn.contactPageList}>
@@ -129,7 +135,7 @@ export default function Contact() {
                         <p>График работы отдела продаж</p>
                     </div>
                     <div className={cn.contactPageListContent}>
-                        <li>info@elecity.ru</li>
+                        <li>info@грузовики-юг.рф</li>
                     </div>
                 </ul>
                 <ul className={cn.contactPageList}>
@@ -139,7 +145,8 @@ export default function Contact() {
                     </div>
                     <div className={cn.contactPageListContent}>
                         <li>
-                            Для покупки по безналичному расчету отправляйте запрос на bn@elecity.ru.
+                            Для покупки по безналичному расчету отправляйте запрос на
+                            bn@грузовики-юг.рф
                         </li>
                     </div>
                 </ul>

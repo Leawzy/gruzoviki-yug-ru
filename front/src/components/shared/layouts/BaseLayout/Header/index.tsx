@@ -70,7 +70,7 @@ export default function Header() {
                         <SearchBar />
                         <div className={cn.headerContact}>
                             <div className={cn.headerContactPhone}>
-                                <a href="tel:89897774245">+7 989 777 42 45</a>
+                                <a href="tel:89185269203">+8 918 526 92 03</a>
                                 <a className={cn.headerContactTimetable}>
                                     8:00 до 19:00 СБ и ВСК выходной
                                 </a>

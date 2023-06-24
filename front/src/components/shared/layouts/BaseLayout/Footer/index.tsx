@@ -17,8 +17,8 @@ export default function Footer() {
                     </a>
                 </address>
                 <div className={cn.footerPhones}>
-                    <a href="">7 989 633 84 44</a>
-                    <a href="">7 989 633 84 44</a>
+                    <a href="tel:89185269203">+8 918 526 92 03</a>
+                    <a href="tel:89185545022">+8 918 554 50 22</a>
                 </div>
             </div>
             <ul className={cn.footerNav}>
@@ -40,7 +40,7 @@ export default function Footer() {
                     <h2 className={cn.navTitle}>Навигация</h2>
                     <ul className={cn.navUl}>
                         <li>
-                            <a href="#">Доставка</a>
+                            <Link href="/404">Доставка</Link>
                         </li>
                         <li>
                             <Link href="/blog">Блог</Link>
